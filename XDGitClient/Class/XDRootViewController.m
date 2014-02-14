@@ -8,6 +8,8 @@
 
 #import "XDRootViewController.h"
 
+#import "XDGitDeckViewController.h"
+
 @interface XDRootViewController ()
 
 @end
@@ -27,6 +29,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    XDGitDeckViewController *deckController = [[XDGitDeckViewController alloc] init];
+    deckController.view.frame = self.view.bounds;
+    [self.view addSubview:deckController.view];
 }
 
 - (void)didReceiveMemoryWarning

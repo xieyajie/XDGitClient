@@ -195,6 +195,8 @@
     [defaults setValue:userName forKey:[NSString stringWithFormat:@"%@_UserName", APPNAME]];
     
     [[XDRequestManager defaultManager] loginRequestWithUserName:userName password:paswd parameters:nil success:^(AFHTTPRequestOperation *operation) {
+        NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+        [defaults setValue:userName forKey:key];
         if (_rememberButton.selected) {
             [defaults setValue:paswd forKey:[NSString stringWithFormat:@"%@_Password", APPNAME]];
         }
