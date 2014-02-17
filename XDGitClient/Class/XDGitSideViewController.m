@@ -10,9 +10,11 @@
 
 #import "UIImageView+AFNetworking.h"
 #import "XDRequestManager.h"
+#import "XDConfigManager.h"
 
 #define KSOURCEIMAGE @"icon"
 #define KSOURCETITLE @"title"
+#define KSOURCESELECTOR @"selector"
 
 @interface XDGitSideViewController ()
 {
@@ -20,6 +22,7 @@
     UILabel *_nameLabel;
     
     NSArray *_titleArray;
+    XDConfigManager *_configManager;
 }
 
 @property (strong, nonatomic) UIView *accountView;
@@ -36,6 +39,8 @@
         // Custom initialization
         NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
         _titleArray = [NSArray arrayWithContentsOfFile:path];
+        
+        _configManager = [XDConfigManager defaultManager];
     }
     return self;
 }
@@ -53,7 +58,7 @@
     UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
     
     [self.navigationItem setLeftBarButtonItems:@[leftItem, settingItem]];
-    [self refreshAccountViewData];
+    [self loadAccountData];
     
     self.tableView.tableFooterView = self.logoutView;
 }
@@ -158,17 +163,40 @@
     
     // Configure the cell...
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
         cell.textLabel.textColor = [UIColor grayColor];
         cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(KLEFTVIEWWIDTH - 45, 15, 35, 20)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont systemFontOfSize:13.0];
+        label.textColor = [UIColor whiteColor];
+        label.tag = 100;
+        label.layer.cornerRadius = 5.0;
+        [cell.contentView addSubview:label];
     }
     
     NSDictionary *dic = [[_titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (dic) {
         cell.imageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
         cell.textLabel.text = [dic objectForKey:KSOURCETITLE];
+        
+        UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
+        detailLabel.backgroundColor = [UIColor clearColor];
+        NSString *selectorStr = [dic objectForKey:KSOURCESELECTOR];
+        if (selectorStr && selectorStr.length > 0) {
+            SEL selectorMethod = NSSelectorFromString(selectorStr);
+            if (selectorMethod) {
+                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
+                if(resultStr && resultStr.length > 0)
+                {
+                    detailLabel.text = resultStr;
+                    detailLabel.backgroundColor = [UIColor lightGrayColor];
+                }
+            }
+        }
     }
     
     return cell;
@@ -200,18 +228,27 @@
 
 - (void)logoutAction
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+    [defaults removeObjectForKey:key];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
 }
 
 #pragma mark - private
 
-- (void)refreshAccountViewData
+- (void)loadAccountData
 {
     UAGithubEngine *githubEngine = [[XDRequestManager defaultManager] githubEngine];
     [githubEngine user:githubEngine.username success:^(id object) {
         NSDictionary *dic = [object objectAtIndex:0];
-        [_headerImageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"avatar_url"]] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
-        _nameLabel.text = [dic objectForKey:@"name"];
+        AccountModel *account = [[AccountModel alloc] initWithDictionary:dic];
+        _configManager.loginAccount = account;
+        
+        [_headerImageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
+        _nameLabel.text = account.accountName;
+        
+        [self.tableView reloadData];
     } failure:^(NSError *error) {
         _headerImageView.image = [UIImage imageNamed:@"userHeaderDefault_30"];
         _nameLabel.text = @"获取失败";

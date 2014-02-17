@@ -217,7 +217,7 @@
         }
         
         [self hideLoadingView];
-        [[XDViewManager defaultManager] removeLoginView];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSString *errorDescription) {
         [self hideLoadingView];
     }];

@@ -20,12 +20,6 @@ static XDRequestManager *defaultManagerInstance = nil;
 {
     self = [super initWithBaseURL:url];
     if (self) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
-        NSString *name = [defaults objectForKey:key];
-        if (name && name.length > 0) {
-            _githubEngine = [[UAGithubEngine alloc] initWithUsername:name password:nil withReachability:YES];
-        }
     }
     
     return self;
@@ -40,6 +34,19 @@ static XDRequestManager *defaultManagerInstance = nil;
         });
     }
     return defaultManagerInstance;
+}
+
+- (void)loadGithubEngine
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+    NSString *name = [defaults objectForKey:key];
+    if (name && name.length > 0) {
+        _githubEngine = [[UAGithubEngine alloc] initWithUsername:name password:nil withReachability:YES];
+    }
+    else{
+        _githubEngine = nil;
+    }
 }
 
 #pragma mark - 信息处理

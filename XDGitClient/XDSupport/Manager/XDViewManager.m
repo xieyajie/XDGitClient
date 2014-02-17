@@ -9,8 +9,6 @@
 #import "XDViewManager.h"
 
 #import "XDAppDelegate.h"
-#import "XDLoginViewController.h"
-
 
 static XDViewManager *defaultManagerInstance = nil;
 
@@ -69,22 +67,5 @@ static XDViewManager *defaultManagerInstance = nil;
 //        [[UIApplication sharedApplication].keyWindow addSubview:self.guideVC.view];
 //    }
 //}
-
-- (void)showLoginView
-{
-    if (_loginNavigationController == nil) {
-        XDLoginViewController *loginController = [[XDLoginViewController alloc] init];
-        _loginNavigationController = [[UINavigationController alloc] initWithRootViewController:loginController];
-    }
-   
-    [[UIApplication sharedApplication].keyWindow addSubview:_loginNavigationController.view];
-}
-
-- (void)removeLoginView
-{
-    if (_loginNavigationController != nil) {
-        [_loginNavigationController.view removeFromSuperview];
-    }
-}
 
 @end
