@@ -51,6 +51,18 @@
     label.font = [UIFont systemFontOfSize:13.0];
     label.text = @"XDIOS工作室出品";
     [self.view addSubview:label];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userName = [defaults objectForKey:[NSString stringWithFormat:@"%@_UserName", APPNAME]];
+    if (userName && userName.length > 0) {
+        _usernameTextField.text = userName;
+        
+        NSString *pswd = [defaults objectForKey:userName];
+        if (pswd && pswd.length > 0) {
+            _passwordTextField.text = pswd;
+            _rememberButton.selected = YES;
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,10 +210,10 @@
         NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
         [defaults setValue:userName forKey:key];
         if (_rememberButton.selected) {
-            [defaults setValue:paswd forKey:[NSString stringWithFormat:@"%@_Password", APPNAME]];
+            [defaults setValue:paswd forKey:userName];
         }
         else{
-            [defaults setValue:nil forKey:[NSString stringWithFormat:@"%@_Password", APPNAME]];
+            [defaults removeObjectForKey:userName];
         }
         
         [self hideLoadingView];

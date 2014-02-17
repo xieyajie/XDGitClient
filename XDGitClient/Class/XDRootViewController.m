@@ -32,6 +32,7 @@
     
     XDGitDeckViewController *deckController = [[XDGitDeckViewController alloc] init];
     deckController.view.frame = self.view.bounds;
+    deckController.view.backgroundColor = [UIColor redColor];
     [self.view addSubview:deckController.view];
 }
 

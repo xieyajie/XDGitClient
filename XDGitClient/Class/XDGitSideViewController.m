@@ -8,17 +8,34 @@
 
 #import "XDGitSideViewController.h"
 
+#import "UIImageView+AFNetworking.h"
+#import "XDRequestManager.h"
+
+#define KSOURCEIMAGE @"icon"
+#define KSOURCETITLE @"title"
+
 @interface XDGitSideViewController ()
+{
+    UIImageView *_headerImageView;
+    UILabel *_nameLabel;
+    
+    NSArray *_titleArray;
+}
+
+@property (strong, nonatomic) UIView *accountView;
+@property (strong, nonatomic) UIView *logoutView;
 
 @end
 
 @implementation XDGitSideViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithStyle:(UITableViewStyle)style
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
+        _titleArray = [NSArray arrayWithContentsOfFile:path];
     }
     return self;
 }
@@ -27,12 +44,178 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.accountView];
+    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
+    [settingButton setImage:[UIImage imageNamed:@"navi_settingWhite.png"] forState:UIControlStateNormal];
+    [settingButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
+    [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
+    
+    [self.navigationItem setLeftBarButtonItems:@[leftItem, settingItem]];
+    [self refreshAccountViewData];
+    
+    self.tableView.tableFooterView = self.logoutView;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - getter
+
+- (UIView *)accountView
+{
+    if (_accountView == nil) {
+        _accountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
+        _accountView.backgroundColor = [UIColor clearColor];
+        
+        _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7, 30, 30)];
+        _headerImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_accountView addSubview:_headerImageView];
+        
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_headerImageView.frame.origin.x + _headerImageView.frame.size.width + 10, 7, 90, 30)];
+        _nameLabel.backgroundColor = [UIColor clearColor];
+        _nameLabel.numberOfLines = 0;
+        _nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        _nameLabel.textColor = [UIColor whiteColor];
+        [_accountView addSubview:_nameLabel];
+    }
+    
+    return _accountView;
+}
+
+- (UIView *)logoutView
+{
+    if (_logoutView == nil) {
+        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 65)];
+        _logoutView.backgroundColor = [UIColor clearColor];
+        
+        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, KLEFTVIEWWIDTH - 30, 35)];
+        logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        [logoutButton setTitle:@"退出当前账户" forState:UIControlStateNormal];
+        [logoutButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+        [logoutButton addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [_logoutView addSubview:logoutButton];
+    }
+    
+    return _logoutView;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    switch (section) {
+        case 0:
+            return 2;
+            break;
+        case 1:
+            return 1;
+            break;
+        case 2:
+            return 2;
+            break;
+            
+        default:
+            return 0;
+            break;
+    }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"工程";
+            break;
+        case 1:
+            return @"动态";
+            break;
+        case 2:
+            return @"关注";
+            break;
+            
+        default:
+            return @"";
+            break;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // Configure the cell...
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        cell.textLabel.textColor = [UIColor grayColor];
+        cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+    }
+    
+    NSDictionary *dic = [[_titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    if (dic) {
+        cell.imageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
+        cell.textLabel.text = [dic objectForKey:KSOURCETITLE];
+    }
+    
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40.0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+#pragma mark - action
+
+- (void)settingAction
+{
+    
+}
+
+- (void)logoutAction
+{
+    
+}
+
+#pragma mark - private
+
+- (void)refreshAccountViewData
+{
+    UAGithubEngine *githubEngine = [[XDRequestManager defaultManager] githubEngine];
+    [githubEngine user:githubEngine.username success:^(id object) {
+        NSDictionary *dic = [object objectAtIndex:0];
+        [_headerImageView setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"avatar_url"]] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
+        _nameLabel.text = [dic objectForKey:@"name"];
+    } failure:^(NSError *error) {
+        _headerImageView.image = [UIImage imageNamed:@"userHeaderDefault_30"];
+        _nameLabel.text = @"获取失败";
+    }];
 }
 
 @end

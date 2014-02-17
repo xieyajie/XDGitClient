@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>我创建的</string>
+			<key>icon</key>
+			<string>side_own.png</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>拷贝的工程</string>
+			<key>icon</key>
+			<string>side_copy.png</string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>动态</string>
+			<key>icon</key>
+			<string></string>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>关注我的</string>
+			<key>icon</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>我关注的</string>
+			<key>icon</key>
+			<string></string>
+		</dict>
+	</array>
+</array>
+</plist>

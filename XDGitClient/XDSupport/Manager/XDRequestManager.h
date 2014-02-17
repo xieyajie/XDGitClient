@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 #import "AFNetworking.h"
+#import "UAGithubEngine.h"
 
 @interface XDRequestManager : AFHTTPClient
 
+@property (strong, nonatomic, readonly) UAGithubEngine *githubEngine;
 @property (strong, nonatomic, readonly) NSString *appApiPath;
 @property (strong, nonatomic, readonly) NSString *accountToken;
 

@@ -8,7 +8,7 @@
 
 #import "XDRequestManager.h"
 
-static NSString *const BASEURL = @"http://github.com";
+static NSString *const BASEURL = @"https://api.github.com";
 
 static XDRequestManager *defaultManagerInstance = nil;
 
@@ -20,7 +20,12 @@ static XDRequestManager *defaultManagerInstance = nil;
 {
     self = [super initWithBaseURL:url];
     if (self) {
-//        _appApiPath = [NSString stringWithFormat:@"%@/%@", kOrgName, kAppName];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+        NSString *name = [defaults objectForKey:key];
+        if (name && name.length > 0) {
+            _githubEngine = [[UAGithubEngine alloc] initWithUsername:name password:nil withReachability:YES];
+        }
     }
     
     return self;
@@ -32,7 +37,6 @@ static XDRequestManager *defaultManagerInstance = nil;
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
             defaultManagerInstance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASEURL]];
-//            [defaultManagerInstance setSecurityPolicy:[AFSecurityPolicy policyWithPinningMode:AFSSLPinningModePublicKey]];
         });
     }
     return defaultManagerInstance;
@@ -122,10 +126,13 @@ static XDRequestManager *defaultManagerInstance = nil;
                          success:(void (^)(AFHTTPRequestOperation *operation))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSString *errorDescription))failure
 {
-    NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", BASEURL, userName, password];
+    NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", @"http://github.com", userName, password];
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
     
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+        if (_githubEngine == nil) {
+            _githubEngine = [[UAGithubEngine alloc] initWithUsername:userName password:password withReachability:YES];
+        }
         success(operation);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error){
         NSString *errorStr = [self requestErrorDescription:error];

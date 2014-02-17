@@ -8,15 +8,18 @@
 
 #import "XDGitDeckViewController.h"
 
+#import "XDGitSideViewController.h"
+#import "XDTableViewController.h"
+
 @interface XDGitDeckViewController ()
 
 @end
 
 @implementation XDGitDeckViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
     }
@@ -27,6 +30,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    XDGitSideViewController *leftController = [[XDGitSideViewController alloc] initWithStyle:UITableViewStylePlain];
+    XDTableViewController *centerController = [[XDTableViewController alloc] initWithStyle:UITableViewStylePlain];
+
+    self.leftSize = 320 - KLEFTVIEWWIDTH;
+    self.leftController = [[UINavigationController alloc] initWithRootViewController:leftController];
+    self.centerController = centerController;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -24,6 +24,7 @@
     
     XDRootViewController *rootController = [[XDRootViewController alloc] init];
     self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
+    self.rootNavigationController.navigationBarHidden = YES;
     self.window.rootViewController = self.rootNavigationController;
     [self.window makeKeyAndVisible];
     
