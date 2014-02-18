@@ -11,6 +11,8 @@
 #import "XDLoginViewController.h"
 #import "XDRootViewController.h"
 #import "XDViewManager.h"
+#import "XDRequestManager.h"
+#import "XDConfigManager.h"
 
 @implementation XDAppDelegate
 
@@ -21,19 +23,12 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [[XDViewManager defaultManager] setupAppearance];
+    [[XDConfigManager defaultManager] loadConfigFilePath];
     
-    XDRootViewController *rootController = [[XDRootViewController alloc] init];
-    self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
-    self.rootNavigationController.navigationBarHidden = YES;
-    self.window.rootViewController = self.rootNavigationController;
+    [self loginStateChanged:nil];
     [self.window makeKeyAndVisible];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
-    NSString *name = [defaults objectForKey:key];
-    if (name == nil || name.length == 0) {
-        [[XDViewManager defaultManager] showLoginView];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateChanged:) name:KNOTIFICATION_LOFINSTATECHANGED object:nil];
     
     return YES;
 }
@@ -63,6 +58,32 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - NSNotification
+
+- (void)loginStateChanged:(NSNotification *)notification
+{
+    [[XDRequestManager defaultManager] loadGithubEngine];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+    NSString *name = [defaults objectForKey:key];
+    
+    BOOL isLogin = YES;
+    if (name == nil || name.length == 0) {
+        isLogin = NO;
+        
+        XDLoginViewController *loginController = [[XDLoginViewController alloc] init];
+        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:loginController];
+    }
+    else{
+        XDRootViewController *rootController = [[XDRootViewController alloc] init];
+        self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
+    }
+    
+    self.rootNavigationController.navigationBarHidden = isLogin;
+    self.window.rootViewController = self.rootNavigationController;
 }
 
 @end

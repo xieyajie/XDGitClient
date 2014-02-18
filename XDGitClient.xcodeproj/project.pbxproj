@@ -73,6 +73,8 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00618B2401F006C28BF /* XDConfigManager.m */; };
+		3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* AccountModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +200,11 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3CA4F00518B2401F006C28BF /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
+		3CA4F00618B2401F006C28BF /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
+		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
+		3CA4F00B18B25298006C28BF /* AccountModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
+		3CA4F00C18B25298006C28BF /* AccountModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +317,7 @@
 				3AEDE95518ADF5A90093946D /* InfoPlist.strings */,
 				3AEDE95818ADF5A90093946D /* main.m */,
 				3AEDE95A18ADF5A90093946D /* XDGitClient-Prefix.pch */,
+				3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -387,6 +395,7 @@
 		3AEDE99018ADFF1A0093946D /* XDSupport */ = {
 			isa = PBXGroup;
 			children = (
+				3CA4F00A18B25281006C28BF /* DataModel */,
 				3AEDE9C018AE17450093946D /* ThirdParty */,
 				3AEDE99118ADFF1A0093946D /* BaseController */,
 				3AEDE99C18ADFF1A0093946D /* Manager */,
@@ -411,6 +420,8 @@
 				3AEDE9BE18AE173C0093946D /* XDRequestManager.m */,
 				3AEDE9A118ADFF1A0093946D /* XDViewManager.h */,
 				3AEDE9A218ADFF1A0093946D /* XDViewManager.m */,
+				3CA4F00518B2401F006C28BF /* XDConfigManager.h */,
+				3CA4F00618B2401F006C28BF /* XDConfigManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -516,6 +527,15 @@
 				3AEDEA5218AE20D10093946D /* IIWrapController.m */,
 			);
 			path = ViewDeck;
+			sourceTree = "<group>";
+		};
+		3CA4F00A18B25281006C28BF /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				3CA4F00B18B25298006C28BF /* AccountModel.h */,
+				3CA4F00C18B25298006C28BF /* AccountModel.m */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -639,6 +659,8 @@
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
 				3A4B779D18B1FE3000A94D47 /* UAGithubURLConnection.m in Sources */,
 				3AEDEA3C18AE17450093946D /* UIScrollView+SVInfiniteScrolling.m in Sources */,
+				3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */,
+				3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */,
 				3AEDEA3B18AE17450093946D /* NRGridViewCell.m in Sources */,
 				3AEDEA5418AE20D10093946D /* IIViewDeckController.m in Sources */,
 				3AEDE98618ADFD380093946D /* XDLoginViewController.m in Sources */,

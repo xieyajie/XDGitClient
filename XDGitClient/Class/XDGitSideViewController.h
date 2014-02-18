@@ -8,6 +8,9 @@
 
 #import "XDTableViewController.h"
 
+@class XDGitDeckViewController;
 @interface XDGitSideViewController : XDTableViewController
+
+@property (strong, nonatomic) XDGitDeckViewController *deckController;
 
 @end

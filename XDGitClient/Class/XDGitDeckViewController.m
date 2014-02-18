@@ -32,6 +32,7 @@
 	// Do any additional setup after loading the view.
     XDGitSideViewController *leftController = [[XDGitSideViewController alloc] initWithStyle:UITableViewStylePlain];
     XDTableViewController *centerController = [[XDTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    leftController.deckController = self;
 
     self.leftSize = 320 - KLEFTVIEWWIDTH;
     self.leftController = [[UINavigationController alloc] initWithRootViewController:leftController];

@@ -19,6 +19,8 @@
 
 + (XDRequestManager *)defaultManager;
 
+- (void)loadGithubEngine;
+
 /**
  *  登录
  */

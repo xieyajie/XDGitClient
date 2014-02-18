@@ -30,12 +30,16 @@
 			<string>关注我的</string>
 			<key>icon</key>
 			<string></string>
+			<key>selector</key>
+			<string>followersCount</string>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>我关注的</string>
 			<key>icon</key>
 			<string></string>
+			<key>selector</key>
+			<string>followingCount</string>
 		</dict>
 	</array>
 </array>
