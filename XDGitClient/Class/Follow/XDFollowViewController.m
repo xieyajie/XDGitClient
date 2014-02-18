@@ -73,6 +73,12 @@
     return 50.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AccountModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    
+}
+
 #pragma mark - data
 
 - (void)tableViewDidTriggerHeaderRefresh

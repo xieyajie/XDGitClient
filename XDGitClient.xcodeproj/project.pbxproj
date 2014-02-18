@@ -25,6 +25,7 @@
 		3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8012718B3554A00F8450B /* RepositoryModel.m */; };
 		3AA8012B18B35B9B00F8450B /* XDTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8012A18B35B9B00F8450B /* XDTabBarController.m */; };
 		3AA8012F18B35C6A00F8450B /* XDTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8012E18B35C6A00F8450B /* XDTabBarItem.m */; };
+		3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8013218B3691700F8450B /* XDAccountCardViewController.m */; };
 		3AEDE94D18ADF5A90093946D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE94C18ADF5A90093946D /* Foundation.framework */; };
 		3AEDE94F18ADF5A90093946D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE94E18ADF5A90093946D /* CoreGraphics.framework */; };
 		3AEDE95118ADF5A90093946D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE95018ADF5A90093946D /* UIKit.framework */; };
@@ -120,6 +121,8 @@
 		3AA8012A18B35B9B00F8450B /* XDTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTabBarController.m; sourceTree = "<group>"; };
 		3AA8012D18B35C6A00F8450B /* XDTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTabBarItem.h; sourceTree = "<group>"; };
 		3AA8012E18B35C6A00F8450B /* XDTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTabBarItem.m; sourceTree = "<group>"; };
+		3AA8013118B3691700F8450B /* XDAccountCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountCardViewController.h; sourceTree = "<group>"; };
+		3AA8013218B3691700F8450B /* XDAccountCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountCardViewController.m; sourceTree = "<group>"; };
 		3AEDE94918ADF5A90093946D /* XDGitClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XDGitClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEDE94C18ADF5A90093946D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3AEDE94E18ADF5A90093946D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -401,6 +404,8 @@
 			children = (
 				3AEDE98218ADFD370093946D /* XDLoginViewController.h */,
 				3AEDE98318ADFD370093946D /* XDLoginViewController.m */,
+				3AA8013118B3691700F8450B /* XDAccountCardViewController.h */,
+				3AA8013218B3691700F8450B /* XDAccountCardViewController.m */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -721,6 +726,7 @@
 				3AA8012518B3532D00F8450B /* XDProjectViewController.m in Sources */,
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
+				3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */,
 				3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */,
 				3AEDEA1E18AE17450093946D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3AEDEA1B18AE17450093946D /* AFHTTPRequestOperation.m in Sources */,
