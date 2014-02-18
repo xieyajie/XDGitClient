@@ -24,7 +24,7 @@
 /**
  *  自定义申请方式
  */
-- (void)requestWithURLRequest:(NSMutableURLRequest *)urlRequest
+- (AFHTTPRequestOperation *)requestWithURLRequest:(NSMutableURLRequest *)urlRequest
                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -42,9 +42,11 @@
     }failure:failure];
     
     [self enqueueHTTPRequestOperation:operation];
+    
+    return operation;
 }
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
               parameters:(id)parameters
@@ -75,42 +77,42 @@
 		[urlRequest setValue:self.token forHTTPHeaderField:@"Authorization"];
 	}
 
-    [self requestWithURLRequest:urlRequest success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    return [self requestWithURLRequest:urlRequest success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failureBlock(error);
     }];
 }
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                   parameters:(id)parameters
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
-    [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:parameters page:0 success:successBlock failure:failureBlock];
+    return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:parameters page:0 success:successBlock failure:failureBlock];
 }
 
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                         page:(NSInteger)page
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
-    [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:page success:successBlock failure:failureBlock];
+    return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:page success:successBlock failure:failureBlock];
 }
 
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
-    [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:0 success:successBlock failure:failureBlock];
+    return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:0 success:successBlock failure:failureBlock];
 }
 
 //- (void)invoke:(void (^)(id obj))invocationBlock success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -178,7 +180,7 @@
 
 #pragma mark - login
 
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", @"http://github.com", userName, password];
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:nil];
@@ -189,6 +191,8 @@
         failureBlock(error);
     }];
     [self enqueueHTTPRequestOperation:operation];
+    
+    return operation;
 }
 
 #pragma mark - private

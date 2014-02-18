@@ -74,6 +74,7 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -118,6 +119,41 @@
     }
     
     return _logoutView;
+}
+
+- (UINavigationController *)projectNavTabController
+{
+    if (_projectNavTabController == nil) {
+        NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
+        NSArray *imageArray = @[@"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSMutableArray *controllers = [NSMutableArray array];
+        for (int i = 0; i < 5; i++) {
+            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil projectsStyle:i];
+            UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
+            [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
+            [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
+            projectsController.tabBarItem = tabBarItem;
+            
+            [controllers addObject:projectsController];
+        }
+        
+        XDTabBarController *projectTabController = [[XDTabBarController alloc] init];
+        [projectTabController setViewControllers:controllers];
+        _projectNavTabController = [[UINavigationController alloc] initWithRootViewController:projectTabController];
+    }
+    
+    return _projectNavTabController;
+}
+
+- (UINavigationController *)activityNavController
+{
+    if (_activityNavController == nil) {
+        XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:nil];
+        _activityNavController = [[UINavigationController alloc] initWithRootViewController:activityController];
+    }
+    
+    return _activityNavController;
 }
 
 #pragma mark - Table view data source
@@ -227,29 +263,12 @@
     switch (indexPath.section) {
         case 0:
         {
-            NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
-            NSArray *imageArray = @[@"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
-            NSArray *selectedImageArray = @[@"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
-            NSMutableArray *controllers = [NSMutableArray array];
-            for (int i = 0; i < 5; i++) {
-                XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil projectsStyle:i];
-                UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
-                [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
-                [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
-                projectsController.tabBarItem = tabBarItem;
-                
-                [controllers addObject:projectsController];
-            }
-            
-            XDTabBarController *tabController = [[XDTabBarController alloc] init];
-            [tabController setViewControllers:controllers];
-            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:tabController];
+            self.deckController.centerController = self.projectNavTabController;
         }
             break;
         case 1:
         {
-            XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:nil];
-            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:activityController];
+            self.deckController.centerController = self.activityNavController;
         }
             break;
         case 2:
@@ -287,18 +306,23 @@
 
 - (void)loadAccountData
 {
-    id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
-    [gitEngine userWithSuccess:^(id object) {
-        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
-        _configManager.loginAccount = account;
+    [self.deckController showLoadingView];
+    __block __weak XDGitSideViewController *weakSelf = self;
+    [_configManager loadLoginAccountWithSuccess:^(id object) {
+        AccountModel *account = (AccountModel *)object;
         
-        [self.accountButton setTitle:account.accountName forState:UIControlStateNormal];
-        [self.accountButton.imageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
+        [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
+        [weakSelf.accountButton.imageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
-        [self.tableView reloadData];
+        [weakSelf.deckController hideLoadingView];
+        [weakSelf.tableView reloadData];
+        [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     } failure:^(NSError *error) {
-        [self.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
-        [self.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
+        [weakSelf.deckController hideLoadingView];
+        
+        [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
+        [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
 }
 

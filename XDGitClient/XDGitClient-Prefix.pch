@@ -14,11 +14,16 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #import "AFNetworking.h"
+
     #import "AccountModel.h"
+
+    #import "XDViewManager.h"
     #import "XDRequestManager.h"
 
     #import "UIImageView+AFNetworking.h"
     #import "NSString+Category.h"
+
     #import "XDLocalDefine.h"
 
     #define APPNAME @"XDGit"

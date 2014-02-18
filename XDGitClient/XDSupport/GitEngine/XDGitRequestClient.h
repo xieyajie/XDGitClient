@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AFNetworking.h"
 #import "XDGitEngineRequestTypes.h"
 #import "NSData+Category.h"
 
@@ -23,11 +22,11 @@
 @property (strong, nonatomic) NSMutableArray *multiPageArray;
 
 #pragma mark - send request
-- (void)requestWithURLRequest:(NSMutableURLRequest *)urlRequest
+- (AFHTTPRequestOperation *)requestWithURLRequest:(NSMutableURLRequest *)urlRequest
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                    requestType:(XDGitRequestType)requestType
                   responseType:(XDGitResponseType)responseType
                     parameters:(id)parameters
@@ -35,28 +34,28 @@
                        success:(XDGitEngineSuccessBlock)successBlock
                        failure:(XDGitEngineFailureBlock)failureBlock;
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
               parameters:(id)parameters
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                         page:(NSInteger)page
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
-- (void)sendRequestWithApiPath:(NSString *)apiPath
+- (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                      success:(XDGitEngineSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
 #pragma mark - login
-- (void)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+- (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 
 @end

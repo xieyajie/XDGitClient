@@ -57,6 +57,27 @@ static XDViewManager *defaultManagerInstance = nil;
     }
 }
 
+- (void)showLoadingViewWithTitle:(NSString *)title requestOperation:(AFHTTPRequestOperation *)requestOperation
+{
+    if (_loadingView == nil) {
+        _loadingView = [[XDLoadingView alloc] initWithRequestOperation:requestOperation title:title];
+    }
+    else{
+        _loadingView.title = title;
+        _loadingView.requestOperation = requestOperation;
+    }
+    [_loadingView start];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:_loadingView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_loadingView];
+}
+
+- (void)hideLoadingView
+{
+    [_loadingView stop];
+    [_loadingView removeFromSuperview];
+}
+
 //- (void)showGuideView
 //{
 //    //欢迎页

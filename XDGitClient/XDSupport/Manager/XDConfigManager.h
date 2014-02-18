@@ -20,8 +20,10 @@
 
 + (XDConfigManager *)defaultManager;
 
-- (void)loadConfigFilePath;
+- (void)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 - (BOOL)didSave;
+- (void)didReset;
+- (void)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 @end

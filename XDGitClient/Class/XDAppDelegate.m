@@ -8,6 +8,7 @@
 
 #import "XDAppDelegate.h"
 
+#import "XDViewController.h"
 #import "XDLoginViewController.h"
 #import "XDRootViewController.h"
 #import "XDViewManager.h"
@@ -23,7 +24,6 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [[XDViewManager defaultManager] setupAppearance];
-    [[XDConfigManager defaultManager] loadConfigFilePath];
     
     [self loginStateChanged:nil];
     [self.window makeKeyAndVisible];
@@ -66,6 +66,7 @@
 {
     id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
     [activityEngine didReset];
+    [[XDConfigManager defaultManager] didReset];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, activityEngine.engineKey];

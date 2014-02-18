@@ -75,6 +75,7 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C0262C818B3A082009757C1 /* XDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0262C718B3A082009757C1 /* XDLoadingView.m */; };
 		3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00618B2401F006C28BF /* XDConfigManager.m */; };
 		3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* AccountModel.m */; };
 /* End PBXBuildFile section */
@@ -207,6 +208,8 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C0262C618B3A082009757C1 /* XDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoadingView.h; sourceTree = "<group>"; };
+		3C0262C718B3A082009757C1 /* XDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDLoadingView.m; sourceTree = "<group>"; };
 		3CA4F00518B2401F006C28BF /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
 		3CA4F00618B2401F006C28BF /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
@@ -458,6 +461,8 @@
 				3AEDEA4218AE1D930093946D /* TableViewController */,
 				3AEDE99A18ADFF1A0093946D /* XDViewController.h */,
 				3AEDE99B18ADFF1A0093946D /* XDViewController.m */,
+				3C0262C618B3A082009757C1 /* XDLoadingView.h */,
+				3C0262C718B3A082009757C1 /* XDLoadingView.m */,
 			);
 			path = BaseController;
 			sourceTree = "<group>";
@@ -720,6 +725,7 @@
 				3AA8012018B3460200F8450B /* NSData+Category.m in Sources */,
 				3AEDEA5318AE20D10093946D /* IISideController.m in Sources */,
 				3AEDEA1F18AE17450093946D /* AFPropertyListRequestOperation.m in Sources */,
+				3C0262C818B3A082009757C1 /* XDLoadingView.m in Sources */,
 				3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */,
 				3AEDE9AA18ADFF1A0093946D /* XDViewManager.m in Sources */,
 				3AEDE98718ADFD380093946D /* XDAppDelegate.m in Sources */,

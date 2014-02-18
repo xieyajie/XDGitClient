@@ -12,5 +12,7 @@
 @interface XDGitSideViewController : XDTableViewController
 
 @property (strong, nonatomic) XDGitDeckViewController *deckController;
+@property (strong, nonatomic) UINavigationController *projectNavTabController;
+@property (strong, nonatomic) UINavigationController *activityNavController;
 
 @end

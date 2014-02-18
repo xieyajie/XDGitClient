@@ -23,7 +23,7 @@
 //  SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
+#import "XDViewController.h"
 
 // thanks to http://stackoverflow.com/a/8594878/742176
 
@@ -129,7 +129,7 @@ typedef UInt32 IIViewDeckDelegateMode;
 extern NSString* NSStringFromIIViewDeckSide(IIViewDeckSide side);
 extern IIViewDeckOffsetOrientation IIViewDeckOffsetOrientationFromIIViewDeckSide(IIViewDeckSide side);
 
-@interface IIViewDeckController : UIViewController {
+@interface IIViewDeckController : XDViewController {
 @private    
     CGPoint _panOrigin;
     UInt32 _viewAppeared;

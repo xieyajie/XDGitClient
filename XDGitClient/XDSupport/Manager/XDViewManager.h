@@ -8,15 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+#import "XDLoadingView.h"
+
 @class XDAppDelegate;
 @interface XDViewManager : NSObject
 {
     XDAppDelegate *_appDelegate;
+    XDLoadingView *_loadingView;
 }
 
 + (XDViewManager *)defaultManager;
 
 - (void)setupAppearance;
+
+- (void)showLoadingViewWithTitle:(NSString *)title requestOperation:(AFHTTPRequestOperation *)requestOperation;
+- (void)hideLoadingView;
 
 //- (void)showGuideView;// 引导页面
 

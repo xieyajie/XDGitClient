@@ -78,32 +78,12 @@
 
 - (void)showLoadingView
 {
-    if (!_loadingView) {
-        _loadingView = [[UIView alloc] initWithFrame:self.view.bounds];
-        
-        UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
-        backgroundView.center = _loadingView.center;
-        backgroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        backgroundView.layer.cornerRadius = 6.0;
-        [_loadingView addSubview:backgroundView];
-        
-        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        _activityIndicatorView.center = backgroundView.center;
-        [_loadingView addSubview:_activityIndicatorView];
-        
-        [self.view addSubview:_loadingView];
-    }
-    
-    [self.view bringSubviewToFront:_loadingView];
-    _loadingView.hidden = NO;
-    
-    [_activityIndicatorView startAnimating];
+    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"数据申请..." requestOperation:nil];
 }
 
 - (void)hideLoadingView
 {
-    _loadingView.hidden = YES;
-    [_activityIndicatorView stopAnimating];
+    [[XDViewManager defaultManager] hideLoadingView];
 }
 
 @end

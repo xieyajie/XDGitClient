@@ -8,6 +8,8 @@
 
 #import "XDAccountCardViewController.h"
 
+#import "XDTableViewCell.h"
+
 @interface XDAccountCardViewController ()
 {
     AccountModel *_accountModel;
@@ -85,26 +87,26 @@
         [cell.contentView addSubview:label];
     }
     
-    NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    if (dic) {
-        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
-        cell.titleLabel.text = [dic objectForKey:KSOURCETITLE];
-        
-        UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
-        detailLabel.backgroundColor = [UIColor clearColor];
-        NSString *selectorStr = [dic objectForKey:KSOURCESELECTOR];
-        if (selectorStr && selectorStr.length > 0) {
-            SEL selectorMethod = NSSelectorFromString(selectorStr);
-            if (selectorMethod) {
-                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
-                if(resultStr && resultStr.length > 0)
-                {
-                    detailLabel.text = resultStr;
-                    detailLabel.backgroundColor = [UIColor lightGrayColor];
-                }
-            }
-        }
-    }
+//    NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+//    if (dic) {
+//        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
+//        cell.titleLabel.text = [dic objectForKey:KSOURCETITLE];
+//        
+//        UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
+//        detailLabel.backgroundColor = [UIColor clearColor];
+//        NSString *selectorStr = [dic objectForKey:KSOURCESELECTOR];
+//        if (selectorStr && selectorStr.length > 0) {
+//            SEL selectorMethod = NSSelectorFromString(selectorStr);
+//            if (selectorMethod) {
+//                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
+//                if(resultStr && resultStr.length > 0)
+//                {
+//                    detailLabel.text = resultStr;
+//                    detailLabel.backgroundColor = [UIColor lightGrayColor];
+//                }
+//            }
+//        }
+//    }
     
     return cell;
 }

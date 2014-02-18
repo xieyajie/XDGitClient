@@ -10,6 +10,7 @@
 
 #import "XDRequestManager.h"
 #import "XDViewManager.h"
+#import "XDConfigManager.h"
 
 @interface XDLoginViewController ()<UITextFieldDelegate>
 {

@@ -49,17 +49,44 @@ static XDConfigManager *defaultManagerInstance = nil;
     return _configDictionary;
 }
 
-#pragma mark - public
+#pragma mark - private
 
-- (void)loadConfigFilePath
+- (void)loadConfigFile
 {
     _configFilePath = [_configDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_config", APPNAME]];
     _configDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:_configFilePath];
 }
 
+#pragma mark - public
+
+- (void)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
+    
+    [gitEngine userWithSuccess:^(id object) {
+        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
+        self.loginAccount = account;
+        successBlock(account);
+    } failure:^(NSError *error) {
+        self.loginAccount = nil;
+        failureBlock(error);
+    }];
+}
+
 - (BOOL)didSave
 {
     return [self.configDictionary writeToFile:_configFilePath atomically:YES];
+}
+
+- (void)didReset
+{
+    [self loadConfigFile];
+}
+
+- (void)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    [self loadConfigFile];
+    [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
 }
 
 @end
