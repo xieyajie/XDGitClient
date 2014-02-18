@@ -12,6 +12,11 @@
 #import "XDRequestManager.h"
 #import "XDConfigManager.h"
 
+#import "XDGitDeckViewController.h"
+#import "XDProjectViewController.h"
+#import "XDActivityViewController.h"
+#import "XDFollowViewController.h"
+
 #define KSOURCEIMAGE @"icon"
 #define KSOURCETITLE @"title"
 #define KSOURCESELECTOR @"selector"
@@ -216,7 +221,32 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.section) {
+        case 0:
+        {
+            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil];
+            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:projectsController];
+        }
+            break;
+        case 1:
+        {
+            XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:nil];
+            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:activityController];
+        }
+            break;
+        case 2:
+        {
+            BOOL follower = indexPath.row == 0 ? YES : NO;
+            XDFollowViewController *followController = [[XDFollowViewController alloc] initWithFollowers:follower];
+            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:followController];
+        }
+            break;
+            
+        default:
+            break;
+    }
     
+    [self.deckController closeLeftViewAnimated:YES];
 }
 
 #pragma mark - action
@@ -239,10 +269,9 @@
 
 - (void)loadAccountData
 {
-    UAGithubEngine *githubEngine = [[XDRequestManager defaultManager] githubEngine];
-    [githubEngine user:githubEngine.username success:^(id object) {
-        NSDictionary *dic = [object objectAtIndex:0];
-        AccountModel *account = [[AccountModel alloc] initWithDictionary:dic];
+    id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
+    [gitEngine userWithSuccess:^(id object) {
+        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
         _configManager.loginAccount = account;
         
         [_headerImageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];

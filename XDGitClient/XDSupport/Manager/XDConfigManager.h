@@ -14,11 +14,14 @@
 
 @property (strong, nonatomic, readonly) NSString *configDirectoryPath;
 @property (strong, nonatomic, readonly) NSString *configFilePath;
+@property (strong, nonatomic) NSMutableDictionary *configDictionary;
 
 @property (strong, nonatomic) AccountModel *loginAccount;
 
 + (XDConfigManager *)defaultManager;
 
 - (void)loadConfigFilePath;
+
+- (BOOL)didSave;
 
 @end

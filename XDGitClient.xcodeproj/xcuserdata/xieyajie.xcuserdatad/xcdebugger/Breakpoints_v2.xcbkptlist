@@ -17,36 +17,70 @@
             endingLineNumber = "1425"
             landmarkName = "-userWithSuccess:failure:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[UAGithubEngine userWithSuccess:failure:]"
-                  moduleName = "XDGitClient"
-                  urlString = "file://localhost/Users/xieyajie/Desktop/XDGitClient/XDGitClient/XDSupport/ThirdParty/UAGithubEngine/UAGithubEngine.m"
-                  timestampString = "414324429.1609"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1425"
-                  endingLineNumber = "1425"
-                  offsetFromSymbolStart = "103">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__42-[UAGithubEngine userWithSuccess:failure:]_block_invoke"
-                  moduleName = "XDGitClient"
-                  urlString = "file://localhost/Users/xieyajie/Desktop/XDGitClient/XDGitClient/XDSupport/ThirdParty/UAGithubEngine/UAGithubEngine.m"
-                  timestampString = "414324429.16116"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1425"
-                  endingLineNumber = "1425"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XDGitClient/XDSupport/ThirdParty/UAGithubEngine/UAGithubEngine.m"
+            timestampString = "414386704.707598"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "-sendRequest:requestType:responseType:withParameters:page:error:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XDGitClient/XDSupport/ThirdParty/UAGithubEngine/UAGithubEngine.m"
+            timestampString = "414386716.261248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
+            landmarkName = "-sendRequest:requestType:responseType:withParameters:page:error:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XDGitClient/XDSupport/ThirdParty/UAGithubEngine/UAGithubEngine.m"
+            timestampString = "414388730.348552"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-sendRequest:requestType:responseType:withParameters:page:error:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "XDGitClient/Class/XDGitSideViewController.m"
+            timestampString = "414403334.998069"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
+            landmarkName = "-loadAccountData"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

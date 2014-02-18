@@ -64,10 +64,11 @@
 
 - (void)loginStateChanged:(NSNotification *)notification
 {
-    [[XDRequestManager defaultManager] loadGithubEngine];
+    id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
+    [activityEngine didReset];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
+    NSString *key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, activityEngine.engineKey];
     NSString *name = [defaults objectForKey:key];
     
     BOOL isLogin = YES;

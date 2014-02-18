@@ -203,12 +203,9 @@
     }
     
     [self showLoadingView];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setValue:userName forKey:[NSString stringWithFormat:@"%@_UserName", APPNAME]];
     
-    [[XDRequestManager defaultManager] loginRequestWithUserName:userName password:paswd parameters:nil success:^(AFHTTPRequestOperation *operation) {
-        NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
-        [defaults setValue:userName forKey:key];
+    [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if (_rememberButton.selected) {
             [defaults setValue:paswd forKey:userName];
         }
@@ -218,7 +215,7 @@
         
         [self hideLoadingView];
         [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
-    } failure:^(AFHTTPRequestOperation *operation, NSString *errorDescription) {
+    } failure:^(NSError *error) {
         [self hideLoadingView];
     }];
 }

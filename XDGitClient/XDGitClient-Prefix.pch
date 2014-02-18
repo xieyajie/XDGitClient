@@ -14,11 +14,13 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 
+    #import "AccountModel.h"
+    #import "XDRequestManager.h"
+
+    #import "UIImageView+AFNetworking.h"
+    #import "NSString+Category.h"
     #import "XDLocalDefine.h"
 
     #define APPNAME @"XDGit"
-    #define KLEFTVIEWWIDTH 190.0
-    //textField color (detail)
-    #define TEXTFIELDDETAILCOLOR [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1.0]
 
 #endif

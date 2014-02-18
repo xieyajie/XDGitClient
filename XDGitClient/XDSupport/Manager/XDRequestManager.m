@@ -8,18 +8,18 @@
 
 #import "XDRequestManager.h"
 
-static NSString *const BASEURL = @"https://api.github.com";
+#import "XDGithubEngine.h"
+#import "XDConfigManager.h"
 
 static XDRequestManager *defaultManagerInstance = nil;
 
 @implementation XDRequestManager
 
-@synthesize accountToken = _accountToken;
-
-- (id)initWithBaseURL:(NSURL *)url
+- (id)init
 {
-    self = [super initWithBaseURL:url];
+    self = [super init];
     if (self) {
+        
     }
     
     return self;
@@ -30,33 +30,25 @@ static XDRequestManager *defaultManagerInstance = nil;
     @synchronized(self) {
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
-            defaultManagerInstance = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASEURL]];
+            defaultManagerInstance = [[self alloc] init];
         });
     }
     return defaultManagerInstance;
 }
 
-- (void)loadGithubEngine
+#pragma mark - getter
+
+- (id<XDGitEngineProtocol>)activityGitEngine
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
-    NSString *name = [defaults objectForKey:key];
-    if (name && name.length > 0) {
-        _githubEngine = [[UAGithubEngine alloc] initWithUsername:name password:nil withReachability:YES];
+    if (_activityGitEngine == nil) {
+        _activityGitEngine = [XDGithubEngine defaultEngine];
     }
     else{
-        _githubEngine = nil;
+        
     }
+    
+    return _activityGitEngine;
 }
-
-#pragma mark - 信息处理
-
-//- (NSString *)accountToken
-//{
-//    _accountToken = [NSString stringWithFormat:@"Bearer %@", AccountToken];
-//    
-//    return _accountToken;
-//}
 
 /*获取请求错误信息描述*/
 - (NSString *)requestErrorDescription:(NSError *)error
@@ -116,244 +108,75 @@ static XDRequestManager *defaultManagerInstance = nil;
     return @"";
 }
 
-#pragma mark - 用户相关
-
-/**
- *  登录
- *
- *  @param userName   用户名
- *  @param password   密码
- *  @param parameters 参数
- *  @param success    申请成功时，回调方法
- *  @param failure    申请失败时，回调方法
- */
-- (void)loginRequestWithUserName:(NSString *)userName
-                        password:(NSString *)password
-                      parameters:(NSDictionary *)parameters
-                         success:(void (^)(AFHTTPRequestOperation *operation))success
-                         failure:(void (^)(AFHTTPRequestOperation *operation, NSString *errorDescription))failure
-{
-    NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", @"http://github.com", userName, password];
-	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        if (_githubEngine == nil) {
-            _githubEngine = [[UAGithubEngine alloc] initWithUsername:userName password:password withReachability:YES];
-        }
-        success(operation);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *errorStr = [self requestErrorDescription:error];
-        failure(operation, errorStr);
-    }];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-#pragma mark - 上拉、下拉申请数据
-
-/**
- *  执行下拉刷新请求
- *
- *  @param path       链接字符串
- *  @param userInfo   参数
- *  @param success    申请成功时，回调方法
- *  @param failure    申请失败时，回调方法
- */
-- (void)startTableHeaderRequestWithPath:(NSString *)path
-                               userInfo:(NSDictionary *)userInfo
-                                success:(void (^)(AFHTTPRequestOperation *operation, id JSONValue))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSString *errorDescription))failure
-{
-    path = [path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL *url = [NSURL URLWithString:path];
-    if (!url.scheme.length) {
-        NSString *tmpPath = [NSString stringWithString:path];
-        path = [NSString stringWithFormat:@"%@/%@", BASEURL, tmpPath];
-    }
-    
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:userInfo];
-    [request addValue:self.accountToken forHTTPHeaderField:@"Authorization"];
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSError *error;
-        id jsonObject = [NSJSONSerialization
-                         JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments
-                         error:&error];
-        if (jsonObject != nil && error == nil){
-            success(operation, jsonObject);
-        }
-        else{
-            failure(operation, [self requestErrorDescription:error]);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *errorStr = [self requestErrorDescription:error];
-        failure(operation, errorStr);
-    }];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-/**
- *  执行上拉刷新请求
- *
- *  @param path       链接字符串
- *  @param userInfo   参数
- *  @param success    申请成功时，回调方法
- *  @param failure    申请失败时，回调方法
- */
-- (void)startTableFooterRequestWithPath:(NSString *)path
-                               userInfo:(NSDictionary *)userInfo
-                                success:(void (^)(AFHTTPRequestOperation *operation, id JSONValue))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSString *errorDescription))failure
-{
-    path = [path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL *url = [NSURL URLWithString:path];
-    if (!url.scheme.length) {
-        NSString *tmpPath = [NSString stringWithString:path];
-        path = [NSString stringWithFormat:@"%@/%@", BASEURL, tmpPath];
-    }
-    
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:userInfo];
-    [request addValue:self.accountToken forHTTPHeaderField:@"Authorization"];
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSError *error;
-        id jsonObject = [NSJSONSerialization
-                         JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments
-                         error:&error];
-        if (jsonObject != nil && error == nil){
-            success(operation, jsonObject);
-        }
-        else{
-            failure(operation, [self requestErrorDescription:error]);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        NSString *errorStr = [self requestErrorDescription:error];
-        failure(operation, errorStr);
-    }];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-/**
- *  自定义申请方式
- */
-- (void)requestWithMode:(NSString *)mode
-               path:(NSString *)path
-         parameters:(NSDictionary *)parameters
-            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-    if (mode == nil || mode.length == 0) {
-        mode = @"GET";
-    }
-    else{
-        mode = [mode uppercaseString];
-    }
-    
-    path = [path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL *url = [NSURL URLWithString:path];
-    if (!url.scheme.length) {
-        NSString *tmpPath = [NSString stringWithString:path];
-        path = [NSString stringWithFormat:@"%@/%@", BASEURL, tmpPath];
-    }
-    
-	NSMutableURLRequest *request = [self requestWithMethod:mode path:path parameters:parameters];
-    [request addValue:self.accountToken forHTTPHeaderField:@"Authorization"];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSError *error;
-        id jsonObject = [NSJSONSerialization
-                         JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments
-                         error:&error];
-        if (jsonObject != nil && error == nil){
-            success(operation, jsonObject);
-        }
-        else{
-            failure(operation, error);
-        }
-    }failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-/**
- *  GET申请
- *
- *  @param path       链接字符串
- *  @param parameters 参数
- *  @param success    申请成功时，回调方法
- *  @param failure    申请失败时，回调方法
- */
-- (void)getPath:(NSString *)path
-     parameters:(NSDictionary *)parameters
-        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-    path = [path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL *url = [NSURL URLWithString:path];
-    if (!url.scheme.length) {
-        NSString *tmpPath = [NSString stringWithString:path];
-        path = [NSString stringWithFormat:@"%@/%@", BASEURL, tmpPath];
-    }
-    
-	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:parameters];
-    [request addValue:self.accountToken forHTTPHeaderField:@"Authorization"];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSError *error;
-        id jsonObject = [NSJSONSerialization
-                         JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments
-                         error:&error];
-        if (jsonObject != nil && error == nil){
-            success(operation, jsonObject);
-        }
-        else{
-            failure(operation, error);
-        }
-    }failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
-}
-
-/**
- *  POST申请
- *
- *  @param path       链接字符串
- *  @param parameters 参数
- *  @param success    申请成功时，回调方法
- *  @param failure    申请失败时，回调方法
- */
-- (void)postPath:(NSString *)path
-      parameters:(NSDictionary *)parameters
-         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-    path = [path stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURL *url = [NSURL URLWithString:path];
-    if (!url.scheme.length) {
-        NSString *tmpPath = [NSString stringWithString:path];
-        path = [NSString stringWithFormat:@"%@/%@", BASEURL, tmpPath];
-    }
-    
-    NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
-    [request addValue:self.accountToken forHTTPHeaderField:@"Authorization"];
-	AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        NSError *error;
-        id jsonObject = [NSJSONSerialization
-                         JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments
-                         error:&error];
-        if (jsonObject != nil && error == nil){
-            success(operation, jsonObject);
-        }
-        else{
-            failure(operation, error);
-        }
-    } failure:failure];
-    [self enqueueHTTPRequestOperation:operation];
-}
+//#pragma mark - account info
+//
+//- (void)followersWithSuccess:(void(^)(id object))successBlock failure:(void(^)(NSError *error))failureBlock
+//{
+//    if (_githubEngine) {
+//        [_githubEngine followers:_githubEngine.username success:^(id object) {
+//            successBlock(object);
+//        } failure:^(NSError *error) {
+//            failureBlock(error);
+//        }];
+//    }
+//    else{
+//        NSError *error = [NSError errorWithDomain:@"申请数据失败" code:404 userInfo:nil];
+//        failureBlock(error);
+//    }
+//}
+//
+//- (void)followingsWithSuccess:(void(^)(id object))successBlock failure:(void(^)(NSError *error))failureBlock
+//{
+//    if (_githubEngine) {
+//        [_githubEngine following:_githubEngine.username success:^(id object) {
+//            successBlock(object);
+//        } failure:^(NSError *error) {
+//            failureBlock(error);
+//        }];
+//    }
+//    else{
+//        NSError *error = [NSError errorWithDomain:@"申请数据失败" code:404 userInfo:nil];
+//        failureBlock(error);
+//    }
+//}
+//
+//#pragma mark - activity
+//
+//- (void)allActivityWithSuccess:(void(^)(id object))successBlock failure:(void(^)(NSError *error))failureBlock
+//{
+//    if (_githubEngine) {
+//        [_githubEngine publicEventsPerformedByUser:_githubEngine.username success:^(id object) {
+//            successBlock(object);
+//        } failure:^(NSError *error) {
+//            failureBlock(error);
+//        }];
+//    }
+//    else{
+//        NSError *error = [NSError errorWithDomain:@"申请数据失败" code:404 userInfo:nil];
+//        failureBlock(error);
+//    }
+//}
+//
+//#pragma mark - project
+//
+//- (void)projectsWithStyle:(XDProjectStyle)style userName:(NSString *)userName success:(void(^)(id object))successBlock failure:(void(^)(NSError *error))failureBlock
+//{
+//    if (_githubEngine) {
+//        if (userName == nil || userName.length == 0) {
+//            userName = _githubEngine.username;
+//        }
+//        
+//        NSString *path = [NSString stringWithFormat:@"user=%@&type=%@", userName, @"owner"];
+//        [_githubEngine repositoriesWithSuccess:^(id object) {
+//            successBlock(object);
+//        } failure:^(NSError *error) {
+//            failureBlock(error);
+//        }];
+//    }
+//    else{
+//        NSError *error = [NSError errorWithDomain:@"申请数据失败" code:404 userInfo:nil];
+//        failureBlock(error);
+//    }
+//}
 
 @end

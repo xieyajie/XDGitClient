@@ -9,21 +9,19 @@
 /* Begin PBXBuildFile section */
 		3A4B777418B1F52900A94D47 /* navi_settingBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B777218B1F52900A94D47 /* navi_settingBlue@2x.png */; };
 		3A4B777518B1F52900A94D47 /* navi_settingWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B777318B1F52900A94D47 /* navi_settingWhite@2x.png */; };
-		3A4B779418B1FE3000A94D47 /* NSArray+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B777E18B1FE3000A94D47 /* NSArray+Utilities.m */; };
-		3A4B779518B1FE3000A94D47 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778018B1FE3000A94D47 /* NSData+Base64.m */; };
-		3A4B779618B1FE3000A94D47 /* NSInvocation+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778218B1FE3000A94D47 /* NSInvocation+Blocks.m */; };
-		3A4B779718B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778418B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.m */; };
-		3A4B779818B1FE3000A94D47 /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778618B1FE3000A94D47 /* NSString+UUID.m */; };
-		3A4B779A18B1FE3000A94D47 /* UAGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778A18B1FE3000A94D47 /* UAGithubEngine.m */; };
-		3A4B779B18B1FE3000A94D47 /* UAGithubEngineConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778C18B1FE3000A94D47 /* UAGithubEngineConstants.m */; };
-		3A4B779C18B1FE3000A94D47 /* UAGithubJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B778F18B1FE3000A94D47 /* UAGithubJSONParser.m */; };
-		3A4B779D18B1FE3000A94D47 /* UAGithubURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B779118B1FE3000A94D47 /* UAGithubURLConnection.m */; };
-		3A4B779E18B1FE3000A94D47 /* UAReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A4B779318B1FE3000A94D47 /* UAReachability.m */; };
 		3A4B77A218B20AD300A94D47 /* userHeaderDefault_30@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A118B20AD300A94D47 /* userHeaderDefault_30@2x.png */; };
 		3A4B77A618B2102D00A94D47 /* button_bg_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A518B2102D00A94D47 /* button_bg_red@2x.png */; };
 		3A4B77A818B2140D00A94D47 /* sideSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A718B2140D00A94D47 /* sideSource.plist */; };
 		3A4B77AC18B2167500A94D47 /* side_copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77AA18B2167500A94D47 /* side_copy@2x.png */; };
 		3A4B77AD18B2167500A94D47 /* side_own@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77AB18B2167500A94D47 /* side_own@2x.png */; };
+		3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FF18B2F18700F8450B /* XDFollowViewController.m */; };
+		3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010218B2F62B00F8450B /* XDTableViewCell.m */; };
+		3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010618B2FECA00F8450B /* XDActivityViewController.m */; };
+		3AA8010A18B304F600F8450B /* XDProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010918B304F600F8450B /* XDProjectViewController.m */; };
+		3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010F18B323CE00F8450B /* XDGithubEngine.m */; };
+		3AA8011318B326E500F8450B /* XDGitRequestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8011218B326E500F8450B /* XDGitRequestClient.m */; };
+		3AA8012018B3460200F8450B /* NSData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8011D18B3460200F8450B /* NSData+Category.m */; };
+		3AA8012118B3460200F8450B /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8011F18B3460200F8450B /* NSString+Category.m */; };
 		3AEDE94D18ADF5A90093946D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE94C18ADF5A90093946D /* Foundation.framework */; };
 		3AEDE94F18ADF5A90093946D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE94E18ADF5A90093946D /* CoreGraphics.framework */; };
 		3AEDE95118ADF5A90093946D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEDE95018ADF5A90093946D /* UIKit.framework */; };
@@ -90,32 +88,29 @@
 /* Begin PBXFileReference section */
 		3A4B777218B1F52900A94D47 /* navi_settingBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navi_settingBlue@2x.png"; sourceTree = "<group>"; };
 		3A4B777318B1F52900A94D47 /* navi_settingWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navi_settingWhite@2x.png"; sourceTree = "<group>"; };
-		3A4B777D18B1FE3000A94D47 /* NSArray+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Utilities.h"; sourceTree = "<group>"; };
-		3A4B777E18B1FE3000A94D47 /* NSArray+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Utilities.m"; sourceTree = "<group>"; };
-		3A4B777F18B1FE3000A94D47 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		3A4B778018B1FE3000A94D47 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
-		3A4B778118B1FE3000A94D47 /* NSInvocation+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+Blocks.h"; sourceTree = "<group>"; };
-		3A4B778218B1FE3000A94D47 /* NSInvocation+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+Blocks.m"; sourceTree = "<group>"; };
-		3A4B778318B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UAGithubEngineUtilities.h"; sourceTree = "<group>"; };
-		3A4B778418B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UAGithubEngineUtilities.m"; sourceTree = "<group>"; };
-		3A4B778518B1FE3000A94D47 /* NSString+UUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UUID.h"; sourceTree = "<group>"; };
-		3A4B778618B1FE3000A94D47 /* NSString+UUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UUID.m"; sourceTree = "<group>"; };
-		3A4B778918B1FE3000A94D47 /* UAGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngine.h; sourceTree = "<group>"; };
-		3A4B778A18B1FE3000A94D47 /* UAGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngine.m; sourceTree = "<group>"; };
-		3A4B778B18B1FE3000A94D47 /* UAGithubEngineConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineConstants.h; sourceTree = "<group>"; };
-		3A4B778C18B1FE3000A94D47 /* UAGithubEngineConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubEngineConstants.m; sourceTree = "<group>"; };
-		3A4B778D18B1FE3000A94D47 /* UAGithubEngineRequestTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubEngineRequestTypes.h; sourceTree = "<group>"; };
-		3A4B778E18B1FE3000A94D47 /* UAGithubJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubJSONParser.h; sourceTree = "<group>"; };
-		3A4B778F18B1FE3000A94D47 /* UAGithubJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubJSONParser.m; sourceTree = "<group>"; };
-		3A4B779018B1FE3000A94D47 /* UAGithubURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAGithubURLConnection.h; sourceTree = "<group>"; };
-		3A4B779118B1FE3000A94D47 /* UAGithubURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAGithubURLConnection.m; sourceTree = "<group>"; };
-		3A4B779218B1FE3000A94D47 /* UAReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAReachability.h; sourceTree = "<group>"; };
-		3A4B779318B1FE3000A94D47 /* UAReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UAReachability.m; sourceTree = "<group>"; };
 		3A4B77A118B20AD300A94D47 /* userHeaderDefault_30@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userHeaderDefault_30@2x.png"; sourceTree = "<group>"; };
 		3A4B77A518B2102D00A94D47 /* button_bg_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_bg_red@2x.png"; sourceTree = "<group>"; };
 		3A4B77A718B2140D00A94D47 /* sideSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sideSource.plist; sourceTree = "<group>"; };
 		3A4B77AA18B2167500A94D47 /* side_copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_copy@2x.png"; sourceTree = "<group>"; };
 		3A4B77AB18B2167500A94D47 /* side_own@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_own@2x.png"; sourceTree = "<group>"; };
+		3AA800FE18B2F18700F8450B /* XDFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFollowViewController.h; sourceTree = "<group>"; };
+		3AA800FF18B2F18700F8450B /* XDFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFollowViewController.m; sourceTree = "<group>"; };
+		3AA8010118B2F62B00F8450B /* XDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewCell.h; sourceTree = "<group>"; };
+		3AA8010218B2F62B00F8450B /* XDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTableViewCell.m; sourceTree = "<group>"; };
+		3AA8010518B2FECA00F8450B /* XDActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDActivityViewController.h; sourceTree = "<group>"; };
+		3AA8010618B2FECA00F8450B /* XDActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDActivityViewController.m; sourceTree = "<group>"; };
+		3AA8010818B304F600F8450B /* XDProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDProjectViewController.h; sourceTree = "<group>"; };
+		3AA8010918B304F600F8450B /* XDProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDProjectViewController.m; sourceTree = "<group>"; };
+		3AA8010D18B3228000F8450B /* XDGitEngineProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGitEngineProtocol.h; sourceTree = "<group>"; };
+		3AA8010E18B323CE00F8450B /* XDGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGithubEngine.h; sourceTree = "<group>"; };
+		3AA8010F18B323CE00F8450B /* XDGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGithubEngine.m; sourceTree = "<group>"; };
+		3AA8011118B326E500F8450B /* XDGitRequestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGitRequestClient.h; sourceTree = "<group>"; };
+		3AA8011218B326E500F8450B /* XDGitRequestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitRequestClient.m; sourceTree = "<group>"; };
+		3AA8011418B32A9F00F8450B /* XDGitEngineRequestTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGitEngineRequestTypes.h; sourceTree = "<group>"; };
+		3AA8011C18B3460200F8450B /* NSData+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Category.h"; sourceTree = "<group>"; };
+		3AA8011D18B3460200F8450B /* NSData+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Category.m"; sourceTree = "<group>"; };
+		3AA8011E18B3460200F8450B /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		3AA8011F18B3460200F8450B /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
 		3AEDE94918ADF5A90093946D /* XDGitClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XDGitClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEDE94C18ADF5A90093946D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3AEDE94E18ADF5A90093946D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -231,34 +226,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A4B777C18B1FE3000A94D47 /* UAGithubEngine */ = {
-			isa = PBXGroup;
-			children = (
-				3A4B777D18B1FE3000A94D47 /* NSArray+Utilities.h */,
-				3A4B777E18B1FE3000A94D47 /* NSArray+Utilities.m */,
-				3A4B777F18B1FE3000A94D47 /* NSData+Base64.h */,
-				3A4B778018B1FE3000A94D47 /* NSData+Base64.m */,
-				3A4B778118B1FE3000A94D47 /* NSInvocation+Blocks.h */,
-				3A4B778218B1FE3000A94D47 /* NSInvocation+Blocks.m */,
-				3A4B778318B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.h */,
-				3A4B778418B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.m */,
-				3A4B778518B1FE3000A94D47 /* NSString+UUID.h */,
-				3A4B778618B1FE3000A94D47 /* NSString+UUID.m */,
-				3A4B778918B1FE3000A94D47 /* UAGithubEngine.h */,
-				3A4B778A18B1FE3000A94D47 /* UAGithubEngine.m */,
-				3A4B778B18B1FE3000A94D47 /* UAGithubEngineConstants.h */,
-				3A4B778C18B1FE3000A94D47 /* UAGithubEngineConstants.m */,
-				3A4B778D18B1FE3000A94D47 /* UAGithubEngineRequestTypes.h */,
-				3A4B778E18B1FE3000A94D47 /* UAGithubJSONParser.h */,
-				3A4B778F18B1FE3000A94D47 /* UAGithubJSONParser.m */,
-				3A4B779018B1FE3000A94D47 /* UAGithubURLConnection.h */,
-				3A4B779118B1FE3000A94D47 /* UAGithubURLConnection.m */,
-				3A4B779218B1FE3000A94D47 /* UAReachability.h */,
-				3A4B779318B1FE3000A94D47 /* UAReachability.m */,
-			);
-			path = UAGithubEngine;
-			sourceTree = "<group>";
-		};
 		3A4B77A918B2167500A94D47 /* Side */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,6 +233,48 @@
 				3A4B77AB18B2167500A94D47 /* side_own@2x.png */,
 			);
 			path = Side;
+			sourceTree = "<group>";
+		};
+		3AA800FD18B2F16F00F8450B /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				3AA800FE18B2F18700F8450B /* XDFollowViewController.h */,
+				3AA800FF18B2F18700F8450B /* XDFollowViewController.m */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		3AA8010418B2FEA400F8450B /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				3AA8010518B2FECA00F8450B /* XDActivityViewController.h */,
+				3AA8010618B2FECA00F8450B /* XDActivityViewController.m */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
+		3AA8010C18B3228000F8450B /* GitEngine */ = {
+			isa = PBXGroup;
+			children = (
+				3AA8011418B32A9F00F8450B /* XDGitEngineRequestTypes.h */,
+				3AA8010D18B3228000F8450B /* XDGitEngineProtocol.h */,
+				3AA8010E18B323CE00F8450B /* XDGithubEngine.h */,
+				3AA8010F18B323CE00F8450B /* XDGithubEngine.m */,
+				3AA8011118B326E500F8450B /* XDGitRequestClient.h */,
+				3AA8011218B326E500F8450B /* XDGitRequestClient.m */,
+			);
+			path = GitEngine;
+			sourceTree = "<group>";
+		};
+		3AA8011B18B3460200F8450B /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3AA8011C18B3460200F8450B /* NSData+Category.h */,
+				3AA8011D18B3460200F8450B /* NSData+Category.m */,
+				3AA8011E18B3460200F8450B /* NSString+Category.h */,
+				3AA8011F18B3460200F8450B /* NSString+Category.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		3AEDE94018ADF5A90093946D = {
@@ -343,6 +352,8 @@
 		3AEDE98018ADFD370093946D /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				3AA8010418B2FEA400F8450B /* Activity */,
+				3AA800FD18B2F16F00F8450B /* Follow */,
 				3AEDE98118ADFD370093946D /* Account */,
 				3AEDE98418ADFD370093946D /* XDAppDelegate.h */,
 				3AEDE98518ADFD380093946D /* XDAppDelegate.m */,
@@ -353,6 +364,8 @@
 				3AEDEA5C18AE22570093946D /* XDRootViewController.h */,
 				3AEDEA5D18AE22570093946D /* XDRootViewController.m */,
 				3A4B77A718B2140D00A94D47 /* sideSource.plist */,
+				3AA8010818B304F600F8450B /* XDProjectViewController.h */,
+				3AA8010918B304F600F8450B /* XDProjectViewController.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -395,6 +408,8 @@
 		3AEDE99018ADFF1A0093946D /* XDSupport */ = {
 			isa = PBXGroup;
 			children = (
+				3AA8011B18B3460200F8450B /* Category */,
+				3AA8010C18B3228000F8450B /* GitEngine */,
 				3CA4F00A18B25281006C28BF /* DataModel */,
 				3AEDE9C018AE17450093946D /* ThirdParty */,
 				3AEDE99118ADFF1A0093946D /* BaseController */,
@@ -442,7 +457,6 @@
 		3AEDE9C018AE17450093946D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				3A4B777C18B1FE3000A94D47 /* UAGithubEngine */,
 				3AEDEA4C18AE20D10093946D /* ViewDeck */,
 				3AEDE9C118AE17450093946D /* AFNetworking */,
 				3AEDEA0C18AE17450093946D /* NRGridView */,
@@ -512,6 +526,8 @@
 				3AEDEA4618AE1D930093946D /* XDGridViewController.m */,
 				3AEDEA4718AE1D930093946D /* XDTableViewController.h */,
 				3AEDEA4818AE1D930093946D /* XDTableViewController.m */,
+				3AA8010118B2F62B00F8450B /* XDTableViewCell.h */,
+				3AA8010218B2F62B00F8450B /* XDTableViewCell.m */,
 			);
 			path = TableViewController;
 			sourceTree = "<group>";
@@ -655,16 +671,16 @@
 				3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */,
 				3AEDEA2018AE17450093946D /* AFURLConnectionOperation.m in Sources */,
 				3AEDEA2218AE17450093946D /* UIImageView+AFNetworking.m in Sources */,
-				3A4B779C18B1FE3000A94D47 /* UAGithubJSONParser.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
-				3A4B779D18B1FE3000A94D47 /* UAGithubURLConnection.m in Sources */,
 				3AEDEA3C18AE17450093946D /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */,
 				3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */,
 				3AEDEA3B18AE17450093946D /* NRGridViewCell.m in Sources */,
 				3AEDEA5418AE20D10093946D /* IIViewDeckController.m in Sources */,
+				3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */,
 				3AEDE98618ADFD380093946D /* XDLoginViewController.m in Sources */,
-				3A4B779418B1FE3000A94D47 /* NSArray+Utilities.m in Sources */,
+				3AA8012118B3460200F8450B /* NSString+Category.m in Sources */,
+				3AA8012018B3460200F8450B /* NSData+Category.m in Sources */,
 				3AEDEA5318AE20D10093946D /* IISideController.m in Sources */,
 				3AEDEA1F18AE17450093946D /* AFPropertyListRequestOperation.m in Sources */,
 				3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */,
@@ -673,24 +689,22 @@
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
 				3AEDEA1E18AE17450093946D /* AFNetworkActivityIndicatorManager.m in Sources */,
-				3A4B779518B1FE3000A94D47 /* NSData+Base64.m in Sources */,
 				3AEDEA1B18AE17450093946D /* AFHTTPRequestOperation.m in Sources */,
 				3AEDEA4918AE1D930093946D /* XDGridViewCell.m in Sources */,
 				3AEDE95918ADF5A90093946D /* main.m in Sources */,
 				3AEDEA4A18AE1D930093946D /* XDGridViewController.m in Sources */,
-				3A4B779A18B1FE3000A94D47 /* UAGithubEngine.m in Sources */,
 				3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */,
-				3A4B779718B1FE3000A94D47 /* NSString+UAGithubEngineUtilities.m in Sources */,
+				3AA8010A18B304F600F8450B /* XDProjectViewController.m in Sources */,
 				3AEDEA5518AE20D10093946D /* IIWrapController.m in Sources */,
-				3A4B779B18B1FE3000A94D47 /* UAGithubEngineConstants.m in Sources */,
-				3A4B779818B1FE3000A94D47 /* NSString+UUID.m in Sources */,
-				3A4B779E18B1FE3000A94D47 /* UAReachability.m in Sources */,
 				3AEDEA1C18AE17450093946D /* AFImageRequestOperation.m in Sources */,
-				3A4B779618B1FE3000A94D47 /* NSInvocation+Blocks.m in Sources */,
+				3AA8011318B326E500F8450B /* XDGitRequestClient.m in Sources */,
 				3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */,
+				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
+				3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */,
 				3AEDEA1A18AE17450093946D /* AFHTTPClient.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,
 				3AEDEA1D18AE17450093946D /* AFJSONRequestOperation.m in Sources */,
+				3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */,
 				3AEDE9BF18AE173C0093946D /* XDRequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

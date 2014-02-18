@@ -38,9 +38,28 @@ static XDConfigManager *defaultManagerInstance = nil;
     return defaultManagerInstance;
 }
 
+#pragma mark - getter
+
+- (NSMutableDictionary *)configDictionary
+{
+    if (_configDictionary == nil) {
+        _configDictionary = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _configDictionary;
+}
+
+#pragma mark - public
+
 - (void)loadConfigFilePath
 {
-    _configFilePath = [_configDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_%@_config", APPNAME, @"github"]];
+    _configFilePath = [_configDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_config", APPNAME]];
+    _configDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:_configFilePath];
+}
+
+- (BOOL)didSave
+{
+    return [self.configDictionary writeToFile:_configFilePath atomically:YES];
 }
 
 @end
