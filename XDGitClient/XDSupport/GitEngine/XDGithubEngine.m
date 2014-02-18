@@ -113,7 +113,7 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 
 - (void)followersWithPage:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    [_requestClient sendRequestWithApiPath:@"user/followers" requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
+    [_requestClient sendRequestWithApiPath:@"user/followers" requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:page success:successBlock failure:failureBlock];
 }
 
 - (void)followingWithPage:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -139,6 +139,46 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 - (void)unfollow:(NSString *)userName success:(XDGitEngineBooleanSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     
+}
+
+#pragma mark - Repositories
+- (void)repositoriesWithStyle:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *apiPath = [NSString stringWithFormat:@"%@%@", @"user/repos", [self apiPathWithProjectStyle:style]];
+    [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse page:page success:successBlock failure:failureBlock];
+}
+
+- (void)repositoriesWithUser:(NSString *)userName style:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos%@", userName, [self apiPathWithProjectStyle:style]];
+    [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse page:page success:successBlock failure:failureBlock];
+}
+
+#pragma mark - private
+
+- (NSString *)apiPathWithProjectStyle:(XDProjectStyle)style
+{
+    switch (style) {
+        case XDProjectStyleAll:
+            return @"";
+            break;
+        case XDProjectStylePublic:
+            return @"?type=public";
+            break;
+        case XDProjectStylePrivate:
+            return @"?type=private";
+            break;
+        case XDProjectStyleForks:
+            return @"?type=owner";
+            break;
+        case XDProjectStyleContributed:
+            return @"?type=member";
+            break;
+            
+        default:
+            break;
+    }
+    return @"";
 }
 
 @end

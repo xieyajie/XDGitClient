@@ -10,7 +10,6 @@
 
 @interface XDProjectViewController : XDTableViewController
 
-- (id)initWithUserName:(NSString *)userName;
 - (id)initWithUserName:(NSString *)userName projectsStyle:(XDProjectStyle)style;
 
 @end

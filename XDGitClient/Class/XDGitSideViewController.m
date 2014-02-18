@@ -13,9 +13,11 @@
 #import "XDConfigManager.h"
 
 #import "XDGitDeckViewController.h"
+#import "XDTabBarController.h"
 #import "XDProjectViewController.h"
 #import "XDActivityViewController.h"
 #import "XDFollowViewController.h"
+#import "XDTableViewCell.h"
 
 #define KSOURCEIMAGE @"icon"
 #define KSOURCETITLE @"title"
@@ -26,11 +28,10 @@
     UIImageView *_headerImageView;
     UILabel *_nameLabel;
     
-    NSArray *_titleArray;
     XDConfigManager *_configManager;
 }
 
-@property (strong, nonatomic) UIView *accountView;
+@property (strong, nonatomic) UIButton *accountButton;
 @property (strong, nonatomic) UIView *logoutView;
 
 @end
@@ -42,10 +43,10 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
-        _titleArray = [NSArray arrayWithContentsOfFile:path];
-        
         _configManager = [XDConfigManager defaultManager];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
+        self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
     }
     return self;
 }
@@ -55,16 +56,23 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.accountView];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.accountButton];
     UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
     [settingButton setImage:[UIImage imageNamed:@"navi_settingWhite.png"] forState:UIControlStateNormal];
     [settingButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
     [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
     
-    [self.navigationItem setLeftBarButtonItems:@[leftItem, settingItem]];
+    UIButton *refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
+    [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateNormal];
+    [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
+    [refreshButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
+    
+    [self.navigationItem setLeftBarButtonItems:@[leftItem, refreshItem, settingItem]];
     [self loadAccountData];
     
+    self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
 }
 
@@ -76,25 +84,23 @@
 
 #pragma mark - getter
 
-- (UIView *)accountView
+- (UIButton *)accountButton
 {
-    if (_accountView == nil) {
-        _accountView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 130, 44)];
-        _accountView.backgroundColor = [UIColor clearColor];
+    if (_accountButton == nil) {
+        _accountButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 5, 100, 34)];
+        _accountButton.backgroundColor = [UIColor clearColor];
+        _accountButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _accountButton.titleLabel.numberOfLines = 0;
+        _accountButton.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+        _accountButton.titleLabel.textColor = [UIColor whiteColor];
+        _accountButton.imageEdgeInsets = UIEdgeInsetsMake(0, -7, 0, 0);
+        _accountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         
-        _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7, 30, 30)];
-        _headerImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [_accountView addSubview:_headerImageView];
-        
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(_headerImageView.frame.origin.x + _headerImageView.frame.size.width + 10, 7, 90, 30)];
-        _nameLabel.backgroundColor = [UIColor clearColor];
-        _nameLabel.numberOfLines = 0;
-        _nameLabel.font = [UIFont boldSystemFontOfSize:14.0];
-        _nameLabel.textColor = [UIColor whiteColor];
-        [_accountView addSubview:_nameLabel];
+        [_accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
+        [_accountButton setTitle:@"正在获取..." forState:UIControlStateNormal];
     }
     
-    return _accountView;
+    return _accountButton;
 }
 
 - (UIView *)logoutView
@@ -119,37 +125,23 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 3;
+    return [self.dataArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    switch (section) {
-        case 0:
-            return 2;
-            break;
-        case 1:
-            return 1;
-            break;
-        case 2:
-            return 2;
-            break;
-            
-        default:
-            return 0;
-            break;
-    }
+    return [[self.dataArray objectAtIndex:section] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
-            return @"工程";
+            return @"";
             break;
         case 1:
-            return @"动态";
+            return @"";
             break;
         case 2:
             return @"关注";
@@ -164,15 +156,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    XDTableViewCell *cell = (XDTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[XDTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        cell.textLabel.textColor = [UIColor grayColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:15.0];
+        cell.titleLabel.textColor = [UIColor grayColor];
+        cell.titleLabel.font = [UIFont systemFontOfSize:15.0];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(KLEFTVIEWWIDTH - 45, 15, 35, 20)];
         label.textAlignment = NSTextAlignmentCenter;
@@ -183,10 +174,10 @@
         [cell.contentView addSubview:label];
     }
     
-    NSDictionary *dic = [[_titleArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (dic) {
-        cell.imageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
-        cell.textLabel.text = [dic objectForKey:KSOURCETITLE];
+        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
+        cell.titleLabel.text = [dic objectForKey:KSOURCETITLE];
         
         UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
         detailLabel.backgroundColor = [UIColor clearColor];
@@ -216,7 +207,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 40.0;
+    switch (section) {
+        case 0:
+        case 1:
+            return 20.0;
+            break;
+        case 2:
+            return 40.0;
+            break;
+            
+        default:
+            return 20.0;
+            break;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -224,8 +227,23 @@
     switch (indexPath.section) {
         case 0:
         {
-            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil];
-            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:projectsController];
+            NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
+            NSArray *imageArray = @[@"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+            NSArray *selectedImageArray = @[@"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+            NSMutableArray *controllers = [NSMutableArray array];
+            for (int i = 0; i < 5; i++) {
+                XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil projectsStyle:i];
+                UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
+                [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
+                [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
+                projectsController.tabBarItem = tabBarItem;
+                
+                [controllers addObject:projectsController];
+            }
+            
+            XDTabBarController *tabController = [[XDTabBarController alloc] init];
+            [tabController setViewControllers:controllers];
+            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:tabController];
         }
             break;
         case 1:
@@ -274,13 +292,13 @@
         AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
         _configManager.loginAccount = account;
         
-        [_headerImageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
-        _nameLabel.text = account.accountName;
+        [self.accountButton setTitle:account.accountName forState:UIControlStateNormal];
+        [self.accountButton.imageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
         [self.tableView reloadData];
     } failure:^(NSError *error) {
-        _headerImageView.image = [UIImage imageNamed:@"userHeaderDefault_30"];
-        _nameLabel.text = @"获取失败";
+        [self.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
+        [self.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
 }
 

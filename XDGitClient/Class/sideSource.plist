@@ -5,13 +5,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>我创建的</string>
-			<key>icon</key>
-			<string>side_own.png</string>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>拷贝的工程</string>
+			<string>工程 Repositories</string>
 			<key>icon</key>
 			<string>side_copy.png</string>
 		</dict>
@@ -19,7 +13,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>动态</string>
+			<string>动态 Activity</string>
 			<key>icon</key>
 			<string></string>
 		</dict>

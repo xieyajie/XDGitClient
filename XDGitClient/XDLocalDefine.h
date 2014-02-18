@@ -15,10 +15,10 @@ typedef enum{
     XDProjectStyleAll   = 0,
     XDProjectStylePublic,
     XDProjectStylePrivate,
-    XDProjectStyleSource,
-    XDProjectStyleForks,
-    XDProjectStyleMirrors,
     XDProjectStyleContributed,
+    XDProjectStyleForks,
+    XDProjectStyleSource,
+    XDProjectStyleMirrors,
 }XDProjectStyle;
 
 //block
@@ -30,7 +30,7 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #pragma mark - default
 
 #define KPERPAGENUMBER 50
-#define KLEFTVIEWWIDTH 190.0
+#define KLEFTVIEWWIDTH 200.0
 
 //textField color (detail)
 #define TEXTFIELDDETAILCOLOR [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1.0]
@@ -38,7 +38,9 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #pragma mark - NSNotification name
 #define KNOTIFICATION_LOFINSTATECHANGED @"LoginStateChanged"
 
-#pragma mark - account model
+#pragma mark - model
+
+//account
 #define KACCOUNT_ID @"id"
 #define KACCOUNT_NAME @"login"
 #define KACCOUNT_AVATARURL @"avatar_url"
@@ -47,5 +49,26 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KACCOUNT_FOLLOWER @"followers"
 #define KACCOUNT_FOLLOWING @"following"
 #define KACCOUNT_TYPE @"type"
+
+//Repository
+#define KREPO_ID @"id"
+#define KREPO_NAME @"name"
+#define KREPO_FULLNAME @"full_name"
+#define KREPO_DESC @"description"
+#define KREPO_CREATE @"created_at"
+#define KREPO_UPDATE @"updated_at"
+#define KREPO_SIZE @"size"
+#define KREPO_LANGUAGE @"language"
+#define KREPO_CLONEURL @"clone_url"
+#define KREPO_SVNURL @"svn_url"
+#define KREPO_GITURL @"git_url"
+#define KREPO_FORKSCOUNT @"forks_count"
+#define KREPO_OPENISSUESCOUNT @"open_issues_count"
+#define KREPO_WATCHERSCOUNT @"watchers_count"
+#define KREPO_STARSCOUNT @"stargazers_count"
+//#define KREPO_ @""
+//#define KREPO_ @""
+//#define KREPO_ @""
+//#define KREPO_ @""
 
 #endif
