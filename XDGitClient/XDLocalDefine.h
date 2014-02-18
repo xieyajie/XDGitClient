@@ -27,6 +27,9 @@ typedef void (^XDGitEngineSuccessBlock)(id object);
 typedef void (^XDGitEngineBooleanSuccessBlock)(BOOL success);
 typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
+#pragma mark - default
+
+#define KPERPAGENUMBER 50
 #define KLEFTVIEWWIDTH 190.0
 
 //textField color (detail)

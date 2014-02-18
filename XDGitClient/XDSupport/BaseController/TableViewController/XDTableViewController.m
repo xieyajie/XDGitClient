@@ -22,7 +22,7 @@
     self = [super init];
     if (self) {
         _tableViewStyle = UITableViewStylePlain;
-        _cursorString = @"";
+        _page = 1;
         
         _showRefreshHeader = NO;
         _showRefreshFooter = NO;
@@ -171,6 +171,14 @@
     [self tableViewDidFinishHeaderRefreshReload:YES];
 }
 
+- (void)tableViewDidFailHeaderRefresh
+{
+    [self tableViewDidFinishHeaderRefreshReload:NO];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
 ///下拉刷新回调
 - (void)tableViewDidFinishHeaderRefreshReload:(BOOL)reload
 {
@@ -191,12 +199,21 @@
     [self tableViewDidFinishFooterRefreshReload:YES];
 }
 
+- (void)tableViewDidFailFooterRefresh
+{
+    [self tableViewDidFinishFooterRefreshReload:NO];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
 ///上拉刷新回调
 - (void)tableViewDidFinishFooterRefreshReload:(BOOL)reload
 {
     __weak XDTableViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        [weakSelf hideLoadingView];
         
         if (reload) {
             [weakSelf.tableView reloadData];

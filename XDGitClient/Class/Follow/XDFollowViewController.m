@@ -34,7 +34,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = _isFollowers ? @"关注我的" : @"我关注的";
-    [self loadDataSource];
+    self.showRefreshHeader = YES;
+    [self tableViewDidTriggerHeaderRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,14 +75,15 @@
 
 #pragma mark - data
 
-- (void)loadDataSource
+- (void)tableViewDidTriggerHeaderRefresh
 {
+    self.page = 1;
     [self showLoadingView];
     __block __weak XDFollowViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         if (_isFollowers) {
-            [activityEngine followersWithSuccess:^(id object) {
+            [activityEngine followersWithPage:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -89,22 +91,14 @@
                         [weakSelf.dataArray addObject:model];
                     }
                     
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf.tableView reloadData];
-                        [weakSelf hideLoadingView];
-                    });
+                    [weakSelf tableViewDidFinishHeaderRefresh];
                 }
             } failure:^(NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf hideLoadingView];
-                    
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alertView show];
-                });
+                [weakSelf tableViewDidFailHeaderRefresh];
             }];
         }
         else{
-            [activityEngine followingWithSuccess:^(id object) {
+            [activityEngine followingWithPage:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -112,18 +106,47 @@
                         [weakSelf.dataArray addObject:model];
                     }
                     
-                     dispatch_async(dispatch_get_main_queue(), ^{
-                         [weakSelf.tableView reloadData];
-                         [weakSelf hideLoadingView];
-                     });
+                     [weakSelf tableViewDidFinishHeaderRefresh];
                 }
             } failure:^(NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf hideLoadingView];
+                [weakSelf tableViewDidFailHeaderRefresh];
+            }];
+        }
+    });
+}
+
+- (void)tableViewDidTriggerFooterRefresh
+{
+    self.page++;
+    __block __weak XDFollowViewController *weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
+        if (_isFollowers) {
+            [activityEngine followersWithPage:self.page success:^(id object) {
+                if (object) {
+                    for (NSDictionary *dic in object) {
+                        AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
+                        [weakSelf.dataArray addObject:model];
+                    }
                     
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                    [alertView show];
-                });
+                    [weakSelf tableViewDidFinishHeaderRefresh];
+                }
+            } failure:^(NSError *error) {
+                [weakSelf tableViewDidFailHeaderRefresh];
+            }];
+        }
+        else{
+            [activityEngine followingWithPage:self.page success:^(id object) {
+                if (object) {
+                    for (NSDictionary *dic in object) {
+                        AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
+                        [weakSelf.dataArray addObject:model];
+                    }
+                    
+                    [weakSelf tableViewDidFinishHeaderRefresh];
+                }
+            } failure:^(NSError *error) {
+                [weakSelf tableViewDidFailHeaderRefresh];
             }];
         }
     });

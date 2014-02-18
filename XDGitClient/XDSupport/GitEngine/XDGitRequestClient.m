@@ -58,10 +58,10 @@
     {
         if ([apiPath rangeOfString:@"?"].location == NSNotFound)
         {
-            [urlString appendFormat:@"?page=%d", page];
+            [urlString appendFormat:@"?page=%d&per_page=%d", page, KPERPAGENUMBER];
         }
         else{
-            [urlString appendFormat:@"&page=%d", page];
+            [urlString appendFormat:@"&page=%d&per_page=%d", page, KPERPAGENUMBER];
         }
     }
 	

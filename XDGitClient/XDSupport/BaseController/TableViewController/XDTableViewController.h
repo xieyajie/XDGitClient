@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dataArray;
 @property (strong, nonatomic) NSMutableDictionary *dataDictionary;
-@property (strong, nonatomic) NSString *cursorString;
+@property (nonatomic) NSInteger page;//其实页为1
 
 @property (nonatomic) BOOL showRefreshHeader;//是否支持下拉刷新
 @property (nonatomic) BOOL showRefreshFooter;//是否支持上拉加载
@@ -28,8 +28,10 @@
 - (void)tableViewDidTriggerFooterRefresh;//上拉加载事件
 
 - (void)tableViewDidFinishHeaderRefresh;//下拉刷新回调，刷新表视图
+- (void)tableViewDidFailHeaderRefresh;
 - (void)tableViewDidFinishHeaderRefreshReload:(BOOL)reload;//下拉刷新回调
 - (void)tableViewDidFinishFooterRefresh;//上拉刷新回调，刷新表视图
+- (void)tableViewDidFailFooterRefresh;
 - (void)tableViewDidFinishFooterRefreshReload:(BOOL)reload;//上拉刷新回调
 
 @end
