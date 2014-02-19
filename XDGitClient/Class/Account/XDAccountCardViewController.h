@@ -10,4 +10,6 @@
 
 @interface XDAccountCardViewController : XDTableViewController
 
+- (id)initWithAccount:(AccountModel *)model;
+
 @end

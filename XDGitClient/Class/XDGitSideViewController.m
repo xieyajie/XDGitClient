@@ -25,7 +25,7 @@
 {
     UIImageView *_headerImageView;
     UILabel *_nameLabel;
-    UIButton *_menuButton;
+    UIBarButtonItem *_menuItem;
     
     XDConfigManager *_configManager;
 }
@@ -281,13 +281,19 @@
             break;
     }
     
-    if (_menuButton == nil) {
-        _menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
-        [_menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
-        [_menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
+    if (_menuItem == nil) {
+        UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
+        [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
+        [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
+        _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     }
     
-    [self.deckController.centerController.view addSubview:_menuButton];
+    id controller = self.deckController.centerController;
+    if ([controller isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navController = (UINavigationController *)controller;
+        [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
+    }
+
     [self.deckController closeLeftViewAnimated:YES];
 }
 

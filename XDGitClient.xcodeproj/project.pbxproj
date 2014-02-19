@@ -32,6 +32,7 @@
 		3A47A51818B462FE001C76C0 /* tab_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50318B462FE001C76C0 /* tab_all@2x.png */; };
 		3A47A51918B462FE001C76C0 /* tab_allSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */; };
 		3A4B77A818B2140D00A94D47 /* sideSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A718B2140D00A94D47 /* sideSource.plist */; };
+		3A8F89E518B4B71200924CDE /* accountCard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8F89E418B4B71200924CDE /* accountCard.plist */; };
 		3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FF18B2F18700F8450B /* XDFollowViewController.m */; };
 		3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010218B2F62B00F8450B /* XDTableViewCell.m */; };
 		3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010618B2FECA00F8450B /* XDActivityViewController.m */; };
@@ -124,6 +125,7 @@
 		3A47A50318B462FE001C76C0 /* tab_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_all@2x.png"; sourceTree = "<group>"; };
 		3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_allSelect@2x.png"; sourceTree = "<group>"; };
 		3A4B77A718B2140D00A94D47 /* sideSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sideSource.plist; sourceTree = "<group>"; };
+		3A8F89E418B4B71200924CDE /* accountCard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = accountCard.plist; sourceTree = "<group>"; };
 		3AA800FE18B2F18700F8450B /* XDFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFollowViewController.h; sourceTree = "<group>"; };
 		3AA800FF18B2F18700F8450B /* XDFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFollowViewController.m; sourceTree = "<group>"; };
 		3AA8010118B2F62B00F8450B /* XDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewCell.h; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 				3AEDE98318ADFD370093946D /* XDLoginViewController.m */,
 				3AA8013118B3691700F8450B /* XDAccountCardViewController.h */,
 				3AA8013218B3691700F8450B /* XDAccountCardViewController.m */,
+				3A8F89E418B4B71200924CDE /* accountCard.plist */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				3A47A50C18B462FE001C76C0 /* button_bg_blue@2x.png in Resources */,
 				3A47A50A18B462FE001C76C0 /* rectangle_uncheck@2x.png in Resources */,
 				3A47A50618B462FE001C76C0 /* login_separator@2x.png in Resources */,
+				3A8F89E518B4B71200924CDE /* accountCard.plist in Resources */,
 				3A47A50F18B462FE001C76C0 /* navi_bg@2x.png in Resources */,
 				3A47A51318B462FE001C76C0 /* navi_settingBlue@2x.png in Resources */,
 			);

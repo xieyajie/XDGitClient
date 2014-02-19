@@ -12,10 +12,12 @@
 
 @interface XDAccountCardViewController ()
 {
-    AccountModel *_accountModel;
+    NSArray *_titleArray;
+    UIBarButtonItem *_acttentionItem;
 }
 
 @property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) AccountModel *accountModel;;
 
 @end
 
@@ -36,6 +38,11 @@
     if (self) {
         // Custom initialization
         _accountModel = model;
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"accountCard" ofType:@"plist"];
+        self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
+        
+        _titleArray = @[@"", @"工程", @"动态"];
     }
     return self;
 }
@@ -47,7 +54,12 @@
     self.title = _accountModel.accountName;
     self.showRefreshHeader = YES;
     
-    [self tableViewDidTriggerHeaderRefresh];
+    _acttentionItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(acttentionAction)];
+    [self.navigationItem setRightBarButtonItem:_acttentionItem];
+    
+    self.tableView.tableHeaderView = self.headerView;
+    
+//    [self tableViewDidTriggerHeaderRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,12 +70,34 @@
 
 #pragma mark - getter
 
+- (UIView *)headerView
+{
+    if (_headerView == nil) {
+//        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:<#(CGRect)#>];
+    }
+    
+    return _headerView;
+}
+
 #pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return [self.dataArray count];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return [[self.dataArray objectAtIndex:section] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [_titleArray objectAtIndex:section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,12 +152,42 @@
     return 50.0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    NSString *str = [_titleArray objectAtIndex:section];
+    if (str == nil || str.length == 0) {
+        return 20.0;
+    }
+    
+    return 40.0;
+}
+
+#pragma mark - action
+
+- (void)acttentionAction
+{
+    
+}
+
 #pragma mark - data
 
 - (void)tableViewDidTriggerHeaderRefresh
 {
-    [self showLoadingView];
-    __block __weak XDAccountCardViewController *weakSelf = self;
+    if (_accountModel != nil) {
+        __block __weak XDAccountCardViewController *weakSelf = self;
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object) {
+            [weakSelf.dataArray removeAllObjects];
+//            weakSelf.accountModel = [];
+            
+            [weakSelf hideLoadingView];
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        } failure:^(NSError *error) {
+            [weakSelf hideLoadingView];
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }];
+        
+        [self showLoadingViewWithRequestOperation:operation];
+    }
 }
 
 @end

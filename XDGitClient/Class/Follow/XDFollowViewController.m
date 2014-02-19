@@ -9,6 +9,7 @@
 #import "XDFollowViewController.h"
 
 #import "XDTableViewCell.h"
+#import "XDAccountCardViewController.h"
 
 @interface XDFollowViewController ()
 {
@@ -76,7 +77,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AccountModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    
+    XDAccountCardViewController *cardController = [[XDAccountCardViewController alloc] initWithAccount:model];
+    [self.navigationController pushViewController:cardController animated:YES];
 }
 
 #pragma mark - data
