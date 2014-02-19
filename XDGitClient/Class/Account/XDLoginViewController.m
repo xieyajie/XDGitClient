@@ -202,10 +202,8 @@
         [alert show];
         return;
     }
-    
-    [self showLoadingView];
-    
-    [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object) {
+
+    AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if (_rememberButton.selected) {
             [defaults setValue:paswd forKey:userName];
@@ -219,6 +217,8 @@
     } failure:^(NSError *error) {
         [self hideLoadingView];
     }];
+    
+    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"验证账号..." requestOperation:operation];
 }
 
 @end

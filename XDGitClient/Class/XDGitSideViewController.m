@@ -27,6 +27,7 @@
 {
     UIImageView *_headerImageView;
     UILabel *_nameLabel;
+    UIButton *_menuButton;
     
     XDConfigManager *_configManager;
 }
@@ -66,7 +67,7 @@
     UIButton *refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
     [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateNormal];
     [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
-    [refreshButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
+    [refreshButton addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     
     [self.navigationItem setLeftBarButtonItems:@[leftItem, refreshItem, settingItem]];
@@ -74,7 +75,6 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,10 +107,10 @@
 - (UIView *)logoutView
 {
     if (_logoutView == nil) {
-        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 65)];
+        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
         _logoutView.backgroundColor = [UIColor clearColor];
         
-        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, KLEFTVIEWWIDTH - 30, 35)];
+        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, KLEFTVIEWWIDTH - 30, 35)];
         logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
         [logoutButton setTitle:@"退出当前账户" forState:UIControlStateNormal];
         [logoutButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
@@ -283,10 +283,22 @@
             break;
     }
     
+    if (_menuButton == nil) {
+        _menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
+        [_menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
+        [_menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    [self.deckController.centerController.view addSubview:_menuButton];
     [self.deckController closeLeftViewAnimated:YES];
 }
 
 #pragma mark - action
+
+- (void)refreshAction
+{
+    
+}
 
 - (void)settingAction
 {
@@ -302,28 +314,34 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
 }
 
+- (void)openSideAction
+{
+    [self.deckController openLeftViewAnimated:YES];
+}
+
 #pragma mark - private
 
 - (void)loadAccountData
 {
-    [self.deckController showLoadingView];
     __block __weak XDGitSideViewController *weakSelf = self;
-    [_configManager loadLoginAccountWithSuccess:^(id object) {
+    AFHTTPRequestOperation *operation = [_configManager loadLoginAccountWithSuccess:^(id object) {
         AccountModel *account = (AccountModel *)object;
         
         [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
         [weakSelf.accountButton.imageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
-        [weakSelf.deckController hideLoadingView];
+        [weakSelf hideLoadingView];
         [weakSelf.tableView reloadData];
         [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
         [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     } failure:^(NSError *error) {
-        [weakSelf.deckController hideLoadingView];
+        [weakSelf hideLoadingView];
         
         [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
         [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
+    
+    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"配置应用..." requestOperation:operation];
 }
 
 @end

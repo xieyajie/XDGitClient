@@ -210,6 +210,7 @@
 
 - (void)start
 {
+    [_activityIndicatorView stopAnimating];
     [_activityIndicatorView startAnimating];
 }
 

@@ -59,11 +59,11 @@ static XDConfigManager *defaultManagerInstance = nil;
 
 #pragma mark - public
 
-- (void)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
     
-    [gitEngine userWithSuccess:^(id object) {
+    return [gitEngine userWithSuccess:^(id object) {
         AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
         self.loginAccount = account;
         successBlock(account);

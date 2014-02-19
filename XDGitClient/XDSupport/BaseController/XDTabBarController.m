@@ -108,8 +108,10 @@
 {
     if (_tabBar == nil) {
         _tabBar = [[UIView alloc] initWithFrame: CGRectZero];
-        _tabBar.backgroundColor = [UIColor colorWithRed:210 / 255.0 green:220 / 255.0 blue:225 / 255.0 alpha:1.0];
+        _tabBar.backgroundColor = [UIColor whiteColor];
         [_tabBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        _tabBar.layer.shadowColor = [[UIColor colorWithWhite:0.5 alpha:0.5f] CGColor];
+        _tabBar.layer.shadowOpacity = 0.5;
     }
     
     return _tabBar;
@@ -152,8 +154,8 @@
         tabItem.tag = i;
         tabItem.backgroundColor = [UIColor clearColor];
         tabItem.titleLabel.text = viewController.tabBarItem.title;
-        tabItem.titleColor = [UIColor colorWithRed:47 / 255.0 green:66 / 255.0 blue:75 / 255.0 alpha:1.0];
-        tabItem.selectedTitleColor = [UIColor colorWithRed:127 / 255.0 green:153 / 255.0 blue:183 / 255.0 alpha:1.0];
+        tabItem.titleColor = [UIColor grayColor];
+        tabItem.selectedTitleColor = [UIColor colorWithRed:49 / 255.0 green:167 / 255.0 blue:250 / 255.0 alpha:1.0];
         tabItem.image = viewController.tabBarItem.image;
         tabItem.selectedImage = viewController.tabBarItem.selectedImage;
         tabItem.imageView.image = tabItem.image;

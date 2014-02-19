@@ -167,7 +167,7 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
             return @"?type=private";
             break;
         case XDProjectStyleForks:
-            return @"?type=owner";
+            return @"?type=owner&fork=1";
             break;
         case XDProjectStyleContributed:
             return @"?type=member";

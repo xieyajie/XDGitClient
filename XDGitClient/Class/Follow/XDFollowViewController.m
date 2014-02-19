@@ -84,12 +84,12 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     self.page = 1;
-    [self showLoadingView];
     __block __weak XDFollowViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
+        AFHTTPRequestOperation *operation = nil;
         if (_isFollowers) {
-            [activityEngine followersWithPage:self.page success:^(id object) {
+            operation = [activityEngine followersWithPage:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -104,7 +104,7 @@
             }];
         }
         else{
-            [activityEngine followingWithPage:self.page success:^(id object) {
+            operation = [activityEngine followingWithPage:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -118,6 +118,7 @@
                 [weakSelf tableViewDidFailHeaderRefresh];
             }];
         }
+        [self showLoadingViewWithRequestOperation:operation];
     });
 }
 

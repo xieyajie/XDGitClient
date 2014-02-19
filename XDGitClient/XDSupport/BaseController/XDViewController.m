@@ -78,7 +78,12 @@
 
 - (void)showLoadingView
 {
-    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"数据申请..." requestOperation:nil];
+    [self showLoadingViewWithRequestOperation:nil];
+}
+
+- (void)showLoadingViewWithRequestOperation:(AFHTTPRequestOperation *)requestOperation
+{
+    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"数据申请..." requestOperation:requestOperation];
 }
 
 - (void)hideLoadingView

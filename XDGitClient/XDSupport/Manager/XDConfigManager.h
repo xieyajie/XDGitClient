@@ -20,7 +20,7 @@
 
 + (XDConfigManager *)defaultManager;
 
-- (void)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 - (BOOL)didSave;
 - (void)didReset;

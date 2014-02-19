@@ -59,22 +59,26 @@ static XDViewManager *defaultManagerInstance = nil;
 
 - (void)showLoadingViewWithTitle:(NSString *)title requestOperation:(AFHTTPRequestOperation *)requestOperation
 {
-    if (_loadingView == nil) {
-        _loadingView = [[XDLoadingView alloc] initWithRequestOperation:requestOperation title:title];
-    }
-    else{
-        _loadingView.title = title;
-        _loadingView.requestOperation = requestOperation;
-    }
-    
-    [[UIApplication sharedApplication].keyWindow addSubview:_loadingView];
-    [_loadingView start];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (_loadingView == nil) {
+            _loadingView = [[XDLoadingView alloc] initWithRequestOperation:requestOperation title:title];
+        }
+        else{
+            _loadingView.title = title;
+            _loadingView.requestOperation = requestOperation;
+        }
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:_loadingView];
+        [_loadingView start];
+    });
 }
 
 - (void)hideLoadingView
 {
-    [_loadingView stop];
-    [_loadingView removeFromSuperview];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_loadingView stop];
+        [_loadingView removeFromSuperview];
+    });
 }
 
 //- (void)showGuideView

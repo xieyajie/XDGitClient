@@ -44,7 +44,7 @@
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:10];
-        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.textColor = [UIColor grayColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.backgroundColor = [UIColor clearColor];
         
@@ -83,8 +83,8 @@
     switch (self.style) {
         case XDTabBarItemStyleDefault:
         {
-            _imageView.frame = CGRectMake(5, 5, self.frame.size.width - 10, self.frame.size.height - 20);
-            _titleLabel.frame = CGRectMake(5, self.frame.size.height - 15, self.frame.size.width - 10, 15);
+            _imageView.frame = CGRectMake(5, 3, self.frame.size.width - 10, self.frame.size.height - 21);
+            _titleLabel.frame = CGRectMake(5, self.frame.size.height - 18, self.frame.size.width - 10, 15);
         }
             break;
         case XDTabBarItemStyleImage:

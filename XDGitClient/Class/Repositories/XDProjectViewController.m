@@ -85,10 +85,9 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     self.page = 1;
-    [self showLoadingView];
     __block __weak XDProjectViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithStyle:_style includeWatched:NO page:self.page success:^(id object) {
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithStyle:_style includeWatched:NO page:self.page success:^(id object) {
             [weakSelf.dataArray removeAllObjects];
             if (object) {
                 for (NSDictionary *dic in object) {
@@ -101,6 +100,30 @@
         } failure:^(NSError *error) {
             [weakSelf tableViewDidFailHeaderRefresh];
         }];
+        
+        [self showLoadingViewWithRequestOperation:operation];
+    });
+}
+
+- (void)tableViewDidTriggerFooterRefresh
+{
+    self.page++;
+    __block __weak XDProjectViewController *weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithStyle:_style includeWatched:NO page:self.page success:^(id object) {
+            if (object) {
+                for (NSDictionary *dic in object) {
+                    RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
+                    [weakSelf.dataArray addObject:model];
+                }
+                
+                [weakSelf tableViewDidFinishFooterRefresh];
+            }
+        } failure:^(NSError *error) {
+            [weakSelf tableViewDidFailFooterRefresh];
+        }];
+        
+        [self showLoadingViewWithRequestOperation:operation];
     });
 }
 
