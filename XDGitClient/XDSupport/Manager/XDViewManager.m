@@ -35,6 +35,11 @@ static XDViewManager *defaultManagerInstance = nil;
     return defaultManagerInstance;
 }
 
+- (UINavigationController *)appRootNavController
+{
+    return _appDelegate.rootNavigationController;
+}
+
 - (void)setupAppearance
 {
     float version = [[[UIDevice currentDevice] systemVersion] floatValue];

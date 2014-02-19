@@ -27,6 +27,13 @@ typedef void (^XDGitEngineSuccessBlock)(id object);
 typedef void (^XDGitEngineBooleanSuccessBlock)(BOOL success);
 typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
+//plist key
+#pragma mark - plist key
+#define KPLIST_SOURCEIMAGE @"icon"
+#define KPLIST_SOURCETITLE @"title"
+#define KPLIST_SOURCESELECTOR @"selector"
+#define KPLIST_SOURCEACCESSORYTYPE @"accessoryType"
+
 #pragma mark - default
 
 #define KPERPAGENUMBER 50
@@ -46,6 +53,8 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KACCOUNT_AVATARURL @"avatar_url"
 #define KACCOUNT_COMPANY @"company"
 #define KACCOUNT_EMAIL @"email"
+#define KACCOUNT_WEBURL @"html_url"
+#define KACCOUNT_LOCATION @"location"
 #define KACCOUNT_FOLLOWER @"followers"
 #define KACCOUNT_FOLLOWING @"following"
 #define KACCOUNT_TYPE @"type"

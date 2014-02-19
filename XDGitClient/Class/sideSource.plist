@@ -5,7 +5,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>工程 Repositories</string>
+			<string>版本库 Repositories</string>
 			<key>icon</key>
 			<string>side_copy.png</string>
 		</dict>
@@ -19,7 +19,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>动态 Activity</string>
+			<string>更新 Events</string>
 			<key>icon</key>
 			<string></string>
 		</dict>

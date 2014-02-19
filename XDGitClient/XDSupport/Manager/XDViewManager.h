@@ -17,6 +17,8 @@
     XDLoadingView *_loadingView;
 }
 
+@property (strong, nonatomic) UINavigationController *appRootNavController;
+
 + (XDViewManager *)defaultManager;
 
 - (void)setupAppearance;

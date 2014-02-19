@@ -13,13 +13,10 @@
 #import "XDProjectViewController.h"
 #import "XDActivityViewController.h"
 #import "XDFollowViewController.h"
+#import "XDAccountCardViewController.h"
 #import "XDTableViewCell.h"
 
 #import "XDConfigManager.h"
-
-#define KSOURCEIMAGE @"icon"
-#define KSOURCETITLE @"title"
-#define KSOURCESELECTOR @"selector"
 
 @interface XDGitSideViewController ()
 {
@@ -97,6 +94,7 @@
         
         [_accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
         [_accountButton setTitle:@"正在获取..." forState:UIControlStateNormal];
+        [_accountButton addTarget:self action:@selector(accountCardAction) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _accountButton;
@@ -210,12 +208,12 @@
     
     NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (dic) {
-        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KSOURCEIMAGE]];
-        cell.titleLabel.text = [dic objectForKey:KSOURCETITLE];
+        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KPLIST_SOURCEIMAGE]];
+        cell.titleLabel.text = [dic objectForKey:KPLIST_SOURCETITLE];
         
         UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
         detailLabel.backgroundColor = [UIColor clearColor];
-        NSString *selectorStr = [dic objectForKey:KSOURCESELECTOR];
+        NSString *selectorStr = [dic objectForKey:KPLIST_SOURCESELECTOR];
         if (selectorStr && selectorStr.length > 0) {
             SEL selectorMethod = NSSelectorFromString(selectorStr);
             if (selectorMethod) {
@@ -299,9 +297,21 @@
 
 #pragma mark - action
 
+- (void)accountCardAction
+{
+    XDAccountCardViewController *cardController = [[XDAccountCardViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *cardNavigation = [[UINavigationController alloc] initWithRootViewController:cardController];
+    UIBarButtonItem *cancleItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:cardController action:@selector(dismissButtonTapped:)];
+    
+    [[[XDViewManager defaultManager] appRootNavController] presentViewController:cardNavigation animated:YES completion:^{
+        [self.deckController closeLeftViewAnimated:YES];
+        [cardController.navigationItem setLeftBarButtonItem:cancleItem];
+    }];
+}
+
 - (void)refreshAction
 {
-    
+    [self loadAccountData];
 }
 
 - (void)settingAction
@@ -345,7 +355,7 @@
         [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
     
-    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"配置应用..." requestOperation:operation];
+    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"配置账号..." requestOperation:operation];
 }
 
 @end

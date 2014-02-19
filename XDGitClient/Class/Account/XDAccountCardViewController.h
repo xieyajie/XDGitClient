@@ -12,4 +12,6 @@
 
 - (id)initWithAccount:(AccountModel *)model;
 
+- (void)dismissButtonTapped:(id)sender;
+
 @end

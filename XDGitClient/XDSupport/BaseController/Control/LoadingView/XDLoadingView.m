@@ -32,7 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithWhite:0.6f alpha:0.8f];
+        self.backgroundColor = [UIColor colorWithWhite:0.6f alpha:0.7f];
         [self addSubview:self.loadingView];
     }
     return self;

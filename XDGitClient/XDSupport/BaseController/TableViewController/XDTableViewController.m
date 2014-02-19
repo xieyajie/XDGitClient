@@ -175,8 +175,8 @@
 {
     [self tableViewDidFinishHeaderRefreshReload:NO];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    [alertView show];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+//    [alertView show];
 }
 
 ///下拉刷新回调
