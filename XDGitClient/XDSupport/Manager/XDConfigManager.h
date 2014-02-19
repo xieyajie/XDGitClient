@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AccountModel.h"
-
 @interface XDConfigManager : NSObject
 
 @property (strong, nonatomic, readonly) NSString *configDirectoryPath;
 @property (strong, nonatomic, readonly) NSString *configFilePath;
 @property (strong, nonatomic) NSMutableDictionary *configDictionary;
 
-@property (strong, nonatomic) AccountModel *loginAccount;
+@property (strong, nonatomic) AccountModel *loginAccount;//登录账号
+
+//setting
+@property (strong, nonatomic) NSString *repositorySortName;
+@property (strong, nonatomic) NSString *repositorySortType;
 
 + (XDConfigManager *)defaultManager;
 
@@ -24,6 +26,6 @@
 
 - (BOOL)didSave;
 - (void)didReset;
-- (void)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 @end

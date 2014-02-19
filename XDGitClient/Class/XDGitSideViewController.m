@@ -8,16 +8,14 @@
 
 #import "XDGitSideViewController.h"
 
-#import "UIImageView+AFNetworking.h"
-#import "XDRequestManager.h"
-#import "XDConfigManager.h"
-
 #import "XDGitDeckViewController.h"
 #import "XDTabBarController.h"
 #import "XDProjectViewController.h"
 #import "XDActivityViewController.h"
 #import "XDFollowViewController.h"
 #import "XDTableViewCell.h"
+
+#import "XDConfigManager.h"
 
 #define KSOURCEIMAGE @"icon"
 #define KSOURCETITLE @"title"

@@ -11,7 +11,6 @@
 #import "NRGridView.h"
 #import "XDGridViewCell.h"
 #import "SVPullToRefresh.h"
-#import "XDRequestManager.h"
 
 @interface XDGridViewController : XDViewController<NRGridViewDataSource, NRGridViewDelegate>
 

@@ -8,6 +8,8 @@
 
 #import "XDGithubEngine.h"
 
+#import "XDConfigManager.h"
+
 static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 
 @implementation XDGithubEngine
@@ -142,41 +144,48 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 #pragma mark - Repositories
 - (AFHTTPRequestOperation *)repositoriesWithStyle:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    NSString *apiPath = [NSString stringWithFormat:@"%@%@", @"user/repos", [self apiPathWithProjectStyle:style]];
-    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse page:page success:successBlock failure:failureBlock];
+    return [_requestClient sendRequestWithApiPath:@"user/repos" requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
 }
 
 - (AFHTTPRequestOperation *)repositoriesWithUser:(NSString *)userName style:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos%@", userName, [self apiPathWithProjectStyle:style]];
-    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse page:page success:successBlock failure:failureBlock];
+    NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
+    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
 }
 
 #pragma mark - private
 
-- (NSString *)apiPathWithProjectStyle:(XDProjectStyle)style
+- (NSMutableDictionary *)parametersWithProjectStyle:(XDProjectStyle)style
 {
+    NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
+    NSString *typeValue = @"";
     switch (style) {
         case XDProjectStyleAll:
-            return @"";
+            typeValue = @"all";
             break;
         case XDProjectStylePublic:
-            return @"?type=public";
+            typeValue = @"public";
             break;
         case XDProjectStylePrivate:
-            return @"?type=private";
+            typeValue = @"private";
             break;
         case XDProjectStyleForks:
-            return @"?type=owner&fork=1";
+            typeValue = @"owner";
             break;
         case XDProjectStyleContributed:
-            return @"?type=member";
+            typeValue = @"member";
             break;
             
         default:
             break;
     }
-    return @"";
+    if (typeValue.length > 0) {
+        [resultDic setObject:typeValue forKey:@"type"];
+        [resultDic setObject:[[XDConfigManager defaultManager] repositorySortName] forKey:@"sort"];
+        [resultDic setObject:[[XDConfigManager defaultManager] repositorySortType] forKey:@"direction"];
+    }
+    
+    return resultDic;
 }
 
 @end

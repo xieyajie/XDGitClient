@@ -9,7 +9,6 @@
 #import "XDRequestManager.h"
 
 #import "XDGithubEngine.h"
-#import "XDConfigManager.h"
 
 static XDRequestManager *defaultManagerInstance = nil;
 

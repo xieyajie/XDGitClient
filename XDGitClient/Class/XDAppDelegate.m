@@ -11,8 +11,7 @@
 #import "XDViewController.h"
 #import "XDLoginViewController.h"
 #import "XDRootViewController.h"
-#import "XDViewManager.h"
-#import "XDRequestManager.h"
+
 #import "XDConfigManager.h"
 
 @implementation XDAppDelegate

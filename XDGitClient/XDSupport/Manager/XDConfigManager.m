@@ -55,6 +55,9 @@ static XDConfigManager *defaultManagerInstance = nil;
 {
     _configFilePath = [_configDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_config", APPNAME]];
     _configDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:_configFilePath];
+    
+    _repositorySortName = @"updated";
+    _repositorySortType = @"desc";
 }
 
 #pragma mark - public
@@ -83,10 +86,10 @@ static XDConfigManager *defaultManagerInstance = nil;
     [self loadConfigFile];
 }
 
-- (void)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     [self loadConfigFile];
-    [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
+    return [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
 }
 
 @end

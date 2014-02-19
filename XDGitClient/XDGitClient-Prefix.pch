@@ -17,7 +17,6 @@
     #import "AFNetworking.h"
 
     #import "AccountModel.h"
-
     #import "XDViewManager.h"
     #import "XDRequestManager.h"
 

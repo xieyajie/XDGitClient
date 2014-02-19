@@ -8,10 +8,6 @@
 
 #import "XDLoginViewController.h"
 
-#import "XDRequestManager.h"
-#import "XDViewManager.h"
-#import "XDConfigManager.h"
-
 @interface XDLoginViewController ()<UITextFieldDelegate>
 {
     UITextField *_usernameTextField;
