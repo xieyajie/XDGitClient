@@ -125,8 +125,8 @@
 {
     if (_projectNavTabController == nil) {
         NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
-        NSArray *imageArray = @[@"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
-        NSArray *selectedImageArray = @[@"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
             XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil projectsStyle:i];

@@ -8,11 +8,18 @@
 
 #import "XDLoadingView.h"
 
+#import "XDActivityIndicatorView.h"
+
+#define KTIWidth 150
+#define KIndicatorHeight 35
+#define KTitleHeight 35
+#define KButtonHeight 30
+
 @interface XDLoadingView()
 
 @property (strong, nonatomic) UIView *loadingView;
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UIActivityIndicatorView *activityIndicatorView;
+@property (strong, nonatomic) XDActivityIndicatorView *activityIndicatorView;
 @property (strong, nonatomic) UIButton *cancleButton;
 @property (strong, nonatomic) UIButton * backgroundButton;
 
@@ -25,7 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.backgroundColor = [UIColor colorWithWhite:0.6f alpha:0.6f];
+        self.backgroundColor = [UIColor colorWithWhite:0.6f alpha:0.8f];
         [self addSubview:self.loadingView];
     }
     return self;
@@ -56,48 +63,46 @@
     return self;
 }
 
-- (id)initWithTarget:(id)target requestOperation:(AFHTTPRequestOperation *)requestOperation title:(NSString *)title
-{
-    CGRect rect = [[UIScreen mainScreen] bounds];
-    self = [self initWithFrame:rect];
-    if (self) {
-        self.target = target;
-        self.requestOperation = requestOperation;
-        self.title = title;
-        [self addSubview:self.loadingView];
-    }
-    
-    return self;
-}
+//- (id)initWithTarget:(id)target requestOperation:(AFHTTPRequestOperation *)requestOperation title:(NSString *)title
+//{
+//    CGRect rect = [[UIScreen mainScreen] bounds];
+//    self = [self initWithFrame:rect];
+//    if (self) {
+//        self.target = target;
+//        self.requestOperation = requestOperation;
+//        self.title = title;
+//        [self addSubview:self.loadingView];
+//    }
+//    
+//    return self;
+//}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    CGFloat height = 0;
-    if (_requestOperation && ![_requestOperation isFinished] && ![_requestOperation isCancelled]) {
-        _loadingView.frame = CGRectMake((self.frame.size.width - 150) / 2, (self.frame.size.height - 100) / 2, 100, 60);
-        _backgroundButton.frame = CGRectMake(0, _loadingView.frame.size.height / 2 + 1, _loadingView.frame.size.width, _loadingView.frame.size.height / 2 - 1);
-        height = _loadingView.frame.size.height / 2;
-    }
-    else{
-        _loadingView.frame = CGRectMake((self.frame.size.width - 150) / 2, (self.frame.size.height - 100) / 2, 100, 30);
-        _backgroundButton.frame = CGRectZero;
-        height = _loadingView.frame.size.height;
-    }
+    CGFloat viewHeight = KIndicatorHeight + KButtonHeight;
+    CGFloat viewWidth = KTIWidth;
     
-    CGFloat oX = 10;
     if (_title && _title.length > 0) {
-        _titleLabel.frame = CGRectMake(oX, 0, _loadingView.frame.size.width - height - 20, height);
-        oX = _titleLabel.frame.size.width;
+        viewHeight += KTitleHeight;
+        _titleLabel.frame = CGRectMake(5, 0, viewWidth - 10, KTitleHeight);
     }
     else{
         _titleLabel.frame = CGRectZero;
     }
+    _activityIndicatorView.frame = CGRectMake(5, _titleLabel.frame.size.height, viewWidth - 10, KIndicatorHeight);
     
-    _activityIndicatorView.frame = CGRectMake(oX, 0, _loadingView.frame.size.width - height - oX - 1, height);
-    oX += _activityIndicatorView.frame.size.width;
-    _cancleButton.frame = CGRectMake(oX, 0, height, height);
+    if (_requestOperation && ![_requestOperation isFinished] && ![_requestOperation isCancelled]) {
+        _loadingView.frame = CGRectMake((self.frame.size.width - viewWidth) / 2, (self.frame.size.height - viewHeight) / 2, viewWidth, viewHeight);
+        _backgroundButton.frame = CGRectMake(0, _loadingView.frame.size.height - 30, (_loadingView.frame.size.width - 10) / 2, KButtonHeight);
+        _cancleButton.frame = CGRectMake(_backgroundButton.frame.size.width + 10, _loadingView.frame.size.height - 30, (_loadingView.frame.size.width - 10) / 2, KButtonHeight);
+    }
+    else{
+        _loadingView.frame = CGRectMake((self.frame.size.width - viewWidth) / 2, (self.frame.size.height - viewHeight) / 2, viewWidth, viewHeight);
+        _backgroundButton.frame = CGRectZero;
+        _cancleButton.frame = CGRectMake(10, _loadingView.frame.size.height - 30, _loadingView.frame.size.width - 20, KButtonHeight);
+    }
 }
 
 #pragma mark - getter
@@ -106,18 +111,20 @@
 {
     if (_loadingView == nil) {
         _loadingView = [[UIView alloc] init];
-        _loadingView.backgroundColor = [UIColor redColor];
-//        _loadingView.center = _loadingView.center;
-//        _loadingView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-//        _loadingView.layer.cornerRadius = 6.0;
         
-        _activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [_loadingView addSubview:_activityIndicatorView];
+        if (_activityIndicatorView == nil) {
+            _activityIndicatorView = [[XDActivityIndicatorView alloc] initWithFrame:CGRectMake(5, 0, KTIWidth - 10, KIndicatorHeight) ballColor:[UIColor colorWithRed:0.47 green:0.60 blue:0.89 alpha:1]];
+            [_loadingView addSubview:_activityIndicatorView];
+        }
         
-        _cancleButton = [[UIButton alloc] init];
-        [_cancleButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchDragInside];
-        [_cancleButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [_loadingView addSubview:_cancleButton];
+        if (_cancleButton == nil) {
+            _cancleButton = [[UIButton alloc] init];
+            _cancleButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+            [_cancleButton addTarget:self action:@selector(cancelAction) forControlEvents:UIControlEventTouchUpInside];
+            [_cancleButton setTitle:@"取消" forState:UIControlStateNormal];
+            [_cancleButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
+            [_loadingView addSubview:_cancleButton];
+        }
     }
     
     if (_title && _title.length > 0) {
@@ -132,7 +139,9 @@
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont systemFontOfSize:14.0];
         _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.loadingView addSubview:_titleLabel];
+        _titleLabel.backgroundColor = [UIColor clearColor];
     }
     
     return _titleLabel;
@@ -144,9 +153,9 @@
         _backgroundButton = [[UIButton alloc] init];
         _backgroundButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
         [_backgroundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_backgroundButton addTarget:self action:@selector(backgroundRunAction) forControlEvents:UIControlEventTouchDragInside];
-        [_backgroundButton setTitle:@"后台运行" forState:UIControlStateNormal];
-        [_backgroundButton setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [_backgroundButton addTarget:self action:@selector(backgroundRunAction) forControlEvents:UIControlEventTouchUpInside];
+        [_backgroundButton setTitle:@"后台申请" forState:UIControlStateNormal];
+        [_backgroundButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_green"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] forState:UIControlStateNormal];
         [self.loadingView addSubview:_backgroundButton];
     }
     

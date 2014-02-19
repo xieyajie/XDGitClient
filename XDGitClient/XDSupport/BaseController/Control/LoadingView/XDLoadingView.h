@@ -16,7 +16,6 @@
 
 - (id)initWithTitle:(NSString *)title;
 - (id)initWithRequestOperation:(AFHTTPRequestOperation *)requestOperation title:(NSString *)title;
-//- (id)initWithTarget:(id)target requestOperation:(AFHTTPRequestOperation *)requestOperation title:(NSString *)title;
 
 - (void)start;
 - (void)stop;

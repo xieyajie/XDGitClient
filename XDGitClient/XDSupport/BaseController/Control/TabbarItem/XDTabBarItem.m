@@ -40,6 +40,7 @@
         
         _imageView = [[UIImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        _imageView.backgroundColor = [UIColor redColor];
         
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:10];
@@ -82,8 +83,8 @@
     switch (self.style) {
         case XDTabBarItemStyleDefault:
         {
-            _imageView.frame = CGRectMake((self.frame.size.width - (self.frame.size.height - 25)) / 2, 5, self.frame.size.height - 25, self.frame.size.height - 25);
-            _titleLabel.frame = CGRectMake(5, self.frame.size.height - 20, self.frame.size.width - 10, 15);
+            _imageView.frame = CGRectMake(5, 5, self.frame.size.width - 10, self.frame.size.height - 20);
+            _titleLabel.frame = CGRectMake(5, self.frame.size.height - 15, self.frame.size.width - 10, 15);
         }
             break;
         case XDTabBarItemStyleImage:

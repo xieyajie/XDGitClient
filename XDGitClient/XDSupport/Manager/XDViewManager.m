@@ -66,10 +66,9 @@ static XDViewManager *defaultManagerInstance = nil;
         _loadingView.title = title;
         _loadingView.requestOperation = requestOperation;
     }
-    [_loadingView start];
     
     [[UIApplication sharedApplication].keyWindow addSubview:_loadingView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_loadingView];
+    [_loadingView start];
 }
 
 - (void)hideLoadingView
