@@ -95,8 +95,8 @@
             _usernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
             _usernameTextField.keyboardType = UIKeyboardTypeEmailAddress;
             _usernameTextField.returnKeyType = UIReturnKeyNext;
+            _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
             _usernameTextField.enablesReturnKeyAutomatically = NO;
-//            [_usernameTextField addTarget:self action:@selector(textFieldDidChangeEditing:) forControlEvents:UIControlEventEditingChanged];//替代delegate，解决中文输入法字符不匹配问题
             [_usernameTextField addTarget:_passwordTextField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventEditingDidEndOnExit];
             [_mainLoginView addSubview:_usernameTextField];
         }

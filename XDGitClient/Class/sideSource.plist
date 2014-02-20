@@ -33,7 +33,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>关注我的</string>
+			<string>关注Me的人</string>
 			<key>icon</key>
 			<string></string>
 			<key>selector</key>
@@ -41,7 +41,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>我关注的</string>
+			<string>Me关注的人</string>
 			<key>icon</key>
 			<string></string>
 			<key>selector</key>

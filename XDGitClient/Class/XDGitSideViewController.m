@@ -15,6 +15,7 @@
 #import "XDFollowViewController.h"
 #import "XDAccountCardViewController.h"
 #import "XDTableViewCell.h"
+#import "UIButton+AsyncImage.h"
 
 #import "XDConfigManager.h"
 
@@ -30,6 +31,8 @@
 @property (strong, nonatomic) UIButton *accountButton;
 @property (strong, nonatomic) UIView *logoutView;
 
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
+
 @end
 
 @implementation XDGitSideViewController
@@ -40,6 +43,7 @@
     if (self) {
         // Custom initialization
         _configManager = [XDConfigManager defaultManager];
+        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
         self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
@@ -91,10 +95,10 @@
         _accountButton.titleLabel.textColor = [UIColor whiteColor];
         _accountButton.imageEdgeInsets = UIEdgeInsetsMake(0, -7, 0, 0);
         _accountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [_accountButton addTarget:self action:@selector(accountCardAction) forControlEvents:UIControlEventTouchUpInside];
         
         [_accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
         [_accountButton setTitle:@"正在获取..." forState:UIControlStateNormal];
-        [_accountButton addTarget:self action:@selector(accountCardAction) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return _accountButton;
@@ -256,6 +260,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectedIndexPath = indexPath;
     switch (indexPath.section) {
         case 0:
         {
@@ -304,7 +309,6 @@
     UIBarButtonItem *cancleItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:cardController action:@selector(dismissButtonTapped:)];
     
     [[[XDViewManager defaultManager] appRootNavController] presentViewController:cardNavigation animated:YES completion:^{
-        [self.deckController closeLeftViewAnimated:YES];
         [cardController.navigationItem setLeftBarButtonItem:cancleItem];
     }];
 }
@@ -341,13 +345,13 @@
     AFHTTPRequestOperation *operation = [_configManager loadLoginAccountWithSuccess:^(id object) {
         AccountModel *account = (AccountModel *)object;
         
+        [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];
         [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
-        [weakSelf.accountButton.imageView setImageWithURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
         [weakSelf hideLoadingView];
         [weakSelf.tableView reloadData];
-        [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:weakSelf.selectedIndexPath];
+        [weakSelf.tableView selectRowAtIndexPath:weakSelf.selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     } failure:^(NSError *error) {
         [weakSelf hideLoadingView];
         

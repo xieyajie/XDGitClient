@@ -66,6 +66,7 @@
     self.title = _accountModel.accountName;
     self.showRefreshHeader = YES;
     [self.navigationItem setRightBarButtonItem:self.acttentionItem];
+    self.tableView.tableFooterView = [[UIView alloc] init];
     
 //    [self tableViewDidTriggerHeaderRefresh];
 }

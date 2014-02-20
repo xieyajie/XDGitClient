@@ -33,6 +33,7 @@
 		3A47A51918B462FE001C76C0 /* tab_allSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */; };
 		3A4B77A818B2140D00A94D47 /* sideSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A718B2140D00A94D47 /* sideSource.plist */; };
 		3A8F89E518B4B71200924CDE /* accountCard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8F89E418B4B71200924CDE /* accountCard.plist */; };
+		3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F02E18B5977600E8E1BA /* UIButton+AsyncImage.m */; };
 		3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FF18B2F18700F8450B /* XDFollowViewController.m */; };
 		3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010218B2F62B00F8450B /* XDTableViewCell.m */; };
 		3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010618B2FECA00F8450B /* XDActivityViewController.m */; };
@@ -126,6 +127,8 @@
 		3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_allSelect@2x.png"; sourceTree = "<group>"; };
 		3A4B77A718B2140D00A94D47 /* sideSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sideSource.plist; sourceTree = "<group>"; };
 		3A8F89E418B4B71200924CDE /* accountCard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = accountCard.plist; sourceTree = "<group>"; };
+		3AA4F02D18B5977600E8E1BA /* UIButton+AsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AsyncImage.h"; sourceTree = "<group>"; };
+		3AA4F02E18B5977600E8E1BA /* UIButton+AsyncImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AsyncImage.m"; sourceTree = "<group>"; };
 		3AA800FE18B2F18700F8450B /* XDFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFollowViewController.h; sourceTree = "<group>"; };
 		3AA800FF18B2F18700F8450B /* XDFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFollowViewController.m; sourceTree = "<group>"; };
 		3AA8010118B2F62B00F8450B /* XDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewCell.h; sourceTree = "<group>"; };
@@ -381,6 +384,8 @@
 				3AA8011D18B3460200F8450B /* NSData+Category.m */,
 				3AA8011E18B3460200F8450B /* NSString+Category.h */,
 				3AA8011F18B3460200F8450B /* NSString+Category.m */,
+				3AA4F02D18B5977600E8E1BA /* UIButton+AsyncImage.h */,
+				3AA4F02E18B5977600E8E1BA /* UIButton+AsyncImage.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */,
+				3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */,
 				3AEDEA2018AE17450093946D /* AFURLConnectionOperation.m in Sources */,
 				3AEDEA2218AE17450093946D /* UIImageView+AFNetworking.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
