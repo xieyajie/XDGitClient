@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XDBaseModel.h"
 
-@interface FileModel : NSObject
+@interface FileModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *Id;             //ID
 @property (strong, nonatomic) NSString *fileName;       //文件名称
@@ -18,7 +18,5 @@
 
 //url
 @property (strong, nonatomic) NSString *rawUrl;       //raw
-
-- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

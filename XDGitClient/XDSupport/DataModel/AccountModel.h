@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XDBaseModel.h"
 
-@interface AccountModel : NSObject
+@interface AccountModel : XDBaseModel
 
 @property (strong, nonatomic) NSNumber *accountId;      //ID
 @property (strong, nonatomic) NSString *accountName;    //用户名称
@@ -21,7 +21,5 @@
 
 @property (strong, nonatomic) NSString *followersCount; //关注我的人的个数
 @property (strong, nonatomic) NSString *followingCount; //我关注的人的个数
-
-- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

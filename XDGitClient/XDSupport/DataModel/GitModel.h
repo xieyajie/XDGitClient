@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XDBaseModel.h"
 
-@interface GitModel : NSObject
+@interface GitModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *Id;             //ID
 @property (strong, nonatomic) NSString *description;    //描述
@@ -23,7 +23,5 @@
 
 //count
 @property (strong, nonatomic) NSString *commentCountDes;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

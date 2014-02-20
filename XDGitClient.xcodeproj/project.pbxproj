@@ -37,6 +37,8 @@
 		3AA4F03318B5CC9100E8E1BA /* XDGitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F03218B5CC9100E8E1BA /* XDGitsViewController.m */; };
 		3AA4F03618B5D27000E8E1BA /* GitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F03518B5D27000E8E1BA /* GitModel.m */; };
 		3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F03818B5D36000E8E1BA /* FileModel.m */; };
+		3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F03B18B5DBC500E8E1BA /* XDRepositoryCell.m */; };
+		3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F04118B5DCB900E8E1BA /* XDBaseModel.m */; };
 		3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA800FF18B2F18700F8450B /* XDFollowViewController.m */; };
 		3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010218B2F62B00F8450B /* XDTableViewCell.m */; };
 		3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010618B2FECA00F8450B /* XDActivityViewController.m */; };
@@ -138,6 +140,12 @@
 		3AA4F03518B5D27000E8E1BA /* GitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GitModel.m; sourceTree = "<group>"; };
 		3AA4F03718B5D36000E8E1BA /* FileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileModel.h; sourceTree = "<group>"; };
 		3AA4F03818B5D36000E8E1BA /* FileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileModel.m; sourceTree = "<group>"; };
+		3AA4F03A18B5DBC500E8E1BA /* XDRepositoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRepositoryCell.h; sourceTree = "<group>"; };
+		3AA4F03B18B5DBC500E8E1BA /* XDRepositoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRepositoryCell.m; sourceTree = "<group>"; };
+		3AA4F04018B5DCB900E8E1BA /* XDBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBaseModel.h; sourceTree = "<group>"; };
+		3AA4F04118B5DCB900E8E1BA /* XDBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBaseModel.m; sourceTree = "<group>"; };
+		3AA4F04418B5DD2F00E8E1BA /* XDModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDModelProtocol.h; sourceTree = "<group>"; };
+		3AA4F04518B5DD2F00E8E1BA /* XDTableViewModelCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewModelCellProtocol.h; sourceTree = "<group>"; };
 		3AA800FE18B2F18700F8450B /* XDFollowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFollowViewController.h; sourceTree = "<group>"; };
 		3AA800FF18B2F18700F8450B /* XDFollowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFollowViewController.m; sourceTree = "<group>"; };
 		3AA8010118B2F62B00F8450B /* XDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewCell.h; sourceTree = "<group>"; };
@@ -364,6 +372,15 @@
 			path = Gits;
 			sourceTree = "<group>";
 		};
+		3AA4F04318B5DD2F00E8E1BA /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3AA4F04418B5DD2F00E8E1BA /* XDModelProtocol.h */,
+				3AA4F04518B5DD2F00E8E1BA /* XDTableViewModelCellProtocol.h */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		3AA800FD18B2F16F00F8450B /* Follow */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +430,8 @@
 			children = (
 				3AA8012318B3532D00F8450B /* XDRepositoryViewController.h */,
 				3AA8012418B3532D00F8450B /* XDRepositoryViewController.m */,
+				3AA4F03A18B5DBC500E8E1BA /* XDRepositoryCell.h */,
+				3AA4F03B18B5DBC500E8E1BA /* XDRepositoryCell.m */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -525,6 +544,7 @@
 		3AEDE99018ADFF1A0093946D /* XDSupport */ = {
 			isa = PBXGroup;
 			children = (
+				3AA4F04318B5DD2F00E8E1BA /* Protocol */,
 				3AA8011B18B3460200F8450B /* Category */,
 				3AA8010C18B3228000F8450B /* GitEngine */,
 				3CA4F00A18B25281006C28BF /* DataModel */,
@@ -663,6 +683,8 @@
 				3AA4F03518B5D27000E8E1BA /* GitModel.m */,
 				3AA4F03718B5D36000E8E1BA /* FileModel.h */,
 				3AA4F03818B5D36000E8E1BA /* FileModel.m */,
+				3AA4F04018B5DCB900E8E1BA /* XDBaseModel.h */,
+				3AA4F04118B5DCB900E8E1BA /* XDBaseModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -812,6 +834,7 @@
 				3AEDE98718ADFD380093946D /* XDAppDelegate.m in Sources */,
 				3AA8012518B3532D00F8450B /* XDRepositoryViewController.m in Sources */,
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
+				3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
 				3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */,
 				3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */,
@@ -825,6 +848,7 @@
 				3AEDEA1C18AE17450093946D /* AFImageRequestOperation.m in Sources */,
 				3AA8011318B326E500F8450B /* XDGitRequestClient.m in Sources */,
 				3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */,
+				3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */,
 				3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */,
 				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
 				3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */,

@@ -124,16 +124,6 @@
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
-			<dict>
-				<key>title</key>
-				<string>通知 Notifications</string>
-				<key>model_selector</key>
-				<string></string>
-				<key>controller_selector</key>
-				<integer>103</integer>
-				<key>accessoryType</key>
-				<integer>1</integer>
-			</dict>
 		</array>
 		<array>
 			<dict>

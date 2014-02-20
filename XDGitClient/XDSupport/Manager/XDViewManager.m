@@ -56,8 +56,8 @@ static XDViewManager *defaultManagerInstance = nil;
         [[UINavigationBar appearance] setBackgroundImage:tempImage forBarMetrics:UIBarMetricsDefault];
         
         NSMutableDictionary *attributesDictionary = [NSMutableDictionary dictionary];
-        [attributesDictionary setValue:[UIFont boldSystemFontOfSize:20.0]               forKey:UITextAttributeFont];
-        [attributesDictionary setValue:[UIColor whiteColor]                             forKey:UITextAttributeTextColor];
+        [attributesDictionary setValue:[UIFont boldSystemFontOfSize:20.0]               forKey:NSFontAttributeName];
+        [attributesDictionary setValue:[UIColor whiteColor]                             forKey:NSForegroundColorAttributeName];
         [[UINavigationBar appearance] setTitleTextAttributes:attributesDictionary];
     }
 }

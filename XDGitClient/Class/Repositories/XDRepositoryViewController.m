@@ -9,6 +9,7 @@
 #import "XDRepositoryViewController.h"
 
 #import "RepositoryModel.h"
+#import "XDRepositoryCell.h"
 
 @interface XDRepositoryViewController ()
 {
@@ -67,19 +68,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"RepositoyCell";
+    XDRepositoryCell *cell = (XDRepositoryCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-//        cell.titleLabel.textColor = [UIColor grayColor];
-//        cell.titleLabel.font = [UIFont systemFontOfSize:15.0];
+        cell = [[XDRepositoryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    RepositoryModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = model.name;
+    cell.model = [self.dataArray objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -88,7 +85,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50.0;
+    RepositoryModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    return [XDRepositoryCell heightWithModel:model];
 }
 
 

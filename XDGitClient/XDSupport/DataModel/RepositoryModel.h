@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "XDBaseModel.h"
 
-@interface RepositoryModel : NSObject
+@interface RepositoryModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *Id;             //ID
 @property (strong, nonatomic) NSString *name;           //项目名称
@@ -32,7 +32,5 @@
 @property (strong, nonatomic) NSString *issuesCountDeS;    //
 @property (strong, nonatomic) NSString *watchersCountDes;  //
 @property (strong, nonatomic) NSString *starsCountDes;     //
-
-- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
