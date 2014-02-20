@@ -13,7 +13,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>工程 Gits</string>
+			<string>Gits</string>
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>
@@ -31,7 +31,7 @@
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>通知 Notification</string>
+			<string>通知 Notifications</string>
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>

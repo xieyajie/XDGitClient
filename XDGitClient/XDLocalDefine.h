@@ -12,19 +12,27 @@
 //enum
 #pragma mark - enum
 typedef enum{
-    XDProjectStyleAll   = 0,
-    XDProjectStylePublic,
-    XDProjectStylePrivate,
-    XDProjectStyleContributed,
-    XDProjectStyleForks,
-    XDProjectStyleSource,
-    XDProjectStyleMirrors,
-}XDProjectStyle;
+    XDRepositoryStyleAll   = 0,
+    XDRepositoryStylePublic,
+    XDRepositoryStylePrivate,
+    XDRepositoryStyleContributed,
+    XDRepositoryStyleForks,
+    XDRepositoryStyleSource,
+    XDRepositoryStyleMirrors,
+}XDRepositoryStyle;
+
+typedef enum{
+    XDGitStyleAll   = 0,
+    XDGitStylePublic,
+    XDGitStylePrivate,
+    XDGitStyleStarred,
+}XDGitStyle;
 
 //block
 #pragma mark - block
 typedef void (^XDGitEngineSuccessBlock)(id object);
 typedef void (^XDGitEngineBooleanSuccessBlock)(BOOL success);
+typedef void (^XDGitEnginePageSuccessBlock)(id object, BOOL haveNextPage);
 typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
 //plist key
@@ -84,7 +92,18 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KREPO_OPENISSUESCOUNT @"open_issues_count"
 #define KREPO_WATCHERSCOUNT @"watchers_count"
 #define KREPO_STARSCOUNT @"stargazers_count"
-//#define KREPO_ @""
+#define KREPO_PRIVATESTATE @"private"
+#define KREPO_FORKSTATE @"fork"
+
+//git
+#define KGIT_ID @"id"
+#define KGIT_DESC @"description"
+#define KGIT_CREATE @"created_at"
+#define KGIT_UPDATE @"updated_at"
+#define KGIT_HTMLURL @"html_url"
+#define KGIT_FORKURL @"forks_url"
+#define KGIT_COMMENTCOUNT @"comments"
+#define KGIT_PUBLICSTATE @"public"
 //#define KREPO_ @""
 //#define KREPO_ @""
 //#define KREPO_ @""

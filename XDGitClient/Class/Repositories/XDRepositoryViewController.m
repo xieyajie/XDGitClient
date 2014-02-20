@@ -1,30 +1,30 @@
 //
-//  XDProjectViewController.m
+//  XDRepositoryViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-18.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDProjectViewController.h"
+#import "XDRepositoryViewController.h"
 
 #import "RepositoryModel.h"
 
-@interface XDProjectViewController ()
+@interface XDRepositoryViewController ()
 {
     NSString *_userName;
-    XDProjectStyle _style;
+    XDRepositoryStyle _style;
     
     UIBarButtonItem *_editItem;
 }
 
 @end
 
-@implementation XDProjectViewController
+@implementation XDRepositoryViewController
 
-- (id)initWithProjectsStyle:(XDProjectStyle)style
+- (id)initWithProjectsStyle:(XDRepositoryStyle)style
 {
-    self = [self initWithUserName:nil projectsStyle:style];
+    self = [self initWithUserName:nil repositoryStyle:style];
     if (self) {
         
     }
@@ -32,7 +32,7 @@
     return self;
 }
 
-- (id)initWithUserName:(NSString *)userName projectsStyle:(XDProjectStyle)style
+- (id)initWithUserName:(NSString *)userName repositoryStyle:(XDRepositoryStyle)style
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
@@ -97,7 +97,7 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     self.page = 1;
-    __block __weak XDProjectViewController *weakSelf = self;
+    __block __weak XDRepositoryViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object) {
             [weakSelf.dataArray removeAllObjects];
@@ -120,7 +120,7 @@
 - (void)tableViewDidTriggerFooterRefresh
 {
     self.page++;
-    __block __weak XDProjectViewController *weakSelf = self;
+    __block __weak XDRepositoryViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object) {
             if (object) {

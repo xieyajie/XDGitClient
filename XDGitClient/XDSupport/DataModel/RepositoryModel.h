@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSString *sizeDes;        //大小描述
 @property (strong, nonatomic) NSString *language;       //语言
 
-@property (nonatomic) BOOL isPrivate; //时候私有
+@property (nonatomic) BOOL isPrivate; //是否私有
 @property (nonatomic) BOOL isFork;    //是否拷贝其他人的
 
 //url

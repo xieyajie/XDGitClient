@@ -29,6 +29,8 @@
         self.issuesCountDeS = [dictionary objectForKey:KREPO_OPENISSUESCOUNT];
         self.watchersCountDes = [dictionary objectForKey:KREPO_WATCHERSCOUNT];
         self.starsCountDes = [dictionary objectForKey:KREPO_STARSCOUNT];
+        self.isPrivate = [[dictionary objectForKey:KREPO_PRIVATESTATE] boolValue];
+        self.isFork = [[dictionary objectForKey:KREPO_FORKSTATE] boolValue];
     }
     
     return self;

@@ -153,12 +153,12 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 }
 
 #pragma mark - Repositories
-- (AFHTTPRequestOperation *)repositoriesWithStyle:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)repositoriesWithStyle:(XDRepositoryStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    return [_requestClient sendRequestWithApiPath:@"user/repos" requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
+    return [_requestClient sendRequestWithApiPath:@"user/repos" requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
 }
 
-- (AFHTTPRequestOperation *)repositoriesWithUser:(NSString *)userName style:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)repositoriesWithUser:(NSString *)userName style:(XDRepositoryStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     if (userName == nil || userName.length == 0)
     {
@@ -166,30 +166,50 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
     }
     else{
         NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
-        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
+        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
+    }
+}
+
+#pragma mark - Gits
+- (AFHTTPRequestOperation *)gistsWithStyle:(XDGitStyle)style page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *apiPath = [NSString stringWithFormat:@"gists%@", [self typePathWithGitStyle:style]];
+    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitGistsRequest responseType:XDGitGistsResponse page:page success:successBlock failure:failureBlock];
+}
+
+
+- (AFHTTPRequestOperation *)gistsForUser:(NSString *)userName style:(XDGitStyle)style page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    if (userName == nil || userName.length == 0)
+    {
+        return [self gistsWithStyle:style page:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *apiPath = [NSString stringWithFormat:@"users/%@/gists", userName];
+        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitGistsRequest responseType:XDGitGistsResponse page:page success:successBlock failure:failureBlock];
     }
 }
 
 #pragma mark - private
 
-- (NSMutableDictionary *)parametersWithProjectStyle:(XDProjectStyle)style
+- (NSMutableDictionary *)parametersWithRepositoryStyle:(XDRepositoryStyle)style
 {
     NSMutableDictionary *resultDic = [NSMutableDictionary dictionary];
     NSString *typeValue = @"";
     switch (style) {
-        case XDProjectStyleAll:
+        case XDRepositoryStyleAll:
             typeValue = @"all";
             break;
-        case XDProjectStylePublic:
+        case XDRepositoryStylePublic:
             typeValue = @"public";
             break;
-        case XDProjectStylePrivate:
+        case XDRepositoryStylePrivate:
             typeValue = @"private";
             break;
-        case XDProjectStyleForks:
+        case XDRepositoryStyleForks:
             typeValue = @"owner";
             break;
-        case XDProjectStyleContributed:
+        case XDRepositoryStyleContributed:
             typeValue = @"member";
             break;
             
@@ -203,6 +223,30 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
     }
     
     return resultDic;
+}
+
+- (NSString *)typePathWithGitStyle:(XDGitStyle)style
+{
+    NSString *typeValue = @"";
+    switch (style) {
+        case XDGitStyleAll:
+            typeValue = @"";
+            break;
+        case XDGitStylePublic:
+            typeValue = @"public";
+            break;
+        case XDGitStylePrivate:
+            typeValue = @"private";
+            break;
+        case XDGitStyleStarred:
+            typeValue = @"starred";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return typeValue;
 }
 
 @end

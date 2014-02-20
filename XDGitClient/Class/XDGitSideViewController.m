@@ -10,7 +10,8 @@
 
 #import "XDGitDeckViewController.h"
 #import "XDTabBarController.h"
-#import "XDProjectViewController.h"
+#import "XDRepositoryViewController.h"
+#import "XDGitsViewController.h"
 #import "XDActivityViewController.h"
 #import "XDFollowViewController.h"
 #import "XDAccountCardViewController.h"
@@ -32,6 +33,10 @@
 @property (strong, nonatomic) UIView *logoutView;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPath;
+
+@property (strong, nonatomic) UINavigationController *reposityNavTabController;
+@property (strong, nonatomic) UINavigationController *gitsNavTabController;
+@property (strong, nonatomic) UINavigationController *activityNavController;
 
 @end
 
@@ -120,15 +125,15 @@
     return _logoutView;
 }
 
-- (UINavigationController *)projectNavTabController
+- (UINavigationController *)reposityNavTabController
 {
-    if (_projectNavTabController == nil) {
+    if (_reposityNavTabController == nil) {
         NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
         NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
         NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
-            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithProjectsStyle:i];
+            XDRepositoryViewController *projectsController = [[XDRepositoryViewController alloc] initWithProjectsStyle:i];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -137,12 +142,37 @@
             [controllers addObject:projectsController];
         }
         
-        XDTabBarController *projectTabController = [[XDTabBarController alloc] init];
-        [projectTabController setViewControllers:controllers];
-        _projectNavTabController = [[UINavigationController alloc] initWithRootViewController:projectTabController];
+        XDTabBarController *reposityTabController = [[XDTabBarController alloc] init];
+        [reposityTabController setViewControllers:controllers];
+        _reposityNavTabController = [[UINavigationController alloc] initWithRootViewController:reposityTabController];
     }
     
-    return _projectNavTabController;
+    return _reposityNavTabController;
+}
+
+- (UINavigationController *)gitsNavTabController
+{
+    if (_gitsNavTabController == nil) {
+        NSArray *titleArray = @[@"全部", @"公开", @"私有", @"关注的"];
+        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSMutableArray *controllers = [NSMutableArray array];
+        for (int i = 0; i < 4; i++) {
+            XDGitsViewController *projectsController = [[XDGitsViewController alloc] initWithGitsStyle:i];
+            UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
+            [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
+            [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
+            projectsController.tabBarItem = tabBarItem;
+            
+            [controllers addObject:projectsController];
+        }
+        
+        XDTabBarController *gitsTabController = [[XDTabBarController alloc] init];
+        [gitsTabController setViewControllers:controllers];
+        _gitsNavTabController = [[UINavigationController alloc] initWithRootViewController:gitsTabController];
+    }
+    
+    return _gitsNavTabController;
 }
 
 - (UINavigationController *)activityNavController
@@ -173,10 +203,10 @@
 {
     switch (section) {
         case 0:
-            return @"";
+            return @"工程";
             break;
         case 1:
-            return @"";
+            return @"动态";
             break;
         case 2:
             return @"关注";
@@ -242,19 +272,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-        case 1:
-            return 20.0;
-            break;
-        case 2:
-            return 40.0;
-            break;
-            
-        default:
-            return 20.0;
-            break;
-    }
+//    switch (section) {
+//        case 0:
+//        case 1:
+//            return 20.0;
+//            break;
+//        case 2:
+//            return 40.0;
+//            break;
+//            
+//        default:
+//            return 20.0;
+//            break;
+//    }
+    return 40.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -267,16 +298,14 @@
         
         switch (controllerSelectorTag) {
             case KPLIST_VALUE_CONTROLLERSELECTOR_REPO:
+                self.deckController.centerController = self.reposityNavTabController;
+                break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
-            {
-                self.deckController.centerController = self.projectNavTabController;
-            }
+                self.deckController.centerController = self.gitsNavTabController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
             case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
-            {
                 self.deckController.centerController = self.activityNavController;
-            }
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
@@ -292,18 +321,18 @@
                 break;
         }
         
-        if (_menuItem == nil) {
-            UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
-            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
-            [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
-            _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-        }
-        
-        id controller = self.deckController.centerController;
-        if ([controller isKindOfClass:[UINavigationController class]]) {
-            UINavigationController *navController = (UINavigationController *)controller;
-            [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
-        }
+//        if (_menuItem == nil) {
+//            UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
+//            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
+//            [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
+//            _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+//        }
+//        
+//        id controller = self.deckController.centerController;
+//        if ([controller isKindOfClass:[UINavigationController class]]) {
+//            UINavigationController *navController = (UINavigationController *)controller;
+//            [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
+//        }
     }
 
     [self.deckController closeLeftViewAnimated:YES];

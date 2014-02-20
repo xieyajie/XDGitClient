@@ -10,7 +10,8 @@
 
 #import "XDTableViewCell.h"
 #import "XDTabBarController.h"
-#import "XDProjectViewController.h"
+#import "XDRepositoryViewController.h"
+#import "XDGitsViewController.h"
 #import "XDFollowViewController.h"
 #import "XDActivityViewController.h"
 #import "XDConfigManager.h"
@@ -30,7 +31,8 @@
 
 @property (strong, nonatomic) UIBarButtonItem *acttentionItem;;
 @property (strong, nonatomic) UIImageView *headerImageView;
-@property (strong, nonatomic) XDTabBarController *projectController;
+@property (strong, nonatomic) XDTabBarController *reposityController;
+@property (strong, nonatomic) XDGitsViewController *gitsController;
 
 @end
 
@@ -141,15 +143,15 @@
     return _plistSourceArray;
 }
 
-- (XDTabBarController *)projectController
+- (XDTabBarController *)reposityController
 {
-    if (_projectController == nil) {
+    if (_reposityController == nil) {
         NSArray *titleArray = @[@"全部", @"自己的", @"参与"];
         NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png"];
         NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png"];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 3; i++) {
-            XDProjectViewController *controller = [[XDProjectViewController alloc] initWithUserName:self.accountModel.accountName projectsStyle:i];
+            XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.accountModel.accountName repositoryStyle:i];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -158,11 +160,21 @@
             [controllers addObject:controller];
         }
         
-        _projectController = [[XDTabBarController alloc] init];
-        [_projectController setViewControllers:controllers];
+        _reposityController = [[XDTabBarController alloc] init];
+        [_reposityController setViewControllers:controllers];
     }
     
-    return _projectController;
+    return _reposityController;
+}
+
+- (XDGitsViewController *)gitsController
+{
+    if (_gitsController == nil) {
+        _gitsController = [[XDGitsViewController alloc] initWithUserName:self.accountModel.accountName gitsStyle:XDGitStyleAll];
+        _gitsController.title = @"Gits";
+    }
+    
+    return _gitsController;
 }
 
 #pragma mark - setter
@@ -260,10 +272,10 @@
     
     switch (controllerSelectorTag) {
         case KPLIST_VALUE_CONTROLLERSELECTOR_REPO:
+            [self.navigationController pushViewController:self.reposityController animated:YES];
+            break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
-        {
-            [self.navigationController pushViewController:self.projectController animated:YES];
-        }
+            [self.navigationController pushViewController:self.gitsController animated:YES];
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
         case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
