@@ -108,7 +108,12 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 #pragma mark - Follow
 - (AFHTTPRequestOperation *)followers:(NSString *)userName page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/followers", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
+    if (userName == nil || userName.length == 0) {
+        return [self followersWithPage:page success:successBlock failure:failureBlock];
+    }
+    else{
+        return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/followers", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
+    }
 }
 
 - (AFHTTPRequestOperation *)followersWithPage:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -123,7 +128,13 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 
 - (AFHTTPRequestOperation *)following:(NSString *)userName page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/following", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
+    if (userName == nil || userName.length == 0)
+    {
+        return [self followingWithPage:page success:successBlock failure:failureBlock];
+    }
+    else{
+        return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/following", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
+    }
 }
 
 - (AFHTTPRequestOperation *)follows:(NSString *)userName success:(XDGitEngineBooleanSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -149,8 +160,14 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 
 - (AFHTTPRequestOperation *)repositoriesWithUser:(NSString *)userName style:(XDProjectStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
-    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
+    if (userName == nil || userName.length == 0)
+    {
+        return [self repositoriesWithStyle:style includeWatched:watched page:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
+        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithProjectStyle:style] page:page success:successBlock failure:failureBlock];
+    }
 }
 
 #pragma mark - private

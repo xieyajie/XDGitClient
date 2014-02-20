@@ -7,13 +7,17 @@
 			<key>title</key>
 			<string>版本库 Repositories</string>
 			<key>icon</key>
-			<string>side_copy.png</string>
+			<string></string>
+			<key>controller_selector</key>
+			<integer>100</integer>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>工程 Gits</string>
 			<key>icon</key>
-			<string>side_copy.png</string>
+			<string></string>
+			<key>controller_selector</key>
+			<integer>101</integer>
 		</dict>
 	</array>
 	<array>
@@ -22,12 +26,16 @@
 			<string>更新 Events</string>
 			<key>icon</key>
 			<string></string>
+			<key>controller_selector</key>
+			<integer>102</integer>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>通知 Notification</string>
 			<key>icon</key>
 			<string></string>
+			<key>controller_selector</key>
+			<integer>103</integer>
 		</dict>
 	</array>
 	<array>
@@ -36,16 +44,20 @@
 			<string>关注Me的人</string>
 			<key>icon</key>
 			<string></string>
-			<key>selector</key>
+			<key>model_selector</key>
 			<string>followersCount</string>
+			<key>controller_selector</key>
+			<integer>104</integer>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>Me关注的人</string>
 			<key>icon</key>
 			<string></string>
-			<key>selector</key>
+			<key>model_selector</key>
 			<string>followingCount</string>
+			<key>controller_selector</key>
+			<integer>105</integer>
 		</dict>
 	</array>
 </array>

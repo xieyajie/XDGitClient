@@ -12,4 +12,6 @@
 
 - (id)initWithFollowers:(BOOL)isFollowers;
 
+- (id)initWithUserName:(NSString *)userName isFollowers:(BOOL)isFollowers;
+
 @end

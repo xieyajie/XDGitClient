@@ -14,6 +14,7 @@
 @interface XDFollowViewController ()
 {
     BOOL _isFollowers;
+    NSString *_userName;
 }
 
 @end
@@ -30,11 +31,20 @@
     return self;
 }
 
+- (id)initWithUserName:(NSString *)userName isFollowers:(BOOL)isFollowers
+{
+    self = [self initWithFollowers:isFollowers];
+    if (self) {
+        _userName = userName;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = _isFollowers ? @"关注我的" : @"我关注的";
     self.showRefreshHeader = YES;
     [self tableViewDidTriggerHeaderRefresh];
 }
@@ -91,7 +101,7 @@
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         if (_isFollowers) {
-            operation = [activityEngine followersWithPage:self.page success:^(id object) {
+            operation = [activityEngine followers:_userName page:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -106,7 +116,7 @@
             }];
         }
         else{
-            operation = [activityEngine followingWithPage:self.page success:^(id object) {
+            operation = [activityEngine following:_userName page:self.page success:^(id object) {
                 [weakSelf.dataArray removeAllObjects];
                 if (object) {
                     for (NSDictionary *dic in object) {
@@ -131,7 +141,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         if (_isFollowers) {
-            [activityEngine followersWithPage:self.page success:^(id object) {
+            [activityEngine followers:_userName page:self.page success:^(id object) {
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
@@ -145,7 +155,7 @@
             }];
         }
         else{
-            [activityEngine followingWithPage:self.page success:^(id object) {
+            [activityEngine following:_userName page:self.page success:^(id object) {
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];

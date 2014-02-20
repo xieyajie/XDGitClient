@@ -9,6 +9,10 @@
 #import "XDAccountCardViewController.h"
 
 #import "XDTableViewCell.h"
+#import "XDTabBarController.h"
+#import "XDProjectViewController.h"
+#import "XDFollowViewController.h"
+#import "XDActivityViewController.h"
 #import "XDConfigManager.h"
 
 #define KPLIST_SOURCE_OWN @"Own"
@@ -26,6 +30,7 @@
 
 @property (strong, nonatomic) UIBarButtonItem *acttentionItem;;
 @property (strong, nonatomic) UIImageView *headerImageView;
+@property (strong, nonatomic) XDTabBarController *projectController;
 
 @end
 
@@ -63,7 +68,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = _accountModel.accountName;
+    self.title = self.accountModel.accountName;
     self.showRefreshHeader = YES;
     [self.navigationItem setRightBarButtonItem:self.acttentionItem];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -98,11 +103,13 @@
     if(_headerImageView == nil)
     {
         _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-        _headerImageView.userInteractionEnabled = YES;
         [_headerImageView setImageWithURL:[NSURL URLWithString:self.accountModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageAction)];
-        [_headerImageView addGestureRecognizer:tap];
+        if (_isOwn) {
+            _headerImageView.userInteractionEnabled = YES;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerImageAction)];
+            [_headerImageView addGestureRecognizer:tap];
+        }
     }
     
     return _headerImageView;
@@ -132,6 +139,38 @@
     }
     
     return _plistSourceArray;
+}
+
+- (XDTabBarController *)projectController
+{
+    if (_projectController == nil) {
+        NSArray *titleArray = @[@"全部", @"自己的", @"参与"];
+        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png"];
+        NSMutableArray *controllers = [NSMutableArray array];
+        for (int i = 0; i < 3; i++) {
+            XDProjectViewController *controller = [[XDProjectViewController alloc] initWithUserName:self.accountModel.accountName projectsStyle:i];
+            UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
+            [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
+            [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
+            controller.tabBarItem = tabBarItem;
+            
+            [controllers addObject:controller];
+        }
+        
+        _projectController = [[XDTabBarController alloc] init];
+        [_projectController setViewControllers:controllers];
+    }
+    
+    return _projectController;
+}
+
+#pragma mark - setter
+
+- (void)setAccountModel:(AccountModel *)accountModel
+{
+    _accountModel = accountModel;
+    [self.headerImageView setImageWithURL:[NSURL URLWithString:accountModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
 }
 
 #pragma mark - Table view data source
@@ -167,22 +206,19 @@
         
         cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0];
     }
-    else{
-        cell.textLabel.text = @"";
-        [self.headerImageView removeFromSuperview];
-    }
     
     NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.accessoryType = [[dic objectForKey:KPLIST_SOURCEACCESSORYTYPE] integerValue];
+    cell.accessoryType = [[dic objectForKey:KPLIST_KEYACCESSORYTYPE] integerValue];
     
     if (indexPath.section == 0 && indexPath.row == 0) {
+        cell.textLabel.text = @"";
         [cell.contentView addSubview:self.headerImageView];
         cell.detailTextLabel.text = self.accountModel.accountName;
     }
     else{
-        cell.textLabel.text = [dic objectForKey:KPLIST_SOURCETITLE];
+        cell.textLabel.text = [dic objectForKey:KPLIST_KEYTITLE];
         
-        NSString *selectorStr = [dic objectForKey:KPLIST_SOURCESELECTOR];
+        NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
         if (selectorStr && selectorStr.length > 0) {
             SEL selectorMethod = NSSelectorFromString(selectorStr);
             if (selectorMethod) {
@@ -215,6 +251,42 @@
     return 40.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSInteger controllerSelectorTag = [[dic objectForKey:KPLIST_KEYCONTROLLERSELECTOR] integerValue];
+    
+    switch (controllerSelectorTag) {
+        case KPLIST_VALUE_CONTROLLERSELECTOR_REPO:
+        case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
+        {
+            [self.navigationController pushViewController:self.projectController animated:YES];
+        }
+            break;
+        case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
+        case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
+        {
+            XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:self.accountModel.accountName];
+            [self.navigationController pushViewController:activityController animated:YES];
+        }
+            break;
+        case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
+        case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
+        {
+            BOOL follower = controllerSelectorTag == KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER ? YES : NO;
+            XDFollowViewController *followController = [[XDFollowViewController alloc] initWithUserName:self.accountModel.accountName isFollowers:follower];
+            followController.title = [dic objectForKey:KPLIST_KEYTITLE];
+            [self.navigationController pushViewController:followController animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - action
 
 - (void)acttentionAction
@@ -231,30 +303,28 @@
 
 - (void)tableViewDidTriggerHeaderRefresh
 {
-    if (_accountModel == nil) {
-        __block __weak XDAccountCardViewController *weakSelf = self;
-        AFHTTPRequestOperation *operation = nil;
-        if (_isOwn) {
-            operation = [[[XDRequestManager defaultManager] activityGitEngine] userWithSuccess:^(id object) {
-                weakSelf.accountModel = object;
-                
-                [weakSelf tableViewDidFinishHeaderRefresh];
-            } failure:^(NSError *error) {
-                [weakSelf tableViewDidFailHeaderRefresh];
-            }];
-        }
-        else{
-            operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object) {
-                weakSelf.accountModel = object;
-                
-//                [weakSelf tableViewDidFinishHeaderRefresh];
-            } failure:^(NSError *error) {
-                [weakSelf tableViewDidFailHeaderRefresh];
-            }];
-        }
-        
-        [self showLoadingViewWithRequestOperation:operation];
+    __block __weak XDAccountCardViewController *weakSelf = self;
+    AFHTTPRequestOperation *operation = nil;
+    if (_isOwn) {
+        operation = [[[XDRequestManager defaultManager] activityGitEngine] userWithSuccess:^(id object) {
+            weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
+            
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        } failure:^(NSError *error) {
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }];
     }
+    else{
+        operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object) {
+            weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
+            
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        } failure:^(NSError *error) {
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }];
+    }
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 @end

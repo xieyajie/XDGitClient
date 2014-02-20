@@ -43,7 +43,6 @@
     if (self) {
         // Custom initialization
         _configManager = [XDConfigManager defaultManager];
-        _selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         
         NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
         self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
@@ -129,7 +128,7 @@
         NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 5; i++) {
-            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithUserName:nil projectsStyle:i];
+            XDProjectViewController *projectsController = [[XDProjectViewController alloc] initWithProjectsStyle:i];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -212,12 +211,12 @@
     
     NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     if (dic) {
-        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KPLIST_SOURCEIMAGE]];
-        cell.titleLabel.text = [dic objectForKey:KPLIST_SOURCETITLE];
+        cell.headerImageView.image = [UIImage imageNamed:[dic objectForKey:KPLIST_KEYIMAGE]];
+        cell.titleLabel.text = [dic objectForKey:KPLIST_KEYTITLE];
         
         UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
         detailLabel.backgroundColor = [UIColor clearColor];
-        NSString *selectorStr = [dic objectForKey:KPLIST_SOURCESELECTOR];
+        NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
         if (selectorStr && selectorStr.length > 0) {
             SEL selectorMethod = NSSelectorFromString(selectorStr);
             if (selectorMethod) {
@@ -260,41 +259,51 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.selectedIndexPath = indexPath;
-    switch (indexPath.section) {
-        case 0:
-        {
-            self.deckController.centerController = self.projectNavTabController;
+    if (self.selectedIndexPath == nil || self.selectedIndexPath.section != indexPath.section || self.selectedIndexPath.row != indexPath.row) {
+        self.selectedIndexPath = indexPath;
+        
+        NSDictionary *dic = [[self.dataArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+        NSInteger controllerSelectorTag = [[dic objectForKey:KPLIST_KEYCONTROLLERSELECTOR] integerValue];
+        
+        switch (controllerSelectorTag) {
+            case KPLIST_VALUE_CONTROLLERSELECTOR_REPO:
+            case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
+            {
+                self.deckController.centerController = self.projectNavTabController;
+            }
+                break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
+            case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
+            {
+                self.deckController.centerController = self.activityNavController;
+            }
+                break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
+            case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
+            {
+                BOOL follower = controllerSelectorTag == KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER ? YES : NO;
+                XDFollowViewController *followController = [[XDFollowViewController alloc] initWithFollowers:follower];
+                followController.title = [dic objectForKey:KPLIST_KEYTITLE];
+                self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:followController];
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-        case 1:
-        {
-            self.deckController.centerController = self.activityNavController;
+        
+        if (_menuItem == nil) {
+            UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
+            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
+            [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
+            _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
         }
-            break;
-        case 2:
-        {
-            BOOL follower = indexPath.row == 0 ? YES : NO;
-            XDFollowViewController *followController = [[XDFollowViewController alloc] initWithFollowers:follower];
-            self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:followController];
+        
+        id controller = self.deckController.centerController;
+        if ([controller isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *)controller;
+            [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
         }
-            break;
-            
-        default:
-            break;
-    }
-    
-    if (_menuItem == nil) {
-        UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
-        [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
-        [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
-        _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    }
-    
-    id controller = self.deckController.centerController;
-    if ([controller isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *navController = (UINavigationController *)controller;
-        [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
     }
 
     [self.deckController closeLeftViewAnimated:YES];
@@ -350,8 +359,15 @@
         
         [weakSelf hideLoadingView];
         [weakSelf.tableView reloadData];
-        [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:weakSelf.selectedIndexPath];
-        [weakSelf.tableView selectRowAtIndexPath:weakSelf.selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        
+        if (self.selectedIndexPath == nil) {
+            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        }
+        else{
+            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:weakSelf.selectedIndexPath];
+            [weakSelf.tableView selectRowAtIndexPath:weakSelf.selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        }
     } failure:^(NSError *error) {
         [weakSelf hideLoadingView];
         

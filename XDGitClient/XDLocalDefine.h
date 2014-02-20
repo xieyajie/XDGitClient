@@ -29,10 +29,19 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
 //plist key
 #pragma mark - plist key
-#define KPLIST_SOURCEIMAGE @"icon"
-#define KPLIST_SOURCETITLE @"title"
-#define KPLIST_SOURCESELECTOR @"selector"
-#define KPLIST_SOURCEACCESSORYTYPE @"accessoryType"
+#define KPLIST_KEYIMAGE @"icon"
+#define KPLIST_KEYTITLE @"title"
+#define KPLIST_KEYMODELSELECTOR @"model_selector"
+#define KPLIST_KEYCONTROLLERSELECTOR @"controller_selector"
+#define KPLIST_KEYACCESSORYTYPE @"accessoryType"
+
+//plist value controller selector tag
+#define KPLIST_VALUE_CONTROLLERSELECTOR_REPO        100
+#define KPLIST_VALUE_CONTROLLERSELECTOR_GIT         101
+#define KPLIST_VALUE_CONTROLLERSELECTOR_EVENT       102
+#define KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF       103
+#define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER    104
+#define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG   105
 
 #pragma mark - default
 

@@ -22,6 +22,16 @@
 
 @implementation XDProjectViewController
 
+- (id)initWithProjectsStyle:(XDProjectStyle)style
+{
+    self = [self initWithUserName:nil projectsStyle:style];
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
 - (id)initWithUserName:(NSString *)userName projectsStyle:(XDProjectStyle)style
 {
     self = [super initWithStyle:UITableViewStylePlain];
@@ -29,8 +39,10 @@
         _style = style;
         _userName = userName;
         
-        _editItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction)];
-        _rightItems = [NSMutableArray arrayWithObjects:_editItem, nil];
+        if (_userName == nil && _userName.length == 0) {
+            _editItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction)];
+            _rightItems = [NSMutableArray arrayWithObjects:_editItem, nil];
+        }
     }
     
     return self;
@@ -87,7 +99,7 @@
     self.page = 1;
     __block __weak XDProjectViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithStyle:_style includeWatched:NO page:self.page success:^(id object) {
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object) {
             [weakSelf.dataArray removeAllObjects];
             if (object) {
                 for (NSDictionary *dic in object) {
@@ -110,7 +122,7 @@
     self.page++;
     __block __weak XDProjectViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithStyle:_style includeWatched:NO page:self.page success:^(id object) {
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object) {
             if (object) {
                 for (NSDictionary *dic in object) {
                     RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];

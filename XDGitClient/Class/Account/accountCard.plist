@@ -8,40 +8,50 @@
 			<dict>
 				<key>title</key>
 				<string>用户名</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>accountName</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>邮箱</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>email</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>网站主页</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>webUrl</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>地址</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>locationDes</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>账号类型</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>accountType</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -53,24 +63,30 @@
 			<dict>
 				<key>title</key>
 				<string>用户名</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>accountName</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>网站主页</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>webUrl</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>账号类型</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string>accountType</string>
+				<key>controller_selector</key>
+				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -79,16 +95,20 @@
 			<dict>
 				<key>title</key>
 				<string>版本库 Repositories</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string></string>
+				<key>controller_selector</key>
+				<integer>100</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>Gits</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string></string>
+				<key>controller_selector</key>
+				<integer>101</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
@@ -97,16 +117,20 @@
 			<dict>
 				<key>title</key>
 				<string>更新 Events</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string></string>
+				<key>controller_selector</key>
+				<integer>102</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>通知 Notifications</string>
-				<key>selector</key>
+				<key>model_selector</key>
 				<string></string>
+				<key>controller_selector</key>
+				<integer>103</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
@@ -115,16 +139,20 @@
 			<dict>
 				<key>title</key>
 				<string>关注Ta的人</string>
-				<key>selector</key>
-				<string>followersCount</string>
+				<key>model_selector</key>
+				<string></string>
+				<key>controller_selector</key>
+				<integer>104</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>Ta关注的人</string>
-				<key>selector</key>
-				<string>followingCount</string>
+				<key>model_selector</key>
+				<string></string>
+				<key>controller_selector</key>
+				<integer>105</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
