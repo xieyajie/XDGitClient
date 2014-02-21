@@ -23,6 +23,7 @@
     if (self) {
         _tableViewStyle = UITableViewStylePlain;
         _page = 1;
+        _haveNextPage = NO;
         
         _showRefreshHeader = NO;
         _showRefreshFooter = NO;
@@ -184,12 +185,14 @@
 {
     __weak XDTableViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.tableView.pullToRefreshView stopAnimating];
-        [weakSelf hideLoadingView];
-        
         if (reload) {
             [weakSelf.tableView reloadData];
         }
+        
+        [weakSelf.tableView.pullToRefreshView stopAnimating];
+        
+        weakSelf.showRefreshFooter = weakSelf.haveNextPage;
+        [weakSelf hideLoadingView];
     });
 }
 
@@ -212,12 +215,13 @@
 {
     __weak XDTableViewController *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        [weakSelf hideLoadingView];
-        
         if (reload) {
             [weakSelf.tableView reloadData];
         }
+        
+        [weakSelf.tableView.infiniteScrollingView stopAnimating];
+        weakSelf.showRefreshFooter = weakSelf.haveNextPage;
+        [weakSelf hideLoadingView];
     });
 }
 

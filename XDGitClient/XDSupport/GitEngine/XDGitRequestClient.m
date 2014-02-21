@@ -51,7 +51,7 @@
                 responseType:(XDGitResponseType)responseType
               parameters:(id)parameters
                         page:(NSInteger)page
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@", apiPath];
@@ -78,7 +78,27 @@
 	}
 
     return [self requestWithURLRequest:urlRequest success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(responseObject);
+        if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"])
+        {
+            NSString *linkHeader = [[operation.response allHeaderFields] valueForKey:@"Link"];
+            NSArray *links = [linkHeader componentsSeparatedByString:@","];
+            self.nextPageURL = nil;
+            NSURL * __block blockURL = nil;
+            [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
+                NSString *rel = [[link componentsSeparatedByString:@";"][1] componentsSeparatedByString:@"\""][1];
+                if ([rel isEqualToString:@"next"])
+                {
+                    blockURL = [NSURL URLWithString:[[link componentsSeparatedByString:@";"][0] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]];
+                    *stop = YES;
+                }
+            }];
+            self.nextPageURL = blockURL;
+            BOOL haveNext = blockURL == nil ? NO : YES;
+            successBlock(responseObject, haveNext);
+        }
+        else{
+            successBlock(responseObject, NO);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         failureBlock(error);
     }];
@@ -88,7 +108,7 @@
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                   parameters:(id)parameters
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
     return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:parameters page:0 success:successBlock failure:failureBlock];
@@ -99,7 +119,7 @@
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                         page:(NSInteger)page
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
     return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:page success:successBlock failure:failureBlock];
@@ -109,7 +129,7 @@
 - (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock
 {
     return [self sendRequestWithApiPath:apiPath requestType:requestType responseType:responseType parameters:nil page:0 success:successBlock failure:failureBlock];

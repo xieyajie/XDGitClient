@@ -99,8 +99,9 @@
     self.page = 1;
     __block __weak XDGitsViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] gistsForUser:_userName style:_style page:self.page success:^(id object) {
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
             [weakSelf.dataArray removeAllObjects];
+            weakSelf.haveNextPage = haveNextPage;
             if (object) {
                 for (NSDictionary *dic in object) {
                     GitModel *model = [[GitModel alloc] initWithDictionary:dic];
@@ -122,7 +123,8 @@
     self.page++;
     __block __weak XDGitsViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] gistsForUser:_userName style:_style page:self.page success:^(id object) {
+        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
+            weakSelf.haveNextPage = haveNextPage;
             if (object) {
                 for (NSDictionary *dic in object) {
                     GitModel *model = [[GitModel alloc] initWithDictionary:dic];

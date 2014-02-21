@@ -101,8 +101,9 @@
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         if (_isFollowers) {
-            operation = [activityEngine followers:_userName page:self.page success:^(id object) {
+            operation = [activityEngine followers:_userName page:self.page success:^(id object, BOOL haveNextPage) {
                 [weakSelf.dataArray removeAllObjects];
+                weakSelf.haveNextPage = haveNextPage;
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
@@ -116,8 +117,9 @@
             }];
         }
         else{
-            operation = [activityEngine following:_userName page:self.page success:^(id object) {
+            operation = [activityEngine following:_userName page:self.page success:^(id object, BOOL haveNextPage) {
                 [weakSelf.dataArray removeAllObjects];
+                weakSelf.haveNextPage = haveNextPage;
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
@@ -141,7 +143,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         if (_isFollowers) {
-            [activityEngine followers:_userName page:self.page success:^(id object) {
+            [activityEngine followers:_userName page:self.page success:^(id object, BOOL haveNextPage) {
+                weakSelf.haveNextPage = haveNextPage;
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
@@ -155,7 +158,8 @@
             }];
         }
         else{
-            [activityEngine following:_userName page:self.page success:^(id object) {
+            [activityEngine following:_userName page:self.page success:^(id object, BOOL haveNextPage) {
+                weakSelf.haveNextPage = haveNextPage;
                 if (object) {
                     for (NSDictionary *dic in object) {
                         AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];

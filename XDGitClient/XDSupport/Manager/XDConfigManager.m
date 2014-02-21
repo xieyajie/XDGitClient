@@ -66,7 +66,7 @@ static XDConfigManager *defaultManagerInstance = nil;
 {
     id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
     
-    return [gitEngine userWithSuccess:^(id object) {
+    return [gitEngine userWithSuccess:^(id object, BOOL haveNextPage) {
         AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
         self.loginAccount = account;
         successBlock(account);

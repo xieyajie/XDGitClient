@@ -53,7 +53,7 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
 #pragma mark - default
 
-#define KPERPAGENUMBER 50
+#define KPERPAGENUMBER 10
 #define KLEFTVIEWWIDTH 200.0
 
 //textField color (detail)

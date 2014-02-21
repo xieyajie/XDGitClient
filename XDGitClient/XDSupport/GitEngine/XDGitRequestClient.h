@@ -31,27 +31,27 @@
                   responseType:(XDGitResponseType)responseType
                     parameters:(id)parameters
                           page:(NSInteger)page
-                       success:(XDGitEngineSuccessBlock)successBlock
+                       success:(XDGitEnginePageSuccessBlock)successBlock
                        failure:(XDGitEngineFailureBlock)failureBlock;
 
 - (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
               parameters:(id)parameters
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
 - (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
                         page:(NSInteger)page
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
 - (AFHTTPRequestOperation *)sendRequestWithApiPath:(NSString *)apiPath
                  requestType:(XDGitRequestType)requestType
                 responseType:(XDGitResponseType)responseType
-                     success:(XDGitEngineSuccessBlock)successBlock
+                     success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
 
 #pragma mark - login

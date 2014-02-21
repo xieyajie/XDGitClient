@@ -199,7 +199,7 @@
         return;
     }
 
-    AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object) {
+    AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object, BOOL haveNextPage) {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if (_rememberButton.selected) {
             [defaults setValue:paswd forKey:userName];

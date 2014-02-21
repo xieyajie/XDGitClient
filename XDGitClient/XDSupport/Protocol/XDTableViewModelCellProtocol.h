@@ -14,6 +14,7 @@
 
 @property (strong, nonatomic) id<XDModelProtocol> model;
 
+@optional
 + (CGFloat)heightWithModel:(id<XDModelProtocol>)model;
 + (CGFloat)heightWithModel:(id<XDModelProtocol>)model accessoryType:(UITableViewCellAccessoryType)accessoryType;
 

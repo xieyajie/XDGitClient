@@ -318,7 +318,7 @@
     __block __weak XDAccountCardViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = nil;
     if (_isOwn) {
-        operation = [[[XDRequestManager defaultManager] activityGitEngine] userWithSuccess:^(id object) {
+        operation = [[[XDRequestManager defaultManager] activityGitEngine] userWithSuccess:^(id object, BOOL haveNextPage) {
             weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];
@@ -327,7 +327,7 @@
         }];
     }
     else{
-        operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object) {
+        operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object, BOOL haveNextPage) {
             weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];

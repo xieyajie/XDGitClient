@@ -182,7 +182,7 @@
         [_textLabel setNumberOfLines:0];
         [_textLabel setLineBreakMode:UILineBreakModeTailTruncation];
         [_textLabel setAdjustsFontSizeToFitWidth:YES];
-        [_textLabel setTextAlignment:UITextAlignmentLeft];
+        [_textLabel setTextAlignment:NSTextAlignmentLeft];
         
         [[self contentView] addSubview:_textLabel];
     }
@@ -200,7 +200,7 @@
         [_detailedTextLabel setNumberOfLines:0];
         [_detailedTextLabel setLineBreakMode:UILineBreakModeTailTruncation];
         [_detailedTextLabel setAdjustsFontSizeToFitWidth:YES];
-        [_detailedTextLabel setTextAlignment:UITextAlignmentLeft];
+        [_detailedTextLabel setTextAlignment:NSTextAlignmentLeft];
         
         [[self contentView] addSubview:_detailedTextLabel];
     }
