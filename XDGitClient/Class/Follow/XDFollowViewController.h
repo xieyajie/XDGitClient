@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDAccountViewController.h"
 
-@interface XDFollowViewController : XDTableViewController
+@interface XDFollowViewController : XDAccountViewController
 
 - (id)initWithFollowers:(BOOL)isFollowers;
 

@@ -9,7 +9,7 @@
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>
-			<integer>100</integer>
+			<integer>110</integer>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -17,7 +17,7 @@
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>
-			<integer>101</integer>
+			<integer>111</integer>
 		</dict>
 	</array>
 	<array>
@@ -27,7 +27,7 @@
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>
-			<integer>102</integer>
+			<integer>100</integer>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -35,7 +35,7 @@
 			<key>icon</key>
 			<string></string>
 			<key>controller_selector</key>
-			<integer>103</integer>
+			<integer>101</integer>
 		</dict>
 	</array>
 	<array>
@@ -47,7 +47,7 @@
 			<key>model_selector</key>
 			<string>followersCount</string>
 			<key>controller_selector</key>
-			<integer>104</integer>
+			<integer>112</integer>
 		</dict>
 		<dict>
 			<key>title</key>
@@ -57,7 +57,7 @@
 			<key>model_selector</key>
 			<string>followingCount</string>
 			<key>controller_selector</key>
-			<integer>105</integer>
+			<integer>113</integer>
 		</dict>
 	</array>
 </array>

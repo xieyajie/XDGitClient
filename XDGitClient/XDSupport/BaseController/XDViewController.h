@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *leftItems;
 
 - (void)showLoadingView;
+- (void)showLoadingViewWithTitle:(NSString *)title;
 - (void)showLoadingViewWithRequestOperation:(AFHTTPRequestOperation *)requestOperation;
 - (void)hideLoadingView;
 

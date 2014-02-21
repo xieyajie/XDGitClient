@@ -78,6 +78,8 @@
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
+    self.tableView.sectionHeaderHeight = 40.0;
+    self.tableView.rowHeight = 50.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -111,10 +113,10 @@
 - (UIView *)logoutView
 {
     if (_logoutView == nil) {
-        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 75)];
+        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 70)];
         _logoutView.backgroundColor = [UIColor clearColor];
         
-        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, KLEFTVIEWWIDTH - 30, 35)];
+        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 15, KLEFTVIEWWIDTH - 30, 35)];
         logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
         [logoutButton setTitle:@"退出当前账户" forState:UIControlStateNormal];
         [logoutButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
@@ -128,7 +130,7 @@
 - (UINavigationController *)reposityNavTabController
 {
     if (_reposityNavTabController == nil) {
-        NSArray *titleArray = @[@"全部", @"公开", @"私有", @"参与", @"拷贝"];
+        NSArray *titleArray = @[@"全部 repo", @"公开 repo", @"私有 repo", @"参与 repo", @"拷贝"];
         NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
         NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
         NSMutableArray *controllers = [NSMutableArray array];
@@ -226,13 +228,13 @@
     // Configure the cell...
     if (cell == nil) {
         cell = [[XDTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
+
         cell.titleLabel.textColor = [UIColor grayColor];
         cell.titleLabel.font = [UIFont systemFontOfSize:15.0];
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(KLEFTVIEWWIDTH - 45, 15, 35, 20)];
         label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:13.0];
+        label.font = [UIFont boldSystemFontOfSize:13.0];
         label.textColor = [UIColor whiteColor];
         label.tag = 100;
         label.layer.cornerRadius = 5.0;
@@ -247,16 +249,17 @@
         UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
         detailLabel.backgroundColor = [UIColor clearColor];
         NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
-        if (selectorStr && selectorStr.length > 0) {
-            SEL selectorMethod = NSSelectorFromString(selectorStr);
-            if (selectorMethod) {
-                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
-                if(resultStr && resultStr.length > 0)
-                {
-                    detailLabel.text = resultStr;
-                    detailLabel.backgroundColor = [UIColor lightGrayColor];
-                }
+        SEL selectorMethod = NSSelectorFromString(selectorStr);
+        if (selectorStr && selectorStr.length && selectorMethod) {
+            NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
+            if(resultStr && resultStr.length > 0)
+            {
+                detailLabel.text = resultStr;
+                detailLabel.backgroundColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:226 / 255.0 alpha:0.7];
             }
+        }
+        else{
+            detailLabel.text = @"";
         }
     }
     
@@ -264,29 +267,6 @@
 }
 
 #pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50.0;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-//    switch (section) {
-//        case 0:
-//        case 1:
-//            return 20.0;
-//            break;
-//        case 2:
-//            return 40.0;
-//            break;
-//            
-//        default:
-//            return 20.0;
-//            break;
-//    }
-    return 40.0;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -98,6 +98,7 @@
         _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:_tableViewStyle];
         _tableView.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.rowHeight = 50.0;
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }

@@ -69,6 +69,7 @@
 {
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
+        _titleLabel.highlightedTextColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:236 / 255.0 alpha:1.0];
         [self.contentView addSubview:_titleLabel];
     }
     

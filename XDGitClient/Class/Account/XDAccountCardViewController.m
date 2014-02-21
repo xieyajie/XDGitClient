@@ -54,12 +54,13 @@
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         // Custom initialization
-        _accountModel = model;
         AccountModel *loginAccount = [[XDConfigManager defaultManager] loginAccount];
-        if ([_accountModel.accountId integerValue] == [loginAccount.accountId integerValue]) {
+        if ([model.accountId integerValue] == [loginAccount.accountId integerValue]) {
+            _accountModel = loginAccount;
             _isOwn = YES;
         }
         else{
+            _accountModel = model;
             _isOwn = NO;
         }
     }
@@ -214,9 +215,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         
         cell.textLabel.textColor = [UIColor grayColor];
-        cell.textLabel.font = [UIFont systemFontOfSize:15.0];
-        
-        cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0];
+        cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0];
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0];
     }
     
     NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -231,15 +231,16 @@
         cell.textLabel.text = [dic objectForKey:KPLIST_KEYTITLE];
         
         NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
-        if (selectorStr && selectorStr.length > 0) {
-            SEL selectorMethod = NSSelectorFromString(selectorStr);
-            if (selectorMethod) {
-                NSString *resultStr = [self.accountModel performSelector:selectorMethod];
-                if(resultStr && resultStr.length > 0)
-                {
-                    cell.detailTextLabel.text = resultStr;
-                }
+        SEL selectorMethod = NSSelectorFromString(selectorStr);
+        if (selectorStr && selectorStr.length && selectorMethod) {
+            NSString *resultStr = [self.accountModel performSelector:selectorMethod];
+            if(resultStr && resultStr.length > 0)
+            {
+                cell.detailTextLabel.text = resultStr;
             }
+        }
+        else{
+            cell.detailTextLabel.text = @"";
         }
     }
     
@@ -247,11 +248,6 @@
 }
 
 #pragma mark - Table view delegate
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50.0;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -278,7 +274,6 @@
             [self.navigationController pushViewController:self.gitsController animated:YES];
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
-        case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
         {
             XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:self.accountModel.accountName];
             [self.navigationController pushViewController:activityController animated:YES];

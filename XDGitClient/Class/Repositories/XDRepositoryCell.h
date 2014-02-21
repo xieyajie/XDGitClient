@@ -15,6 +15,7 @@
 {
     UILabel *_nameLabel;
     UILabel *_desLabel;
+    UILabel *_updateLabel;
     UIButton *_starButton;
     UIButton *_forkButton;
 }

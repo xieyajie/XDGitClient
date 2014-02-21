@@ -12,7 +12,7 @@
 
 @protocol XDTableViewModelCellProtocol <NSObject>
 
-@property (strong, nonatomic) id<XDModelProtocol> model;
+//@property (strong, nonatomic) id<XDModelProtocol> model;
 
 @optional
 + (CGFloat)heightWithModel:(id<XDModelProtocol>)model;

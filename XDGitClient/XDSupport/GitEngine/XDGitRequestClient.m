@@ -78,7 +78,7 @@
 	}
 
     return [self requestWithURLRequest:urlRequest success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"])
+        if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"] && page > 0)
         {
             NSString *linkHeader = [[operation.response allHeaderFields] valueForKey:@"Link"];
             NSArray *links = [linkHeader componentsSeparatedByString:@","];

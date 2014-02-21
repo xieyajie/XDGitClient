@@ -10,8 +10,6 @@
 				<string>用户名</string>
 				<key>model_selector</key>
 				<string>accountName</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -20,8 +18,6 @@
 				<string>邮箱</string>
 				<key>model_selector</key>
 				<string>email</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -30,8 +26,6 @@
 				<string>网站主页</string>
 				<key>model_selector</key>
 				<string>webUrl</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -40,8 +34,6 @@
 				<string>地址</string>
 				<key>model_selector</key>
 				<string>locationDes</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -50,8 +42,6 @@
 				<string>账号类型</string>
 				<key>model_selector</key>
 				<string>accountType</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -65,8 +55,6 @@
 				<string>用户名</string>
 				<key>model_selector</key>
 				<string>accountName</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -75,8 +63,6 @@
 				<string>网站主页</string>
 				<key>model_selector</key>
 				<string>webUrl</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -85,8 +71,6 @@
 				<string>账号类型</string>
 				<key>model_selector</key>
 				<string>accountType</string>
-				<key>controller_selector</key>
-				<string></string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -95,20 +79,16 @@
 			<dict>
 				<key>title</key>
 				<string>版本库 Repositories</string>
-				<key>model_selector</key>
-				<string></string>
 				<key>controller_selector</key>
-				<integer>100</integer>
+				<integer>110</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>Gits</string>
-				<key>model_selector</key>
-				<string></string>
 				<key>controller_selector</key>
-				<integer>101</integer>
+				<integer>111</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
@@ -117,10 +97,8 @@
 			<dict>
 				<key>title</key>
 				<string>更新 Events</string>
-				<key>model_selector</key>
-				<string></string>
 				<key>controller_selector</key>
-				<integer>102</integer>
+				<integer>100</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
@@ -129,20 +107,16 @@
 			<dict>
 				<key>title</key>
 				<string>关注Ta的人</string>
-				<key>model_selector</key>
-				<string></string>
 				<key>controller_selector</key>
-				<integer>104</integer>
+				<integer>112</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>title</key>
 				<string>Ta关注的人</string>
-				<key>model_selector</key>
-				<string></string>
 				<key>controller_selector</key>
-				<integer>105</integer>
+				<integer>113</integer>
 				<key>accessoryType</key>
 				<integer>1</integer>
 			</dict>

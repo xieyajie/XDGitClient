@@ -10,6 +10,7 @@
 
 #import "RepositoryModel.h"
 #import "XDRepositoryCell.h"
+#import "XDRepoCardViewController.h"
 
 @interface XDRepositoryViewController ()
 {
@@ -54,6 +55,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
+    self.tableView.separatorColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:226 / 255.0 alpha:0.6];
     
     [self tableViewDidTriggerHeaderRefresh];
 }
@@ -89,6 +91,12 @@
     return [XDRepositoryCell heightWithModel:model];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    RepositoryModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    XDRepoCardViewController *repoCardController = [[XDRepoCardViewController alloc] initWithRepositoryModel:model];
+    [self.navigationController pushViewController:repoCardController animated:YES];
+}
 
 #pragma mark - date
 

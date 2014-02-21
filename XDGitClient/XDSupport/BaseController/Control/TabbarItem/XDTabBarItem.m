@@ -42,9 +42,10 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFit;
 //        _imageView.backgroundColor = [UIColor redColor];
         
+        _titleColor = [UIColor grayColor];
         _titleLabel = [[UILabel alloc] init];
         _titleLabel.font = [UIFont boldSystemFontOfSize:10];
-        _titleLabel.textColor = [UIColor grayColor];
+        _titleLabel.textColor = _titleColor;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.backgroundColor = [UIColor clearColor];
         

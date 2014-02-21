@@ -13,4 +13,7 @@
 - (NSDate *)dateFromGithubDateString;
 - (NSString *)encodedString;
 
+- (NSString *)fileSizeDescription;
+- (NSString *)dateDes;
+
 @end

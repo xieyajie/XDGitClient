@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A3279D818B704B90031A0A7 /* fork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279D518B704B90031A0A7 /* fork@2x.png */; };
+		3A3279D918B704B90031A0A7 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279D618B704B90031A0A7 /* star@2x.png */; };
+		3A3279DA18B704B90031A0A7 /* starred@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279D718B704B90031A0A7 /* starred@2x.png */; };
+		3A3279DE18B705050031A0A7 /* tab_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279DC18B705050031A0A7 /* tab_all@2x.png */; };
+		3A3279DF18B705050031A0A7 /* tab_allSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279DD18B705050031A0A7 /* tab_allSelect@2x.png */; };
+		3A3279E318B705BC0031A0A7 /* fork40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279E018B705BC0031A0A7 /* fork40@2x.png */; };
+		3A3279E418B705BC0031A0A7 /* star40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279E118B705BC0031A0A7 /* star40@2x.png */; };
+		3A3279E518B705BC0031A0A7 /* starred40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279E218B705BC0031A0A7 /* starred40@2x.png */; };
+		3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279E718B721100031A0A7 /* XDRepoCardViewController.m */; };
+		3A3279EA18B721810031A0A7 /* repoCard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279E918B721810031A0A7 /* repoCard.plist */; };
+		3A3279ED18B74E700031A0A7 /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EC18B74E700031A0A7 /* XDAccountViewController.m */; };
+		3A3279F018B750A60031A0A7 /* XDStarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EF18B750A60031A0A7 /* XDStarViewController.m */; };
+		3A3279F318B7513A0031A0A7 /* XDForkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */; };
+		3A3279F618B758510031A0A7 /* XDWatcherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F518B758510031A0A7 /* XDWatcherViewController.m */; };
 		3A47A4E118B45504001C76C0 /* XDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4DA18B45504001C76C0 /* XDLoadingView.m */; };
 		3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E018B45504001C76C0 /* XDTabBarItem.m */; };
 		3A47A4E718B45527001C76C0 /* XDActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E618B45527001C76C0 /* XDActivityIndicatorView.m */; };
@@ -29,8 +43,6 @@
 		3A47A51518B462FE001C76C0 /* side_menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50018B462FE001C76C0 /* side_menu@2x.png */; };
 		3A47A51618B462FE001C76C0 /* side_copy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50118B462FE001C76C0 /* side_copy@2x.png */; };
 		3A47A51718B462FE001C76C0 /* side_own@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50218B462FE001C76C0 /* side_own@2x.png */; };
-		3A47A51818B462FE001C76C0 /* tab_all@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50318B462FE001C76C0 /* tab_all@2x.png */; };
-		3A47A51918B462FE001C76C0 /* tab_allSelect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */; };
 		3A4B77A818B2140D00A94D47 /* sideSource.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A4B77A718B2140D00A94D47 /* sideSource.plist */; };
 		3A8F89E518B4B71200924CDE /* accountCard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8F89E418B4B71200924CDE /* accountCard.plist */; };
 		3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F02E18B5977600E8E1BA /* UIButton+AsyncImage.m */; };
@@ -103,6 +115,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A3279D518B704B90031A0A7 /* fork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fork@2x.png"; sourceTree = "<group>"; };
+		3A3279D618B704B90031A0A7 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
+		3A3279D718B704B90031A0A7 /* starred@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starred@2x.png"; sourceTree = "<group>"; };
+		3A3279DC18B705050031A0A7 /* tab_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_all@2x.png"; sourceTree = "<group>"; };
+		3A3279DD18B705050031A0A7 /* tab_allSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_allSelect@2x.png"; sourceTree = "<group>"; };
+		3A3279E018B705BC0031A0A7 /* fork40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fork40@2x.png"; sourceTree = "<group>"; };
+		3A3279E118B705BC0031A0A7 /* star40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star40@2x.png"; sourceTree = "<group>"; };
+		3A3279E218B705BC0031A0A7 /* starred40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "starred40@2x.png"; sourceTree = "<group>"; };
+		3A3279E618B721100031A0A7 /* XDRepoCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRepoCardViewController.h; sourceTree = "<group>"; };
+		3A3279E718B721100031A0A7 /* XDRepoCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRepoCardViewController.m; sourceTree = "<group>"; };
+		3A3279E918B721810031A0A7 /* repoCard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = repoCard.plist; sourceTree = "<group>"; };
+		3A3279EB18B74E700031A0A7 /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
+		3A3279EC18B74E700031A0A7 /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
+		3A3279EE18B750A60031A0A7 /* XDStarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDStarViewController.h; sourceTree = "<group>"; };
+		3A3279EF18B750A60031A0A7 /* XDStarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDStarViewController.m; sourceTree = "<group>"; };
+		3A3279F118B7513A0031A0A7 /* XDForkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDForkerViewController.h; sourceTree = "<group>"; };
+		3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDForkerViewController.m; sourceTree = "<group>"; };
+		3A3279F418B758510031A0A7 /* XDWatcherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWatcherViewController.h; sourceTree = "<group>"; };
+		3A3279F518B758510031A0A7 /* XDWatcherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDWatcherViewController.m; sourceTree = "<group>"; };
 		3A47A4D918B45504001C76C0 /* XDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoadingView.h; sourceTree = "<group>"; };
 		3A47A4DA18B45504001C76C0 /* XDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDLoadingView.m; sourceTree = "<group>"; };
 		3A47A4DF18B45504001C76C0 /* XDTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTabBarItem.h; sourceTree = "<group>"; };
@@ -128,8 +159,6 @@
 		3A47A50018B462FE001C76C0 /* side_menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_menu@2x.png"; sourceTree = "<group>"; };
 		3A47A50118B462FE001C76C0 /* side_copy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_copy@2x.png"; sourceTree = "<group>"; };
 		3A47A50218B462FE001C76C0 /* side_own@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_own@2x.png"; sourceTree = "<group>"; };
-		3A47A50318B462FE001C76C0 /* tab_all@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_all@2x.png"; sourceTree = "<group>"; };
-		3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_allSelect@2x.png"; sourceTree = "<group>"; };
 		3A4B77A718B2140D00A94D47 /* sideSource.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sideSource.plist; sourceTree = "<group>"; };
 		3A8F89E418B4B71200924CDE /* accountCard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = accountCard.plist; sourceTree = "<group>"; };
 		3AA4F02D18B5977600E8E1BA /* UIButton+AsyncImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AsyncImage.h"; sourceTree = "<group>"; };
@@ -274,6 +303,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A3279DB18B705050031A0A7 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				3A3279DC18B705050031A0A7 /* tab_all@2x.png */,
+				3A3279DD18B705050031A0A7 /* tab_allSelect@2x.png */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
 		3A47A4D718B45504001C76C0 /* Control */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,14 +352,19 @@
 		3A47A4EC18B462FE001C76C0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				3A3279E018B705BC0031A0A7 /* fork40@2x.png */,
+				3A3279E118B705BC0031A0A7 /* star40@2x.png */,
+				3A3279E218B705BC0031A0A7 /* starred40@2x.png */,
+				3A3279DB18B705050031A0A7 /* Tabbar */,
+				3A3279D518B704B90031A0A7 /* fork@2x.png */,
+				3A3279D618B704B90031A0A7 /* star@2x.png */,
+				3A3279D718B704B90031A0A7 /* starred@2x.png */,
 				3A47A4ED18B462FE001C76C0 /* Account */,
 				3A47A4F518B462FE001C76C0 /* button_bg_blue@2x.png */,
 				3A47A4F618B462FE001C76C0 /* button_bg_green@2x.png */,
 				3A47A4F718B462FE001C76C0 /* button_bg_red@2x.png */,
 				3A47A4F818B462FE001C76C0 /* NavigationBar */,
 				3A47A4FF18B462FE001C76C0 /* Side */,
-				3A47A50318B462FE001C76C0 /* tab_all@2x.png */,
-				3A47A50418B462FE001C76C0 /* tab_allSelect@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -432,6 +475,15 @@
 				3AA8012418B3532D00F8450B /* XDRepositoryViewController.m */,
 				3AA4F03A18B5DBC500E8E1BA /* XDRepositoryCell.h */,
 				3AA4F03B18B5DBC500E8E1BA /* XDRepositoryCell.m */,
+				3A3279E618B721100031A0A7 /* XDRepoCardViewController.h */,
+				3A3279E718B721100031A0A7 /* XDRepoCardViewController.m */,
+				3A3279E918B721810031A0A7 /* repoCard.plist */,
+				3A3279EE18B750A60031A0A7 /* XDStarViewController.h */,
+				3A3279EF18B750A60031A0A7 /* XDStarViewController.m */,
+				3A3279F118B7513A0031A0A7 /* XDForkerViewController.h */,
+				3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */,
+				3A3279F418B758510031A0A7 /* XDWatcherViewController.h */,
+				3A3279F518B758510031A0A7 /* XDWatcherViewController.m */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -537,6 +589,8 @@
 				3AA8013118B3691700F8450B /* XDAccountCardViewController.h */,
 				3AA8013218B3691700F8450B /* XDAccountCardViewController.m */,
 				3A8F89E418B4B71200924CDE /* accountCard.plist */,
+				3A3279EB18B74E700031A0A7 /* XDAccountViewController.h */,
+				3A3279EC18B74E700031A0A7 /* XDAccountViewController.m */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -771,20 +825,27 @@
 				3A47A50818B462FE001C76C0 /* rectangle_checked@2x.png in Resources */,
 				3A47A51718B462FE001C76C0 /* side_own@2x.png in Resources */,
 				3A47A51018B462FE001C76C0 /* navi_bg_i7@2x.png in Resources */,
+				3A3279D918B704B90031A0A7 /* star@2x.png in Resources */,
 				3A47A50718B462FE001C76C0 /* rectangle_checked.png in Resources */,
-				3A47A51818B462FE001C76C0 /* tab_all@2x.png in Resources */,
-				3A47A51918B462FE001C76C0 /* tab_allSelect@2x.png in Resources */,
 				3A47A51518B462FE001C76C0 /* side_menu@2x.png in Resources */,
 				3A47A50B18B462FE001C76C0 /* userHeaderDefault_30@2x.png in Resources */,
+				3A3279DA18B704B90031A0A7 /* starred@2x.png in Resources */,
 				3A47A50918B462FE001C76C0 /* rectangle_uncheck.png in Resources */,
+				3A3279E318B705BC0031A0A7 /* fork40@2x.png in Resources */,
 				3A47A50E18B462FE001C76C0 /* button_bg_red@2x.png in Resources */,
 				3A47A51118B462FE001C76C0 /* navi_bg_prompt@2x.png in Resources */,
+				3A3279DE18B705050031A0A7 /* tab_all@2x.png in Resources */,
 				3A47A51218B462FE001C76C0 /* navi_bg_prompt_i7@2x.png in Resources */,
+				3A3279DF18B705050031A0A7 /* tab_allSelect@2x.png in Resources */,
+				3A3279E418B705BC0031A0A7 /* star40@2x.png in Resources */,
 				3A47A51418B462FE001C76C0 /* navi_settingWhite@2x.png in Resources */,
 				3A47A50D18B462FE001C76C0 /* button_bg_green@2x.png in Resources */,
 				3A47A51618B462FE001C76C0 /* side_copy@2x.png in Resources */,
 				3AEDE95F18ADF5A90093946D /* Images.xcassets in Resources */,
 				3A47A50C18B462FE001C76C0 /* button_bg_blue@2x.png in Resources */,
+				3A3279EA18B721810031A0A7 /* repoCard.plist in Resources */,
+				3A3279E518B705BC0031A0A7 /* starred40@2x.png in Resources */,
+				3A3279D818B704B90031A0A7 /* fork@2x.png in Resources */,
 				3A47A50A18B462FE001C76C0 /* rectangle_uncheck@2x.png in Resources */,
 				3A47A50618B462FE001C76C0 /* login_separator@2x.png in Resources */,
 				3A8F89E518B4B71200924CDE /* accountCard.plist in Resources */,
@@ -814,6 +875,7 @@
 				3AEDEA2218AE17450093946D /* UIImageView+AFNetworking.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
 				3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */,
+				3A3279F018B750A60031A0A7 /* XDStarViewController.m in Sources */,
 				3AEDEA3C18AE17450093946D /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */,
 				3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */,
@@ -836,6 +898,7 @@
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
 				3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
+				3A3279ED18B74E700031A0A7 /* XDAccountViewController.m in Sources */,
 				3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */,
 				3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */,
 				3AEDEA1E18AE17450093946D /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -849,11 +912,14 @@
 				3AA8011318B326E500F8450B /* XDGitRequestClient.m in Sources */,
 				3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */,
 				3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */,
+				3A3279F618B758510031A0A7 /* XDWatcherViewController.m in Sources */,
 				3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */,
 				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
+				3A3279F318B7513A0031A0A7 /* XDForkerViewController.m in Sources */,
 				3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */,
 				3AEDEA1A18AE17450093946D /* AFHTTPClient.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,
+				3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */,
 				3AEDEA1D18AE17450093946D /* AFJSONRequestOperation.m in Sources */,
 				3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */,
 				3AEDE9BF18AE173C0093946D /* XDRequestManager.m in Sources */,

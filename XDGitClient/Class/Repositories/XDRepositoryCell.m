@@ -28,28 +28,44 @@
         _desLabel.backgroundColor = [UIColor clearColor];
         _desLabel.numberOfLines = 0;
         _desLabel.font = [UIFont systemFontOfSize:14.0];
-        _desLabel.textColor = [UIColor grayColor];
+        _desLabel.textColor = [UIColor colorWithWhite:0.3 alpha:1.0];
         [self.contentView addSubview:_desLabel];
         
-//        _starButton = [[UIButton alloc] init];
-//        _starButton.backgroundColor = [UIColor grayColor];
-//        _starButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-//        [_starButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//        [_starButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-//        [_starButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//        [_starButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
-//        [_starButton addTarget:self action:@selector(starAction) forControlEvents:UIControlEventTouchUpInside];
-//        [self.contentView addSubview:_starButton];
-//        
-//        _forkButton = [[UIButton alloc] init];
+        _updateLabel = [[UILabel alloc] init];
+        _updateLabel.backgroundColor = [UIColor clearColor];
+        _updateLabel.font = [UIFont systemFontOfSize:12.0];
+        _updateLabel.textColor = [UIColor grayColor];
+        [self.contentView addSubview:_updateLabel];
+        
+        _starButton = [[UIButton alloc] init];
+        _starButton.enabled = NO;
+//        _starButton.backgroundColor = [UIColor redColor];
+        _starButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _starButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        _starButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        _starButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _starButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5);
+        [_starButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_starButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_starButton setImage:[UIImage imageNamed:@"star40"] forState:UIControlStateNormal];
+        [_starButton setImage:[UIImage imageNamed:@"starred40"] forState:UIControlStateSelected];
+        [_starButton addTarget:self action:@selector(starAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_starButton];
+
+        _forkButton = [[UIButton alloc] init];
+        _forkButton.enabled = NO;
 //        _forkButton.backgroundColor = [UIColor greenColor];
-//        _forkButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-//        [_forkButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-//        [_forkButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
-//        [_forkButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-//        [_forkButton setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
-//        [_forkButton addTarget:self action:@selector(forkAction) forControlEvents:UIControlEventTouchUpInside];
-//        [self.contentView addSubview:_forkButton];
+        _forkButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _forkButton.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+        _forkButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        _forkButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _forkButton.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, -5);
+        [_forkButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_forkButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        [_forkButton setImage:[UIImage imageNamed:@"fork40"] forState:UIControlStateNormal];
+        [_forkButton setImage:[UIImage imageNamed:@"starred40"] forState:UIControlStateSelected];
+        [_forkButton addTarget:self action:@selector(forkAction) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:_forkButton];
     }
     return self;
 }
@@ -80,8 +96,10 @@
         _desLabel.frame = CGRectZero;
     }
     
-//    _starButton.frame = CGRectMake(15, oY, 60, 30);
-//    _forkButton.frame = CGRectMake(15 + _starButton.frame.size.width + 10, oY, 60, 30);
+    _updateLabel.frame = CGRectMake(10, oY, viewWidth - 20, 15);
+    oY += 20;
+    _starButton.frame = CGRectMake(10, oY, 80, 20);
+    _forkButton.frame = CGRectMake(10 + _starButton.frame.size.width + 10, oY, 80, 20);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -96,14 +114,17 @@
     _model = model;
     _nameLabel.text = _model.name;
     _desLabel.text = _model.description;
-//    [_starButton setTitle:_model.starsCountDes forState:UIControlStateNormal];
-//    [_forkButton setTitle:_model.forksCountDes forState:UIControlStateNormal];
+    _updateLabel.text = [NSString stringWithFormat:@"更新于：%@", _model.updatedDateDes];
+//    _starButton.selected = _model.isPrivate;
+    [_starButton setTitle:_model.starsCountDes forState:UIControlStateNormal];
+//    _forkButton.selected = _model.isFork;
+    [_forkButton setTitle:_model.forksCountDes forState:UIControlStateNormal];
 }
 
 + (CGFloat)heightWithModel:(RepositoryModel *)model
 {
     CGFloat viewWidth = 320;
-    CGFloat viewHeight = 20;
+    CGFloat viewHeight = 60;
     if (model.name && model.name.length > 0) {
         viewHeight += 25;
     }
@@ -123,7 +144,7 @@
 
 - (void)starAction
 {
-    
+    _starButton.selected = !_starButton.selected;
 }
 
 - (void)forkAction

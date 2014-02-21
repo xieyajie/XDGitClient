@@ -28,7 +28,6 @@
     }
     
     return [df dateFromString:dateString];
-    
 }
 
 
@@ -36,6 +35,53 @@
 {
     return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, (CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8);
     
+}
+
+- (NSString *)fileSizeDescription
+{
+    double bytes = [self doubleValue];
+    NSString *readable = @"0 B";
+    if (bytes > 0)
+    {
+        if ((bytes < 1024)){
+            readable = [NSString stringWithFormat:@"%.2lf B", bytes];
+        }
+        
+        //kilobytes
+        if ((bytes/1024) >= 1){
+            readable = [NSString stringWithFormat:@"%.2lf KB", (bytes/1024)];
+        }
+        
+        //megabytes
+        if ((bytes/1024/1024) >= 1){
+            readable = [NSString stringWithFormat:@"%.2lf MB", (bytes/1024/1024)];
+        }
+        
+        //gigabytes
+        if ((bytes/1024/1024/1024)>=1){
+            readable = [NSString stringWithFormat:@"%.2lf GB", (bytes/1024/1024/1024)];
+        }
+        
+        //terabytes
+        if ((bytes/1024/1024/1024/1024)>=1){
+            readable = [NSString stringWithFormat:@"%.2lf TB", (bytes/1024/1024/1024/1024)];
+        }
+        
+        //petabytes
+        if ((bytes/1024/1024/1024/1024/1024)>=1){
+            readable = [NSString stringWithFormat:@"%.2lf PB", (bytes/1024/1024/1024/1024/1024)];
+        }
+    }
+    
+    return readable;
+}
+
+- (NSString *)dateDes
+{
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    return [df stringFromDate:[self dateFromGithubDateString]];
 }
 
 @end
