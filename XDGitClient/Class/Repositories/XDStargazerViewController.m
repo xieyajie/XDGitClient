@@ -1,24 +1,28 @@
 //
-//  XDStarViewController.m
+//  XDStargazerViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDStarViewController.h"
+#import "XDStargazerViewController.h"
 
-@interface XDStarViewController ()
+@interface XDStargazerViewController ()
+{
+    NSString *_fullName;
+}
 
 @end
 
-@implementation XDStarViewController
+@implementation XDStargazerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithRepoFullname:(NSString *)fullName
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
+        _fullName = fullName;
     }
     return self;
 }
@@ -39,12 +43,16 @@
 
 - (void)requestDataWithRefresh:(BOOL)isRefresh
 {
-    __block __weak XDStarViewController *weakSelf = self;
+    if (_fullName == nil || _fullName.length == 0) {
+        return;
+    }
+    
+    __block __weak XDStargazerViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine followers:self.userName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [activityEngine starsForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }
@@ -63,19 +71,6 @@
         }];
         [self showLoadingViewWithRequestOperation:operation];
     });
-    
-}
-
-- (void)tableViewDidTriggerHeaderRefresh
-{
-    self.page = 1;
-    [self requestDataWithRefresh:YES];
-}
-
-- (void)tableViewDidTriggerFooterRefresh
-{
-    self.page++;
-    [self requestDataWithRefresh:NO];
 }
 
 @end

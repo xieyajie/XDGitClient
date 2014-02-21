@@ -11,6 +11,7 @@
 #import "RepositoryModel.h"
 #import "XDAccountCardViewController.h"
 #import "XDForkerViewController.h"
+#import "XDStargazerViewController.h"
 #import "XDWatcherViewController.h"
 
 @interface XDRepoCardViewController ()
@@ -175,7 +176,9 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_STARER:
         {
-            
+            XDStargazerViewController *starController = [[XDStargazerViewController alloc] initWithRepoFullname:self.repoModel.fullName];
+            starController.title = [NSString stringWithFormat:@"%@`s stargazers", self.repoModel.name];
+            [self.navigationController pushViewController:starController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_WATCHER:

@@ -21,7 +21,7 @@ typedef enum XDGitRequestType
 	XDGitRepositoryWatchRequest,					// Watch a repository
 	XDGitRepositoryUnwatchRequest,				// Unwatch a repository
     XDGitRepositoryForksRequest,                 // Get one or more forks
-	XDGitRepositoryForkRequest,					// Fork a repository
+	XDGitRepositoryForkRequest,					// Fork a repository,
 	XDGitRepositoryCreateRequest,				// Create a repository
 	XDGitRepositoryPrivatiseRequest,				// Make a repository private
 	XDGitRepositoryPubliciseRequest,				// Make a repository public
