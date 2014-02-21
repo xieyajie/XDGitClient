@@ -54,7 +54,7 @@
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine forksForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [activityEngine forkersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }
