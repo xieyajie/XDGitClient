@@ -13,10 +13,13 @@
 #pragma mark - enum
 typedef enum{
     XDRepositoryStyleAll   = 0,
+    XDRepositoryStyleOwner,
+    XDRepositoryStyleMember,
+    XDRepositoryStyleForks,
+    XDRepositoryStyleStars,
+    XDRepositoryStyleWatchs,
     XDRepositoryStylePublic,
     XDRepositoryStylePrivate,
-    XDRepositoryStyleContributed,
-    XDRepositoryStyleForks,
     XDRepositoryStyleSource,
     XDRepositoryStyleMirrors,
 }XDRepositoryStyle;

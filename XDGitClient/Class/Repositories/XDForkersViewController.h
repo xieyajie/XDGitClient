@@ -1,5 +1,5 @@
 //
-//  XDWatcherViewController.h
+//  XDForkersViewController.h
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
@@ -8,7 +8,7 @@
 
 #import "XDAccountViewController.h"
 
-@interface XDWatcherViewController : XDAccountViewController
+@interface XDForkersViewController : XDAccountViewController
 
 - (id)initWithRepoFullname:(NSString *)fullName;
 

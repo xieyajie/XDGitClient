@@ -10,9 +10,9 @@
 
 #import "RepositoryModel.h"
 #import "XDAccountCardViewController.h"
-#import "XDForkerViewController.h"
-#import "XDStargazerViewController.h"
-#import "XDWatcherViewController.h"
+#import "XDForkersViewController.h"
+#import "XDStargazersViewController.h"
+#import "XDWatchersViewController.h"
 
 @interface XDRepoCardViewController ()
 {
@@ -169,21 +169,21 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FORKER:
         {
-            XDForkerViewController *fokerController = [[XDForkerViewController alloc] initWithRepoFullname:self.repoModel.fullName];
+            XDForkersViewController *fokerController = [[XDForkersViewController alloc] initWithRepoFullname:self.repoModel.fullName];
             fokerController.title = [NSString stringWithFormat:@"%@`s fokers", self.repoModel.name];
             [self.navigationController pushViewController:fokerController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_STARER:
         {
-            XDStargazerViewController *starController = [[XDStargazerViewController alloc] initWithRepoFullname:self.repoModel.fullName];
+            XDStargazersViewController *starController = [[XDStargazersViewController alloc] initWithRepoFullname:self.repoModel.fullName];
             starController.title = [NSString stringWithFormat:@"%@`s stargazers", self.repoModel.name];
             [self.navigationController pushViewController:starController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_WATCHER:
         {
-            XDWatcherViewController *watcherController = [[XDWatcherViewController alloc] initWithRepoFullname:self.repoModel.fullName];
+            XDWatchersViewController *watcherController = [[XDWatchersViewController alloc] initWithRepoFullname:self.repoModel.fullName];
             watcherController.title = [NSString stringWithFormat:@"%@`s watcher", self.repoModel.name];
             [self.navigationController pushViewController:watcherController animated:YES];
         }

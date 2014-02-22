@@ -1,21 +1,21 @@
 //
-//  XDWatcherViewController.m
+//  XDStargazersViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDWatcherViewController.h"
+#import "XDStargazersViewController.h"
 
-@interface XDWatcherViewController ()
+@interface XDStargazersViewController ()
 {
     NSString *_fullName;
 }
 
 @end
 
-@implementation XDWatcherViewController
+@implementation XDStargazersViewController
 
 - (id)initWithRepoFullname:(NSString *)fullName
 {
@@ -47,12 +47,12 @@
         return;
     }
     
-    __block __weak XDWatcherViewController *weakSelf = self;
+    __block __weak XDStargazersViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine watchersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [activityEngine stargazersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }

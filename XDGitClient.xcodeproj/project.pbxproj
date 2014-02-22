@@ -18,9 +18,9 @@
 		3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279E718B721100031A0A7 /* XDRepoCardViewController.m */; };
 		3A3279EA18B721810031A0A7 /* repoCard.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A3279E918B721810031A0A7 /* repoCard.plist */; };
 		3A3279ED18B74E700031A0A7 /* XDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EC18B74E700031A0A7 /* XDAccountViewController.m */; };
-		3A3279F018B750A60031A0A7 /* XDStargazerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EF18B750A60031A0A7 /* XDStargazerViewController.m */; };
-		3A3279F318B7513A0031A0A7 /* XDForkerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */; };
-		3A3279F618B758510031A0A7 /* XDWatcherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F518B758510031A0A7 /* XDWatcherViewController.m */; };
+		3A3279F018B750A60031A0A7 /* XDStargazersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EF18B750A60031A0A7 /* XDStargazersViewController.m */; };
+		3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */; };
+		3A3279F618B758510031A0A7 /* XDWatchersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F518B758510031A0A7 /* XDWatchersViewController.m */; };
 		3A47A4E118B45504001C76C0 /* XDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4DA18B45504001C76C0 /* XDLoadingView.m */; };
 		3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E018B45504001C76C0 /* XDTabBarItem.m */; };
 		3A47A4E718B45527001C76C0 /* XDActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E618B45527001C76C0 /* XDActivityIndicatorView.m */; };
@@ -100,6 +100,7 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C33275D18B886D7006C6F43 /* XDPullRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */; };
 		3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00618B2401F006C28BF /* XDConfigManager.m */; };
 		3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* AccountModel.m */; };
 /* End PBXBuildFile section */
@@ -128,12 +129,12 @@
 		3A3279E918B721810031A0A7 /* repoCard.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = repoCard.plist; sourceTree = "<group>"; };
 		3A3279EB18B74E700031A0A7 /* XDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDAccountViewController.h; sourceTree = "<group>"; };
 		3A3279EC18B74E700031A0A7 /* XDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDAccountViewController.m; sourceTree = "<group>"; };
-		3A3279EE18B750A60031A0A7 /* XDStargazerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDStargazerViewController.h; sourceTree = "<group>"; };
-		3A3279EF18B750A60031A0A7 /* XDStargazerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDStargazerViewController.m; sourceTree = "<group>"; };
-		3A3279F118B7513A0031A0A7 /* XDForkerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDForkerViewController.h; sourceTree = "<group>"; };
-		3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDForkerViewController.m; sourceTree = "<group>"; };
-		3A3279F418B758510031A0A7 /* XDWatcherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWatcherViewController.h; sourceTree = "<group>"; };
-		3A3279F518B758510031A0A7 /* XDWatcherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDWatcherViewController.m; sourceTree = "<group>"; };
+		3A3279EE18B750A60031A0A7 /* XDStargazersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDStargazersViewController.h; sourceTree = "<group>"; };
+		3A3279EF18B750A60031A0A7 /* XDStargazersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDStargazersViewController.m; sourceTree = "<group>"; };
+		3A3279F118B7513A0031A0A7 /* XDForkersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDForkersViewController.h; sourceTree = "<group>"; };
+		3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDForkersViewController.m; sourceTree = "<group>"; };
+		3A3279F418B758510031A0A7 /* XDWatchersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWatchersViewController.h; sourceTree = "<group>"; };
+		3A3279F518B758510031A0A7 /* XDWatchersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDWatchersViewController.m; sourceTree = "<group>"; };
 		3A47A4D918B45504001C76C0 /* XDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoadingView.h; sourceTree = "<group>"; };
 		3A47A4DA18B45504001C76C0 /* XDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDLoadingView.m; sourceTree = "<group>"; };
 		3A47A4DF18B45504001C76C0 /* XDTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTabBarItem.h; sourceTree = "<group>"; };
@@ -272,6 +273,8 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C33275B18B886D7006C6F43 /* XDPullRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPullRequestsViewController.h; sourceTree = "<group>"; };
+		3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPullRequestsViewController.m; sourceTree = "<group>"; };
 		3CA4F00518B2401F006C28BF /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
 		3CA4F00618B2401F006C28BF /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
@@ -478,12 +481,14 @@
 				3A3279E618B721100031A0A7 /* XDRepoCardViewController.h */,
 				3A3279E718B721100031A0A7 /* XDRepoCardViewController.m */,
 				3A3279E918B721810031A0A7 /* repoCard.plist */,
-				3A3279EE18B750A60031A0A7 /* XDStargazerViewController.h */,
-				3A3279EF18B750A60031A0A7 /* XDStargazerViewController.m */,
-				3A3279F118B7513A0031A0A7 /* XDForkerViewController.h */,
-				3A3279F218B7513A0031A0A7 /* XDForkerViewController.m */,
-				3A3279F418B758510031A0A7 /* XDWatcherViewController.h */,
-				3A3279F518B758510031A0A7 /* XDWatcherViewController.m */,
+				3A3279EE18B750A60031A0A7 /* XDStargazersViewController.h */,
+				3A3279EF18B750A60031A0A7 /* XDStargazersViewController.m */,
+				3A3279F118B7513A0031A0A7 /* XDForkersViewController.h */,
+				3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */,
+				3A3279F418B758510031A0A7 /* XDWatchersViewController.h */,
+				3A3279F518B758510031A0A7 /* XDWatchersViewController.m */,
+				3C33275B18B886D7006C6F43 /* XDPullRequestsViewController.h */,
+				3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -875,7 +880,7 @@
 				3AEDEA2218AE17450093946D /* UIImageView+AFNetworking.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
 				3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */,
-				3A3279F018B750A60031A0A7 /* XDStargazerViewController.m in Sources */,
+				3A3279F018B750A60031A0A7 /* XDStargazersViewController.m in Sources */,
 				3AEDEA3C18AE17450093946D /* UIScrollView+SVInfiniteScrolling.m in Sources */,
 				3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */,
 				3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */,
@@ -898,6 +903,7 @@
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
 				3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
+				3C33275D18B886D7006C6F43 /* XDPullRequestsViewController.m in Sources */,
 				3A3279ED18B74E700031A0A7 /* XDAccountViewController.m in Sources */,
 				3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */,
 				3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */,
@@ -912,10 +918,10 @@
 				3AA8011318B326E500F8450B /* XDGitRequestClient.m in Sources */,
 				3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */,
 				3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */,
-				3A3279F618B758510031A0A7 /* XDWatcherViewController.m in Sources */,
+				3A3279F618B758510031A0A7 /* XDWatchersViewController.m in Sources */,
 				3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */,
 				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
-				3A3279F318B7513A0031A0A7 /* XDForkerViewController.m in Sources */,
+				3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */,
 				3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */,
 				3AEDEA1A18AE17450093946D /* AFHTTPClient.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,

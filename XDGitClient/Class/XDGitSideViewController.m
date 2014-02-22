@@ -130,12 +130,13 @@
 - (UINavigationController *)reposityNavTabController
 {
     if (_reposityNavTabController == nil) {
-        NSArray *titleArray = @[@"全部 repo", @"公开 repo", @"私有 repo", @"参与 repo", @"拷贝"];
-        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
-        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSArray *titleArray = @[@"Me全部的", @"Me自己的", @"Me参与的", @"Me关注的"];
+        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember], [NSNumber numberWithInt:XDRepositoryStyleStars]];
         NSMutableArray *controllers = [NSMutableArray array];
-        for (int i = 0; i < 5; i++) {
-            XDRepositoryViewController *projectsController = [[XDRepositoryViewController alloc] initWithProjectsStyle:i];
+        for (int i = 0; i < 4; i++) {
+            XDRepositoryViewController *projectsController = [[XDRepositoryViewController alloc] initWithProjectsStyle:[[typeArray objectAtIndex:i] integerValue]];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -303,7 +304,7 @@
         
 //        if (_menuItem == nil) {
 //            UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
-//            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"] forState:UIControlStateNormal];
+//            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"]tr8 forState:UIControlStateNormal];
 //            [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
 //            _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 //        }

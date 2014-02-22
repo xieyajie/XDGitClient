@@ -1,23 +1,21 @@
 //
-//  XDForkerViewController.m
+//  XDWatchersViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDForkerViewController.h"
+#import "XDWatchersViewController.h"
 
-#import "RepositoryModel.h"
-
-@interface XDForkerViewController ()
+@interface XDWatchersViewController ()
 {
     NSString *_fullName;
 }
 
 @end
 
-@implementation XDForkerViewController
+@implementation XDWatchersViewController
 
 - (id)initWithRepoFullname:(NSString *)fullName
 {
@@ -49,12 +47,12 @@
         return;
     }
     
-    __block __weak XDForkerViewController *weakSelf = self;
+    __block __weak XDWatchersViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine forkersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [activityEngine watchersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }
@@ -62,8 +60,8 @@
             
             if (object) {
                 for (NSDictionary *dic in object) {
-                    RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model.owner];
+                    AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
+                    [weakSelf.dataArray addObject:model];
                 }
                 
                 [weakSelf tableViewDidFinishHeaderRefresh];

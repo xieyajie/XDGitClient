@@ -1,5 +1,5 @@
 //
-//  XDStargazerViewController.h
+//  XDStargazersViewController.h
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
@@ -8,7 +8,7 @@
 
 #import "XDAccountViewController.h"
 
-@interface XDStargazerViewController : XDAccountViewController
+@interface XDStargazersViewController : XDAccountViewController
 
 - (id)initWithRepoFullname:(NSString *)fullName;
 
