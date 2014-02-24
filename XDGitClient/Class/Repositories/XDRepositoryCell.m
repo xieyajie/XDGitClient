@@ -115,9 +115,7 @@
     _nameLabel.text = _model.name;
     _desLabel.text = _model.description;
     _updateLabel.text = [NSString stringWithFormat:@"更新于：%@", _model.updatedDateDes];
-//    _starButton.selected = _model.isPrivate;
     [_starButton setTitle:_model.starsCountDes forState:UIControlStateNormal];
-//    _forkButton.selected = _model.isFork;
     [_forkButton setTitle:_model.forksCountDes forState:UIControlStateNormal];
 }
 

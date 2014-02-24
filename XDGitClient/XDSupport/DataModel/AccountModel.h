@@ -10,7 +10,7 @@
 
 @interface AccountModel : XDBaseModel
 
-@property (strong, nonatomic) NSNumber *accountId;      //ID
+@property (strong, nonatomic) NSString *accountId;      //ID
 @property (strong, nonatomic) NSString *accountName;    //用户名称
 @property (strong, nonatomic) NSString *avatarUrl;      //头像网络地址
 @property (strong, nonatomic) NSString *accountType;    //用户类型

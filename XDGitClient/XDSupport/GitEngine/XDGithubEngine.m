@@ -161,6 +161,11 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
      return [_requestClient sendRequestWithApiPath:@"user/starred" requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
 }
 
+- (AFHTTPRequestOperation *)starredWithUserName:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/starred", userName] requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
+}
+
 #pragma mark Watching
 
 - (AFHTTPRequestOperation *)watchersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -175,23 +180,33 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
     if (style == XDRepositoryStyleStars) {
         return [self starredWithPage:page success:successBlock failure:failureBlock];
     }
-    else if (style == XDRepositoryStyleForks)
-    {
-        return [self forkedWithPage:page success:successBlock failure:failureBlock];
+    else{
+        return [_requestClient sendRequestWithApiPath:@"user/repos" requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
     }
-    return [_requestClient sendRequestWithApiPath:@"user/repos" requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
 }
 
 - (AFHTTPRequestOperation *)repositoriesWithUser:(NSString *)userName style:(XDRepositoryStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    if (userName == nil || userName.length == 0)
+    if (style == XDRepositoryStyleStars)
     {
-        return [self repositoriesWithStyle:style includeWatched:watched page:page success:successBlock failure:failureBlock];
+        if (userName == nil || userName.length == 0)
+        {
+            return [self starredWithPage:page success:successBlock failure:failureBlock];
+        }
     }
-    else{
-        NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
-        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
+    else
+    {
+        if (userName == nil || userName.length == 0)
+        {
+            return [self repositoriesWithStyle:style includeWatched:watched page:page success:successBlock failure:failureBlock];
+        }
+        else{
+            NSString *apiPath = [NSString stringWithFormat:@"users/%@/repos", userName];
+            return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
+        }
     }
+    
+    return nil;
 }
 
 - (AFHTTPRequestOperation *)repository:(NSString *)repositoryFullName success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -220,15 +235,16 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 }
 
 #pragma mark - Pull Request
-- (AFHTTPRequestOperation *)pullRequestsForRepository:(NSString *)repositoryFullName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)pullRequestsForRepository:(NSString *)repositoryFullName state:(XDPullRequestState)state page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls", repositoryFullName] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
+    NSString *stateStr = state == XDPullRequestStateOpen ? @"open" : @"closed";
+    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls?state=%@", repositoryFullName, stateStr] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
 }
 
 - (AFHTTPRequestOperation *)pullRequest:(NSString *)pullRequestId forRepository:(NSString *)repositoryFullName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     if (pullRequestId == nil || pullRequestId.length == 0) {
-        return [self pullRequestsForRepository:repositoryFullName page:page success:successBlock failure:failureBlock];
+        return [self pullRequestsForRepository:repositoryFullName state:XDPullRequestStateOpen page:page success:successBlock failure:failureBlock];
     }
     
     return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls/%@", repositoryFullName, pullRequestId] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];

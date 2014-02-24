@@ -21,6 +21,11 @@
 		3A3279F018B750A60031A0A7 /* XDStargazersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279EF18B750A60031A0A7 /* XDStargazersViewController.m */; };
 		3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */; };
 		3A3279F618B758510031A0A7 /* XDWatchersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3279F518B758510031A0A7 /* XDWatchersViewController.m */; };
+		3A373AD618BB439700E57345 /* PullRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A373AD518BB439700E57345 /* PullRequestModel.m */; };
+		3A373ADB18BB440800E57345 /* NSDictionary+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A373AD818BB440800E57345 /* NSDictionary+Category.m */; };
+		3A373ADC18BB440800E57345 /* NSMutableDictionary+nilObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A373ADA18BB440800E57345 /* NSMutableDictionary+nilObject.m */; };
+		3A373AE018BB48D200E57345 /* XDPullRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A373ADF18BB48D200E57345 /* XDPullRequestsViewController.m */; };
+		3A373AE318BB491E00E57345 /* XDPullRequestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A373AE218BB491E00E57345 /* XDPullRequestCell.m */; };
 		3A47A4E118B45504001C76C0 /* XDLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4DA18B45504001C76C0 /* XDLoadingView.m */; };
 		3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E018B45504001C76C0 /* XDTabBarItem.m */; };
 		3A47A4E718B45527001C76C0 /* XDActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A47A4E618B45527001C76C0 /* XDActivityIndicatorView.m */; };
@@ -91,8 +96,6 @@
 		3AEDEA3B18AE17450093946D /* NRGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA1118AE17450093946D /* NRGridViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3AEDEA3C18AE17450093946D /* UIScrollView+SVInfiniteScrolling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA1718AE17450093946D /* UIScrollView+SVInfiniteScrolling.m */; };
 		3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA1918AE17450093946D /* UIScrollView+SVPullToRefresh.m */; };
-		3AEDEA4918AE1D930093946D /* XDGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA4418AE1D930093946D /* XDGridViewCell.m */; };
-		3AEDEA4A18AE1D930093946D /* XDGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA4618AE1D930093946D /* XDGridViewController.m */; };
 		3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA4818AE1D930093946D /* XDTableViewController.m */; };
 		3AEDEA5318AE20D10093946D /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA4E18AE20D10093946D /* IISideController.m */; };
 		3AEDEA5418AE20D10093946D /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5018AE20D10093946D /* IIViewDeckController.m */; };
@@ -100,7 +103,6 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
-		3C33275D18B886D7006C6F43 /* XDPullRequestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */; };
 		3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00618B2401F006C28BF /* XDConfigManager.m */; };
 		3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* AccountModel.m */; };
 /* End PBXBuildFile section */
@@ -135,6 +137,16 @@
 		3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDForkersViewController.m; sourceTree = "<group>"; };
 		3A3279F418B758510031A0A7 /* XDWatchersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWatchersViewController.h; sourceTree = "<group>"; };
 		3A3279F518B758510031A0A7 /* XDWatchersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDWatchersViewController.m; sourceTree = "<group>"; };
+		3A373AD418BB439700E57345 /* PullRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRequestModel.h; sourceTree = "<group>"; };
+		3A373AD518BB439700E57345 /* PullRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRequestModel.m; sourceTree = "<group>"; };
+		3A373AD718BB440800E57345 /* NSDictionary+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Category.h"; sourceTree = "<group>"; };
+		3A373AD818BB440800E57345 /* NSDictionary+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Category.m"; sourceTree = "<group>"; };
+		3A373AD918BB440800E57345 /* NSMutableDictionary+nilObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+nilObject.h"; sourceTree = "<group>"; };
+		3A373ADA18BB440800E57345 /* NSMutableDictionary+nilObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+nilObject.m"; sourceTree = "<group>"; };
+		3A373ADE18BB48D200E57345 /* XDPullRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPullRequestsViewController.h; sourceTree = "<group>"; };
+		3A373ADF18BB48D200E57345 /* XDPullRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPullRequestsViewController.m; sourceTree = "<group>"; };
+		3A373AE118BB491E00E57345 /* XDPullRequestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPullRequestCell.h; sourceTree = "<group>"; };
+		3A373AE218BB491E00E57345 /* XDPullRequestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPullRequestCell.m; sourceTree = "<group>"; };
 		3A47A4D918B45504001C76C0 /* XDLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoadingView.h; sourceTree = "<group>"; };
 		3A47A4DA18B45504001C76C0 /* XDLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDLoadingView.m; sourceTree = "<group>"; };
 		3A47A4DF18B45504001C76C0 /* XDTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTabBarItem.h; sourceTree = "<group>"; };
@@ -255,10 +267,6 @@
 		3AEDEA1718AE17450093946D /* UIScrollView+SVInfiniteScrolling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVInfiniteScrolling.m"; sourceTree = "<group>"; };
 		3AEDEA1818AE17450093946D /* UIScrollView+SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SVPullToRefresh.h"; sourceTree = "<group>"; };
 		3AEDEA1918AE17450093946D /* UIScrollView+SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SVPullToRefresh.m"; sourceTree = "<group>"; };
-		3AEDEA4318AE1D930093946D /* XDGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGridViewCell.h; sourceTree = "<group>"; };
-		3AEDEA4418AE1D930093946D /* XDGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGridViewCell.m; sourceTree = "<group>"; };
-		3AEDEA4518AE1D930093946D /* XDGridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGridViewController.h; sourceTree = "<group>"; };
-		3AEDEA4618AE1D930093946D /* XDGridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGridViewController.m; sourceTree = "<group>"; };
 		3AEDEA4718AE1D930093946D /* XDTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewController.h; sourceTree = "<group>"; };
 		3AEDEA4818AE1D930093946D /* XDTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTableViewController.m; sourceTree = "<group>"; };
 		3AEDEA4D18AE20D10093946D /* IISideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IISideController.h; sourceTree = "<group>"; };
@@ -273,8 +281,6 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
-		3C33275B18B886D7006C6F43 /* XDPullRequestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDPullRequestsViewController.h; sourceTree = "<group>"; };
-		3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDPullRequestsViewController.m; sourceTree = "<group>"; };
 		3CA4F00518B2401F006C28BF /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
 		3CA4F00618B2401F006C28BF /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
@@ -313,6 +319,17 @@
 				3A3279DD18B705050031A0A7 /* tab_allSelect@2x.png */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		3A373ADD18BB48D200E57345 /* PullRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3A373ADE18BB48D200E57345 /* XDPullRequestsViewController.h */,
+				3A373ADF18BB48D200E57345 /* XDPullRequestsViewController.m */,
+				3A373AE118BB491E00E57345 /* XDPullRequestCell.h */,
+				3A373AE218BB491E00E57345 /* XDPullRequestCell.m */,
+			);
+			path = PullRequest;
 			sourceTree = "<group>";
 		};
 		3A47A4D718B45504001C76C0 /* Control */ = {
@@ -461,6 +478,10 @@
 		3AA8011B18B3460200F8450B /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				3A373AD718BB440800E57345 /* NSDictionary+Category.h */,
+				3A373AD818BB440800E57345 /* NSDictionary+Category.m */,
+				3A373AD918BB440800E57345 /* NSMutableDictionary+nilObject.h */,
+				3A373ADA18BB440800E57345 /* NSMutableDictionary+nilObject.m */,
 				3AA8011C18B3460200F8450B /* NSData+Category.h */,
 				3AA8011D18B3460200F8450B /* NSData+Category.m */,
 				3AA8011E18B3460200F8450B /* NSString+Category.h */,
@@ -487,8 +508,6 @@
 				3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */,
 				3A3279F418B758510031A0A7 /* XDWatchersViewController.h */,
 				3A3279F518B758510031A0A7 /* XDWatchersViewController.m */,
-				3C33275B18B886D7006C6F43 /* XDPullRequestsViewController.h */,
-				3C33275C18B886D7006C6F43 /* XDPullRequestsViewController.m */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -568,6 +587,7 @@
 		3AEDE98018ADFD370093946D /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				3A373ADD18BB48D200E57345 /* PullRequest */,
 				3AA4F03018B5CC8300E8E1BA /* Gits */,
 				3AA8012218B3532D00F8450B /* Repositories */,
 				3AA8010418B2FEA400F8450B /* Activity */,
@@ -706,10 +726,6 @@
 		3AEDEA4218AE1D930093946D /* TableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3AEDEA4318AE1D930093946D /* XDGridViewCell.h */,
-				3AEDEA4418AE1D930093946D /* XDGridViewCell.m */,
-				3AEDEA4518AE1D930093946D /* XDGridViewController.h */,
-				3AEDEA4618AE1D930093946D /* XDGridViewController.m */,
 				3AEDEA4718AE1D930093946D /* XDTableViewController.h */,
 				3AEDEA4818AE1D930093946D /* XDTableViewController.m */,
 				3AA8010118B2F62B00F8450B /* XDTableViewCell.h */,
@@ -744,6 +760,8 @@
 				3AA4F03818B5D36000E8E1BA /* FileModel.m */,
 				3AA4F04018B5DCB900E8E1BA /* XDBaseModel.h */,
 				3AA4F04118B5DCB900E8E1BA /* XDBaseModel.m */,
+				3A373AD418BB439700E57345 /* PullRequestModel.h */,
+				3A373AD518BB439700E57345 /* PullRequestModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -875,6 +893,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */,
+				3A373AE018BB48D200E57345 /* XDPullRequestsViewController.m in Sources */,
 				3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */,
 				3AEDEA2018AE17450093946D /* AFURLConnectionOperation.m in Sources */,
 				3AEDEA2218AE17450093946D /* UIImageView+AFNetworking.m in Sources */,
@@ -903,15 +922,12 @@
 				3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */,
 				3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */,
 				3AEDEA2118AE17450093946D /* AFXMLRequestOperation.m in Sources */,
-				3C33275D18B886D7006C6F43 /* XDPullRequestsViewController.m in Sources */,
 				3A3279ED18B74E700031A0A7 /* XDAccountViewController.m in Sources */,
 				3AA8013318B3691700F8450B /* XDAccountCardViewController.m in Sources */,
 				3AA8012818B3554A00F8450B /* RepositoryModel.m in Sources */,
 				3AEDEA1E18AE17450093946D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3AEDEA1B18AE17450093946D /* AFHTTPRequestOperation.m in Sources */,
-				3AEDEA4918AE1D930093946D /* XDGridViewCell.m in Sources */,
 				3AEDE95918ADF5A90093946D /* main.m in Sources */,
-				3AEDEA4A18AE1D930093946D /* XDGridViewController.m in Sources */,
 				3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */,
 				3AEDEA5518AE20D10093946D /* IIWrapController.m in Sources */,
 				3AEDEA1C18AE17450093946D /* AFImageRequestOperation.m in Sources */,
@@ -922,13 +938,17 @@
 				3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */,
 				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
 				3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */,
+				3A373AE318BB491E00E57345 /* XDPullRequestCell.m in Sources */,
 				3AA8010018B2F18700F8450B /* XDFollowViewController.m in Sources */,
 				3AEDEA1A18AE17450093946D /* AFHTTPClient.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,
 				3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */,
+				3A373AD618BB439700E57345 /* PullRequestModel.m in Sources */,
 				3AEDEA1D18AE17450093946D /* AFJSONRequestOperation.m in Sources */,
 				3AA8010718B2FECA00F8450B /* XDActivityViewController.m in Sources */,
 				3AEDE9BF18AE173C0093946D /* XDRequestManager.m in Sources */,
+				3A373ADB18BB440800E57345 /* NSDictionary+Category.m in Sources */,
+				3A373ADC18BB440800E57345 /* NSMutableDictionary+nilObject.m in Sources */,
 				3AA4F03318B5CC9100E8E1BA /* XDGitsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

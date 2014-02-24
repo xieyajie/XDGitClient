@@ -14,13 +14,13 @@
 {
     self = [super init];
     if (self) {
-        self.Id = [dictionary objectForKey:KGIT_ID];
-        self.description = [dictionary objectForKey:KGIT_DESC];
-        self.createDateDes = [dictionary objectForKey:KGIT_CREATE];
-        self.updateDateDes = [dictionary objectForKey:KGIT_UPDATE];
-        self.htmlUrl = [dictionary objectForKey:KGIT_HTMLURL];
-        self.forksUrl = [dictionary objectForKey:KGIT_FORKURL];
-        self.commentCountDes = [dictionary objectForKey:KGIT_COMMENTCOUNT];
+        self.Id = [dictionary safeStringForKey:KGIT_ID];
+        self.description = [dictionary safeStringForKey:KGIT_DESC];
+        self.createDateDes = [dictionary safeStringForKey:KGIT_CREATE];
+        self.updateDateDes = [dictionary safeStringForKey:KGIT_UPDATE];
+        self.htmlUrl = [dictionary safeStringForKey:KGIT_HTMLURL];
+        self.forksUrl = [dictionary safeStringForKey:KGIT_FORKURL];
+        self.commentCountDes = [dictionary safeStringForKey:KGIT_COMMENTCOUNT];
         self.isPublic = [[dictionary objectForKey:KGIT_PUBLICSTATE] boolValue];
     }
     

@@ -13,6 +13,7 @@
 #import "XDForkersViewController.h"
 #import "XDStargazersViewController.h"
 #import "XDWatchersViewController.h"
+#import "XDPullRequestsViewController.h"
 
 @interface XDRepoCardViewController ()
 {
@@ -164,7 +165,9 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_PULLREQUEST:
         {
-            
+            XDPullRequestsViewController *pullRequestController = [[XDPullRequestsViewController alloc] initWithRepoFullName:self.repoModel.fullName];
+            pullRequestController.title = [NSString stringWithFormat:@"%@`s pull request", self.repoModel.name];
+            [self.navigationController pushViewController:pullRequestController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FORKER:

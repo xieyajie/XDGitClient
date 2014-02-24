@@ -147,12 +147,12 @@
 - (XDTabBarController *)reposityController
 {
     if (_reposityController == nil) {
-        NSArray *titleArray = @[@"全部", @"Ta自己的", @"Ta参与"];
-        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png"];
-        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png"];
-        NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember]];
+        NSArray *titleArray = @[@"Ta全部的", @"Ta自己的", @"Ta参与的", @"Ta关注的"];
+        NSArray *imageArray = @[@"tab_all.png", @"side_copy.png", @"side_copy.png", @"side_copy.png"];
+        NSArray *selectedImageArray = @[@"tab_allSelect.png", @"side_own.png", @"side_own.png", @"side_own.png"];
+        NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember], [NSNumber numberWithInt:XDRepositoryStyleStars]];
         NSMutableArray *controllers = [NSMutableArray array];
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.accountModel.accountName repositoryStyle:[[typeArray objectAtIndex:i] integerValue]];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];

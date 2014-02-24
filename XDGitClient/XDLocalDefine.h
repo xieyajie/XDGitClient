@@ -31,6 +31,11 @@ typedef enum{
     XDGitStyleStarred,
 }XDGitStyle;
 
+typedef enum{
+    XDPullRequestStateOpen   = 0,
+    XDPullRequestStateClosed,
+}XDPullRequestState;
+
 //block
 #pragma mark - block
 typedef void (^XDGitEngineSuccessBlock)(id object);
@@ -121,8 +126,16 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KGIT_FORKURL @"forks_url"
 #define KGIT_COMMENTCOUNT @"comments"
 #define KGIT_PUBLICSTATE @"public"
-//#define KREPO_ @""
-//#define KREPO_ @""
-//#define KREPO_ @""
+
+//pull request
+#define KPULLREQUEST_ID @"id"
+#define KPULLREQUEST_TITLE @"title"
+#define KPULLREQUEST_CONTENT @"body"
+#define KPULLREQUEST_CREATE @"created_at"
+#define KPULLREQUEST_UPDATE @"updated_at"
+#define KPULLREQUEST_OWNER @"user"
+
+//#define KPULLREQUEST_ @""
+//#define KPULLREQUEST_ @""
 
 #endif
