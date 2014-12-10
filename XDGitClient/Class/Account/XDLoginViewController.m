@@ -75,9 +75,13 @@
     if (_mainLoginView == nil) {
         _mainLoginView = [[UIView alloc] initWithFrame:CGRectMake(20.0, 40.0, self.view.frame.size.width - 40.0, 165.0)];
         
-        UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, _mainLoginView.frame.size.width, 80.0)];
-        backgroundImageView.image = [[UIImage imageNamed:@"login_input_bg"] stretchableImageWithLeftCapWidth:10 topCapHeight:15];
-        [_mainLoginView addSubview:backgroundImageView];
+        UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _mainLoginView.frame.size.width, 80.0)];
+//        backgroundView.backgroundColor = [UIColor clearColor];
+        backgroundView.layer.cornerRadius = 5.0;
+        backgroundView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+        backgroundView.layer.borderWidth = 0.5;
+        [_mainLoginView addSubview:backgroundView];
+
         
         UIImageView *separatorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 39.0, _mainLoginView.frame.size.width - 10.0, 2.0)];
         separatorImageView.image = [UIImage imageNamed:@"login_separator"];
@@ -134,7 +138,7 @@
             _rememberButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             [_rememberButton setTitle:@" 记住密码" forState:UIControlStateNormal];
             [_rememberButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [_rememberButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+            [_rememberButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
             _rememberButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
             [_rememberButton setImage:[UIImage imageNamed:@"rectangle_uncheck.png"] forState:UIControlStateNormal];
             [_rememberButton setImage:[UIImage imageNamed:@"rectangle_checked.png"] forState:UIControlStateSelected];

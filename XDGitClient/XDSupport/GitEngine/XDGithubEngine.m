@@ -57,11 +57,28 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
 
 - (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-    return [_requestClient loginWithUserName:userName password:password success:^(id object) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    __block __weak NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    __block NSString *key = [NSString stringWithFormat:@"%@_%@_LoginDate", APPNAME, self.engineKey];
+    NSDate *lastLoginDate = [defaults objectForKey:key];
+    
+    NSTimeInterval timeInterval = -1;
+    NSString *token = nil;
+    if (lastLoginDate) {
+        timeInterval = [[NSDate date] timeIntervalSinceDate:lastLoginDate];
+    }
+    if (timeInterval < 0 || timeInterval > (7 * 25 * 60 *60)) {
+        [defaults removeObjectForKey:key];
+    }
+    else{
+        key = [NSString stringWithFormat:@"%@_%@_LoginToken", APPNAME, self.engineKey];
+        token = [defaults objectForKey:key];
+    }
+    
+    AFHTTPRequestOperation *operation = [_requestClient loginWithUserName:userName password:password token:token success:^(id object) {
+        
         [defaults setValue:userName forKey:[NSString stringWithFormat:@"%@_%@_UserName", APPNAME, self.engineKey]];//最后一次成功登陆的用户名
         
-        NSString *key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, self.engineKey];
+        key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, self.engineKey];
         [defaults setValue:userName forKey:key];//当前账号的用户名
         
         key = [NSString stringWithFormat:@"%@_%@_LoginToken", APPNAME, self.engineKey];
@@ -69,6 +86,8 @@ static id<XDGitEngineProtocol> defaultEngineInstance = nil;
         
         successBlock(object, NO);
     } failure:failureBlock];
+    
+    return operation;
 }
 
 #pragma mark - User
