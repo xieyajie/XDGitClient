@@ -103,6 +103,8 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */; };
+		3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */; };
 		3CA4F00718B2401F006C28BF /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00618B2401F006C28BF /* XDConfigManager.m */; };
 		3CA4F00D18B25298006C28BF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* AccountModel.m */; };
 /* End PBXBuildFile section */
@@ -281,6 +283,8 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3CA4F00518B2401F006C28BF /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
 		3CA4F00618B2401F006C28BF /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
@@ -293,6 +297,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */,
+				3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */,
 				3AEDE94F18ADF5A90093946D /* CoreGraphics.framework in Frameworks */,
 				3AEDE95118ADF5A90093946D /* UIKit.framework in Frameworks */,
 				3AEDE94D18ADF5A90093946D /* Foundation.framework in Frameworks */,
@@ -534,6 +540,8 @@
 		3AEDE94B18ADF5A90093946D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */,
+				3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */,
 				3AEDE94C18ADF5A90093946D /* Foundation.framework */,
 				3AEDE94E18ADF5A90093946D /* CoreGraphics.framework */,
 				3AEDE95018ADF5A90093946D /* UIKit.framework */,
@@ -814,6 +822,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = XDIOS;
 				TargetAttributes = {
+					3AEDE94818ADF5A90093946D = {
+						DevelopmentTeam = 499WYUV8Q2;
+					};
 					3AEDE96318ADF5A90093946D = {
 						TestTargetID = 3AEDE94818ADF5A90093946D;
 					};
@@ -1069,11 +1080,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XDGitClient/XDGitClient-Prefix.pch";
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6cab64ab-ddab-4047-a08c-ff259fed8566";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1084,11 +1097,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XDGitClient/XDGitClient-Prefix.pch";
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6cab64ab-ddab-4047-a08c-ff259fed8566";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
