@@ -225,24 +225,38 @@ static XDGithubEngine *engineInstance = nil;
 //{
 //    return [_requestClient sendRequestWithApiPath:@"user/forks" requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
 //}
-//
-//#pragma mark - Star
-//
+
+#pragma mark - Star
+
 //- (AFHTTPRequestOperation *)stargazersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
 //    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/stargazers", repositoryFullname] requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
 //}
-//
-//- (AFHTTPRequestOperation *)starredWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//     return [_requestClient sendRequestWithApiPath:@"user/starred" requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
-//}
-//
-//- (AFHTTPRequestOperation *)starredWithUserName:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/starred", userName] requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
-//}
-//
+
+- (AFHTTPRequestOperation *)starredWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"user/starred?page=%d&per_page=%d", page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)starredWithUserName:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"users/%@/starred?page=%d&per_page=%d", userName, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
 //#pragma mark Watching
 //
 //- (AFHTTPRequestOperation *)watchersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -252,7 +266,7 @@ static XDGithubEngine *engineInstance = nil;
 
 #pragma mark - Repositories
 
-- (AFHTTPRequestOperation *)_repositoriesWithPath:(NSString *)path page:(NSInteger)page parameters:(id)parameters success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)_requestWithPath:(NSString *)path page:(NSInteger)page parameters:(id)parameters success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"] && page > 0)
@@ -291,7 +305,7 @@ static XDGithubEngine *engineInstance = nil;
     else{
         NSString *path = [NSString stringWithFormat:@"user/repos?page=%d&per_page=%d", page, KPERPAGENUMBER];
         NSDictionary *parameters = [self parametersWithRepositoryStyle:style];
-        AFHTTPRequestOperation *operation = [self _repositoriesWithPath:path page:page parameters:parameters success:^(id object, BOOL haveNextPage) {
+        AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:parameters success:^(id object, BOOL haveNextPage) {
             successBlock(object, haveNextPage);
         } failure:^(NSError *error) {
             failureBlock(error);
@@ -319,15 +333,13 @@ static XDGithubEngine *engineInstance = nil;
         else{
             NSString *path = [NSString stringWithFormat:@"users/%@/repos?page=%d&per_page=%d", userName, page, KPERPAGENUMBER];
             NSDictionary *parameters = [self parametersWithRepositoryStyle:style];
-            AFHTTPRequestOperation *operation = [self _repositoriesWithPath:path page:page parameters:parameters success:^(id object, BOOL haveNextPage) {
+            AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:parameters success:^(id object, BOOL haveNextPage) {
                 successBlock(object, haveNextPage);
             } failure:^(NSError *error) {
                 failureBlock(error);
             }];
             
             return operation;
-            
-//            return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitRepositoriesRequest responseType:XDGitRepositoriesResponse parameters:[self parametersWithRepositoryStyle:style] page:page success:successBlock failure:failureBlock];
         }
     }
     
