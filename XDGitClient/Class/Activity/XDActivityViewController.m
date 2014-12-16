@@ -47,7 +47,7 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     [self showLoadingView];
-    __block __weak XDActivityViewController *weakSelf = self;
+//    __block __weak XDActivityViewController *weakSelf = self;
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //        [[XDRequestManager defaultManager] allActivityWithSuccess:^(id object) {
 //            [weakSelf.dataArray removeAllObjects];

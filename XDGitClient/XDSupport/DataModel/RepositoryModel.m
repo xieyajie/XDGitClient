@@ -24,7 +24,7 @@
         self.pushedDateDes = [dictionary safeStringForKey:KREPO_PUSH];
         self.language = [dictionary safeStringForKey:KREPO_LANGUAGE];
         self.sizeDes = [[dictionary safeStringForKey:KREPO_SIZE] fileSizeDescription];
-        self.description = [dictionary safeStringForKey:KREPO_DESC];
+        self.describe = [dictionary safeStringForKey:KREPO_DESC];
         self.owner = [[AccountModel alloc] initWithDictionary:[dictionary objectForKey:KREPO_OWNER]];
         self.defaultBranch = [dictionary safeStringForKey:KREPO_DEFAULTBRANCH];
 

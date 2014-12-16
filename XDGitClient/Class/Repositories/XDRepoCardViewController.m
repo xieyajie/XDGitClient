@@ -119,7 +119,7 @@
     if ([key isEqualToString:@"描述"]) {
         NSMutableDictionary *attributesDictionary = [NSMutableDictionary dictionary];
         [attributesDictionary setValue:[UIFont systemFontOfSize:15.0] forKey:NSFontAttributeName];
-        CGRect sizeRect = [self.repoModel.description boundingRectWithSize:CGSizeMake(300 - 100, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
+        CGRect sizeRect = [self.repoModel.describe boundingRectWithSize:CGSizeMake(300 - 100, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
         
         return sizeRect.size.height < 30 ? 50.0 : (20 + sizeRect.size.height);
     }
@@ -204,7 +204,7 @@
 - (void)loadPlistSource
 {
     __block __weak XDRepoCardViewController *weakSelf = self;
-    _operation = [[[XDRequestManager defaultManager] activityGitEngine] repository:self.repoModel.fullName success:^(id object, BOOL haveNextPage) {
+    _operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object, BOOL haveNextPage) {
         weakSelf.isLoadedPlist = YES;
     } failure:^(NSError *error) {
         weakSelf.isLoadedPlist = YES;
@@ -227,7 +227,7 @@
         }
     }
     
-    if (self.repoModel.description && self.repoModel.description.length > 0) {
+    if (self.repoModel.describe && self.repoModel.describe.length > 0) {
         [[self.plistSourceArray objectAtIndex:0] insertObject:[plistDic objectForKey:@"description"] atIndex:1];
     }
     

@@ -12,16 +12,24 @@ static XDConfigManager *defaultManagerInstance = nil;
 
 @implementation XDConfigManager
 
+@synthesize configFilePath = _configFilePath;
+@synthesize appConfig = _appConfig;
+
+@synthesize loginToken = _loginToken;
+@synthesize loginAccount = _loginAccount;
+
 - (id)init
 {
     self = [super init];
     if (self) {
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-        _configDirectoryPath = [documentPath stringByAppendingPathComponent:@"config"];
+        _configFilePath = [documentPath stringByAppendingPathComponent:KCONFIG_FILE];
         NSFileManager *fm = [NSFileManager defaultManager];
-        if (![fm fileExistsAtPath:_configDirectoryPath]) {
-            [fm createDirectoryAtPath:_configDirectoryPath withIntermediateDirectories:YES attributes:Nil error:nil];
+        if (![fm fileExistsAtPath:_configFilePath]) {
+            [fm createFileAtPath:_configFilePath contents:nil attributes:nil];
         }
+        
+        [self _loadConfigInfo];
     }
     return self;
 }
@@ -38,58 +46,67 @@ static XDConfigManager *defaultManagerInstance = nil;
     return defaultManagerInstance;
 }
 
-#pragma mark - getter
-
-- (NSMutableDictionary *)configDictionary
-{
-    if (_configDictionary == nil) {
-        _configDictionary = [[NSMutableDictionary alloc] init];
-    }
-    
-    return _configDictionary;
-}
-
 #pragma mark - private
 
-- (void)loadConfigFile
+- (void)_loadConfigInfo
 {
-    _configFilePath = [_configDirectoryPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@_config", APPNAME]];
-    _configDictionary = [NSMutableDictionary dictionaryWithContentsOfFile:_configFilePath];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:_configFilePath];
+    _appConfig = [[AppConfigModel alloc] initWithDictionary:dic];
+    _loginToken = _appConfig.loginToken;
+    [[XDGithubEngine shareEngine] setToken:_loginToken];
+}
+
+#pragma mark - 
+
+- (void)setLoginToken:(NSString *)loginToken
+{
+    if (!_loginToken || ![_loginToken isEqualToString:loginToken]) {
+        _appConfig.loginToken = loginToken;
+        _loginToken = loginToken;
+        [self save];
+    }
+}
+
+- (void)setLoginAccount:(AccountModel *)loginAccount
+{
+    _loginAccount = loginAccount;
     
-    _repositorySortName = @"updated";
-    _repositorySortType = @"desc";
+    if (![_appConfig.loginUsername isEqualToString:loginAccount.accountName]) {
+        _appConfig.loginUsername = loginAccount.accountName;
+        [self save];
+    }
 }
 
 #pragma mark - public
 
-- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (BOOL)save
 {
-    id<XDGitEngineProtocol> gitEngine = [[XDRequestManager defaultManager] activityGitEngine];
-    
-    return [gitEngine userWithSuccess:^(id object, BOOL haveNextPage) {
-        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
-        self.loginAccount = account;
-        successBlock(account);
-    } failure:^(NSError *error) {
-        self.loginAccount = nil;
-        failureBlock(error);
-    }];
+    BOOL ret = YES;
+    NSDictionary *dic = [_appConfig dictionaryForValues];
+    if ([dic count] > 0) {
+        ret = [dic writeToFile:_configFilePath atomically:YES];
+    }
+    return ret;
 }
 
-- (BOOL)didSave
-{
-    return [self.configDictionary writeToFile:_configFilePath atomically:YES];
-}
-
-- (void)didReset
-{
-    [self loadConfigFile];
-}
-
-- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-{
-    [self loadConfigFile];
-    return [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
-}
+//- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object, BOOL haveNextPage) {
+//        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
+//        self.loginAccount = account;
+//        successBlock(account);
+//    } failure:^(NSError *error) {
+//        self.loginAccount = nil;
+//        failureBlock(error);
+//    }];
+//    
+//    return operation;
+//}
+//
+//- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    [self _loadConfigInfo];
+//    return [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
+//}
 
 @end

@@ -8,19 +8,20 @@
 
 #import "XDGitRequestClient.h"
 
-#define KCLIENTID @"dd15c5320bd70c217be5"
-#define KCLIENTSECRET @"2428107df510240815de4cba7795e779894889d5"
-
 @implementation XDGitRequestClient
+
 
 - (id)initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
     if (self) {
+        self.responseSerializer = [AFJSONResponseSerializer serializer];
     }
     
     return self;
 }
+
+#pragma mark - private
 
 #pragma mark - send request
 
@@ -31,6 +32,7 @@
                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
+    
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:urlRequest success:^(AFHTTPRequestOperation *operation, id responseObject){
         NSError *error;
         id jsonObject = [NSJSONSerialization
@@ -44,7 +46,8 @@
         }
     }failure:failure];
     
-    [self enqueueHTTPRequestOperation:operation];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+//    [self enqueueHTTPRequestOperation:operation];
     
     return operation;
 }
@@ -70,10 +73,12 @@
         }
     }
 	
+    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:30];
+    []
 	NSMutableURLRequest *urlRequest = [self requestWithMethod:[self httpMethodWithRequestType:requestType] path:urlString parameters:parameters];
+    [urlRequest setHTTPMethod:[self httpMethodWithRequestType:requestType]];
     [urlRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    urlRequest.timeoutInterval = 30;
-    urlRequest.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    [urlRequest setHTTPBody:[NSData data]];
 
 	if (self.token)
 	{
@@ -201,42 +206,24 @@
 //    successBlock(result);
 //}
 
-#pragma mark - login
-
-- (NSString *)fetchToken
-{
-    NSString *path = [NSString stringWithFormat:@"%@?client_id=%@&scope=user", @"https://github.com/login/oauth/authorize", KCLIENTID];
-    NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:nil];
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if(responseObject)
-        {
-            
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        <#code#>
-    }];
-}
-
-
-
-- (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password token:(NSString *)token success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-{
-    if (!token || [token length] == 0) {
-        token = [self fetchToken];
-    }
-    
-    NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", @"https://api.github.com/user?access_token=%@", token];
-	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:nil];
-    
-    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
-        successBlock(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
-        failureBlock(error);
-    }];
-    [self enqueueHTTPRequestOperation:operation];
-    
-    return operation;
-}
+//- (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password token:(NSString *)token success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    if (!token || [token length] == 0) {
+//        token = [self fetchToken];
+//    }
+//    
+//    NSString *path = [NSString stringWithFormat:@"%@?login=%@&token=%@", @"https://api.github.com/user?access_token=%@", token];
+//	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:nil];
+//    
+//    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+//        successBlock(responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error){
+//        failureBlock(error);
+//    }];
+//    [self enqueueHTTPRequestOperation:operation];
+//    
+//    return operation;
+//}
 
 #pragma mark - private
 

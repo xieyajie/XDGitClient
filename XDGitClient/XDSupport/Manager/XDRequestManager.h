@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "XDGitEngineProtocol.h"
+#import "XDGithubEngine.h"
 
 @interface XDRequestManager : NSObject
 
-@property (strong, nonatomic) id<XDGitEngineProtocol> activityGitEngine;
+@property (strong, nonatomic) XDGithubEngine *githubEngine;
 
 + (XDRequestManager *)defaultManager;
 

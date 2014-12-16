@@ -49,10 +49,9 @@
     
     __block __weak XDWatchersViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine watchersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [[XDGithubEngine shareEngine] watchersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }

@@ -43,6 +43,16 @@ typedef void (^XDGitEngineBooleanSuccessBlock)(BOOL success);
 typedef void (^XDGitEnginePageSuccessBlock)(id object, BOOL haveNextPage);
 typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
+#define APPNAME @"XDGit"
+
+//config key
+#pragma mark - config key
+#define KCONFIG_FILE @"xdgit_config.plist"
+#define KCONFIG_LOGINUSERNAME @"login_username"
+#define KCONFIG_LOGINUSERPASSWORD @"login_password"
+#define KCONFIG_LOGINUSERTOKEN @"login_token"
+#define KCONFIG_LOGINUSERDATE @"login_date"
+
 //plist key
 #pragma mark - plist key
 #define KPLIST_KEYIMAGE @"icon"
@@ -82,9 +92,16 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define TEXTFIELDDETAILCOLOR [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1.0]
 
 #pragma mark - NSNotification name
+
 #define KNOTIFICATION_LOFINSTATECHANGED @"LoginStateChanged"
+#define KNOTIFICATION_GETCODE @"GetCode"
 
 #pragma mark - model
+//config
+#define KCONFIG_LOGIN_USERNAME @"loginUsername"
+#define KCONFIG_LOGIN_TOKEN @"loginToken"
+#define KCONFIG_SORT_REPOSITORY_NAME @"repositorySortName"
+#define KCONFIG_SORT_REPOSITORY_TYPE @"repositorySortType"
 
 //account
 #define KACCOUNT_ID @"id"

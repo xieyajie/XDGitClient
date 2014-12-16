@@ -23,6 +23,7 @@
     if ([value respondsToSelector:@selector(integerValue)]) {
         return [value integerValue];
     }
+    
     return 0;
 }
 

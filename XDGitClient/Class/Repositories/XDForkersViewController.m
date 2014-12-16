@@ -51,10 +51,9 @@
     
     __block __weak XDForkersViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [activityEngine forkersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
+        operation = [[XDGithubEngine shareEngine] forkersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
             if (isRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }

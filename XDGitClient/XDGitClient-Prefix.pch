@@ -18,14 +18,13 @@
 
     #import "AccountModel.h"
     #import "XDViewManager.h"
-    #import "XDRequestManager.h"
+    #import "XDGithubEngine.h"
+//    #import "XDRequestManager.h"
 
     #import "UIImageView+AFNetworking.h"
     #import "NSString+Category.h"
     #import "NSDictionary+Category.h"
 
     #import "XDLocalDefine.h"
-
-    #define APPNAME @"XDGit"
 
 #endif

@@ -104,24 +104,22 @@
 {
     self.page = 1;
     __block __weak XDRepositoryViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
-            [weakSelf.dataArray removeAllObjects];
-            weakSelf.haveNextPage = haveNextPage;
-            if (object) {
-                for (NSDictionary *dic in object) {
-                    RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                [weakSelf tableViewDidFinishHeaderRefresh];
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
+        [weakSelf.dataArray removeAllObjects];
+        weakSelf.haveNextPage = haveNextPage;
+        if (object) {
+            for (NSDictionary *dic in object) {
+                RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
+                [weakSelf.dataArray addObject:model];
             }
-        } failure:^(NSError *error) {
-            [weakSelf tableViewDidFailHeaderRefresh];
-        }];
-        
-        [self showLoadingViewWithRequestOperation:operation];
-    });
+            
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        }
+    } failure:^(NSError *error) {
+        [weakSelf tableViewDidFailHeaderRefresh];
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 - (void)tableViewDidTriggerFooterRefresh
@@ -129,7 +127,7 @@
     self.page++;
     __block __weak XDRepositoryViewController *weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
+        AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
             weakSelf.haveNextPage = haveNextPage;
             if (object) {
                 for (NSDictionary *dic in object) {

@@ -6,16 +6,16 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperationManager.h"
 
+#import "AFNetworking.h"
 #import "XDGitEngineRequestTypes.h"
 #import "NSData+Category.h"
 
-@interface XDGitRequestClient : AFHTTPClient
+@interface XDGitRequestClient : AFHTTPRequestOperationManager
 
 @property (strong, nonatomic) NSString *userName;
 @property (strong, nonatomic) NSString *token;
-
 @property BOOL isMultiPageRequest;
 @property (strong, nonatomic) NSURL *nextPageURL;
 @property (strong, nonatomic) NSURL *lastPageURL;
@@ -53,9 +53,6 @@
                 responseType:(XDGitResponseType)responseType
                      success:(XDGitEnginePageSuccessBlock)successBlock
                      failure:(XDGitEngineFailureBlock)failureBlock;
-
-#pragma mark - login
-- (AFHTTPRequestOperation *)loginWithUserName:(NSString *)userName password:(NSString *)password success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 
 @end

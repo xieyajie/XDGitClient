@@ -153,7 +153,7 @@
         NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember], [NSNumber numberWithInt:XDRepositoryStyleStars]];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 4; i++) {
-            XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.accountModel.accountName repositoryStyle:[[typeArray objectAtIndex:i] integerValue]];
+            XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.accountModel.accountName repositoryStyle:[[typeArray objectAtIndex:i] intValue]];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -234,7 +234,7 @@
         NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
         SEL selectorMethod = NSSelectorFromString(selectorStr);
         if (selectorStr && selectorStr.length && selectorMethod) {
-            NSString *resultStr = [self.accountModel performSelector:selectorMethod];
+            NSString *resultStr = [self.accountModel performSelector:selectorMethod withObject:nil];
             if(resultStr && resultStr.length > 0)
             {
                 cell.detailTextLabel.text = resultStr;
@@ -314,7 +314,7 @@
     __block __weak XDAccountCardViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = nil;
     if (_isOwn) {
-        operation = [[[XDRequestManager defaultManager] activityGitEngine] userWithSuccess:^(id object, BOOL haveNextPage) {
+        operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
             weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];
@@ -323,7 +323,7 @@
         }];
     }
     else{
-        operation = [[[XDRequestManager defaultManager] activityGitEngine] user:_accountModel.accountName success:^(id object, BOOL haveNextPage) {
+        operation = [[XDGithubEngine shareEngine] user:_accountModel.accountName success:^(id object) {
             weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];

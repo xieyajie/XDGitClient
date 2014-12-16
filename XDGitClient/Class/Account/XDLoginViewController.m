@@ -90,7 +90,7 @@
         //用户名输入框
         if (!_usernameTextField) {
             _usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, _mainLoginView.frame.size.width - 16.0, 40.0)];
-            _usernameTextField.placeholder = @" 请输入用户名/邮箱";
+            _usernameTextField.placeholder = @" 请输入github账号";
             NSString *saveUserName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
             if (saveUserName.length) {
                 _usernameTextField.text = saveUserName;
@@ -137,8 +137,8 @@
             _rememberButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _loginButton.frame.origin.y + _loginButton.frame.size.height + 10, 100, 30)];
             _rememberButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             [_rememberButton setTitle:@" 记住密码" forState:UIControlStateNormal];
-            [_rememberButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [_rememberButton setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+            [_rememberButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [_rememberButton setTitleColor:[UIColor colorWithRed:48 / 255.0 green:169 / 255.0 blue:55 / 255.0 alpha:1.0] forState:UIControlStateSelected];
             _rememberButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
             [_rememberButton setImage:[UIImage imageNamed:@"rectangle_uncheck.png"] forState:UIControlStateNormal];
             [_rememberButton setImage:[UIImage imageNamed:@"rectangle_checked.png"] forState:UIControlStateSelected];
@@ -193,7 +193,7 @@
     
     UIAlertView *alert = nil;
     if (userName.length == 0) {
-        alert = [[UIAlertView alloc] initWithTitle:@"警告" message:@"用户名/邮箱不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"警告" message:@"github账号不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
         [alert show];
         return;
     }
@@ -202,23 +202,58 @@
         [alert show];
         return;
     }
-
-    AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] loginWithUserName:userName password:paswd success:^(id object, BOOL haveNextPage) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if (_rememberButton.selected) {
-            [defaults setValue:paswd forKey:userName];
-        }
-        else{
-            [defaults removeObjectForKey:userName];
-        }
-        
-        [self hideLoadingView];
-        [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
-    } failure:^(NSError *error) {
-        [self hideLoadingView];
-    }];
     
-    [[XDViewManager defaultManager] showLoadingViewWithTitle:@"验证账号..." requestOperation:operation];
+    __weak typeof(self) weakSelf = self;
+    __weak XDViewManager *viewManager = [XDViewManager defaultManager];
+    [viewManager showLoadingViewWithTitle:@"验证账号..." requestOperation:nil];
+    
+    __weak XDGithubEngine *engine = [XDGithubEngine shareEngine];
+    NSString *token = [engine getLocalTokenWithUsername:userName password:paswd];
+    
+    __block AFHTTPRequestOperation *operation = nil;
+    if([token length] == 0)
+    {
+        operation = [engine fetchTokenWithUsername:userName password:paswd success:^(id object) {
+            operation = [[XDGithubEngine shareEngine] loginWithUserName:userName password:paswd success:^(id object) {
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                if (_rememberButton.selected) {
+                    [defaults setValue:paswd forKey:userName];
+                }
+                else{
+                    [defaults removeObjectForKey:userName];
+                }
+                
+                [weakSelf hideLoadingView];
+                [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
+            } failure:^(NSError *error) {
+                [weakSelf hideLoadingView];
+            }];
+            
+            [viewManager showLoadingViewWithTitle:@"获取账号信息..." requestOperation:operation];
+        } failure:^(NSError *error) {
+            [self hideLoadingView];
+        }];
+        
+        [viewManager showLoadingViewWithTitle:@"授权账号..." requestOperation:operation];
+    }
+    else{
+        operation = [[XDGithubEngine shareEngine] loginWithUserName:userName password:paswd success:^(id object) {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            if (_rememberButton.selected) {
+                [defaults setValue:paswd forKey:userName];
+            }
+            else{
+                [defaults removeObjectForKey:userName];
+            }
+            
+            [weakSelf hideLoadingView];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
+        } failure:^(NSError *error) {
+            [weakSelf hideLoadingView];
+        }];
+        
+        [viewManager showLoadingViewWithTitle:@"获取账号信息..." requestOperation:operation];
+    }
 }
 
 @end

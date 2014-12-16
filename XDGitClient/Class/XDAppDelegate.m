@@ -9,7 +9,7 @@
 #import "XDAppDelegate.h"
 
 #import "XDViewController.h"
-#import "XDLoginViewController.h"
+#import "XDOauthViewController.h"
 #import "XDRootViewController.h"
 
 #import "XDConfigManager.h"
@@ -23,6 +23,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     [[XDViewManager defaultManager] setupAppearance];
+    [XDConfigManager defaultManager];
     
     [self loginStateChanged:nil];
     [self.window makeKeyAndVisible];
@@ -63,19 +64,11 @@
 
 - (void)loginStateChanged:(NSNotification *)notification
 {
-    id<XDGitEngineProtocol> activityEngine = [[XDRequestManager defaultManager] activityGitEngine];
-    [activityEngine didReset];
-    [[XDConfigManager defaultManager] didReset];
+    NSString *token = [XDConfigManager defaultManager].loginToken;
+    BOOL isLogin = ([token length] == 0) ? NO : YES;
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, activityEngine.engineKey];
-    NSString *name = [defaults objectForKey:key];
-    
-    BOOL isLogin = YES;
-    if (name == nil || name.length == 0) {
-        isLogin = NO;
-        
-        XDLoginViewController *loginController = [[XDLoginViewController alloc] init];
+    if (!isLogin) {
+        XDOauthViewController *loginController = [[XDOauthViewController alloc] init];
         self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:loginController];
     }
     else{

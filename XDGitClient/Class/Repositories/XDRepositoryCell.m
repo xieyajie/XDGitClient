@@ -84,10 +84,10 @@
         _nameLabel.frame = CGRectZero;
     }
     
-    if (_model.description && _model.description.length > 0) {
+    if (_model.describe && _model.describe.length > 0) {
         NSMutableDictionary *attributesDictionary = [NSMutableDictionary dictionary];
         [attributesDictionary setValue:[UIFont boldSystemFontOfSize:14.0] forKey:NSFontAttributeName];
-        CGRect sizeRect = [_model.description boundingRectWithSize:CGSizeMake(viewWidth - 25, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
+        CGRect sizeRect = [_model.describe boundingRectWithSize:CGSizeMake(viewWidth - 25, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
         CGFloat desH = sizeRect.size.height > 15 ? sizeRect.size.height : 15;
         _desLabel.frame = CGRectMake(15, oY, viewWidth - 25, desH);
         oY += desH + 5;
@@ -113,7 +113,7 @@
 {
     _model = model;
     _nameLabel.text = _model.name;
-    _desLabel.text = _model.description;
+    _desLabel.text = _model.describe;
     _updateLabel.text = [NSString stringWithFormat:@"更新于：%@", _model.updatedDateDes];
     [_starButton setTitle:_model.starsCountDes forState:UIControlStateNormal];
     [_forkButton setTitle:_model.forksCountDes forState:UIControlStateNormal];
@@ -127,10 +127,10 @@
         viewHeight += 25;
     }
     
-    if (model.description && model.description.length > 0) {
+    if (model.describe && model.describe.length > 0) {
         NSMutableDictionary *attributesDictionary = [NSMutableDictionary dictionary];
         [attributesDictionary setValue:[UIFont boldSystemFontOfSize:14.0] forKey:NSFontAttributeName];
-        CGRect sizeRect = [model.description boundingRectWithSize:CGSizeMake(viewWidth - 25, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
+        CGRect sizeRect = [model.describe boundingRectWithSize:CGSizeMake(viewWidth - 25, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributesDictionary context:nil];
         CGFloat desH = sizeRect.size.height > 15 ? sizeRect.size.height : 15;
         viewHeight += desH + 5;
     }

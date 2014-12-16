@@ -8,6 +8,7 @@
 
 typedef enum XDGitRequestType 
 {
+    XDGitFetchUserToken = -1,						// fetch token
 	XDGitUsersRequest = 0,						// Get more than one non-specific user
 	XDGitUserRequest,							// Get exactly one specific user
     XDGitUserEditRequest,                        // Edit the authenticated user

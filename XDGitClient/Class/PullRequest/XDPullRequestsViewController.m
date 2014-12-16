@@ -86,7 +86,7 @@
 - (void)requestDataWithRefresh:(BOOL)isRefresh
 {
     __block __weak XDPullRequestsViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[[XDRequestManager defaultManager] activityGitEngine] pullRequestsForRepository:_repoFullName state:_state page:self.page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] pullRequestsForRepository:_repoFullName state:_state page:self.page success:^(id object, BOOL haveNextPage) {
         if (isRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

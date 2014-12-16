@@ -136,7 +136,7 @@
         NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember], [NSNumber numberWithInt:XDRepositoryStyleStars]];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 4; i++) {
-            XDRepositoryViewController *projectsController = [[XDRepositoryViewController alloc] initWithProjectsStyle:[[typeArray objectAtIndex:i] integerValue]];
+            XDRepositoryViewController *projectsController = [[XDRepositoryViewController alloc] initWithProjectsStyle:[[typeArray objectAtIndex:i] intValue]];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -250,13 +250,15 @@
         UILabel *detailLabel = (UILabel *)[cell.contentView viewWithTag:100];
         detailLabel.backgroundColor = [UIColor clearColor];
         NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
-        SEL selectorMethod = NSSelectorFromString(selectorStr);
-        if (selectorStr && selectorStr.length && selectorMethod) {
-            NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
-            if(resultStr && resultStr.length > 0)
-            {
-                detailLabel.text = resultStr;
-                detailLabel.backgroundColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:226 / 255.0 alpha:0.7];
+        if (selectorStr && selectorStr.length) {
+            SEL selectorMethod = NSSelectorFromString(selectorStr);
+            if(selectorMethod){
+                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
+                if(resultStr && resultStr.length > 0)
+                {
+                    detailLabel.text = resultStr;
+                    detailLabel.backgroundColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:226 / 255.0 alpha:0.7];
+                }
             }
         }
         else{
@@ -361,9 +363,9 @@
 - (void)loadAccountData
 {
     __block __weak XDGitSideViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [_configManager loadLoginAccountWithSuccess:^(id object) {
-        AccountModel *account = (AccountModel *)object;
-        
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
+        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
+        _configManager.loginAccount = account;
         [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];
         [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
         
@@ -381,9 +383,34 @@
     } failure:^(NSError *error) {
         [weakSelf hideLoadingView];
         
+        _configManager.loginAccount = nil;
         [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
         [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
+    
+//    AFHTTPRequestOperation *operation = [_configManager loadLoginAccountWithSuccess:^(id object) {
+//        AccountModel *account = (AccountModel *)object;
+//        
+//        [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];
+//        [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
+//        
+//        [weakSelf hideLoadingView];
+//        [weakSelf.tableView reloadData];
+//        
+//        if (self.selectedIndexPath == nil) {
+//            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//            [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+//        }
+//        else{
+//            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:weakSelf.selectedIndexPath];
+//            [weakSelf.tableView selectRowAtIndexPath:weakSelf.selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+//        }
+//    } failure:^(NSError *error) {
+//        [weakSelf hideLoadingView];
+//        
+//        [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
+//        [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
+//    }];
     
     [[XDViewManager defaultManager] showLoadingViewWithTitle:@"配置账号..." requestOperation:operation];
 }

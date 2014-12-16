@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSString *Id;             //ID
 @property (strong, nonatomic) NSString *name;           //项目名称
 @property (strong, nonatomic) NSString *fullName;       //项目全称
-@property (strong, nonatomic) NSString *description;    //描述
+@property (strong, nonatomic) NSString *describe;    //描述
 @property (strong, nonatomic) NSString *createdDateDes; //创建时间描述
 @property (strong, nonatomic) NSString *updatedDateDes; //更新时间描述
 @property (strong, nonatomic) NSString *pushedDateDes;  //上传时间描述
