@@ -204,7 +204,7 @@
 - (void)loadPlistSource
 {
     __block __weak XDRepoCardViewController *weakSelf = self;
-    _operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object, BOOL haveNextPage) {
+    _operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object) {
         weakSelf.isLoadedPlist = YES;
     } failure:^(NSError *error) {
         weakSelf.isLoadedPlist = YES;

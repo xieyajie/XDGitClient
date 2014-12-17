@@ -32,6 +32,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.showRefreshHeader = YES;
+    self.showRefreshFooter = NO;
     [self tableViewDidTriggerHeaderRefresh];
 }
 

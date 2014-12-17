@@ -12,8 +12,10 @@
 #import "XDTabBarController.h"
 #import "XDRepositoryViewController.h"
 #import "XDGitsViewController.h"
-#import "XDFollowViewController.h"
-#import "XDActivityViewController.h"
+#import "XDFollowerViewController.h"
+#import "XDFollowingViewController.h"
+#import "XDEventsViewController.h"
+#import "XDNotificationsViewController.h"
 #import "XDConfigManager.h"
 
 #define KPLIST_SOURCE_OWN @"Own"
@@ -276,17 +278,21 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
         {
-            XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:self.accountModel.accountName];
-            [self.navigationController pushViewController:activityController animated:YES];
+            XDEventsViewController *eventsController = [[XDEventsViewController alloc] initWithUserName:self.accountModel.accountName];
+            [self.navigationController pushViewController:eventsController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
+        {
+            XDFollowerViewController *followerController = [[XDFollowerViewController alloc] initWithUserName:self.accountModel.accountName];
+            followerController.title = [dic objectForKey:KPLIST_KEYTITLE];
+            [self.navigationController pushViewController:followerController animated:YES];
+        }
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
         {
-            BOOL follower = controllerSelectorTag == KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER ? YES : NO;
-            XDFollowViewController *followController = [[XDFollowViewController alloc] initWithUserName:self.accountModel.accountName isFollowers:follower];
-            followController.title = [dic objectForKey:KPLIST_KEYTITLE];
-            [self.navigationController pushViewController:followController animated:YES];
+            XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:self.accountModel.accountName];
+            followingController.title = [dic objectForKey:KPLIST_KEYTITLE];
+            [self.navigationController pushViewController:followingController animated:YES];
         }
             break;
             

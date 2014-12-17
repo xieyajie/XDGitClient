@@ -12,8 +12,10 @@
 #import "XDTabBarController.h"
 #import "XDRepositoryViewController.h"
 #import "XDGitsViewController.h"
-#import "XDActivityViewController.h"
-#import "XDFollowViewController.h"
+#import "XDEventsViewController.h"
+#import "XDNotificationsViewController.h"
+#import "XDFollowerViewController.h"
+#import "XDFollowingViewController.h"
 #import "XDAccountCardViewController.h"
 #import "XDTableViewCell.h"
 #import "UIButton+AsyncImage.h"
@@ -36,11 +38,21 @@
 
 @property (strong, nonatomic) UINavigationController *reposityNavTabController;
 @property (strong, nonatomic) UINavigationController *gitsNavTabController;
-@property (strong, nonatomic) UINavigationController *activityNavController;
+@property (strong, nonatomic) UINavigationController *eventsNavController;
+@property (strong, nonatomic) UINavigationController *notifsNavController;
+@property (strong, nonatomic) UINavigationController *followerNavController;
+@property (strong, nonatomic) UINavigationController *followingNavController;
 
 @end
 
 @implementation XDGitSideViewController
+
+@synthesize reposityNavTabController = _reposityNavTabController;
+@synthesize gitsNavTabController = _gitsNavTabController;
+@synthesize eventsNavController = _eventsNavController;
+@synthesize notifsNavController = _notifsNavController;
+@synthesize followerNavController = _followerNavController;
+@synthesize followingNavController = _followingNavController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -178,14 +190,44 @@
     return _gitsNavTabController;
 }
 
-- (UINavigationController *)activityNavController
+- (UINavigationController *)eventsNavController
 {
-    if (_activityNavController == nil) {
-        XDActivityViewController *activityController = [[XDActivityViewController alloc] initWithUserName:nil];
-        _activityNavController = [[UINavigationController alloc] initWithRootViewController:activityController];
+    if (_eventsNavController == nil) {
+        XDEventsViewController *eventController = [[XDEventsViewController alloc] initWithUserName:nil];
+        _eventsNavController = [[UINavigationController alloc] initWithRootViewController:eventController];
     }
     
-    return _activityNavController;
+    return _eventsNavController;
+}
+
+- (UINavigationController *)notifsNavController
+{
+    if (_notifsNavController == nil) {
+        XDNotificationsViewController *notifsController = [[XDNotificationsViewController alloc] initWithUserName:nil];
+        _notifsNavController = [[UINavigationController alloc] initWithRootViewController:notifsController];
+    }
+    
+    return _notifsNavController;
+}
+
+- (UINavigationController *)followerNavController
+{
+    if (_followerNavController == nil) {
+        XDFollowerViewController *followerController = [[XDFollowerViewController alloc] initWithUserName:nil];
+        _followerNavController = [[UINavigationController alloc] initWithRootViewController:followerController];
+    }
+    
+    return _followerNavController;
+}
+
+- (UINavigationController *)followingNavController
+{
+    if (_followingNavController == nil) {
+        XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:nil];
+        _followingNavController = [[UINavigationController alloc] initWithRootViewController:followingController];
+    }
+    
+    return _followingNavController;
 }
 
 #pragma mark - Table view data source
@@ -287,17 +329,16 @@
                 self.deckController.centerController = self.gitsNavTabController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
+                self.deckController.centerController = self.eventsNavController;
+                break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
-                self.deckController.centerController = self.activityNavController;
+                self.deckController.centerController = self.notifsNavController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
+                self.deckController.centerController = self.followerNavController;
+                break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
-            {
-                BOOL follower = controllerSelectorTag == KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER ? YES : NO;
-                XDFollowViewController *followController = [[XDFollowViewController alloc] initWithFollowers:follower];
-                followController.title = [dic objectForKey:KPLIST_KEYTITLE];
-                self.deckController.centerController = [[UINavigationController alloc] initWithRootViewController:followController];
-            }
+                self.deckController.centerController = self.followingNavController;
                 break;
                 
             default:

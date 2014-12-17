@@ -72,6 +72,39 @@ static XDGithubEngine *engineInstance = nil;
     }
 }
 
+#pragma mark - base
+
+- (AFHTTPRequestOperation *)_requestWithPath:(NSString *)path page:(NSInteger)page parameters:(id)parameters success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"] && page > 0)
+        {
+            NSString *linkHeader = [[operation.response allHeaderFields] valueForKey:@"Link"];
+            NSArray *links = [linkHeader componentsSeparatedByString:@","];
+            //                self.nextPageURL = nil;
+            NSURL * __block blockURL = nil;
+            [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
+                NSString *rel = [[link componentsSeparatedByString:@";"][1] componentsSeparatedByString:@"\""][1];
+                if ([rel isEqualToString:@"next"])
+                {
+                    blockURL = [NSURL URLWithString:[[link componentsSeparatedByString:@";"][0] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]];
+                    *stop = YES;
+                }
+            }];
+            //                self.nextPageURL = blockURL;
+            BOOL haveNext = blockURL == nil ? NO : YES;
+            successBlock(responseObject, haveNext);
+        }
+        else{
+            successBlock(responseObject, NO);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
 #pragma mark - login
 
 - (NSString *)_accessTokenFromString:(NSString *)string
@@ -181,39 +214,67 @@ static XDGithubEngine *engineInstance = nil;
 //{
 //    return nil;
 //}
-//
-//#pragma mark - Follow
-//- (AFHTTPRequestOperation *)followers:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    if (userName == nil || userName.length == 0) {
-//        return [self followersWithPage:page success:successBlock failure:failureBlock];
-//    }
-//    else{
-//        return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/followers", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
-//    }
-//}
-//
-//- (AFHTTPRequestOperation *)followersWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:@"user/followers" requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:page success:successBlock failure:failureBlock];
-//}
-//
-//- (AFHTTPRequestOperation *)followingWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [self following:_requestClient.userName page:page success:successBlock failure:failureBlock];
-//}
-//
-//- (AFHTTPRequestOperation *)following:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    if (userName == nil || userName.length == 0)
-//    {
-//        return [self followingWithPage:page success:successBlock failure:failureBlock];
-//    }
-//    else{
-//        return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"users/%@/following", userName] requestType:XDGitUserRequest responseType:XDGitFollowersResponse page:1 success:successBlock failure:failureBlock];
-//    }
-//}
-//
+
+#pragma mark - Follow
+- (AFHTTPRequestOperation *)followers:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    if (userName == nil || userName.length == 0) {
+        return [self followersWithPage:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *path = [NSString stringWithFormat:@"users/%@/followers?page=%d&per_page=%d", userName, page, KPERPAGENUMBER];
+        AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+            successBlock(object, haveNextPage);
+        } failure:^(NSError *error) {
+            failureBlock(error);
+        }];
+        
+        return operation;
+    }
+}
+
+- (AFHTTPRequestOperation *)followersWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"user/followers?page=%d&per_page=%d", page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)followingWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"user/following?page=%d&per_page=%d", page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)following:(NSString *)userName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    if (userName == nil || userName.length == 0)
+    {
+        return [self followingWithPage:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *path = [NSString stringWithFormat:@"users/%@/following?page=%d&per_page=%d", userName, page, KPERPAGENUMBER];
+        AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+            successBlock(object, haveNextPage);
+        } failure:^(NSError *error) {
+            failureBlock(error);
+        }];
+        
+        return operation;
+    }
+}
+
 //#pragma mark - Fork
 //
 //- (AFHTTPRequestOperation *)forkersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
@@ -228,10 +289,17 @@ static XDGithubEngine *engineInstance = nil;
 
 #pragma mark - Star
 
-//- (AFHTTPRequestOperation *)stargazersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/stargazers", repositoryFullname] requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
-//}
+- (AFHTTPRequestOperation *)stargazersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"repos/%@/stargazers?page=%d&per_page=%d", repositoryFullname, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
 
 - (AFHTTPRequestOperation *)starredWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
@@ -265,37 +333,6 @@ static XDGithubEngine *engineInstance = nil;
 //}
 
 #pragma mark - Repositories
-
-- (AFHTTPRequestOperation *)_requestWithPath:(NSString *)path page:(NSInteger)page parameters:(id)parameters success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-{
-    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[[operation.response allHeaderFields] allKeys] containsObject:@"Link"] && page > 0)
-        {
-            NSString *linkHeader = [[operation.response allHeaderFields] valueForKey:@"Link"];
-            NSArray *links = [linkHeader componentsSeparatedByString:@","];
-            //                self.nextPageURL = nil;
-            NSURL * __block blockURL = nil;
-            [links enumerateObjectsUsingBlock:^(NSString *link, NSUInteger idx, BOOL *stop) {
-                NSString *rel = [[link componentsSeparatedByString:@";"][1] componentsSeparatedByString:@"\""][1];
-                if ([rel isEqualToString:@"next"])
-                {
-                    blockURL = [NSURL URLWithString:[[link componentsSeparatedByString:@";"][0] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]];
-                    *stop = YES;
-                }
-            }];
-            //                self.nextPageURL = blockURL;
-            BOOL haveNext = blockURL == nil ? NO : YES;
-            successBlock(responseObject, haveNext);
-        }
-        else{
-            successBlock(responseObject, NO);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failureBlock(error);
-    }];
-    
-    return operation;
-}
 
 - (AFHTTPRequestOperation *)repositoriesWithStyle:(XDRepositoryStyle)style includeWatched:(BOOL)watched page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
@@ -346,31 +383,50 @@ static XDGithubEngine *engineInstance = nil;
     return nil;
 }
 
-//- (AFHTTPRequestOperation *)repository:(NSString *)repositoryFullName success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@", repositoryFullName] requestType:XDGitRepositoryRequest responseType:XDGitRepositoryResponse success:successBlock failure:failureBlock];
-//}
-//
-//#pragma mark - Gits
-//- (AFHTTPRequestOperation *)gistsWithStyle:(XDGitStyle)style page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    NSString *apiPath = [NSString stringWithFormat:@"gists%@", [self typePathWithGitStyle:style]];
-//    return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitGistsRequest responseType:XDGitGistsResponse page:page success:successBlock failure:failureBlock];
-//}
-//
-//
-//- (AFHTTPRequestOperation *)gistsForUser:(NSString *)userName style:(XDGitStyle)style page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    if (userName == nil || userName.length == 0)
-//    {
-//        return [self gistsWithStyle:style page:page success:successBlock failure:failureBlock];
-//    }
-//    else{
-//        NSString *apiPath = [NSString stringWithFormat:@"users/%@/gists", userName];
-//        return [_requestClient sendRequestWithApiPath:apiPath requestType:XDGitGistsRequest responseType:XDGitGistsResponse page:page success:successBlock failure:failureBlock];
-//    }
-//}
-//
+- (AFHTTPRequestOperation *)repository:(NSString *)repositoryFullName success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"repos/%@", repositoryFullName];
+    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        successBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+#pragma mark - Gits
+- (AFHTTPRequestOperation *)gistsWithStyle:(XDGitStyle)style page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"gists%@", [self typePathWithGitStyle:style]];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+
+- (AFHTTPRequestOperation *)gistsForUser:(NSString *)userName style:(XDGitStyle)style page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    if (userName == nil || userName.length == 0)
+    {
+        return [self gistsWithStyle:style page:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *path = [NSString stringWithFormat:@"users/%@/gists?page=%d&per_page=%d", userName, page, KPERPAGENUMBER];
+        AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+            successBlock(object, haveNextPage);
+        } failure:^(NSError *error) {
+            failureBlock(error);
+        }];
+        
+        return operation;
+    }
+}
+
 //#pragma mark - Pull Request
 //- (AFHTTPRequestOperation *)pullRequestsForRepository:(NSString *)repositoryFullName state:(XDPullRequestState)state page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{

@@ -49,6 +49,7 @@
     
      __weak XDTableViewController *weakSelf = self;
     [self.tableView addPullToRefreshWithActionHandler:^{
+//        weakSelf.haveNextPage = YES;
         [weakSelf tableViewDidTriggerHeaderRefresh];
     }];
     [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -87,6 +88,17 @@
 {
     if (_showTableBlankView != showTableBlankView) {
         _showTableBlankView = showTableBlankView;
+    }
+}
+
+- (void)setHaveNextPage:(BOOL)haveNextPage
+{
+    if (_haveNextPage != haveNextPage) {
+        _haveNextPage = haveNextPage;
+        
+        if (!haveNextPage) {
+            self.showRefreshFooter = NO;
+        }
     }
 }
 
