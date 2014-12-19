@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDPageViewViewController.h"
 
-@interface XDGitsViewController : XDTableViewController
+@interface XDGitsViewController : XDPageViewViewController
 
 - (id)initWithGitsStyle:(XDGitStyle)style;
 

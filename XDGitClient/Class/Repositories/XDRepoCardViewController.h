@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDPageViewViewController.h"
 
 @class RepositoryModel;
-@interface XDRepoCardViewController : XDTableViewController
+@interface XDRepoCardViewController : XDPageViewViewController
 
 - (id)initWithRepositoryModel:(RepositoryModel *)model;
 

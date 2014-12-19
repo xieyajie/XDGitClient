@@ -6,10 +6,10 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDPageViewViewController.h"
 
 @class XDGitDeckViewController;
-@interface XDGitSideViewController : XDTableViewController
+@interface XDGitSideViewController : XDPageViewViewController
 
 @property (strong, nonatomic) XDGitDeckViewController *deckController;
 

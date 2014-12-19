@@ -78,24 +78,5 @@
     [self.navigationController pushViewController:cardController animated:YES];
 }
 
-#pragma mark - data
-
-- (void)requestDataWithRefresh:(BOOL)isRefresh
-{
-    
-}
-
-- (void)tableViewDidTriggerHeaderRefresh
-{
-    self.page = 1;
-    [self requestDataWithRefresh:YES];
-}
-
-- (void)tableViewDidTriggerFooterRefresh
-{
-    self.page++;
-    [self requestDataWithRefresh:NO];
-}
-
 
 @end

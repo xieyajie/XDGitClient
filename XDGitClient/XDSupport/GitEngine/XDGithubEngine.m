@@ -193,12 +193,21 @@ static XDGithubEngine *engineInstance = nil;
     return operation;
 }
 
-//
+
 //- (AFHTTPRequestOperation *)editUser:(NSDictionary *)userDictionary success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
+//    NSString *path = [NSString stringWithFormat:@"users/%@", userName];
+//    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        successBlock(responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failureBlock(error);
+//    }];
+//    
+//    return operation;
+//    
 //    return [_requestClient sendRequestWithApiPath:@"user" requestType:XDGitUserEditRequest responseType:XDGitUserResponse parameters:userDictionary success:successBlock failure:failureBlock];
 //}
-//
+
 //#pragma mark - Email
 //- (AFHTTPRequestOperation *)emailAddressesSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
@@ -275,17 +284,31 @@ static XDGithubEngine *engineInstance = nil;
     }
 }
 
-//#pragma mark - Fork
-//
-//- (AFHTTPRequestOperation *)forkersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/forks", repositoryFullname] requestType:XDGitRepositoryForksRequest responseType:XDGitRepositoriesResponse page:page success:successBlock failure:failureBlock];
-//}
-//
-//- (AFHTTPRequestOperation *)forkedWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:@"user/forks" requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
-//}
+#pragma mark - Fork
+
+- (AFHTTPRequestOperation *)forkersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"repos/%@/forks?page=%d&per_page=%d", repositoryFullname, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)forkedWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"user/forks?page=%d&per_page=%d", page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
 
 #pragma mark - Star
 
@@ -325,12 +348,19 @@ static XDGithubEngine *engineInstance = nil;
     return operation;
 }
 
-//#pragma mark Watching
-//
-//- (AFHTTPRequestOperation *)watchersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/watchers", repositoryFullname] requestType:XDGitUsersRequest responseType:XDGitUsersResponse page:page success:successBlock failure:failureBlock];
-//}
+#pragma mark Watching
+
+- (AFHTTPRequestOperation *)watchersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"repos/%@/watchers?page=%d&per_page=%d", repositoryFullname, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
 
 #pragma mark - Repositories
 
@@ -359,6 +389,9 @@ static XDGithubEngine *engineInstance = nil;
         if (userName == nil || userName.length == 0)
         {
             return [self starredWithPage:page success:successBlock failure:failureBlock];
+        }
+        else{
+            return [self starredWithUserName:userName page:page success:successBlock failure:failureBlock];
         }
     }
     else
@@ -427,21 +460,83 @@ static XDGithubEngine *engineInstance = nil;
     }
 }
 
-//#pragma mark - Pull Request
-//- (AFHTTPRequestOperation *)pullRequestsForRepository:(NSString *)repositoryFullName state:(XDPullRequestState)state page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+#pragma mark - Events
+
+- (AFHTTPRequestOperation *)allPublicEventsWithPage:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"events?page=%d&per_page=%d", page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
+//- (AFHTTPRequestOperation *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
-//    NSString *stateStr = state == XDPullRequestStateOpen ? @"open" : @"closed";
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls?state=%@", repositoryFullName, stateStr] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
+//    
 //}
 //
-//- (AFHTTPRequestOperation *)pullRequest:(NSString *)pullRequestId forRepository:(NSString *)repositoryFullName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//- (AFHTTPRequestOperation *)issueEventsForRepository:(NSString *)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
-//    if (pullRequestId == nil || pullRequestId.length == 0) {
-//        return [self pullRequestsForRepository:repositoryFullName state:XDPullRequestStateOpen page:page success:successBlock failure:failureBlock];
-//    }
 //    
-//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls/%@", repositoryFullName, pullRequestId] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
 //}
+//
+//- (AFHTTPRequestOperation *)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    
+//}
+
+#pragma mark - Notification
+
+//- (AFHTTPRequestOperation *)notificationsWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    
+//}
+//
+//- (AFHTTPRequestOperation *)notificationsForRepository:(NSString *)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+//{
+//    
+//}
+
+#pragma mark - Pull Request
+- (AFHTTPRequestOperation *)pullRequestsForRepository:(NSString *)repositoryFullName state:(XDPullRequestState)state page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *stateStr = state == XDPullRequestStateOpen ? @"open" : @"closed";
+    NSString *path = [NSString stringWithFormat:@"repos/%@/pulls?state=%@&page=%d&per_page=%d", repositoryFullName, stateStr, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+    
+//    NSString *stateStr = state == XDPullRequestStateOpen ? @"open" : @"closed";
+//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls?state=%@", repositoryFullName, stateStr] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
+}
+
+- (AFHTTPRequestOperation *)pullRequest:(NSString *)pullRequestId forRepository:(NSString *)repositoryFullName page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    AFHTTPRequestOperation *operation = nil;
+    if (pullRequestId == nil || pullRequestId.length == 0) {
+        operation = [self pullRequestsForRepository:repositoryFullName state:XDPullRequestStateOpen page:page success:successBlock failure:failureBlock];
+    }
+    else{
+        NSString *path = [NSString stringWithFormat:@"repos/%@/pulls/%@?page=%d&per_page=%d", repositoryFullName, pullRequestId, page, KPERPAGENUMBER];
+        operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+            successBlock(object, haveNextPage);
+        } failure:^(NSError *error) {
+            failureBlock(error);
+        }];
+    }
+    
+    return operation;
+    
+//    return [_requestClient sendRequestWithApiPath:[NSString stringWithFormat:@"repos/%@/pulls/%@", repositoryFullName, pullRequestId] requestType:XDGitPullRequestsRequest responseType:XDGitPullRequestsResponse page:page success:successBlock failure:failureBlock];
+}
 
 #pragma mark - private
 

@@ -43,7 +43,7 @@
 
 #pragma mark - data
 
-- (void)requestDataWithRefresh:(BOOL)isRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     if (_fullName == nil || _fullName.length == 0) {
         return;
@@ -53,8 +53,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [[XDGithubEngine shareEngine] forkersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
-            if (isRefresh) {
+        operation = [[XDGithubEngine shareEngine] forkersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
+            if (isHeaderRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }
             weakSelf.haveNextPage = haveNextPage;
@@ -64,12 +64,23 @@
                     RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
                     [weakSelf.dataArray addObject:model.owner];
                 }
-                
+            }
+            
+            if (isHeaderRefresh) {
                 [weakSelf tableViewDidFinishHeaderRefresh];
             }
+            else{
+                [weakSelf tableViewDidFinishFooterRefresh];
+            }
         } failure:^(NSError *error) {
-            [weakSelf tableViewDidFailHeaderRefresh];
+            if (isHeaderRefresh) {
+                [weakSelf tableViewDidFailHeaderRefresh];
+            }
+            else{
+                [weakSelf tableViewDidFailFooterRefresh];
+            }
         }];
+        
         [self showLoadingViewWithRequestOperation:operation];
     });
 }

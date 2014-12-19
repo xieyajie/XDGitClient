@@ -8,6 +8,8 @@
 
 #import "XDEventsViewController.h"
 
+#import "EventModel.h"
+
 @interface XDEventsViewController ()
 {
     NSString *_userName;
@@ -44,28 +46,38 @@
 
 #pragma mark - data
 
-- (void)tableViewDidTriggerHeaderRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
-    [self showLoadingView];
-    //    __block __weak XDActivityViewController *weakSelf = self;
-    //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    //        [[XDRequestManager defaultManager] allActivityWithSuccess:^(id object) {
-    //            [weakSelf.dataArray removeAllObjects];
-    //            if (object) {
-    //                for (NSDictionary *dic in object) {
-    //
-    //                }
-    //
-    //                [weakSelf tableViewDidFinishHeaderRefresh];
-    //            }
-    //        } failure:^(NSError *error) {
-    //            [weakSelf tableViewDidFinishHeaderRefresh];
-    //            dispatch_async(dispatch_get_main_queue(), ^{
-    //                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"错误" message:@"获取数据失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-    //                [alertView show];
-    //            });
-    //        }];
-    //    });
+    __block __weak XDEventsViewController *weakSelf = self;
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] allPublicEventsWithPage:self.page success:^(id object, BOOL haveNextPage) {
+        if (isHeaderRefresh) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        weakSelf.haveNextPage = haveNextPage;
+        
+        if (object) {
+            for (NSDictionary *dic in object) {
+                EventModel *model = [[EventModel alloc] initWithDictionary:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+        }
+        
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFinishFooterRefresh];
+        }
+    } failure:^(NSError *error) {
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFailFooterRefresh];
+        }
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 @end

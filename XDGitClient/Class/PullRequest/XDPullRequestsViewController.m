@@ -83,11 +83,11 @@
 
 #pragma mark - data
 
-- (void)requestDataWithRefresh:(BOOL)isRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDPullRequestsViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] pullRequestsForRepository:_repoFullName state:_state page:self.page success:^(id object, BOOL haveNextPage) {
-        if (isRefresh) {
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] pullRequestsForRepository:_repoFullName state:_state page:page success:^(id object, BOOL haveNextPage) {
+        if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }
         weakSelf.haveNextPage = haveNextPage;
@@ -97,26 +97,24 @@
                 PullRequestModel *model = [[PullRequestModel alloc] initWithDictionary:dic];
                 [weakSelf.dataArray addObject:model];
             }
-            
+        }
+        
+        if (isHeaderRefresh) {
             [weakSelf tableViewDidFinishHeaderRefresh];
         }
+        else{
+            [weakSelf tableViewDidFinishFooterRefresh];
+        }
     } failure:^(NSError *error) {
-        [weakSelf tableViewDidFailHeaderRefresh];
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFailFooterRefresh];
+        }
     }];
     
     [self showLoadingViewWithRequestOperation:operation];
-}
-
-- (void)tableViewDidTriggerHeaderRefresh
-{
-    self.page = 1;
-    [self requestDataWithRefresh:YES];
-}
-
-- (void)tableViewDidTriggerFooterRefresh
-{
-    self.page++;
-    [self requestDataWithRefresh:NO];
 }
 
 @end

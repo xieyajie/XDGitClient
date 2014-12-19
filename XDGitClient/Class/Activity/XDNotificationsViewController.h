@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDPageViewViewController.h"
 
-@interface XDNotificationsViewController : XDTableViewController
+@interface XDNotificationsViewController : XDPageViewViewController
 
 - (id)initWithUserName:(NSString *)userName;
 

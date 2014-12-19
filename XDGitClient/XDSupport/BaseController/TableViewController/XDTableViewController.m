@@ -17,13 +17,20 @@
 
 @implementation XDTableViewController
 
+@synthesize tableView = _tableView;
+
+@synthesize dataArray = _dataArray;
+@synthesize dataDictionary = _dataDictionary;
+
+@synthesize showRefreshHeader = _showRefreshHeader;
+@synthesize showRefreshFooter = _showRefreshFooter;
+@synthesize showTableBlankView = _showTableBlankView;
+
 - (id)init
 {
     self = [super init];
     if (self) {
         _tableViewStyle = UITableViewStylePlain;
-        _page = 1;
-        _haveNextPage = NO;
         
         _showRefreshHeader = NO;
         _showRefreshFooter = NO;
@@ -88,17 +95,6 @@
 {
     if (_showTableBlankView != showTableBlankView) {
         _showTableBlankView = showTableBlankView;
-    }
-}
-
-- (void)setHaveNextPage:(BOOL)haveNextPage
-{
-    if (_haveNextPage != haveNextPage) {
-        _haveNextPage = haveNextPage;
-        
-        if (!haveNextPage) {
-            self.showRefreshFooter = NO;
-        }
     }
 }
 
@@ -204,7 +200,6 @@
         
         [weakSelf.tableView.pullToRefreshView stopAnimating];
         
-        weakSelf.showRefreshFooter = weakSelf.haveNextPage;
         [weakSelf hideLoadingView];
     });
 }
@@ -233,7 +228,6 @@
         }
         
         [weakSelf.tableView.infiniteScrollingView stopAnimating];
-        weakSelf.showRefreshFooter = weakSelf.haveNextPage;
         [weakSelf hideLoadingView];
     });
 }

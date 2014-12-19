@@ -6,14 +6,12 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDTableViewController.h"
+#import "XDPageViewViewController.h"
 
-@interface XDAccountViewController : XDTableViewController
+@interface XDAccountViewController : XDPageViewViewController
 
 @property (strong, nonatomic) NSString *userName;
 
 - (id)initWithUsername:(NSString *)userName;
-
-- (void)requestDataWithRefresh:(BOOL)isRefresh;
 
 @end

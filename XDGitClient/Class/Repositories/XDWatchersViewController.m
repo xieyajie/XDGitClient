@@ -41,35 +41,42 @@
 
 #pragma mark - data
 
-- (void)requestDataWithRefresh:(BOOL)isRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     if (_fullName == nil || _fullName.length == 0) {
         return;
     }
     
     __block __weak XDWatchersViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = nil;
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] watchersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
+        if (isHeaderRefresh) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        weakSelf.haveNextPage = haveNextPage;
         
-        operation = [[XDGithubEngine shareEngine] watchersForRepository:_fullName page:self.page success:^(id object, BOOL haveNextPage) {
-            if (isRefresh) {
-                [weakSelf.dataArray removeAllObjects];
+        if (object) {
+            for (NSDictionary *dic in object) {
+                AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
+                [weakSelf.dataArray addObject:model];
             }
-            weakSelf.haveNextPage = haveNextPage;
-            
-            if (object) {
-                for (NSDictionary *dic in object) {
-                    AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                [weakSelf tableViewDidFinishHeaderRefresh];
-            }
-        } failure:^(NSError *error) {
+        }
+        
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFinishFooterRefresh];
+        }
+    } failure:^(NSError *error) {
+        if (isHeaderRefresh) {
             [weakSelf tableViewDidFailHeaderRefresh];
-        }];
-        [self showLoadingViewWithRequestOperation:operation];
-    });
+        }
+        else{
+            [weakSelf tableViewDidFailFooterRefresh];
+        }
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 @end
