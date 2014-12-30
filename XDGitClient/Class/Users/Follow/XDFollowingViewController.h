@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDAccountViewController.h"
+#import "XDUsersViewController.h"
 
-@interface XDFollowingViewController : XDAccountViewController
+@interface XDFollowingViewController : XDUsersViewController
 
 - (id)initWithUserName:(NSString *)userName;
 

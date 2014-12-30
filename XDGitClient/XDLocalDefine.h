@@ -104,16 +104,16 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KCONFIG_SORT_REPOSITORY_TYPE @"repositorySortType"
 
 //account
-#define KACCOUNT_ID @"id"
-#define KACCOUNT_NAME @"login"
-#define KACCOUNT_AVATARURL @"avatar_url"
-#define KACCOUNT_COMPANY @"company"
-#define KACCOUNT_EMAIL @"email"
-#define KACCOUNT_WEBURL @"html_url"
-#define KACCOUNT_LOCATION @"location"
-#define KACCOUNT_FOLLOWER @"followers"
-#define KACCOUNT_FOLLOWING @"following"
-#define KACCOUNT_TYPE @"type"
+#define KUSER_ID @"id"
+#define KUSER_NAME @"login"
+#define KUSER_AVATARURL @"avatar_url"
+#define KUSER_COMPANY @"company"
+#define KUSER_EMAIL @"email"
+#define KUSER_WEBURL @"html_url"
+#define KUSER_LOCATION @"location"
+#define KUSER_FOLLOWER @"followers"
+#define KUSER_FOLLOWING @"following"
+#define KUSER_TYPE @"type"
 
 //Repository
 #define KREPO_ID @"id"

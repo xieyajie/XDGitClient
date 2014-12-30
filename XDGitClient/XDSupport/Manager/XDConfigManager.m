@@ -16,7 +16,7 @@ static XDConfigManager *defaultManagerInstance = nil;
 @synthesize appConfig = _appConfig;
 
 @synthesize loginToken = _loginToken;
-@synthesize loginAccount = _loginAccount;
+@synthesize loginUser = _loginUser;
 
 - (id)init
 {
@@ -67,12 +67,12 @@ static XDConfigManager *defaultManagerInstance = nil;
     }
 }
 
-- (void)setLoginAccount:(AccountModel *)loginAccount
+- (void)setLoginUser:(UserModel *)loginUser
 {
-    _loginAccount = loginAccount;
+    _loginUser = loginUser;
     
-    if (![_appConfig.loginUsername isEqualToString:loginAccount.accountName]) {
-        _appConfig.loginUsername = loginAccount.accountName;
+    if (![_appConfig.loginUsername isEqualToString:loginUser.userName]) {
+        _appConfig.loginUsername = loginUser.userName;
         [self save];
     }
 }
@@ -88,25 +88,5 @@ static XDConfigManager *defaultManagerInstance = nil;
     }
     return ret;
 }
-
-//- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object, BOOL haveNextPage) {
-//        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
-//        self.loginAccount = account;
-//        successBlock(account);
-//    } failure:^(NSError *error) {
-//        self.loginAccount = nil;
-//        failureBlock(error);
-//    }];
-//    
-//    return operation;
-//}
-//
-//- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
-//{
-//    [self _loadConfigInfo];
-//    return [self loadLoginAccountWithSuccess:successBlock failure:failureBlock];
-//}
 
 @end

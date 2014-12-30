@@ -1,5 +1,5 @@
 //
-//  AccountModel.h
+//  UserModel.h
 //  XDGitClient
 //
 //  Created by dhcdht on 14-2-17.
@@ -8,10 +8,10 @@
 
 #import "XDBaseModel.h"
 
-@interface AccountModel : XDBaseModel
+@interface UserModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *accountId;      //ID
-@property (strong, nonatomic) NSString *accountName;    //用户名称
+@property (strong, nonatomic) NSString *uId;      //ID
+@property (strong, nonatomic) NSString *userName;    //用户名称
 @property (strong, nonatomic) NSString *avatarUrl;      //头像网络地址
 @property (strong, nonatomic) NSString *accountType;    //用户类型
 @property (strong, nonatomic) NSString *company;        //公司名称

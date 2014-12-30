@@ -9,7 +9,7 @@
 #import "XDRepoCardViewController.h"
 
 #import "RepositoryModel.h"
-#import "XDAccountCardViewController.h"
+#import "XDUserCardViewController.h"
 #import "XDForkersViewController.h"
 #import "XDStargazersViewController.h"
 #import "XDWatchersViewController.h"
@@ -143,8 +143,8 @@
         case KPLIST_VALUE_CONTROLLERSELECTOR_ACCOUNT:
         {
             if (self.repoModel.owner) {
-                XDAccountCardViewController *accountController = [[XDAccountCardViewController alloc] initWithAccount:self.repoModel.owner];
-                [self.navigationController pushViewController:accountController animated:YES];
+                XDUserCardViewController *cardController = [[XDUserCardViewController alloc] initWithUser:self.repoModel.owner];
+                [self.navigationController pushViewController:cardController animated:YES];
             }
         }
             break;

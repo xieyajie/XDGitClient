@@ -56,7 +56,7 @@
         
         if (object) {
             for (NSDictionary *dic in object) {
-                AccountModel *model = [[AccountModel alloc] initWithDictionary:dic];
+                UserModel *model = [[UserModel alloc] initWithDictionary:dic];
                 [weakSelf.dataArray addObject:model];
             }
         }

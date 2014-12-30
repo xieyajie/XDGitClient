@@ -16,7 +16,7 @@
 #import "XDNotificationsViewController.h"
 #import "XDFollowerViewController.h"
 #import "XDFollowingViewController.h"
-#import "XDAccountCardViewController.h"
+#import "XDUserCardViewController.h"
 #import "XDTableViewCell.h"
 #import "UIButton+AsyncImage.h"
 
@@ -86,7 +86,7 @@
     UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     
     [self.navigationItem setLeftBarButtonItems:@[leftItem, refreshItem, settingItem]];
-    [self loadAccountData];
+    [self fetchUserInfo];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
@@ -295,7 +295,7 @@
         if (selectorStr && selectorStr.length) {
             SEL selectorMethod = NSSelectorFromString(selectorStr);
             if(selectorMethod){
-                NSString *resultStr = [_configManager.loginAccount performSelector:selectorMethod];
+                NSString *resultStr = [_configManager.loginUser performSelector:selectorMethod];
                 if(resultStr && resultStr.length > 0)
                 {
                     detailLabel.text = resultStr;
@@ -366,7 +366,7 @@
 
 - (void)accountCardAction
 {
-    XDAccountCardViewController *cardController = [[XDAccountCardViewController alloc] initWithStyle:UITableViewStylePlain];
+    XDUserCardViewController *cardController = [[XDUserCardViewController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *cardNavigation = [[UINavigationController alloc] initWithRootViewController:cardController];
     UIBarButtonItem *cancleItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:cardController action:@selector(dismissButtonTapped:)];
     
@@ -377,7 +377,7 @@
 
 - (void)refreshAction
 {
-    [self loadAccountData];
+    [self fetchUserInfo];
 }
 
 - (void)settingAction
@@ -401,14 +401,14 @@
 
 #pragma mark - private
 
-- (void)loadAccountData
+- (void)fetchUserInfo
 {
     __block __weak XDGitSideViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
-        AccountModel *account = [[AccountModel alloc] initWithDictionary:object];
-        _configManager.loginAccount = account;
+        UserModel *account = [[UserModel alloc] initWithDictionary:object];
+        _configManager.loginUser = account;
         [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];
-        [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
+        [weakSelf.accountButton setTitle:account.userName forState:UIControlStateNormal];
         
         [weakSelf hideLoadingView];
         [weakSelf.tableView reloadData];
@@ -424,7 +424,7 @@
     } failure:^(NSError *error) {
         [weakSelf hideLoadingView];
         
-        _configManager.loginAccount = nil;
+        _configManager.loginUser = nil;
         [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
         [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];

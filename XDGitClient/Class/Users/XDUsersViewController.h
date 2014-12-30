@@ -1,5 +1,5 @@
 //
-//  XDAccountViewController.h
+//  XDUsersViewController.h
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
@@ -8,7 +8,7 @@
 
 #import "XDPageViewViewController.h"
 
-@interface XDAccountViewController : XDPageViewViewController
+@interface XDUsersViewController : XDPageViewViewController
 
 @property (strong, nonatomic) NSString *userName;
 

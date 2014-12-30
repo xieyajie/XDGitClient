@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDAccountViewController.h"
+#import "XDUsersViewController.h"
 
-@interface XDForkersViewController : XDAccountViewController
+@interface XDForkersViewController : XDUsersViewController
 
 - (id)initWithRepoFullname:(NSString *)fullName;
 

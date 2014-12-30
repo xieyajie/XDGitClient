@@ -10,7 +10,7 @@
 
 @interface RepositoryModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *Id;             //ID
+@property (strong, nonatomic) NSString *rid;             //ID
 @property (strong, nonatomic) NSString *name;           //项目名称
 @property (strong, nonatomic) NSString *fullName;       //项目全称
 @property (strong, nonatomic) NSString *describe;    //描述
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSString *pushedDateDes;  //上传时间描述
 @property (strong, nonatomic) NSString *sizeDes;        //大小描述
 @property (strong, nonatomic) NSString *language;       //语言
-@property (strong, nonatomic) AccountModel *owner;      //所有者
+@property (strong, nonatomic) UserModel *owner;      //所有者
 @property (strong, nonatomic) NSString *defaultBranch;  //默认分支
 
 @property (nonatomic) BOOL isPrivate; //是否私有

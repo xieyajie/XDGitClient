@@ -16,10 +16,9 @@
 
     #import "AFNetworking.h"
 
-    #import "AccountModel.h"
+    #import "UserModel.h"
     #import "XDViewManager.h"
     #import "XDGithubEngine.h"
-//    #import "XDRequestManager.h"
 
     #import "UIImageView+AFNetworking.h"
     #import "NSString+Category.h"

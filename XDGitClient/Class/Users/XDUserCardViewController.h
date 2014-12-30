@@ -1,5 +1,5 @@
 //
-//  XDAccountCardViewController.h
+//  XDUserCardViewController.h
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-18.
@@ -8,9 +8,9 @@
 
 #import "XDPageViewViewController.h"
 
-@interface XDAccountCardViewController : XDPageViewViewController
+@interface XDUserCardViewController : XDPageViewViewController
 
-- (id)initWithAccount:(AccountModel *)model;
+- (id)initWithUser:(UserModel *)model;
 
 - (void)dismissButtonTapped:(id)sender;
 

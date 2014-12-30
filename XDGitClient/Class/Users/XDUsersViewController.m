@@ -1,21 +1,21 @@
 //
-//  XDAccountViewController.m
+//  XDUsersViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-21.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDAccountViewController.h"
+#import "XDUsersViewController.h"
 
 #import "XDTableViewCell.h"
-#import "XDAccountCardViewController.h"
+#import "XDUserCardViewController.h"
 
-@interface XDAccountViewController ()
+@interface XDUsersViewController ()
 
 @end
 
-@implementation XDAccountViewController
+@implementation XDUsersViewController
 
 - (id)initWithUsername:(NSString *)userName
 {
@@ -57,9 +57,9 @@
         cell.titleLabel.font = [UIFont systemFontOfSize:15.0];
     }
     
-    AccountModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    UserModel *model = [self.dataArray objectAtIndex:indexPath.row];
     [cell.headerImageView setImageWithURL:[NSURL URLWithString:model.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
-    cell.titleLabel.text = model.accountName;
+    cell.titleLabel.text = model.userName;
     
     return cell;
 }
@@ -73,8 +73,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    AccountModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    XDAccountCardViewController *cardController = [[XDAccountCardViewController alloc] initWithAccount:model];
+    UserModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    XDUserCardViewController *cardController = [[XDUserCardViewController alloc] initWithUser:model];
     [self.navigationController pushViewController:cardController animated:YES];
 }
 

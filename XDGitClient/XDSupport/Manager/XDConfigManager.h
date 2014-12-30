@@ -18,14 +18,8 @@
 
 @property (strong, nonatomic) NSString *loginToken;//登录token
 
-@property (strong, nonatomic) AccountModel *loginAccount;//登录账号
+@property (strong, nonatomic) UserModel *loginUser;//登录账号
 
 + (XDConfigManager *)defaultManager;
-
-//- (AFHTTPRequestOperation *)loadLoginAccountWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
-
-//- (BOOL)save;
-//- (void)reset;
-//- (AFHTTPRequestOperation *)didResetWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 @end

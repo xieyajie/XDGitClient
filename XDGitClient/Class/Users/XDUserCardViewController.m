@@ -1,12 +1,12 @@
 //
-//  XDAccountCardViewController.m
+//  XDUserCardViewController.m
 //  XDGitClient
 //
 //  Created by xieyajie on 14-2-18.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDAccountCardViewController.h"
+#import "XDUserCardViewController.h"
 
 #import "XDTableViewCell.h"
 #import "XDTabBarController.h"
@@ -21,12 +21,12 @@
 #define KPLIST_SOURCE_OWN @"Own"
 #define KPLIST_SOURCE_OTHER @"Other"
 
-@interface XDAccountCardViewController ()
+@interface XDUserCardViewController ()
 {
     BOOL _isOwn;
 }
 
-@property (strong, nonatomic) AccountModel *accountModel;
+@property (strong, nonatomic) UserModel *userModel;
 
 @property (strong, nonatomic) NSArray *plistSourceArray;
 @property (strong, nonatomic) NSArray *titleArray;
@@ -38,7 +38,7 @@
 
 @end
 
-@implementation XDAccountCardViewController
+@implementation XDUserCardViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,23 +46,23 @@
     if (self) {
         // Custom initialization
         _isOwn = YES;
-        _accountModel = [[XDConfigManager defaultManager] loginAccount];
+        _userModel = [[XDConfigManager defaultManager] loginUser];
     }
     return self;
 }
 
-- (id)initWithAccount:(AccountModel *)model
+- (id)initWithUser:(UserModel *)model
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         // Custom initialization
-        AccountModel *loginAccount = [[XDConfigManager defaultManager] loginAccount];
-        if ([model.accountId integerValue] == [loginAccount.accountId integerValue]) {
-            _accountModel = loginAccount;
+        UserModel *loginAccount = [[XDConfigManager defaultManager] loginUser];
+        if ([model.uId integerValue] == [loginAccount.uId integerValue]) {
+            _userModel = loginAccount;
             _isOwn = YES;
         }
         else{
-            _accountModel = model;
+            _userModel = model;
             _isOwn = NO;
         }
     }
@@ -73,7 +73,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = self.accountModel.accountName;
+    self.title = self.userModel.userName;
     self.showRefreshHeader = YES;
     [self.navigationItem setRightBarButtonItem:self.acttentionItem];
     self.tableView.tableFooterView = [[UIView alloc] init];
@@ -108,7 +108,7 @@
     if(_headerImageView == nil)
     {
         _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
-        [_headerImageView setImageWithURL:[NSURL URLWithString:self.accountModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
+        [_headerImageView setImageWithURL:[NSURL URLWithString:self.userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
         
         if (_isOwn) {
             _headerImageView.userInteractionEnabled = YES;
@@ -137,7 +137,7 @@
 - (NSArray *)plistSourceArray
 {
     if (_plistSourceArray == nil) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"accountCard" ofType:@"plist"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"userCard" ofType:@"plist"];
         NSDictionary *sourcrDic = [NSDictionary dictionaryWithContentsOfFile:path];
         NSString *sourceKey = _isOwn ? KPLIST_SOURCE_OWN : KPLIST_SOURCE_OTHER;
         _plistSourceArray = [sourcrDic objectForKey:sourceKey];
@@ -155,7 +155,7 @@
         NSArray *typeArray = @[[NSNumber numberWithInt:XDRepositoryStyleAll], [NSNumber numberWithInt:XDRepositoryStyleOwner], [NSNumber numberWithInt:XDRepositoryStyleMember], [NSNumber numberWithInt:XDRepositoryStyleStars]];
         NSMutableArray *controllers = [NSMutableArray array];
         for (int i = 0; i < 4; i++) {
-            XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.accountModel.accountName repositoryStyle:[[typeArray objectAtIndex:i] intValue]];
+            XDRepositoryViewController *controller = [[XDRepositoryViewController alloc] initWithUserName:self.userModel.userName repositoryStyle:[[typeArray objectAtIndex:i] intValue]];
             UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:[titleArray objectAtIndex:i] image:nil tag:i];
             [tabBarItem setImage:[UIImage imageNamed:[imageArray objectAtIndex:i]]];
             [tabBarItem setSelectedImage:[UIImage imageNamed:[selectedImageArray objectAtIndex:i]]];
@@ -174,7 +174,7 @@
 - (XDGitsViewController *)gitsController
 {
     if (_gitsController == nil) {
-        _gitsController = [[XDGitsViewController alloc] initWithUserName:self.accountModel.accountName gitsStyle:XDGitStyleAll];
+        _gitsController = [[XDGitsViewController alloc] initWithUserName:self.userModel.userName gitsStyle:XDGitStyleAll];
         _gitsController.title = @"Gits";
     }
     
@@ -183,10 +183,10 @@
 
 #pragma mark - setter
 
-- (void)setAccountModel:(AccountModel *)accountModel
+- (void)setUserModel:(UserModel *)userModel
 {
-    _accountModel = accountModel;
-    [self.headerImageView setImageWithURL:[NSURL URLWithString:accountModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
+    _userModel = userModel;
+    [self.headerImageView setImageWithURL:[NSURL URLWithString:userModel.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"]];
 }
 
 #pragma mark - Table view data source
@@ -228,7 +228,7 @@
     if (indexPath.section == 0 && indexPath.row == 0) {
         cell.textLabel.text = @"";
         [cell.contentView addSubview:self.headerImageView];
-        cell.detailTextLabel.text = self.accountModel.accountName;
+        cell.detailTextLabel.text = self.userModel.userName;
     }
     else{
         cell.textLabel.text = [dic objectForKey:KPLIST_KEYTITLE];
@@ -236,7 +236,7 @@
         NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
         SEL selectorMethod = NSSelectorFromString(selectorStr);
         if (selectorStr && selectorStr.length && selectorMethod) {
-            NSString *resultStr = [self.accountModel performSelector:selectorMethod withObject:nil];
+            NSString *resultStr = [self.userModel performSelector:selectorMethod withObject:nil];
             if(resultStr && resultStr.length > 0)
             {
                 cell.detailTextLabel.text = resultStr;
@@ -268,6 +268,7 @@
     
     NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     NSInteger controllerSelectorTag = [[dic objectForKey:KPLIST_KEYCONTROLLERSELECTOR] integerValue];
+    NSString *userName = self.userModel.userName;
     
     switch (controllerSelectorTag) {
         case KPLIST_VALUE_CONTROLLERSELECTOR_REPO:
@@ -278,19 +279,19 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
         {
-            XDEventsViewController *eventsController = [[XDEventsViewController alloc] initWithUserName:self.accountModel.accountName];
+            XDEventsViewController *eventsController = [[XDEventsViewController alloc] initWithUserName:userName];
             [self.navigationController pushViewController:eventsController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
         {
-            XDFollowerViewController *followerController = [[XDFollowerViewController alloc] initWithUserName:self.accountModel.accountName];
+            XDFollowerViewController *followerController = [[XDFollowerViewController alloc] initWithUserName:userName];
             followerController.title = [dic objectForKey:KPLIST_KEYTITLE];
             [self.navigationController pushViewController:followerController animated:YES];
         }
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
         {
-            XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:self.accountModel.accountName];
+            XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:userName];
             followingController.title = [dic objectForKey:KPLIST_KEYTITLE];
             [self.navigationController pushViewController:followingController animated:YES];
         }
@@ -317,11 +318,11 @@
 
 - (void)tableViewDidTriggerHeaderRefresh
 {
-    __block __weak XDAccountCardViewController *weakSelf = self;
+    __block __weak XDUserCardViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = nil;
     if (_isOwn) {
         operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
-            weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
+            weakSelf.userModel = [[UserModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];
         } failure:^(NSError *error) {
@@ -329,8 +330,8 @@
         }];
     }
     else{
-        operation = [[XDGithubEngine shareEngine] user:_accountModel.accountName success:^(id object) {
-            weakSelf.accountModel = [[AccountModel alloc] initWithDictionary:object];
+        operation = [[XDGithubEngine shareEngine] user:_userModel.userName success:^(id object) {
+            weakSelf.userModel = [[UserModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];
         } failure:^(NSError *error) {

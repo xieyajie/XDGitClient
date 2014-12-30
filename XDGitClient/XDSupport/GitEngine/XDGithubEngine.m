@@ -474,6 +474,18 @@ static XDGithubEngine *engineInstance = nil;
     return operation;
 }
 
+- (AFHTTPRequestOperation *)eventsForUsername:(NSString *)username page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"users/%@/received_events?page=%d&per_page=%d", username, page, KPERPAGENUMBER];
+    AFHTTPRequestOperation *operation = [self _requestWithPath:path page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
 //- (AFHTTPRequestOperation *)eventsForIssue:(NSInteger)issueId forRepository:(NSString *)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
 //    

@@ -19,7 +19,7 @@
         self.content = [dictionary safeStringForKey:KPULLREQUEST_CONTENT];
         self.createdDateDes = [dictionary objectForKey:KPULLREQUEST_CREATE];
         self.updatedDateDes = [dictionary objectForKey:KPULLREQUEST_UPDATE];
-        self.owner = [[AccountModel alloc] initWithDictionary:[dictionary objectForKey:KPULLREQUEST_OWNER]];
+        self.owner = [[UserModel alloc] initWithDictionary:[dictionary objectForKey:KPULLREQUEST_OWNER]];
     }
     
     return self;

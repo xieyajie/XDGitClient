@@ -9,6 +9,7 @@
 #import "XDEventsViewController.h"
 
 #import "EventModel.h"
+#import "XDConfigManager.h"
 
 @interface XDEventsViewController ()
 {
@@ -49,7 +50,9 @@
 - (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDEventsViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] allPublicEventsWithPage:self.page success:^(id object, BOOL haveNextPage) {
+    
+    NSString *account = [XDConfigManager defaultManager].loginUser.userName;
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] eventsForUsername:account page:page success:^(id object, BOOL haveNextPage) {
         if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

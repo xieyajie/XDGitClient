@@ -16,7 +16,7 @@
 {
     self = [super init];
     if (self) {
-        self.Id = [dictionary safeStringForKey:KREPO_ID];
+        self.rid = [dictionary safeStringForKey:KREPO_ID];
         self.name = [dictionary safeStringForKey:KREPO_NAME];
         self.fullName = [dictionary safeStringForKey:KREPO_FULLNAME];
         self.createdDateDes = [dictionary safeStringForKey:KREPO_CREATE];
@@ -25,7 +25,7 @@
         self.language = [dictionary safeStringForKey:KREPO_LANGUAGE];
         self.sizeDes = [[dictionary safeStringForKey:KREPO_SIZE] fileSizeDescription];
         self.describe = [dictionary safeStringForKey:KREPO_DESC];
-        self.owner = [[AccountModel alloc] initWithDictionary:[dictionary objectForKey:KREPO_OWNER]];
+        self.owner = [[UserModel alloc] initWithDictionary:[dictionary objectForKey:KREPO_OWNER]];
         self.defaultBranch = [dictionary safeStringForKey:KREPO_DEFAULTBRANCH];
 
         self.forksCountDes = [dictionary safeStringForKey:KREPO_FORKSCOUNT];
@@ -36,7 +36,7 @@
         self.isPrivate = [[dictionary objectForKey:KREPO_PRIVATESTATE] boolValue];
         self.isFork = [[dictionary objectForKey:KREPO_FORKSTATE] boolValue];
         
-        self.ownerName = self.owner ? self.owner.accountName : @"";
+        self.ownerName = self.owner ? self.owner.userName : @"";
         self.purviewDes = self.isPrivate ? @"Private" : @"Public";
     }
     
