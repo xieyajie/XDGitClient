@@ -9,7 +9,7 @@
 #import "XDAppDelegate.h"
 
 #import "XDViewController.h"
-#import "XDOauthViewController.h"
+#import "XDLoginViewController.h"
 #import "XDRootViewController.h"
 
 #import "XDConfigManager.h"
@@ -68,7 +68,7 @@
     BOOL isLogin = ([token length] == 0) ? NO : YES;
     
     if (!isLogin) {
-        XDOauthViewController *loginController = [[XDOauthViewController alloc] init];
+        XDLoginViewController *loginController = [[XDLoginViewController alloc] init];
         self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:loginController];
     }
     else{
@@ -76,7 +76,7 @@
         self.rootNavigationController = [[UINavigationController alloc] initWithRootViewController:rootController];
     }
     
-    self.rootNavigationController.navigationBarHidden = isLogin;
+    self.rootNavigationController.navigationBarHidden = YES;
     self.window.rootViewController = self.rootNavigationController;
 }
 

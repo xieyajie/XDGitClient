@@ -22,4 +22,6 @@
 
 + (XDConfigManager *)defaultManager;
 
+- (void)logoff;
+
 @end

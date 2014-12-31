@@ -56,7 +56,7 @@ static XDConfigManager *defaultManagerInstance = nil;
     [[XDGithubEngine shareEngine] setToken:_loginToken];
 }
 
-#pragma mark - 
+#pragma mark - setter
 
 - (void)setLoginToken:(NSString *)loginToken
 {
@@ -77,7 +77,7 @@ static XDConfigManager *defaultManagerInstance = nil;
     }
 }
 
-#pragma mark - public
+#pragma mark - private
 
 - (BOOL)save
 {
@@ -87,6 +87,13 @@ static XDConfigManager *defaultManagerInstance = nil;
         ret = [dic writeToFile:_configFilePath atomically:YES];
     }
     return ret;
+}
+
+#pragma mark - public
+
+- (void)logoff
+{
+    [self setLoginToken:nil];
 }
 
 @end

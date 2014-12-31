@@ -50,19 +50,19 @@
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
-    if (self.repositorySortName) {
+    if ([self.repositorySortName length] > 0) {
         [dic setObject:self.repositorySortName forKey:KCONFIG_SORT_REPOSITORY_NAME];
     }
     
-    if (self.repositorySortType) {
+    if ([self.repositorySortType length] > 0) {
         [dic setObject:self.repositorySortType forKey:KCONFIG_SORT_REPOSITORY_TYPE];
     }
     
-    if (self.loginUsername) {
+    if ([self.loginUsername length] > 0) {
         [dic setObject:self.loginUsername forKey:KCONFIG_LOGIN_USERNAME];
     }
     
-    if (self.loginToken) {
+    if ([self.loginToken length] > 0) {
         [dic setObject:self.loginToken forKey:KCONFIG_LOGIN_TOKEN];
     }
     

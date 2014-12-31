@@ -2,7 +2,7 @@
 //  XDLoginViewController.h
 //  XDGitClient
 //
-//  Created by xieyajie on 14-2-14.
+//  Created by dhcdht on 14-12-31.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 

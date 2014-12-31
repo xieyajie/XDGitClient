@@ -387,9 +387,7 @@
 
 - (void)logoutAction
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = [NSString stringWithFormat:@"%@_LoginAccountName", APPNAME];
-    [defaults removeObjectForKey:key];
+    [[XDConfigManager defaultManager] logoff];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
 }

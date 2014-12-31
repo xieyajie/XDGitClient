@@ -2,258 +2,78 @@
 //  XDLoginViewController.m
 //  XDGitClient
 //
-//  Created by xieyajie on 14-2-14.
+//  Created by dhcdht on 14-12-31.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
 #import "XDLoginViewController.h"
 
-@interface XDLoginViewController ()<UITextFieldDelegate>
+#import "XDOauthViewController.h"
+
+@interface XDLoginViewController ()
 {
-    UITextField *_usernameTextField;
-    UITextField *_passwordTextField;
-    UIButton *_loginButton;
-    UIButton *_rememberButton;
-    UIButton *_forgetButton;
+    UILabel *_titleLabel;
+    UILabel *_contentLabel;
+    UIButton *_oauthButton;
+    UILabel *_copyrightLabel;
 }
 
-@property (strong, nonatomic) UIView *mainLoginView;
+@property (strong, nonatomic) XDOauthViewController *oauthController;
 
 @end
 
 @implementation XDLoginViewController
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize oauthController = _oauthController;
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.title = @"登录";
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"注册" style:UIBarButtonItemStyleBordered target:self action:@selector(registerAction)];
+    // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.mainLoginView];
+    _oauthController = [[XDOauthViewController alloc] init];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, self.mainLoginView.frame.origin.y + self.mainLoginView.frame.size.height + 50, self.view.frame.size.width - 40, 40)];
-    label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor grayColor];
-    label.font = [UIFont systemFontOfSize:13.0];
-    label.text = @"XDIOS工作室出品";
-    [self.view addSubview:label];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, self.view.frame.size.width, 80)];
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:32];
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.textColor = [UIColor blackColor];
+    _titleLabel.text = @"G i t H u b";
+    [self.view addSubview:_titleLabel];
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userName = [defaults objectForKey:[NSString stringWithFormat:@"%@_UserName", APPNAME]];
-    if (userName && userName.length > 0) {
-        _usernameTextField.text = userName;
-        
-        NSString *pswd = [defaults objectForKey:userName];
-        if (pswd && pswd.length > 0) {
-            _passwordTextField.text = pswd;
-            _rememberButton.selected = YES;
-        }
-    }
+    _contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_titleLabel.frame) + 20, self.view.frame.size.width, 100)];
+    _contentLabel.backgroundColor = [UIColor clearColor];
+    _contentLabel.font = [UIFont fontWithName:@"Avenir-Medium" size:15];;
+    _contentLabel.textAlignment = NSTextAlignmentCenter;
+    _contentLabel.numberOfLines = 0;
+    _contentLabel.textColor = [UIColor blackColor];
+    _contentLabel.text = @"随时阅读你的代码动态\n\nRead the codes that matter to you.\n Anywhere, anytime.";
+    [self.view addSubview:_contentLabel];
+    
+    _oauthButton = [[UIButton alloc] initWithFrame:CGRectMake(30, self.view.frame.size.height / 2 + 60, self.view.frame.size.width - 60, 40)];
+    [_oauthButton setTitle:@"github 官方授权" forState:UIControlStateNormal];
+    [_oauthButton setTitleColor:[UIColor colorWithRed:48 / 255.0 green:169 / 255.0 blue:55 / 255.0 alpha:1.0] forState:UIControlStateNormal];
+    [_oauthButton addTarget:self action:@selector(oauthAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_oauthButton];
+    
+    _copyrightLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.view.frame.size.height - 40, self.view.frame.size.width - 40, 20)];
+    _copyrightLabel.backgroundColor = [UIColor clearColor];
+    _copyrightLabel.font = [UIFont systemFontOfSize:13];
+    _copyrightLabel.textAlignment = NSTextAlignmentCenter;
+    _copyrightLabel.textColor = [UIColor grayColor];
+    _copyrightLabel.text = @"XDStudio工作室出品，欢迎使用";
+    [self.view addSubview:_copyrightLabel];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - getter
-
-- (UIView *)mainLoginView
-{
-    if (_mainLoginView == nil) {
-        _mainLoginView = [[UIView alloc] initWithFrame:CGRectMake(20.0, 40.0, self.view.frame.size.width - 40.0, 165.0)];
-        
-        UIView *backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _mainLoginView.frame.size.width, 80.0)];
-//        backgroundView.backgroundColor = [UIColor clearColor];
-        backgroundView.layer.cornerRadius = 5.0;
-        backgroundView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
-        backgroundView.layer.borderWidth = 0.5;
-        [_mainLoginView addSubview:backgroundView];
-
-        
-        UIImageView *separatorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5.0, 39.0, _mainLoginView.frame.size.width - 10.0, 2.0)];
-        separatorImageView.image = [UIImage imageNamed:@"login_separator"];
-        [_mainLoginView addSubview:separatorImageView];
-        
-        //用户名输入框
-        if (!_usernameTextField) {
-            _usernameTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 0.0, _mainLoginView.frame.size.width - 16.0, 40.0)];
-            _usernameTextField.placeholder = @" 请输入github账号";
-            NSString *saveUserName = [[NSUserDefaults standardUserDefaults]objectForKey:@"username"];
-            if (saveUserName.length) {
-                _usernameTextField.text = saveUserName;
-            }
-            _usernameTextField.delegate = self;
-            _usernameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-            _usernameTextField.keyboardType = UIKeyboardTypeEmailAddress;
-            _usernameTextField.returnKeyType = UIReturnKeyNext;
-            _usernameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-            _usernameTextField.enablesReturnKeyAutomatically = NO;
-            [_usernameTextField addTarget:_passwordTextField action:@selector(becomeFirstResponder) forControlEvents:UIControlEventEditingDidEndOnExit];
-            [_mainLoginView addSubview:_usernameTextField];
-        }
-        
-        //密码输入框
-        if (!_passwordTextField) {
-            _passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(8.0, 40.0, _mainLoginView.frame.size.width - 16.0, 38.0)];
-            _passwordTextField.placeholder = @" 请输入密码";
-            _passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
-            _passwordTextField.returnKeyType = UIReturnKeyGo;
-            _passwordTextField.enablesReturnKeyAutomatically = NO;
-            _passwordTextField.secureTextEntry = YES;
-            _passwordTextField.clearsOnBeginEditing = YES;
-            [_passwordTextField addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventEditingDidEndOnExit];
-            [_passwordTextField addTarget:self action:@selector(hideKeyboardAction) forControlEvents:UIControlEventEditingDidEndOnExit];
-            [_mainLoginView addSubview:_passwordTextField];
-        }
-        
-        //登录按钮
-        if (!_loginButton) {
-            UIImage *bgImage = [[UIImage imageNamed:@"button_bg_green"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
-            _loginButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, _passwordTextField.frame.origin.y + _passwordTextField.frame.size.height + 10, _mainLoginView.frame.size.width, 40.0)];
-            [_loginButton setTitle:@"登  录" forState:UIControlStateNormal];
-            [_loginButton setBackgroundImage:bgImage forState:UIControlStateNormal];
-            _loginButton.titleLabel.font = [UIFont boldSystemFontOfSize:18.0];
-            _loginButton.titleLabel.shadowOffset = CGSizeMake(0.0, 1.0);
-            [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [_loginButton addTarget:self action:@selector(loginAction) forControlEvents:UIControlEventTouchUpInside];
-            [_loginButton addTarget:self action:@selector(hideKeyboardAction) forControlEvents:UIControlEventTouchUpInside];
-            [_mainLoginView addSubview:_loginButton];
-        }
-        
-        if (!_rememberButton) {
-            _rememberButton = [[UIButton alloc] initWithFrame:CGRectMake(5, _loginButton.frame.origin.y + _loginButton.frame.size.height + 10, 100, 30)];
-            _rememberButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-            [_rememberButton setTitle:@" 记住密码" forState:UIControlStateNormal];
-            [_rememberButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-            [_rememberButton setTitleColor:[UIColor colorWithRed:48 / 255.0 green:169 / 255.0 blue:55 / 255.0 alpha:1.0] forState:UIControlStateSelected];
-            _rememberButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-            [_rememberButton setImage:[UIImage imageNamed:@"rectangle_uncheck.png"] forState:UIControlStateNormal];
-            [_rememberButton setImage:[UIImage imageNamed:@"rectangle_checked.png"] forState:UIControlStateSelected];
-            [_rememberButton addTarget:self action:@selector(rememberPswdAction) forControlEvents:UIControlEventTouchUpInside];
-            [_mainLoginView addSubview:_rememberButton];
-        }
-        
-//        if (!_forgetButton) {
-//            _forgetButton = [[UIButton alloc]initWithFrame:CGRectMake(190, _loginButton.frame.origin.y + _loginButton.frame.size.height + 10, 100, 30)];
-//            _forgetButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
-//            [_forgetButton setTitle:@"忘记密码 ?" forState:UIControlStateNormal];
-//            [_forgetButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//            [_forgetButton addTarget:self action:@selector(forgetAction) forControlEvents:UIControlEventTouchUpInside];
-//            [_mainLoginView addSubview:_forgetButton];
-//        }
-    }
-    
-    return _mainLoginView;
-}
-
-#pragma mark - UITextFieldDelegate
-
-
-
 #pragma mark - action
 
-- (void)hideKeyboardAction
+- (void)oauthAction:(id)sender
 {
-    [_usernameTextField resignFirstResponder];
-    [_passwordTextField resignFirstResponder];
-}
-
-- (void)registerAction
-{
-    
-}
-
-- (void)forgetAction
-{
-    
-}
-
-- (void)rememberPswdAction
-{
-    _rememberButton.selected = !_rememberButton.selected;
-}
-
-- (void)loginAction
-{
-    NSString *userName = _usernameTextField.text;
-    NSString *paswd = _passwordTextField.text;
-    
-    UIAlertView *alert = nil;
-    if (userName.length == 0) {
-        alert = [[UIAlertView alloc] initWithTitle:@"警告" message:@"github账号不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    if (paswd.length == 0) {
-        alert = [[UIAlertView alloc] initWithTitle:@"警告" message:@"密码不能为空" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alert show];
-        return;
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    __weak XDViewManager *viewManager = [XDViewManager defaultManager];
-    [viewManager showLoadingViewWithTitle:@"验证账号..." requestOperation:nil];
-    
-    __weak XDGithubEngine *engine = [XDGithubEngine shareEngine];
-    NSString *token = [engine getLocalTokenWithUsername:userName password:paswd];
-    
-    __block AFHTTPRequestOperation *operation = nil;
-    if([token length] == 0)
-    {
-        operation = [engine fetchTokenWithUsername:userName password:paswd success:^(id object) {
-            operation = [[XDGithubEngine shareEngine] loginWithUserName:userName password:paswd success:^(id object) {
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                if (_rememberButton.selected) {
-                    [defaults setValue:paswd forKey:userName];
-                }
-                else{
-                    [defaults removeObjectForKey:userName];
-                }
-                
-                [weakSelf hideLoadingView];
-                [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
-            } failure:^(NSError *error) {
-                [weakSelf hideLoadingView];
-            }];
-            
-            [viewManager showLoadingViewWithTitle:@"获取账号信息..." requestOperation:operation];
-        } failure:^(NSError *error) {
-            [self hideLoadingView];
-        }];
-        
-        [viewManager showLoadingViewWithTitle:@"授权账号..." requestOperation:operation];
-    }
-    else{
-        operation = [[XDGithubEngine shareEngine] loginWithUserName:userName password:paswd success:^(id object) {
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if (_rememberButton.selected) {
-                [defaults setValue:paswd forKey:userName];
-            }
-            else{
-                [defaults removeObjectForKey:userName];
-            }
-            
-            [weakSelf hideLoadingView];
-            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
-        } failure:^(NSError *error) {
-            [weakSelf hideLoadingView];
-        }];
-        
-        [viewManager showLoadingViewWithTitle:@"获取账号信息..." requestOperation:operation];
-    }
+    [self.navigationController pushViewController:_oauthController animated:YES];
 }
 
 @end
