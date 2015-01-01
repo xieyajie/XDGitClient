@@ -113,7 +113,7 @@
 		3C3401CD1A440BCD00DC5632 /* XDPageViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3401CC1A440BCD00DC5632 /* XDPageViewViewController.m */; };
 		3C3401D01A4420CE00DC5632 /* CommitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3401CF1A4420CE00DC5632 /* CommitModel.m */; };
 		3C3401D31A44318700DC5632 /* OrganizationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3401D21A44318700DC5632 /* OrganizationModel.m */; };
-		3C35293A1A41996700D88E09 /* XDEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3529391A41996700D88E09 /* XDEventsViewController.m */; };
+		3C35293A1A41996700D88E09 /* XDNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3529391A41996700D88E09 /* XDNewsViewController.m */; };
 		3C35293D1A41999F00D88E09 /* XDNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C35293C1A41999F00D88E09 /* XDNotificationsViewController.m */; };
 		3C3529441A4199F700D88E09 /* XDFollowerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3529411A4199F700D88E09 /* XDFollowerViewController.m */; };
 		3C3529451A4199F700D88E09 /* XDFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3529431A4199F700D88E09 /* XDFollowingViewController.m */; };
@@ -316,8 +316,8 @@
 		3C3401CF1A4420CE00DC5632 /* CommitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitModel.m; sourceTree = "<group>"; };
 		3C3401D11A44318700DC5632 /* OrganizationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrganizationModel.h; sourceTree = "<group>"; };
 		3C3401D21A44318700DC5632 /* OrganizationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrganizationModel.m; sourceTree = "<group>"; };
-		3C3529381A41996700D88E09 /* XDEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDEventsViewController.h; sourceTree = "<group>"; };
-		3C3529391A41996700D88E09 /* XDEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDEventsViewController.m; sourceTree = "<group>"; };
+		3C3529381A41996700D88E09 /* XDNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDNewsViewController.h; sourceTree = "<group>"; };
+		3C3529391A41996700D88E09 /* XDNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDNewsViewController.m; sourceTree = "<group>"; };
 		3C35293B1A41999F00D88E09 /* XDNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDNotificationsViewController.h; sourceTree = "<group>"; };
 		3C35293C1A41999F00D88E09 /* XDNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDNotificationsViewController.m; sourceTree = "<group>"; };
 		3C3529401A4199F700D88E09 /* XDFollowerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFollowerViewController.h; sourceTree = "<group>"; };
@@ -496,8 +496,8 @@
 		3AA8010418B2FEA400F8450B /* Activity */ = {
 			isa = PBXGroup;
 			children = (
-				3C3529381A41996700D88E09 /* XDEventsViewController.h */,
-				3C3529391A41996700D88E09 /* XDEventsViewController.m */,
+				3C3529381A41996700D88E09 /* XDNewsViewController.h */,
+				3C3529391A41996700D88E09 /* XDNewsViewController.m */,
 				3C35293B1A41999F00D88E09 /* XDNotificationsViewController.h */,
 				3C35293C1A41999F00D88E09 /* XDNotificationsViewController.m */,
 				3C1F7D471A557C8F002A442C /* XDIssuesViewController.h */,
@@ -990,7 +990,7 @@
 				3CA4F00D18B25298006C28BF /* UserModel.m in Sources */,
 				3C35293D1A41999F00D88E09 /* XDNotificationsViewController.m in Sources */,
 				3AEDEA3B18AE17450093946D /* NRGridViewCell.m in Sources */,
-				3C35293A1A41996700D88E09 /* XDEventsViewController.m in Sources */,
+				3C35293A1A41996700D88E09 /* XDNewsViewController.m in Sources */,
 				3C2D35B81A3A88D7000E0FFB /* AFSecurityPolicy.m in Sources */,
 				3C5072451A428C5400566CDA /* XDConfigManager.m in Sources */,
 				3AEDEA5418AE20D10093946D /* IIViewDeckController.m in Sources */,

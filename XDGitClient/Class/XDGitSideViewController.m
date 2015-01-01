@@ -12,7 +12,7 @@
 #import "XDTabBarController.h"
 #import "XDRepositoryViewController.h"
 #import "XDGitsViewController.h"
-#import "XDEventsViewController.h"
+#import "XDNewsViewController.h"
 #import "XDNotificationsViewController.h"
 #import "XDIssuesViewController.h"
 #import "XDFollowerViewController.h"
@@ -39,7 +39,7 @@
 
 @property (strong, nonatomic) UINavigationController *reposityNavTabController;
 @property (strong, nonatomic) UINavigationController *gitsNavTabController;
-@property (strong, nonatomic) UINavigationController *eventsNavController;
+@property (strong, nonatomic) UINavigationController *newsNavController;
 @property (strong, nonatomic) UINavigationController *notifsNavController;
 @property (strong, nonatomic) UINavigationController *issuesNavController;
 @property (strong, nonatomic) UINavigationController *followerNavController;
@@ -51,7 +51,7 @@
 
 @synthesize reposityNavTabController = _reposityNavTabController;
 @synthesize gitsNavTabController = _gitsNavTabController;
-@synthesize eventsNavController = _eventsNavController;
+@synthesize newsNavController = _newsNavController;
 @synthesize notifsNavController = _notifsNavController;
 @synthesize issuesNavController = _issuesNavController;
 @synthesize followerNavController = _followerNavController;
@@ -196,14 +196,14 @@
     return _gitsNavTabController;
 }
 
-- (UINavigationController *)eventsNavController
+- (UINavigationController *)newsNavController
 {
-    if (_eventsNavController == nil) {
-        XDEventsViewController *eventController = [[XDEventsViewController alloc] initWithUserName:nil];
-        _eventsNavController = [[UINavigationController alloc] initWithRootViewController:eventController];
+    if (_newsNavController == nil) {
+        XDNewsViewController *newController = [[XDNewsViewController alloc] initWithUserName:nil];
+        _newsNavController = [[UINavigationController alloc] initWithRootViewController:newController];
     }
     
-    return _eventsNavController;
+    return _newsNavController;
 }
 
 - (UINavigationController *)notifsNavController
@@ -344,11 +344,17 @@
             case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
                 self.deckController.centerController = self.gitsNavTabController;
                 break;
-            case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
-                self.deckController.centerController = self.eventsNavController;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_NEW:
+                self.deckController.centerController = self.newsNavController;
+                break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_ACTIVITY:
+//                self.deckController.centerController = self.eventsNavController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
                 self.deckController.centerController = self.notifsNavController;
+                break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_PULLREQUEST:
+//                self.deckController.centerController = self.notifsNavController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_ISSUE:
                 self.deckController.centerController = self.issuesNavController;

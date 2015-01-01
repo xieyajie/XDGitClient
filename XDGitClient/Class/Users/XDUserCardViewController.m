@@ -14,7 +14,7 @@
 #import "XDGitsViewController.h"
 #import "XDFollowerViewController.h"
 #import "XDFollowingViewController.h"
-#import "XDEventsViewController.h"
+#import "XDNewsViewController.h"
 #import "XDNotificationsViewController.h"
 #import "XDConfigManager.h"
 
@@ -277,10 +277,10 @@
         case KPLIST_VALUE_CONTROLLERSELECTOR_GIT:
             [self.navigationController pushViewController:self.gitsController animated:YES];
             break;
-        case KPLIST_VALUE_CONTROLLERSELECTOR_EVENT:
+        case KPLIST_VALUE_CONTROLLERSELECTOR_NEW:
         {
-            XDEventsViewController *eventsController = [[XDEventsViewController alloc] initWithUserName:userName];
-            [self.navigationController pushViewController:eventsController animated:YES];
+            XDNewsViewController *newsController = [[XDNewsViewController alloc] initWithUserName:userName];
+            [self.navigationController pushViewController:newsController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:

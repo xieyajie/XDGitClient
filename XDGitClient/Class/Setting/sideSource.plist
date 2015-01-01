@@ -19,21 +19,33 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>更新 Events</string>
+			<string>新闻提要 News Feed</string>
 			<key>controller_selector</key>
 			<integer>100</integer>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>通知 Notifications</string>
+			<string>活动 Public Activity</string>
 			<key>controller_selector</key>
 			<integer>101</integer>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>问题 Issues</string>
+			<string>通知 Notifications</string>
 			<key>controller_selector</key>
 			<integer>102</integer>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>请求 Pull Requests</string>
+			<key>controller_selector</key>
+			<integer>103</integer>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>问题 Issues</string>
+			<key>controller_selector</key>
+			<integer>104</integer>
 		</dict>
 	</array>
 	<array>

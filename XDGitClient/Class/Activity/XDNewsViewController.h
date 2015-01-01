@@ -1,5 +1,5 @@
 //
-//  XDEventsViewController.h
+//  XDNewsViewController.h
 //  XDGitClient
 //
 //  Created by dhcdht on 14-12-17.
@@ -8,7 +8,7 @@
 
 #import "XDPageViewViewController.h"
 
-@interface XDEventsViewController : XDPageViewViewController
+@interface XDNewsViewController : XDPageViewViewController
 
 - (id)initWithUserName:(NSString *)userName;
 

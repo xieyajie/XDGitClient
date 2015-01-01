@@ -1,24 +1,24 @@
 //
-//  XDEventsViewController.m
+//  XDNewsViewController.m
 //  XDGitClient
 //
 //  Created by dhcdht on 14-12-17.
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDEventsViewController.h"
+#import "XDNewsViewController.h"
 
 #import "EventModel.h"
 #import "XDConfigManager.h"
 
-@interface XDEventsViewController ()
+@interface XDNewsViewController ()
 {
     NSString *_userName;
 }
 
 @end
 
-@implementation XDEventsViewController
+@implementation XDNewsViewController
 
 - (id)initWithUserName:(NSString *)userName
 {
@@ -33,7 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"事件";
+    self.title = @"新闻提要";
     self.showRefreshHeader = YES;
     self.showRefreshFooter = NO;
     
@@ -73,7 +73,7 @@
 
 - (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
-    __block __weak XDEventsViewController *weakSelf = self;
+    __block __weak XDNewsViewController *weakSelf = self;
     
     NSString *account = [XDConfigManager defaultManager].loginUser.userName;
     AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] eventsForUsername:account page:page success:^(id object, BOOL haveNextPage) {
