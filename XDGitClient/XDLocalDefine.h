@@ -88,7 +88,7 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KPLIST_VALUE_CONTROLLERSELECTOR_REPO        110
 #define KPLIST_VALUE_CONTROLLERSELECTOR_GIT         111
 #define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER    112
-#define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG   113
+#define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEING   113
 
 //repo
 #define KPLIST_VALUE_CONTROLLERSELECTOR_ACCOUNT     120
@@ -99,6 +99,7 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE  125
 
 #pragma mark - model
+
 //config
 #define KCONFIG_LOGIN_USERNAME @"loginUsername"
 #define KCONFIG_LOGIN_TOKEN @"loginToken"

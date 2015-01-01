@@ -10,19 +10,16 @@
 
 #import "RepositoryModel.h"
 #import "XDUserCardViewController.h"
+#import "XDSourceViewController.h"
 #import "XDForkersViewController.h"
 #import "XDStargazersViewController.h"
 #import "XDWatchersViewController.h"
 #import "XDPullRequestsViewController.h"
 
 @interface XDRepoCardViewController ()
-{
-    AFHTTPRequestOperation *_operation;
-}
 
 @property (strong, nonatomic) RepositoryModel *repoModel;
 
-@property (nonatomic) BOOL isLoadedPlist;
 @property (strong, nonatomic) NSMutableArray *plistSourceArray;
 @property (strong, nonatomic) NSArray *titleArray;
 
@@ -36,7 +33,6 @@
     if (self) {
         // Custom initialization
         _repoModel = model;
-        _isLoadedPlist = YES;
     }
     return self;
 }
@@ -46,8 +42,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.title = self.repoModel.fullName;
+    self.showRefreshHeader = NO;
     
-    [self tableViewDidTriggerHeaderRefresh];
+    [self loadPlistSource];
+//    [self tableViewDidTriggerHeaderRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,7 +153,9 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE:
         {
-            
+            XDSourceViewController *sourceController = [[XDSourceViewController alloc] init];
+            sourceController.title = [NSString stringWithFormat:@"%@`s Source", self.repoModel.name];
+            [self.navigationController pushViewController:sourceController animated:YES];
         }
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_ISSUE:
@@ -203,18 +203,8 @@
 
 - (void)loadPlistSource
 {
-    __block __weak XDRepoCardViewController *weakSelf = self;
-    _operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object) {
-        weakSelf.isLoadedPlist = YES;
-    } failure:^(NSError *error) {
-        weakSelf.isLoadedPlist = YES;
-    }];
-    [self showLoadingViewWithRequestOperation:_operation];
-}
-
-- (void)tableViewDidTriggerHeaderRefresh
-{
-    [self showLoadingViewWithTitle:@"获取基本信息..."];
+    [self showLoadingViewWithTitle:@"加载基本信息..."];
+    
     self.titleArray = @[@"基本信息", @"资料", @"人气"];
     self.plistSourceArray = [NSMutableArray array];
     NSString *path = [[NSBundle mainBundle] pathForResource:@"repoCard" ofType:@"plist"];
@@ -228,7 +218,7 @@
     }
     
     if (self.repoModel.describe && self.repoModel.describe.length > 0) {
-        [[self.plistSourceArray objectAtIndex:0] insertObject:[plistDic objectForKey:@"description"] atIndex:1];
+        [[self.plistSourceArray objectAtIndex:0] insertObject:[plistDic objectForKey:@"describe"] atIndex:1];
     }
     
     NSString *forkKey = self.repoModel.isFork ? @"1" : @"0";
@@ -237,6 +227,22 @@
     
     [self.tableView reloadData];
     [self hideLoadingView];
+}
+
+- (void)tableViewDidTriggerHeaderRefresh
+{
+    __block __weak XDRepoCardViewController *weakSelf = self;
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object) {
+        if([object count] > 0)
+        {
+            
+        }
+        [weakSelf hideLoadingView];
+    } failure:^(NSError *error) {
+        [weakSelf hideLoadingView];
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 @end

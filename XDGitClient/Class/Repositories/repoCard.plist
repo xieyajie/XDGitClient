@@ -7,7 +7,7 @@
 		<key>title</key>
 		<string>描述</string>
 		<key>model_selector</key>
-		<string>description</string>
+		<string>describe</string>
 		<key>accessoryType</key>
 		<integer>0</integer>
 	</dict>
@@ -104,13 +104,13 @@
 			<key>title</key>
 			<string>Source</string>
 			<key>controller_selector</key>
-			<string>127</string>
+			<string>125</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>Update List</string>
+			<string>Events</string>
 			<key>controller_selector</key>
 			<string>100</string>
 			<key>accessoryType</key>
@@ -122,7 +122,7 @@
 			<key>model_selector</key>
 			<string>issuesCountDes</string>
 			<key>controller_selector</key>
-			<string>122</string>
+			<string>104</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>
@@ -130,7 +130,7 @@
 			<key>title</key>
 			<string>Pull Requests</string>
 			<key>controller_selector</key>
-			<string>123</string>
+			<string>103</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>
@@ -143,7 +143,7 @@
 			<key>model_selector</key>
 			<string>forksCountDes</string>
 			<key>controller_selector</key>
-			<string>124</string>
+			<string>122</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>
@@ -153,7 +153,7 @@
 			<key>model_selector</key>
 			<string>starsCountDes</string>
 			<key>controller_selector</key>
-			<string>125</string>
+			<string>123</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>
@@ -163,7 +163,7 @@
 			<key>model_selector</key>
 			<string>watchersCountDes</string>
 			<key>controller_selector</key>
-			<string>126</string>
+			<string>124</string>
 			<key>accessoryType</key>
 			<integer>1</integer>
 		</dict>

@@ -9,7 +9,7 @@
 				<key>title</key>
 				<string>用户名</string>
 				<key>model_selector</key>
-				<string>accountName</string>
+				<string>userName</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -41,7 +41,7 @@
 				<key>title</key>
 				<string>账号类型</string>
 				<key>model_selector</key>
-				<string>accountType</string>
+				<string>userType</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -54,7 +54,7 @@
 				<key>title</key>
 				<string>用户名</string>
 				<key>model_selector</key>
-				<string>accountName</string>
+				<string>userName</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>
@@ -70,7 +70,7 @@
 				<key>title</key>
 				<string>账号类型</string>
 				<key>model_selector</key>
-				<string>accountType</string>
+				<string>userType</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 			</dict>

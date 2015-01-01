@@ -363,7 +363,7 @@
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
                 self.deckController.centerController = self.followerNavController;
                 break;
-            case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEIMG:
+            case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEING:
                 self.deckController.centerController = self.followingNavController;
                 break;
                 
