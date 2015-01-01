@@ -51,17 +51,6 @@ static XDGithubEngine *engineInstance = nil;
     return engineInstance;
 }
 
-- (void)didReset
-{
-//    if (_requestClient) {
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        NSString *key = [NSString stringWithFormat:@"%@_%@_LoginToken", APPNAME, self.engineKey];
-//        _requestClient.token = [defaults objectForKey:key];
-//        key = [NSString stringWithFormat:@"%@_%@_LoginName", APPNAME, self.engineKey];
-//        _requestClient.userName = [defaults objectForKey:key];
-//    }
-}
-
 - (void)setToken:(NSString *)token
 {
     if ([token length] > 0) {
@@ -490,10 +479,31 @@ static XDGithubEngine *engineInstance = nil;
 //{
 //    
 //}
-//
+
+#pragma mark - Issue
+
+- (AFHTTPRequestOperation *)issueEventsWithSuccess:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    NSString *path = [NSString stringWithFormat:@"user/issues?filter=all&state=all&sort=updated&direction=desc"];
+    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        successBlock(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failureBlock(error);
+    }];
+    
+    return operation;
+}
+
 //- (AFHTTPRequestOperation *)issueEventsForRepository:(NSString *)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 //{
+//    NSString *path = [NSString stringWithFormat:@"users/%@", userName];
+//    AFHTTPRequestOperation *operation = [_operationManager GET:path parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        successBlock(responseObject);
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failureBlock(error);
+//    }];
 //    
+//    return operation;
 //}
 //
 //- (AFHTTPRequestOperation *)issueEvent:(NSInteger)eventId forRepository:(NSString*)repositoryPath success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock

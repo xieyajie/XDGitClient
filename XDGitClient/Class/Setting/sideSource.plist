@@ -19,6 +19,24 @@
 	<array>
 		<dict>
 			<key>title</key>
+			<string>关注Me的人</string>
+			<key>model_selector</key>
+			<string>followersCount</string>
+			<key>controller_selector</key>
+			<integer>112</integer>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>Me关注的人</string>
+			<key>model_selector</key>
+			<string>followingCount</string>
+			<key>controller_selector</key>
+			<integer>113</integer>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
 			<string>新闻提要 News Feed</string>
 			<key>controller_selector</key>
 			<integer>100</integer>
@@ -46,24 +64,6 @@
 			<string>问题 Issues</string>
 			<key>controller_selector</key>
 			<integer>104</integer>
-		</dict>
-	</array>
-	<array>
-		<dict>
-			<key>title</key>
-			<string>关注Me的人</string>
-			<key>model_selector</key>
-			<string>followersCount</string>
-			<key>controller_selector</key>
-			<integer>112</integer>
-		</dict>
-		<dict>
-			<key>title</key>
-			<string>Me关注的人</string>
-			<key>model_selector</key>
-			<string>followingCount</string>
-			<key>controller_selector</key>
-			<integer>113</integer>
 		</dict>
 	</array>
 </array>

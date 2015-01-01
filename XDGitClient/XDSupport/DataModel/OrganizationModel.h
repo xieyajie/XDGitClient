@@ -8,6 +8,8 @@
 
 #import "XDBaseModel.h"
 
+#define KORG_GRAVATARID @"gravatar_id"
+
 @interface OrganizationModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *oId;

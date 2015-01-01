@@ -93,12 +93,10 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 //repo
 #define KPLIST_VALUE_CONTROLLERSELECTOR_ACCOUNT     120
 #define KPLIST_VALUE_CONTROLLERSELECTOR_FORKORIGIN  121
-#define KPLIST_VALUE_CONTROLLERSELECTOR_ISSUE       122
-#define KPLIST_VALUE_CONTROLLERSELECTOR_PULLREQUEST 123
-#define KPLIST_VALUE_CONTROLLERSELECTOR_FORKER      124
-#define KPLIST_VALUE_CONTROLLERSELECTOR_STARER      125
-#define KPLIST_VALUE_CONTROLLERSELECTOR_WATCHER     126
-#define KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE  127
+#define KPLIST_VALUE_CONTROLLERSELECTOR_FORKER      122
+#define KPLIST_VALUE_CONTROLLERSELECTOR_STARER      123
+#define KPLIST_VALUE_CONTROLLERSELECTOR_WATCHER     124
+#define KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE  125
 
 #pragma mark - model
 //config
@@ -108,76 +106,20 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KCONFIG_SORT_REPOSITORY_TYPE @"repositorySortType"
 
 #define KMODEL_ID @"id"
+#define KMODEL_LOGIN @"login"
+#define KMODEL_AVATARURL @"avatar_url"
 #define KMODEL_TYPE @"type"
 #define KMODEL_URL @"url"
 #define KMODEL_CREATE @"created_at"
 #define KMODEL_UPDATE @"updated_at"
 #define KMODEL_SIZE @"size"
 
-//User
-#define KUSER_NAME @"login"
-#define KUSER_AVATARURL @"avatar_url"
-#define KUSER_COMPANY @"company"
-#define KUSER_EMAIL @"email"
-#define KUSER_WEBURL @"html_url"
-#define KUSER_LOCATION @"location"
-#define KUSER_FOLLOWER @"followers"
-#define KUSER_FOLLOWING @"following"
-
-//Organization
-#define KORG_NAME @"login"
-#define KORG_AVATARURL @"avatar_url"
-#define KORG_GRAVATARID @"gravatar_id"
-
-//Repository
-#define KREPO_NAME @"name"
-#define KREPO_FULLNAME @"full_name"
-#define KREPO_DESC @"description"
-#define KREPO_PUSH @"pushed_at"
-#define KREPO_LANGUAGE @"language"
-#define KREPO_OWNER @"owner"
-#define KREPO_DEFAULTBRANCH @"default_branch"
-#define KREPO_FORKSCOUNT @"forks_count"
-#define KREPO_OPENISSUESCOUNT @"open_issues_count"
-#define KREPO_WATCHERSCOUNT @"watchers_count"
-#define KREPO_STARSCOUNT @"stargazers_count"
-#define KREPO_PRIVATESTATE @"private"
-#define KREPO_FORKSTATE @"fork"
-
-//Git
-#define KGIT_DESC @"description"
-#define KGIT_HTMLURL @"html_url"
-#define KGIT_FORKURL @"forks_url"
-#define KGIT_COMMENTCOUNT @"comments"
-#define KGIT_PUBLICSTATE @"public"
-
-//Event
-#define KEVENT_PUBLICSTATE @"public"
-#define KEVENT_PAYLOAD @"payload"
-#define KEVENT_USER @"actor"
-#define KEVENT_ORG @"org"
-#define KEVENT_REPO @"repo"
-
-//Event Payload
-#define KEVENT_PAYLOAD_ID @"push_id"
-#define KEVENT_PAYLOAD_COMMITS @"commits"
-#define KEVENT_PAYLOAD_HEAD @"head"
-#define KEVENT_PAYLOAD_DISTINCTSIZE @"distinct_size"
-#define KEVENT_PAYLOAD_BEFORE @"before"
-#define KEVENT_PAYLOAD_RER @"ref"
 
 //Pull Request
 #define KPULLREQUEST_TITLE @"title"
 #define KPULLREQUEST_CONTENT @"body"
 #define KPULLREQUEST_OWNER @"user"
 
-//Commit
-#define KCOMMIT_AUTHOR @"author"
-#define KCOMMIT_AUTHOR_NAME @"name"
-#define KCOMMIT_AUTHOR_EMAIL @"email"
-#define KCOMMIT_DISTINCT @"distinct"
-#define KCOMMIT_MESSAGE @"message"
-#define KCOMMIT_SHA @"sha"
 
 //#define KPULLREQUEST_ @""
 //#define KPULLREQUEST_ @""

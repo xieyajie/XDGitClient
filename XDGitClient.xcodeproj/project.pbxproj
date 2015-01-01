@@ -83,6 +83,8 @@
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
 		3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */; };
+		3C1F7D4C1A558C6C002A442C /* IssueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4B1A558C6C002A442C /* IssueModel.m */; };
+		3C1F7D4F1A558E08002A442C /* LabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4E1A558E08002A442C /* LabelModel.m */; };
 		3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */; };
 		3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */; };
 		3C2539B41A5395F600C71561 /* XDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2539B31A5395F600C71561 /* XDLoginViewController.m */; };
@@ -258,6 +260,10 @@
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
 		3C1F7D471A557C8F002A442C /* XDIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDIssuesViewController.h; sourceTree = "<group>"; };
 		3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDIssuesViewController.m; sourceTree = "<group>"; };
+		3C1F7D4A1A558C6C002A442C /* IssueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueModel.h; sourceTree = "<group>"; };
+		3C1F7D4B1A558C6C002A442C /* IssueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueModel.m; sourceTree = "<group>"; };
+		3C1F7D4D1A558E08002A442C /* LabelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelModel.h; sourceTree = "<group>"; };
+		3C1F7D4E1A558E08002A442C /* LabelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelModel.m; sourceTree = "<group>"; };
 		3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3C2539B21A5395F600C71561 /* XDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoginViewController.h; sourceTree = "<group>"; };
@@ -842,6 +848,10 @@
 				3C3401CF1A4420CE00DC5632 /* CommitModel.m */,
 				3C3401D11A44318700DC5632 /* OrganizationModel.h */,
 				3C3401D21A44318700DC5632 /* OrganizationModel.m */,
+				3C1F7D4A1A558C6C002A442C /* IssueModel.h */,
+				3C1F7D4B1A558C6C002A442C /* IssueModel.m */,
+				3C1F7D4D1A558E08002A442C /* LabelModel.h */,
+				3C1F7D4E1A558E08002A442C /* LabelModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1026,6 +1036,7 @@
 				3C2D35B51A3A88D7000E0FFB /* AFHTTPRequestOperationManager.m in Sources */,
 				3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */,
 				3AEDEA5518AE20D10093946D /* IIWrapController.m in Sources */,
+				3C1F7D4C1A558C6C002A442C /* IssueModel.m in Sources */,
 				3C2D35C01A3A88D7000E0FFB /* UIButton+AFNetworking.m in Sources */,
 				3AEDEA4B18AE1D930093946D /* XDTableViewController.m in Sources */,
 				3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */,
@@ -1041,6 +1052,7 @@
 				3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */,
 				3C2D35BA1A3A88D7000E0FFB /* AFURLRequestSerialization.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,
+				3C1F7D4F1A558E08002A442C /* LabelModel.m in Sources */,
 				3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */,
 				3A373AD618BB439700E57345 /* PullRequestModel.m in Sources */,
 				3A373ADB18BB440800E57345 /* NSDictionary+Category.m in Sources */,

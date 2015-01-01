@@ -21,8 +21,8 @@
     self = [super init];
     if (self) {
         self.oId = [dictionary safeStringForKey:KMODEL_ID];
-        self.name = [dictionary safeStringForKey:KORG_NAME];
-        self.avatarUrl = [dictionary safeStringForKey:KORG_AVATARURL];
+        self.name = [dictionary safeStringForKey:KMODEL_LOGIN];
+        self.avatarUrl = [dictionary safeStringForKey:KMODEL_AVATARURL];
         self.gravatarId = [dictionary safeStringForKey:KORG_GRAVATARID];
         self.url = [dictionary safeStringForKey:KMODEL_URL];
     }

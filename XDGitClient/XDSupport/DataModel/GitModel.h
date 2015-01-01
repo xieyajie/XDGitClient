@@ -8,6 +8,12 @@
 
 #import "XDBaseModel.h"
 
+#define KGIT_DESC @"description"
+#define KGIT_HTMLURL @"html_url"
+#define KGIT_FORKURL @"forks_url"
+#define KGIT_COMMENTCOUNT @"comments"
+#define KGIT_PUBLICSTATE @"public"
+
 @interface GitModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *gId;             //ID

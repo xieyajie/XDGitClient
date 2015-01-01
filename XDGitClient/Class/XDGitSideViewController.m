@@ -251,7 +251,8 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return [self.dataArray count];
+//    return [self.dataArray count];
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -267,10 +268,10 @@
             return @"工程";
             break;
         case 1:
-            return @"动态";
+            return @"关注";
             break;
         case 2:
-            return @"关注";
+            return @"动态";
             break;
             
         default:

@@ -8,6 +8,13 @@
 
 #import "XDBaseModel.h"
 
+#define KUSER_COMPANY @"company"
+#define KUSER_EMAIL @"email"
+#define KUSER_WEBURL @"html_url"
+#define KUSER_LOCATION @"location"
+#define KUSER_FOLLOWER @"followers"
+#define KUSER_FOLLOWING @"following"
+
 @interface UserModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *uId;      //ID

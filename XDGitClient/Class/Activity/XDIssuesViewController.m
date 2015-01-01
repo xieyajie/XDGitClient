@@ -9,6 +9,7 @@
 #import "XDIssuesViewController.h"
 
 #import "XDConfigManager.h"
+#import "IssueModel.h"
 
 @interface XDIssuesViewController ()
 {
@@ -33,8 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"问题";
-    self.showRefreshHeader = YES;
-    self.showRefreshFooter = NO;
+    self.showRefreshHeader = NO;
     
     [self tableViewDidTriggerHeaderRefresh];
 }
@@ -73,7 +73,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    RepositoryModel *model = [self.dataArray objectAtIndex:indexPath.row];
+//    IssueModel *model = [self.dataArray objectAtIndex:indexPath.row];
 //    return [XDRepositoryCell heightWithModel:model];
     
     return 50.0;
@@ -88,40 +88,26 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataFromServer
 {
-//    __block __weak XDIssuesViewController *weakSelf = self;
-//    
-//    NSString *account = [XDConfigManager defaultManager].loginUser.userName;
-//    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] eventsForUsername:account page:page success:^(id object, BOOL haveNextPage) {
-//        if (isHeaderRefresh) {
-//            [weakSelf.dataArray removeAllObjects];
-//        }
-//        weakSelf.haveNextPage = haveNextPage;
-//        
-//        if (object) {
-//            for (NSDictionary *dic in object) {
-//                EventModel *model = [[EventModel alloc] initWithDictionary:dic];
-//                [weakSelf.dataArray addObject:model];
-//            }
-//        }
-//        
-//        if (isHeaderRefresh) {
-//            [weakSelf tableViewDidFinishHeaderRefresh];
-//        }
-//        else{
-//            [weakSelf tableViewDidFinishFooterRefresh];
-//        }
-//    } failure:^(NSError *error) {
-//        if (isHeaderRefresh) {
-//            [weakSelf tableViewDidFailHeaderRefresh];
-//        }
-//        else{
-//            [weakSelf tableViewDidFailFooterRefresh];
-//        }
-//    }];
-//    
-//    [self showLoadingViewWithRequestOperation:operation];
+    __block __weak XDIssuesViewController *weakSelf = self;
+    
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] issueEventsWithSuccess:^(id object) {
+        [weakSelf.dataArray removeAllObjects];
+        if (object) {
+            for (NSDictionary *dic in object) {
+                IssueModel *model = [[IssueModel alloc] initWithDictionary:dic];
+                [weakSelf.dataArray addObject:model];
+            }
+        }
+        
+        [weakSelf hideLoadingView];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSError *error) {
+        [weakSelf hideLoadingView];
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 @end

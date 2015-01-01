@@ -29,8 +29,8 @@
     self = [super init];
     if (self) {
         self.uId = [dictionary safeStringForKey:KMODEL_ID];
-        self.userName = [dictionary safeStringForKey:KUSER_NAME];
-        self.avatarUrl = [dictionary safeStringForKey:KUSER_AVATARURL];
+        self.userName = [dictionary safeStringForKey:KMODEL_LOGIN];
+        self.avatarUrl = [dictionary safeStringForKey:KMODEL_AVATARURL];
         self.company = [dictionary safeStringForKey:KUSER_COMPANY];
         self.email = [dictionary safeStringForKey:KUSER_EMAIL];
         self.webUrl = [dictionary safeStringForKey:KUSER_WEBURL];

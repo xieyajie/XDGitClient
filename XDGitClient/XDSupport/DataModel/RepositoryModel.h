@@ -8,6 +8,20 @@
 
 #import "XDBaseModel.h"
 
+#define KREPO_NAME @"name"
+#define KREPO_FULLNAME @"full_name"
+#define KREPO_DESC @"description"
+#define KREPO_PUSH @"pushed_at"
+#define KREPO_LANGUAGE @"language"
+#define KREPO_OWNER @"owner"
+#define KREPO_DEFAULTBRANCH @"default_branch"
+#define KREPO_FORKSCOUNT @"forks_count"
+#define KREPO_OPENISSUESCOUNT @"open_issues_count"
+#define KREPO_WATCHERSCOUNT @"watchers_count"
+#define KREPO_STARSCOUNT @"stargazers_count"
+#define KREPO_PRIVATESTATE @"private"
+#define KREPO_FORKSTATE @"fork"
+
 @interface RepositoryModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *rId;             //ID

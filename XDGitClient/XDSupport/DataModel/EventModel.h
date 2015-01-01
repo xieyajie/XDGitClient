@@ -13,6 +13,19 @@
 #import "RepositoryModel.h"
 #import "OrganizationModel.h"
 
+#define KEVENT_PUBLICSTATE @"public"
+#define KEVENT_PAYLOAD @"payload"
+#define KEVENT_USER @"actor"
+#define KEVENT_ORG @"org"
+#define KEVENT_REPO @"repo"
+
+#define KEVENT_PAYLOAD_ID @"push_id"
+#define KEVENT_PAYLOAD_COMMITS @"commits"
+#define KEVENT_PAYLOAD_HEAD @"head"
+#define KEVENT_PAYLOAD_DISTINCTSIZE @"distinct_size"
+#define KEVENT_PAYLOAD_BEFORE @"before"
+#define KEVENT_PAYLOAD_RER @"ref"
+
 @interface EventModel : XDBaseModel
 
 @property (strong, nonatomic) NSString *eId;
