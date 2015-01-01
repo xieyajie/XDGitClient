@@ -43,7 +43,21 @@ typedef void (^XDGitEngineBooleanSuccessBlock)(BOOL success);
 typedef void (^XDGitEnginePageSuccessBlock)(id object, BOOL haveNextPage);
 typedef void (^XDGitEngineFailureBlock)(NSError *error);
 
-#define APPNAME @"XDGit"
+#pragma mark - NSNotification name
+
+#define KNOTIFICATION_LOFINSTATECHANGED @"LoginStateChanged"
+
+#pragma mark - default
+
+#define KPERPAGENUMBER 50
+#define KLEFTVIEWWIDTH 200.0
+
+//textField color (detail)
+#define TEXTFIELDDETAILCOLOR [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1.0]
+
+//app name
+#pragma mark - app name
+#define APPNAME @"XDGitHub"
 
 //config key
 #pragma mark - config key
@@ -66,8 +80,9 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 //base
 #define KPLIST_VALUE_CONTROLLERSELECTOR_EVENT       100
 #define KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF       101
+#define KPLIST_VALUE_CONTROLLERSELECTOR_ISSUE       102
 
-//account
+//user
 #define KPLIST_VALUE_CONTROLLERSELECTOR_REPO        110
 #define KPLIST_VALUE_CONTROLLERSELECTOR_GIT         111
 #define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER    112
@@ -83,19 +98,6 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KPLIST_VALUE_CONTROLLERSELECTOR_WATCHER     126
 #define KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE  127
 
-#pragma mark - default
-
-#define KPERPAGENUMBER 50
-#define KLEFTVIEWWIDTH 200.0
-
-//textField color (detail)
-#define TEXTFIELDDETAILCOLOR [UIColor colorWithRed:247 / 255.0 green:247 / 255.0 blue:247 / 255.0 alpha:1.0]
-
-#pragma mark - NSNotification name
-
-#define KNOTIFICATION_LOFINSTATECHANGED @"LoginStateChanged"
-#define KNOTIFICATION_GETCODE @"GetCode"
-
 #pragma mark - model
 //config
 #define KCONFIG_LOGIN_USERNAME @"loginUsername"
@@ -103,8 +105,14 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KCONFIG_SORT_REPOSITORY_NAME @"repositorySortName"
 #define KCONFIG_SORT_REPOSITORY_TYPE @"repositorySortType"
 
-//account
-#define KUSER_ID @"id"
+#define KMODEL_ID @"id"
+#define KMODEL_TYPE @"type"
+#define KMODEL_URL @"url"
+#define KMODEL_CREATE @"created_at"
+#define KMODEL_UPDATE @"updated_at"
+#define KMODEL_SIZE @"size"
+
+//User
 #define KUSER_NAME @"login"
 #define KUSER_AVATARURL @"avatar_url"
 #define KUSER_COMPANY @"company"
@@ -113,17 +121,17 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KUSER_LOCATION @"location"
 #define KUSER_FOLLOWER @"followers"
 #define KUSER_FOLLOWING @"following"
-#define KUSER_TYPE @"type"
+
+//Organization
+#define KORG_NAME @"login"
+#define KORG_AVATARURL @"avatar_url"
+#define KORG_GRAVATARID @"gravatar_id"
 
 //Repository
-#define KREPO_ID @"id"
 #define KREPO_NAME @"name"
 #define KREPO_FULLNAME @"full_name"
 #define KREPO_DESC @"description"
-#define KREPO_CREATE @"created_at"
-#define KREPO_UPDATE @"updated_at"
 #define KREPO_PUSH @"pushed_at"
-#define KREPO_SIZE @"size"
 #define KREPO_LANGUAGE @"language"
 #define KREPO_OWNER @"owner"
 #define KREPO_DEFAULTBRANCH @"default_branch"
@@ -134,23 +142,40 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KREPO_PRIVATESTATE @"private"
 #define KREPO_FORKSTATE @"fork"
 
-//git
-#define KGIT_ID @"id"
+//Git
 #define KGIT_DESC @"description"
-#define KGIT_CREATE @"created_at"
-#define KGIT_UPDATE @"updated_at"
 #define KGIT_HTMLURL @"html_url"
 #define KGIT_FORKURL @"forks_url"
 #define KGIT_COMMENTCOUNT @"comments"
 #define KGIT_PUBLICSTATE @"public"
 
-//pull request
-#define KPULLREQUEST_ID @"id"
+//Event
+#define KEVENT_PUBLICSTATE @"public"
+#define KEVENT_PAYLOAD @"payload"
+#define KEVENT_USER @"actor"
+#define KEVENT_ORG @"org"
+#define KEVENT_REPO @"repo"
+
+//Event Payload
+#define KEVENT_PAYLOAD_ID @"push_id"
+#define KEVENT_PAYLOAD_COMMITS @"commits"
+#define KEVENT_PAYLOAD_HEAD @"head"
+#define KEVENT_PAYLOAD_DISTINCTSIZE @"distinct_size"
+#define KEVENT_PAYLOAD_BEFORE @"before"
+#define KEVENT_PAYLOAD_RER @"ref"
+
+//Pull Request
 #define KPULLREQUEST_TITLE @"title"
 #define KPULLREQUEST_CONTENT @"body"
-#define KPULLREQUEST_CREATE @"created_at"
-#define KPULLREQUEST_UPDATE @"updated_at"
 #define KPULLREQUEST_OWNER @"user"
+
+//Commit
+#define KCOMMIT_AUTHOR @"author"
+#define KCOMMIT_AUTHOR_NAME @"name"
+#define KCOMMIT_AUTHOR_EMAIL @"email"
+#define KCOMMIT_DISTINCT @"distinct"
+#define KCOMMIT_MESSAGE @"message"
+#define KCOMMIT_SHA @"sha"
 
 //#define KPULLREQUEST_ @""
 //#define KPULLREQUEST_ @""

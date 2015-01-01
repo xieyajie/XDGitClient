@@ -10,7 +10,7 @@
 
 @interface RepositoryModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *rid;             //ID
+@property (strong, nonatomic) NSString *rId;             //ID
 @property (strong, nonatomic) NSString *name;           //项目名称
 @property (strong, nonatomic) NSString *fullName;       //项目全称
 @property (strong, nonatomic) NSString *describe;    //描述
@@ -31,7 +31,8 @@
 @property (strong, nonatomic) NSString *starsCountDes;     //
 
 //衍生信息
-@property (strong, nonatomic) NSString *ownerName;  //默认分支
-@property (strong, nonatomic) NSString *purviewDes;  //默认分支
+@property (strong, nonatomic) NSString *ownerName;
+@property (strong, nonatomic) NSString *purviewDes;
+@property (strong, nonatomic) NSString *url;
 
 @end

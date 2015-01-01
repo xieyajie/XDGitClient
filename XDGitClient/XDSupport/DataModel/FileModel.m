@@ -10,11 +10,19 @@
 
 @implementation FileModel
 
+@synthesize fId = _fId;
+@synthesize fileName = _fileName;
+@synthesize sizeDes = _sizeDes;
+@synthesize language = _language;
+@synthesize typeDes = _typeDes;
+
+@synthesize rawUrl = _rawUrl;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-//        self.Id = [dictionary objectForKey:KREPO_ID];
+//        self.fId = [dictionary objectForKey:KMODEL_ID];
 //        self.name = [dictionary objectForKey:KREPO_NAME];
 //        self.fullName = [dictionary objectForKey:KREPO_FULLNAME];
 //        self.description = [dictionary objectForKey:KREPO_DESC];

@@ -10,11 +10,25 @@
 
 @implementation UserModel
 
+@synthesize uId = _uId;
+@synthesize userName = _userName;
+@synthesize avatarUrl = _avatarUrl;
+@synthesize userType = _userType;
+@synthesize company = _company;
+@synthesize email = _email;
+@synthesize webUrl = _webUrl;
+@synthesize locationDes = _locationDes;
+
+@synthesize followersCount = _followersCount;
+@synthesize followingCount = _followingCount;
+
+@synthesize url = _url;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-        self.uId = [dictionary safeStringForKey:KUSER_ID];
+        self.uId = [dictionary safeStringForKey:KMODEL_ID];
         self.userName = [dictionary safeStringForKey:KUSER_NAME];
         self.avatarUrl = [dictionary safeStringForKey:KUSER_AVATARURL];
         self.company = [dictionary safeStringForKey:KUSER_COMPANY];
@@ -23,7 +37,8 @@
         self.locationDes = [dictionary safeStringForKey:KUSER_LOCATION];
         self.followersCount = [dictionary safeStringForKey:KUSER_FOLLOWER];
         self.followingCount = [dictionary safeStringForKey:KUSER_FOLLOWING];
-        self.accountType = [dictionary safeStringForKey:KUSER_TYPE];
+        self.userType = [dictionary safeStringForKey:KMODEL_TYPE];
+        self.url = [dictionary safeStringForKey:KMODEL_URL];
     }
     
     return self;

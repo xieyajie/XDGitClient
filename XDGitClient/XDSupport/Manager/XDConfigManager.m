@@ -22,6 +22,8 @@ static XDConfigManager *defaultManagerInstance = nil;
 {
     self = [super init];
     if (self) {
+        _saveLock = [[NSObject alloc] init];
+        
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         _configFilePath = [documentPath stringByAppendingPathComponent:KCONFIG_FILE];
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -63,7 +65,7 @@ static XDConfigManager *defaultManagerInstance = nil;
     if (!_loginToken || ![_loginToken isEqualToString:loginToken]) {
         _appConfig.loginToken = loginToken;
         _loginToken = loginToken;
-        [self save];
+        [self saveInBackground];
     }
 }
 
@@ -73,19 +75,26 @@ static XDConfigManager *defaultManagerInstance = nil;
     
     if (![_appConfig.loginUsername isEqualToString:loginUser.userName]) {
         _appConfig.loginUsername = loginUser.userName;
-        [self save];
+        [self saveInBackground];
     }
 }
 
 #pragma mark - private
 
-- (BOOL)save
+- (BOOL)saveInBackground
 {
-    BOOL ret = YES;
-    NSDictionary *dic = [_appConfig dictionaryForValues];
-    if ([dic count] > 0) {
-        ret = [dic writeToFile:_configFilePath atomically:YES];
+    __block BOOL ret = YES;
+    
+    @synchronized(_saveLock)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSDictionary *dic = [_appConfig dictionaryForValues];
+            if ([dic count] > 0) {
+                ret = [dic writeToFile:_configFilePath atomically:YES];
+            }
+        });
     }
+    
     return ret;
 }
 

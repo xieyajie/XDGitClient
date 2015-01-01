@@ -10,7 +10,7 @@
 
 @interface PullRequestModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *Id;              //ID
+@property (strong, nonatomic) NSString *prId;              //ID
 @property (strong, nonatomic) NSString *title;           //标题
 @property (strong, nonatomic) NSString *content;         //内容
 @property (strong, nonatomic) NSString *createdDateDes; //创建时间描述

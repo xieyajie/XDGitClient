@@ -10,14 +10,23 @@
 
 @implementation GitModel
 
+@synthesize gId = _gId;
+@synthesize describe = _describe;
+@synthesize createDateDes = _createDateDes;
+@synthesize updateDateDes = _updateDateDes;
+@synthesize htmlUrl = _htmlUrl;
+@synthesize forksUrl = _forksUrl;
+@synthesize commentCountDes = _commentCountDes;
+@synthesize isPublic = _isPublic;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-        self.Id = [dictionary safeStringForKey:KGIT_ID];
+        self.gId = [dictionary safeStringForKey:KMODEL_ID];
         self.describe = [dictionary safeStringForKey:KGIT_DESC];
-        self.createDateDes = [dictionary safeStringForKey:KGIT_CREATE];
-        self.updateDateDes = [dictionary safeStringForKey:KGIT_UPDATE];
+        self.createDateDes = [dictionary safeStringForKey:KMODEL_CREATE];
+        self.updateDateDes = [dictionary safeStringForKey:KMODEL_UPDATE];
         self.htmlUrl = [dictionary safeStringForKey:KGIT_HTMLURL];
         self.forksUrl = [dictionary safeStringForKey:KGIT_FORKURL];
         self.commentCountDes = [dictionary safeStringForKey:KGIT_COMMENTCOUNT];

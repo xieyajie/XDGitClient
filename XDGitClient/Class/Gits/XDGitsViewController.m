@@ -79,7 +79,7 @@
     }
     
     GitModel *model = [self.dataArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = model.Id;
+    cell.textLabel.text = model.gId;
     
     return cell;
 }
@@ -94,51 +94,39 @@
 
 #pragma mark - date
 
-- (void)tableViewDidTriggerHeaderRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
-    self.page = 1;
     __block __weak XDGitsViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
+        
+        if (isHeaderRefresh)
+        {
             [weakSelf.dataArray removeAllObjects];
-            weakSelf.haveNextPage = haveNextPage;
-            if (object) {
-                for (NSDictionary *dic in object) {
-                    GitModel *model = [[GitModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                [weakSelf tableViewDidFinishHeaderRefresh];
+        }
+        weakSelf.haveNextPage = haveNextPage;
+        if (object) {
+            for (NSDictionary *dic in object) {
+                GitModel *model = [[GitModel alloc] initWithDictionary:dic];
+                [weakSelf.dataArray addObject:model];
             }
-        } failure:^(NSError *error) {
+        }
+        
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFinishHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFinishFooterRefresh];
+        }
+    } failure:^(NSError *error) {
+        if (isHeaderRefresh) {
             [weakSelf tableViewDidFailHeaderRefresh];
-        }];
-        
-        [self showLoadingViewWithRequestOperation:operation];
-    });
-}
-
-- (void)tableViewDidTriggerFooterRefresh
-{
-    self.page++;
-    __block __weak XDGitsViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
-            weakSelf.haveNextPage = haveNextPage;
-            if (object) {
-                for (NSDictionary *dic in object) {
-                    GitModel *model = [[GitModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                [weakSelf tableViewDidFinishFooterRefresh];
-            }
-        } failure:^(NSError *error) {
+        }
+        else{
             [weakSelf tableViewDidFailFooterRefresh];
-        }];
-        
-        [self showLoadingViewWithRequestOperation:operation];
-    });
+        }
+    }];
+    
+    [self showLoadingViewWithRequestOperation:operation];
 }
 
 #pragma mark - action

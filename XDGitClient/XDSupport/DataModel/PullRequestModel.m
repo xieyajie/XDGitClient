@@ -10,15 +10,22 @@
 
 @implementation PullRequestModel
 
+@synthesize prId = _prId;
+@synthesize title = _title;
+@synthesize content = _content;
+@synthesize createdDateDes = _createdDateDes;
+@synthesize updatedDateDes = _updatedDateDes;
+@synthesize owner = _owner;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-        self.Id = [dictionary safeStringForKey:KPULLREQUEST_ID];
+        self.prId = [dictionary safeStringForKey:KMODEL_ID];
         self.title = [dictionary safeStringForKey:KPULLREQUEST_TITLE];
         self.content = [dictionary safeStringForKey:KPULLREQUEST_CONTENT];
-        self.createdDateDes = [dictionary objectForKey:KPULLREQUEST_CREATE];
-        self.updatedDateDes = [dictionary objectForKey:KPULLREQUEST_UPDATE];
+        self.createdDateDes = [dictionary objectForKey:KMODEL_CREATE];
+        self.updatedDateDes = [dictionary objectForKey:KMODEL_UPDATE];
         self.owner = [[UserModel alloc] initWithDictionary:[dictionary objectForKey:KPULLREQUEST_OWNER]];
     }
     

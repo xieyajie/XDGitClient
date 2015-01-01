@@ -100,49 +100,39 @@
 
 #pragma mark - date
 
-- (void)tableViewDidTriggerHeaderRefresh
+- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
-    self.page = 1;
     __block __weak XDRepositoryViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
-        [weakSelf.dataArray removeAllObjects];
+        
+        if (isHeaderRefresh)
+        {
+            [weakSelf.dataArray removeAllObjects];
+        }
         weakSelf.haveNextPage = haveNextPage;
         if (object) {
             for (NSDictionary *dic in object) {
                 RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
                 [weakSelf.dataArray addObject:model];
             }
-            
+        }
+        
+        if (isHeaderRefresh) {
             [weakSelf tableViewDidFinishHeaderRefresh];
         }
+        else{
+            [weakSelf tableViewDidFinishFooterRefresh];
+        }
     } failure:^(NSError *error) {
-        [weakSelf tableViewDidFailHeaderRefresh];
+        if (isHeaderRefresh) {
+            [weakSelf tableViewDidFailHeaderRefresh];
+        }
+        else{
+            [weakSelf tableViewDidFailFooterRefresh];
+        }
     }];
     
     [self showLoadingViewWithRequestOperation:operation];
-}
-
-- (void)tableViewDidTriggerFooterRefresh
-{
-    self.page++;
-    __block __weak XDRepositoryViewController *weakSelf = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
-            weakSelf.haveNextPage = haveNextPage;
-            if (object) {
-                for (NSDictionary *dic in object) {
-                    RepositoryModel *model = [[RepositoryModel alloc] initWithDictionary:dic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                [weakSelf tableViewDidFinishFooterRefresh];
-            }
-        } failure:^(NSError *error) {
-            [weakSelf tableViewDidFailFooterRefresh];
-        }];
-        
-        [self showLoadingViewWithRequestOperation:operation];
-    });
 }
 
 #pragma mark - action

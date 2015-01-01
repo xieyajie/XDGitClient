@@ -14,6 +14,7 @@
 #import "XDGitsViewController.h"
 #import "XDEventsViewController.h"
 #import "XDNotificationsViewController.h"
+#import "XDIssuesViewController.h"
 #import "XDFollowerViewController.h"
 #import "XDFollowingViewController.h"
 #import "XDUserCardViewController.h"
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) UINavigationController *gitsNavTabController;
 @property (strong, nonatomic) UINavigationController *eventsNavController;
 @property (strong, nonatomic) UINavigationController *notifsNavController;
+@property (strong, nonatomic) UINavigationController *issuesNavController;
 @property (strong, nonatomic) UINavigationController *followerNavController;
 @property (strong, nonatomic) UINavigationController *followingNavController;
 
@@ -51,6 +53,7 @@
 @synthesize gitsNavTabController = _gitsNavTabController;
 @synthesize eventsNavController = _eventsNavController;
 @synthesize notifsNavController = _notifsNavController;
+@synthesize issuesNavController = _issuesNavController;
 @synthesize followerNavController = _followerNavController;
 @synthesize followingNavController = _followingNavController;
 
@@ -59,10 +62,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-        _configManager = [XDConfigManager defaultManager];
         
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
-        self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
     }
     return self;
 }
@@ -71,6 +71,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.showRefreshHeader = NO;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.accountButton];
     UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
@@ -86,12 +87,17 @@
     UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
     
     [self.navigationItem setLeftBarButtonItems:@[leftItem, refreshItem, settingItem]];
-    [self fetchUserInfo];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
+    self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
     self.tableView.tableFooterView = self.logoutView;
     self.tableView.sectionHeaderHeight = 40.0;
     self.tableView.rowHeight = 50.0;
+    
+    _configManager = [XDConfigManager defaultManager];
+    [self fetchUserInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -208,6 +214,16 @@
     }
     
     return _notifsNavController;
+}
+
+- (UINavigationController *)issuesNavController
+{
+    if (_issuesNavController == nil) {
+        XDIssuesViewController *issuesController = [[XDIssuesViewController alloc] initWithUserName:nil];
+        _issuesNavController = [[UINavigationController alloc] initWithRootViewController:issuesController];
+    }
+    
+    return _issuesNavController;
 }
 
 - (UINavigationController *)followerNavController
@@ -334,6 +350,9 @@
             case KPLIST_VALUE_CONTROLLERSELECTOR_NOTIF:
                 self.deckController.centerController = self.notifsNavController;
                 break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_ISSUE:
+                self.deckController.centerController = self.issuesNavController;
+                break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER:
                 self.deckController.centerController = self.followerNavController;
                 break;
@@ -426,30 +445,6 @@
         [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
         [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
     }];
-    
-//    AFHTTPRequestOperation *operation = [_configManager loadLoginAccountWithSuccess:^(id object) {
-//        AccountModel *account = (AccountModel *)object;
-//        
-//        [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];
-//        [weakSelf.accountButton setTitle:account.accountName forState:UIControlStateNormal];
-//        
-//        [weakSelf hideLoadingView];
-//        [weakSelf.tableView reloadData];
-//        
-//        if (self.selectedIndexPath == nil) {
-//            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//            [weakSelf.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
-//        }
-//        else{
-//            [weakSelf tableView:weakSelf.tableView didSelectRowAtIndexPath:weakSelf.selectedIndexPath];
-//            [weakSelf.tableView selectRowAtIndexPath:weakSelf.selectedIndexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-//        }
-//    } failure:^(NSError *error) {
-//        [weakSelf hideLoadingView];
-//        
-//        [weakSelf.accountButton setTitle:@"获取失败" forState:UIControlStateNormal];
-//        [weakSelf.accountButton setImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal];
-//    }];
     
     [[XDViewManager defaultManager] showLoadingViewWithTitle:@"配置账号..." requestOperation:operation];
 }

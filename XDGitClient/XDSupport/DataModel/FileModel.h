@@ -10,7 +10,7 @@
 
 @interface FileModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *Id;             //ID
+@property (strong, nonatomic) NSString *fId;             //ID
 @property (strong, nonatomic) NSString *fileName;       //文件名称
 @property (strong, nonatomic) NSString *sizeDes;        //大小描述
 @property (strong, nonatomic) NSString *language;       //语言

@@ -56,8 +56,6 @@
     [_backButton setTitleColor:[UIColor colorWithRed:48 / 255.0 green:169 / 255.0 blue:55 / 255.0 alpha:1.0] forState:UIControlStateNormal];
     [_backButton addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
     [_webView addSubview:_backButton];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchToken:) name:KNOTIFICATION_GETCODE object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,7 +82,7 @@
         range = [path rangeOfString:@"code="];
         if (range.location != NSNotFound) {
             NSString *code = [path substringFromIndex:(range.location + range.length)];
-            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_GETCODE object:code];
+            [self fetchToken:code];
         }
     }
     
@@ -112,17 +110,20 @@
 
 #pragma mark - private
 
-- (void)fetchToken:(NSNotification *)notification
+- (void)fetchToken:(NSString *)code
 {
-    NSString *code = [notification object];
+    [self showLoadingViewWithTitle:@"获取token..."];
+    
+    __weak __typeof(self) weakSelf = self;
     [[XDGithubEngine shareEngine] fetchTokenWithUsername:nil password:nil code:code success:^(id object) {
+        [weakSelf hideLoadingView];
         if (object) {
             [[XDConfigManager defaultManager] setLoginToken:object];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOFINSTATECHANGED object:@YES];
         }
     } failure:^(NSError *error) {
-        
+        [weakSelf hideLoadingView];
     }];
 }
 

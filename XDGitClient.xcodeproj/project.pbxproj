@@ -82,6 +82,7 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */; };
 		3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */; };
 		3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */; };
 		3C2539B41A5395F600C71561 /* XDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2539B31A5395F600C71561 /* XDLoginViewController.m */; };
@@ -255,6 +256,8 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C1F7D471A557C8F002A442C /* XDIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDIssuesViewController.h; sourceTree = "<group>"; };
+		3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDIssuesViewController.m; sourceTree = "<group>"; };
 		3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3C2539B21A5395F600C71561 /* XDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoginViewController.h; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 				3C3529391A41996700D88E09 /* XDEventsViewController.m */,
 				3C35293B1A41999F00D88E09 /* XDNotificationsViewController.h */,
 				3C35293C1A41999F00D88E09 /* XDNotificationsViewController.m */,
+				3C1F7D471A557C8F002A442C /* XDIssuesViewController.h */,
+				3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */,
 			);
 			path = Activity;
 			sourceTree = "<group>";
@@ -1033,6 +1038,7 @@
 				3C2D35B91A3A88D7000E0FFB /* AFURLConnectionOperation.m in Sources */,
 				3A373AE318BB491E00E57345 /* XDPullRequestCell.m in Sources */,
 				3C2D35BF1A3A88D7000E0FFB /* UIAlertView+AFNetworking.m in Sources */,
+				3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */,
 				3C2D35BA1A3A88D7000E0FFB /* AFURLRequestSerialization.m in Sources */,
 				3AEDEA3A18AE17450093946D /* NRGridView.m in Sources */,
 				3A3279E818B721100031A0A7 /* XDRepoCardViewController.m in Sources */,

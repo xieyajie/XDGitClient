@@ -10,7 +10,7 @@
 
 @interface GitModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *Id;             //ID
+@property (strong, nonatomic) NSString *gId;             //ID
 @property (strong, nonatomic) NSString *describe;    //描述
 @property (strong, nonatomic) NSString *createDateDes;  //创建时间描述
 @property (strong, nonatomic) NSString *updateDateDes;  //更新时间描述

@@ -11,6 +11,9 @@
 #import "AppConfigModel.h"
 
 @interface XDConfigManager : NSObject
+{
+    NSObject *_saveLock;
+}
 
 @property (strong, nonatomic, readonly) NSString *configFilePath;//配置文件本地路径
 

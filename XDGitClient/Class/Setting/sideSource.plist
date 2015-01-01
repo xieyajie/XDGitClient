@@ -6,16 +6,12 @@
 		<dict>
 			<key>title</key>
 			<string>版本库 Repositories</string>
-			<key>icon</key>
-			<string></string>
 			<key>controller_selector</key>
 			<integer>110</integer>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>Gits</string>
-			<key>icon</key>
-			<string></string>
 			<key>controller_selector</key>
 			<integer>111</integer>
 		</dict>
@@ -24,26 +20,26 @@
 		<dict>
 			<key>title</key>
 			<string>更新 Events</string>
-			<key>icon</key>
-			<string></string>
 			<key>controller_selector</key>
 			<integer>100</integer>
 		</dict>
 		<dict>
 			<key>title</key>
 			<string>通知 Notifications</string>
-			<key>icon</key>
-			<string></string>
 			<key>controller_selector</key>
 			<integer>101</integer>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>问题 Issues</string>
+			<key>controller_selector</key>
+			<integer>102</integer>
 		</dict>
 	</array>
 	<array>
 		<dict>
 			<key>title</key>
 			<string>关注Me的人</string>
-			<key>icon</key>
-			<string></string>
 			<key>model_selector</key>
 			<string>followersCount</string>
 			<key>controller_selector</key>
@@ -52,8 +48,6 @@
 		<dict>
 			<key>title</key>
 			<string>Me关注的人</string>
-			<key>icon</key>
-			<string></string>
 			<key>model_selector</key>
 			<string>followingCount</string>
 			<key>controller_selector</key>
