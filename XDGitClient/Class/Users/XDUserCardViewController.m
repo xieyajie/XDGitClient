@@ -210,7 +210,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"CellValue1";
+    NSString *CellIdentifier = @"CellValue";
+    if (indexPath.section == 0 && indexPath.row == 0){
+        CellIdentifier = @"CellValueHead";
+    }
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
