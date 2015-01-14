@@ -72,7 +72,7 @@
     }
     
     if (indexPath.section == 1) {
-        cell.textLabel.text = @"Read Me";
+        cell.textLabel.text = @"ReadMe.md";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
