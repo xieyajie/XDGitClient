@@ -153,7 +153,7 @@
             break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_REPOSOURCE:
         {
-            XDSourceViewController *sourceController = [[XDSourceViewController alloc] init];
+            XDSourceViewController *sourceController = [[XDSourceViewController alloc] initWithRepository:self.repoModel];
             sourceController.title = [NSString stringWithFormat:@"%@`s Source", self.repoModel.name];
             [self.navigationController pushViewController:sourceController animated:YES];
         }

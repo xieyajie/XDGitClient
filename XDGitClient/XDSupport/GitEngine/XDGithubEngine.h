@@ -87,4 +87,7 @@
 #pragma mark Watching
 - (AFHTTPRequestOperation *)watchersForRepository:(NSString *)repositoryFullname page:(NSInteger)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
+#pragma mark - Read Me
+- (AFHTTPRequestOperation *)readmeForRepository:(NSString *)repositoryFullName success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+
 @end

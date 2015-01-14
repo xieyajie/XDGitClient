@@ -8,11 +8,27 @@
 
 #import "XDSourceViewController.h"
 
+#import "RepositoryModel.h"
+#import "XDReadMeViewController.h"
+
 @interface XDSourceViewController ()
+{
+    RepositoryModel *_repoModel;
+}
 
 @end
 
 @implementation XDSourceViewController
+
+- (instancetype)initWithRepository:(RepositoryModel *)model
+{
+    self = [super initWithStyle:UITableViewStylePlain];
+    if (self) {
+        _repoModel = model;
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,6 +88,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(indexPath.section == 1 && indexPath.row == 0)
+    {
+        XDReadMeViewController *readmeController = [[XDReadMeViewController alloc] initWithRepositoryFullName:_repoModel.fullName];
+        [self.navigationController pushViewController:readmeController animated:YES];
+    }
     //    RepositoryModel *model = [self.dataArray objectAtIndex:indexPath.row];
     //    XDRepoCardViewController *repoCardController = [[XDRepoCardViewController alloc] initWithRepositoryModel:model];
     //    [self.navigationController pushViewController:repoCardController animated:YES];

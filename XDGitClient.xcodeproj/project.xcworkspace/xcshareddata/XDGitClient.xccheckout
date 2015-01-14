@@ -12,6 +12,8 @@
 	<dict>
 		<key>2503B9026E2355156C4D93FADD1217DE4E462561</key>
 		<string>https://github.com/xieyajie/XDGitClient.git</string>
+		<key>8E756A5F3B3088D21C2995D34B375B49B53EB485</key>
+		<string>https://github.com/xieyajie/MMMarkdown.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>XDGitClient.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>2503B9026E2355156C4D93FADD1217DE4E462561</key>
 		<string>../..</string>
+		<key>8E756A5F3B3088D21C2995D34B375B49B53EB485</key>
+		<string>../../../MMMarkdown</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/xieyajie/XDGitClient.git</string>
@@ -28,6 +32,14 @@
 	<string>2503B9026E2355156C4D93FADD1217DE4E462561</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8E756A5F3B3088D21C2995D34B375B49B53EB485</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MMMarkdown</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

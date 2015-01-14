@@ -85,7 +85,6 @@
 		3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */; };
 		3C1F7D4C1A558C6C002A442C /* IssueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4B1A558C6C002A442C /* IssueModel.m */; };
 		3C1F7D4F1A558E08002A442C /* LabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4E1A558E08002A442C /* LabelModel.m */; };
-		3C1F7D521A55A302002A442C /* XDSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D511A55A302002A442C /* XDSourceViewController.m */; };
 		3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */; };
 		3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */; };
 		3C2539B41A5395F600C71561 /* XDLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C2539B31A5395F600C71561 /* XDLoginViewController.m */; };
@@ -123,7 +122,12 @@
 		3C5072451A428C5400566CDA /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50723E1A428C5400566CDA /* XDConfigManager.m */; };
 		3C5072481A428C5400566CDA /* XDViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5072441A428C5400566CDA /* XDViewManager.m */; };
 		3C50724B1A428CCD00566CDA /* XDHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50724A1A428CCD00566CDA /* XDHelperManager.m */; };
+		3C78C79E1A5ABCC400AE2E94 /* XDSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C78C79D1A5ABCC400AE2E94 /* XDSourceViewController.m */; };
 		3CA4F00D18B25298006C28BF /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* UserModel.m */; };
+		3CE0FACD1A66507B00BC0A68 /* XDReadMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FACC1A66507B00BC0A68 /* XDReadMeViewController.m */; };
+		3CE0FAD01A66527100BC0A68 /* XDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FACF1A66527100BC0A68 /* XDWebViewController.m */; };
+		3CE0FAD51A665E2000BC0A68 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FAD31A665E2000BC0A68 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		3CE0FB161A66824300BC0A68 /* libMMMarkdown-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE0FB111A66823A00BC0A68 /* libMMMarkdown-iOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +137,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = 3AEDE94818ADF5A90093946D;
 			remoteInfo = XDGitClient;
+		};
+		3CE0FB0E1A66823A00BC0A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE813DD614F893EB00EC9469;
+			remoteInfo = "MMMarkdown-Mac";
+		};
+		3CE0FB101A66823A00BC0A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE813E0E14F8961D00EC9469;
+			remoteInfo = "MMMarkdown-iOS";
+		};
+		3CE0FB121A66823A00BC0A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE813DEA14F893EB00EC9469;
+			remoteInfo = MMMarkdownTests;
+		};
+		3CE0FB141A66823A00BC0A68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BE813E1314F92B6100EC9469;
+			remoteInfo = mmmarkdown;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -265,8 +297,6 @@
 		3C1F7D4B1A558C6C002A442C /* IssueModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IssueModel.m; sourceTree = "<group>"; };
 		3C1F7D4D1A558E08002A442C /* LabelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LabelModel.h; sourceTree = "<group>"; };
 		3C1F7D4E1A558E08002A442C /* LabelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LabelModel.m; sourceTree = "<group>"; };
-		3C1F7D501A55A302002A442C /* XDSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSourceViewController.h; sourceTree = "<group>"; };
-		3C1F7D511A55A302002A442C /* XDSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSourceViewController.m; sourceTree = "<group>"; };
 		3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3C2539B21A5395F600C71561 /* XDLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLoginViewController.h; sourceTree = "<group>"; };
@@ -339,9 +369,19 @@
 		3C5072441A428C5400566CDA /* XDViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDViewManager.m; sourceTree = "<group>"; };
 		3C5072491A428CCD00566CDA /* XDHelperManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDHelperManager.h; sourceTree = "<group>"; };
 		3C50724A1A428CCD00566CDA /* XDHelperManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDHelperManager.m; sourceTree = "<group>"; };
+		3C78C79C1A5ABCC400AE2E94 /* XDSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSourceViewController.h; sourceTree = "<group>"; };
+		3C78C79D1A5ABCC400AE2E94 /* XDSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSourceViewController.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
 		3CA4F00B18B25298006C28BF /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		3CA4F00C18B25298006C28BF /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		3CE0FACB1A66507B00BC0A68 /* XDReadMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDReadMeViewController.h; sourceTree = "<group>"; };
+		3CE0FACC1A66507B00BC0A68 /* XDReadMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDReadMeViewController.m; sourceTree = "<group>"; };
+		3CE0FACE1A66527100BC0A68 /* XDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWebViewController.h; sourceTree = "<group>"; };
+		3CE0FACF1A66527100BC0A68 /* XDWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDWebViewController.m; sourceTree = "<group>"; };
+		3CE0FAD21A665E2000BC0A68 /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
+		3CE0FAD31A665E2000BC0A68 /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
+		3CE0FAD41A665E2000BC0A68 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MMMarkdown.xcodeproj; path = ../MMMarkdown/MMMarkdown.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +389,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CE0FB161A66824300BC0A68 /* libMMMarkdown-iOS.a in Frameworks */,
 				3C2059411A383F4B00CE3299 /* MobileCoreServices.framework in Frameworks */,
 				3C20593F1A383F2400CE3299 /* SystemConfiguration.framework in Frameworks */,
 				3AEDE94F18ADF5A90093946D /* CoreGraphics.framework in Frameworks */,
@@ -545,6 +586,7 @@
 		3AA8012218B3532D00F8450B /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				3C78C79B1A5ABCC400AE2E94 /* Source */,
 				3AA8012318B3532D00F8450B /* XDRepositoryViewController.h */,
 				3AA8012418B3532D00F8450B /* XDRepositoryViewController.m */,
 				3AA4F03A18B5DBC500E8E1BA /* XDRepositoryCell.h */,
@@ -558,8 +600,6 @@
 				3A3279F218B7513A0031A0A7 /* XDForkersViewController.m */,
 				3A3279F418B758510031A0A7 /* XDWatchersViewController.h */,
 				3A3279F518B758510031A0A7 /* XDWatchersViewController.m */,
-				3C1F7D501A55A302002A442C /* XDSourceViewController.h */,
-				3C1F7D511A55A302002A442C /* XDSourceViewController.m */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -585,6 +625,7 @@
 		3AEDE94B18ADF5A90093946D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */,
 				3C2059401A383F4B00CE3299 /* MobileCoreServices.framework */,
 				3C20593E1A383F2400CE3299 /* SystemConfiguration.framework */,
 				3AEDE94C18ADF5A90093946D /* Foundation.framework */,
@@ -657,6 +698,8 @@
 		3AEDE99118ADFF1A0093946D /* BaseController */ = {
 			isa = PBXGroup;
 			children = (
+				3CE0FACE1A66527100BC0A68 /* XDWebViewController.h */,
+				3CE0FACF1A66527100BC0A68 /* XDWebViewController.m */,
 				3A47A4D718B45504001C76C0 /* Control */,
 				3AA8012918B35B9B00F8450B /* XDTabBarController.h */,
 				3AA8012A18B35B9B00F8450B /* XDTabBarController.m */,
@@ -670,6 +713,7 @@
 		3AEDE9C018AE17450093946D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3CE0FAD11A665E2000BC0A68 /* GTMBase64 */,
 				3C2D358E1A3A88D7000E0FFB /* AFNetworking */,
 				3AEDEA4C18AE20D10093946D /* ViewDeck */,
 				3AEDEA0C18AE17450093946D /* NRGridView */,
@@ -830,6 +874,17 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		3C78C79B1A5ABCC400AE2E94 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3C78C79C1A5ABCC400AE2E94 /* XDSourceViewController.h */,
+				3C78C79D1A5ABCC400AE2E94 /* XDSourceViewController.m */,
+				3CE0FACB1A66507B00BC0A68 /* XDReadMeViewController.h */,
+				3CE0FACC1A66507B00BC0A68 /* XDReadMeViewController.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		3CA4F00A18B25281006C28BF /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,6 +914,27 @@
 				3C1F7D4E1A558E08002A442C /* LabelModel.m */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		3CE0FAD11A665E2000BC0A68 /* GTMBase64 */ = {
+			isa = PBXGroup;
+			children = (
+				3CE0FAD21A665E2000BC0A68 /* GTMBase64.h */,
+				3CE0FAD31A665E2000BC0A68 /* GTMBase64.m */,
+				3CE0FAD41A665E2000BC0A68 /* GTMDefines.h */,
+			);
+			path = GTMBase64;
+			sourceTree = "<group>";
+		};
+		3CE0FB081A66823A00BC0A68 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3CE0FB0F1A66823A00BC0A68 /* libMMMarkdown-Mac.a */,
+				3CE0FB111A66823A00BC0A68 /* libMMMarkdown-iOS.a */,
+				3CE0FB131A66823A00BC0A68 /* MMMarkdownTests.xctest */,
+				3CE0FB151A66823A00BC0A68 /* mmmarkdown */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -927,6 +1003,12 @@
 			mainGroup = 3AEDE94018ADF5A90093946D;
 			productRefGroup = 3AEDE94A18ADF5A90093946D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3CE0FB081A66823A00BC0A68 /* Products */;
+					ProjectRef = 3CE0FB071A66823A00BC0A68 /* MMMarkdown.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3AEDE94818ADF5A90093946D /* XDGitClient */,
@@ -934,6 +1016,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3CE0FB0F1A66823A00BC0A68 /* libMMMarkdown-Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMMMarkdown-Mac.a";
+			remoteRef = 3CE0FB0E1A66823A00BC0A68 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3CE0FB111A66823A00BC0A68 /* libMMMarkdown-iOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libMMMarkdown-iOS.a";
+			remoteRef = 3CE0FB101A66823A00BC0A68 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3CE0FB131A66823A00BC0A68 /* MMMarkdownTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MMMarkdownTests.xctest;
+			remoteRef = 3CE0FB121A66823A00BC0A68 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3CE0FB151A66823A00BC0A68 /* mmmarkdown */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = mmmarkdown;
+			remoteRef = 3CE0FB141A66823A00BC0A68 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3AEDE94718ADF5A90093946D /* Resources */ = {
@@ -990,6 +1103,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */,
+				3CE0FACD1A66507B00BC0A68 /* XDReadMeViewController.m in Sources */,
 				3A373AE018BB48D200E57345 /* XDPullRequestsViewController.m in Sources */,
 				3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
@@ -1015,8 +1129,9 @@
 				3C2B738B1A52DF7200DCA00F /* XDUsersViewController.m in Sources */,
 				3C2B738A1A52DF7200DCA00F /* XDUserCardViewController.m in Sources */,
 				3AA8012B18B35B9B00F8450B /* XDTabBarController.m in Sources */,
+				3CE0FAD01A66527100BC0A68 /* XDWebViewController.m in Sources */,
 				3AA8012118B3460200F8450B /* NSString+Category.m in Sources */,
-				3C1F7D521A55A302002A442C /* XDSourceViewController.m in Sources */,
+				3C78C79E1A5ABCC400AE2E94 /* XDSourceViewController.m in Sources */,
 				3AA8012018B3460200F8450B /* NSData+Category.m in Sources */,
 				3AEDEA5318AE20D10093946D /* IISideController.m in Sources */,
 				3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */,
@@ -1054,6 +1169,7 @@
 				3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */,
 				3C2D35B91A3A88D7000E0FFB /* AFURLConnectionOperation.m in Sources */,
 				3A373AE318BB491E00E57345 /* XDPullRequestCell.m in Sources */,
+				3CE0FAD51A665E2000BC0A68 /* GTMBase64.m in Sources */,
 				3C2D35BF1A3A88D7000E0FFB /* UIAlertView+AFNetworking.m in Sources */,
 				3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */,
 				3C2D35BA1A3A88D7000E0FFB /* AFURLRequestSerialization.m in Sources */,
@@ -1179,6 +1295,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XDGitClient/XDGitClient-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(CONFIGURATION_BUILD_DIR)/MMMarkdown-iOS/public/",
+				);
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1196,6 +1317,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XDGitClient/XDGitClient-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(CONFIGURATION_BUILD_DIR)/MMMarkdown-iOS/public/",
+				);
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";

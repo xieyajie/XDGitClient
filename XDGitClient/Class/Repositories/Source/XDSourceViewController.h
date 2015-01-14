@@ -8,6 +8,9 @@
 
 #import "XDTableViewController.h"
 
+@class RepositoryModel;
 @interface XDSourceViewController : XDTableViewController
+
+- (instancetype)initWithRepository:(RepositoryModel *)model;
 
 @end
