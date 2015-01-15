@@ -37,6 +37,20 @@
 	<array>
 		<dict>
 			<key>title</key>
+			<string>XDStudio发展史</string>
+			<key>controller_selector</key>
+			<integer>114</integer>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>联系XDStudio</string>
+			<key>controller_selector</key>
+			<integer>115</integer>
+		</dict>
+	</array>
+	<array>
+		<dict>
+			<key>title</key>
 			<string>新闻提要 News Feed</string>
 			<key>controller_selector</key>
 			<integer>100</integer>

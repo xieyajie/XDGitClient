@@ -8,15 +8,24 @@
 
 #import "XDBaseModel.h"
 
+#define KREPO_FILE_CONTENT @"content"
+#define KREPO_FILE_DOWNLOADPATH @"download_url"
+#define KREPO_FILE_GIT @"git_url"
+#define KREPO_FILE_BROWSERPATH @"html_url"
+#define KREPO_FILE_ENCODING @"encoding"
+#define KREPO_FILE_NAME @"name"
+#define KREPO_FILE_PATH @"path"
+
 @interface FileModel : XDBaseModel
 
-@property (strong, nonatomic) NSString *fId;             //ID
-@property (strong, nonatomic) NSString *fileName;       //文件名称
-@property (strong, nonatomic) NSString *sizeDes;        //大小描述
-@property (strong, nonatomic) NSString *language;       //语言
-@property (strong, nonatomic) NSString *typeDes;        //类型描述
-
-//url
-@property (strong, nonatomic) NSString *rawUrl;       //raw
+@property (strong, nonatomic) NSString *content;
+@property (strong, nonatomic) NSString *downloadPath;
+@property (strong, nonatomic) NSString *gitPath;
+@property (strong, nonatomic) NSString *htmlPath;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *path;
+@property (strong, nonatomic) NSString *sha;
+@property (strong, nonatomic) NSString *encoding;
+@property (nonatomic) long long size;
 
 @end

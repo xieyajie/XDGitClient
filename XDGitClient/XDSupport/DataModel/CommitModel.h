@@ -13,7 +13,6 @@
 #define KCOMMIT_AUTHOR_EMAIL @"email"
 #define KCOMMIT_DISTINCT @"distinct"
 #define KCOMMIT_MESSAGE @"message"
-#define KCOMMIT_SHA @"sha"
 
 @interface CommitModel : XDBaseModel
 

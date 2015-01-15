@@ -82,6 +82,9 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C1F777D1A677CA600C24D5E /* XDSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F777B1A677CA600C24D5E /* XDSourceViewController.m */; };
+		3C1F77841A67AB4C00C24D5E /* XDFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F77831A67AB4C00C24D5E /* XDFileListViewController.m */; };
+		3C1F77871A67B14200C24D5E /* RepoSourceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F77861A67B14200C24D5E /* RepoSourceModel.m */; };
 		3C1F7D491A557C8F002A442C /* XDIssuesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */; };
 		3C1F7D4C1A558C6C002A442C /* IssueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4B1A558C6C002A442C /* IssueModel.m */; };
 		3C1F7D4F1A558E08002A442C /* LabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F7D4E1A558E08002A442C /* LabelModel.m */; };
@@ -122,9 +125,8 @@
 		3C5072451A428C5400566CDA /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50723E1A428C5400566CDA /* XDConfigManager.m */; };
 		3C5072481A428C5400566CDA /* XDViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5072441A428C5400566CDA /* XDViewManager.m */; };
 		3C50724B1A428CCD00566CDA /* XDHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50724A1A428CCD00566CDA /* XDHelperManager.m */; };
-		3C78C79E1A5ABCC400AE2E94 /* XDSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C78C79D1A5ABCC400AE2E94 /* XDSourceViewController.m */; };
 		3CA4F00D18B25298006C28BF /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* UserModel.m */; };
-		3CE0FACD1A66507B00BC0A68 /* XDReadMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FACC1A66507B00BC0A68 /* XDReadMeViewController.m */; };
+		3CDB06281A67C5EF004FB764 /* XDFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB06271A67C5EF004FB764 /* XDFileViewController.m */; };
 		3CE0FAD01A66527100BC0A68 /* XDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FACF1A66527100BC0A68 /* XDWebViewController.m */; };
 		3CE0FAD51A665E2000BC0A68 /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FAD31A665E2000BC0A68 /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		3CE0FB161A66824300BC0A68 /* libMMMarkdown-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE0FB111A66823A00BC0A68 /* libMMMarkdown-iOS.a */; };
@@ -291,6 +293,12 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C1F777A1A677CA600C24D5E /* XDSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSourceViewController.h; sourceTree = "<group>"; };
+		3C1F777B1A677CA600C24D5E /* XDSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSourceViewController.m; sourceTree = "<group>"; };
+		3C1F77821A67AB4C00C24D5E /* XDFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFileListViewController.h; sourceTree = "<group>"; };
+		3C1F77831A67AB4C00C24D5E /* XDFileListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFileListViewController.m; sourceTree = "<group>"; };
+		3C1F77851A67B14200C24D5E /* RepoSourceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepoSourceModel.h; sourceTree = "<group>"; };
+		3C1F77861A67B14200C24D5E /* RepoSourceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoSourceModel.m; sourceTree = "<group>"; };
 		3C1F7D471A557C8F002A442C /* XDIssuesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDIssuesViewController.h; sourceTree = "<group>"; };
 		3C1F7D481A557C8F002A442C /* XDIssuesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDIssuesViewController.m; sourceTree = "<group>"; };
 		3C1F7D4A1A558C6C002A442C /* IssueModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IssueModel.h; sourceTree = "<group>"; };
@@ -374,6 +382,8 @@
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
 		3CA4F00B18B25298006C28BF /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		3CA4F00C18B25298006C28BF /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		3CDB06261A67C5EF004FB764 /* XDFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFileViewController.h; sourceTree = "<group>"; };
+		3CDB06271A67C5EF004FB764 /* XDFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDFileViewController.m; sourceTree = "<group>"; };
 		3CE0FACB1A66507B00BC0A68 /* XDReadMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDReadMeViewController.h; sourceTree = "<group>"; };
 		3CE0FACC1A66507B00BC0A68 /* XDReadMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDReadMeViewController.m; sourceTree = "<group>"; };
 		3CE0FACE1A66527100BC0A68 /* XDWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDWebViewController.h; sourceTree = "<group>"; };
@@ -663,6 +673,7 @@
 		3AEDE98018ADFD370093946D /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				3C1F77771A677CA600C24D5E /* Source */,
 				3C2B738C1A52E51200DCA00F /* Setting */,
 				3C35293E1A4199F700D88E09 /* Users */,
 				3A373ADD18BB48D200E57345 /* PullRequest */,
@@ -772,6 +783,19 @@
 				3AEDEA5218AE20D10093946D /* IIWrapController.m */,
 			);
 			path = ViewDeck;
+			sourceTree = "<group>";
+		};
+		3C1F77771A677CA600C24D5E /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3C1F777A1A677CA600C24D5E /* XDSourceViewController.h */,
+				3C1F777B1A677CA600C24D5E /* XDSourceViewController.m */,
+				3C1F77821A67AB4C00C24D5E /* XDFileListViewController.h */,
+				3C1F77831A67AB4C00C24D5E /* XDFileListViewController.m */,
+				3CDB06261A67C5EF004FB764 /* XDFileViewController.h */,
+				3CDB06271A67C5EF004FB764 /* XDFileViewController.m */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 		3C2B738C1A52E51200DCA00F /* Setting */ = {
@@ -912,6 +936,8 @@
 				3C1F7D4B1A558C6C002A442C /* IssueModel.m */,
 				3C1F7D4D1A558E08002A442C /* LabelModel.h */,
 				3C1F7D4E1A558E08002A442C /* LabelModel.m */,
+				3C1F77851A67B14200C24D5E /* RepoSourceModel.h */,
+				3C1F77861A67B14200C24D5E /* RepoSourceModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1103,12 +1129,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AEDEA3D18AE17450093946D /* UIScrollView+SVPullToRefresh.m in Sources */,
-				3CE0FACD1A66507B00BC0A68 /* XDReadMeViewController.m in Sources */,
+				3C1F77841A67AB4C00C24D5E /* XDFileListViewController.m in Sources */,
 				3A373AE018BB48D200E57345 /* XDPullRequestsViewController.m in Sources */,
 				3AA4F02F18B5977600E8E1BA /* UIButton+AsyncImage.m in Sources */,
 				3AEDE9A718ADFF1A0093946D /* XDViewController.m in Sources */,
 				3C2539B41A5395F600C71561 /* XDLoginViewController.m in Sources */,
 				3C3401D01A4420CE00DC5632 /* CommitModel.m in Sources */,
+				3CDB06281A67C5EF004FB764 /* XDFileViewController.m in Sources */,
 				3A47A4E318B45504001C76C0 /* XDTabBarItem.m in Sources */,
 				3C2D35BC1A3A88D7000E0FFB /* AFURLSessionManager.m in Sources */,
 				3C3529451A4199F700D88E09 /* XDFollowingViewController.m in Sources */,
@@ -1131,12 +1158,13 @@
 				3AA8012B18B35B9B00F8450B /* XDTabBarController.m in Sources */,
 				3CE0FAD01A66527100BC0A68 /* XDWebViewController.m in Sources */,
 				3AA8012118B3460200F8450B /* NSString+Category.m in Sources */,
-				3C78C79E1A5ABCC400AE2E94 /* XDSourceViewController.m in Sources */,
 				3AA8012018B3460200F8450B /* NSData+Category.m in Sources */,
 				3AEDEA5318AE20D10093946D /* IISideController.m in Sources */,
+				3C1F777D1A677CA600C24D5E /* XDSourceViewController.m in Sources */,
 				3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */,
 				3A47A4E118B45504001C76C0 /* XDLoadingView.m in Sources */,
 				3AA4F03618B5D27000E8E1BA /* GitModel.m in Sources */,
+				3C1F77871A67B14200C24D5E /* RepoSourceModel.m in Sources */,
 				3C2D35B41A3A88D7000E0FFB /* AFHTTPRequestOperation.m in Sources */,
 				3C3401CA1A440A7600DC5632 /* EventModel.m in Sources */,
 				3AEDE98718ADFD380093946D /* XDAppDelegate.m in Sources */,

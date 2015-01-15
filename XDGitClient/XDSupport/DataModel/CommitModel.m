@@ -23,7 +23,7 @@
     if (self) {
         self.message = [dictionary safeStringForKey:KCOMMIT_MESSAGE];
         self.distinct = [dictionary safeStringForKey:KCOMMIT_DISTINCT];
-        self.sha = [dictionary safeStringForKey:KCOMMIT_SHA];
+        self.sha = [dictionary safeStringForKey:KMODEL_SHA];
         self.url = [dictionary safeStringForKey:KMODEL_URL];
         
         NSDictionary *author = [dictionary objectForKey:KCOMMIT_AUTHOR];

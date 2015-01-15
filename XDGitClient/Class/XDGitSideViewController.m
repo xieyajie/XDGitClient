@@ -33,7 +33,7 @@
 }
 
 @property (strong, nonatomic) UIButton *accountButton;
-@property (strong, nonatomic) UIView *logoutView;
+@property (strong, nonatomic) UIView *footerView;
 
 @property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
@@ -71,28 +71,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.showRefreshHeader = NO;
     
     UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:self.accountButton];
-    UIButton *settingButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
-    [settingButton setImage:[UIImage imageNamed:@"navi_settingWhite.png"] forState:UIControlStateNormal];
-    [settingButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
-    [settingButton addTarget:self action:@selector(settingAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *settingItem = [[UIBarButtonItem alloc] initWithCustomView:settingButton];
-    
-    UIButton *refreshButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 44)];
-    [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateNormal];
-    [refreshButton setImage:[UIImage imageNamed:@"navi_settingBlue.png"] forState:UIControlStateHighlighted];
-    [refreshButton addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithCustomView:refreshButton];
-    
-    [self.navigationItem setLeftBarButtonItems:@[leftItem, refreshItem, settingItem]];
+    [self.navigationItem setLeftBarButtonItem:leftItem];
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"sideSource" ofType:@"plist"];
     self.dataArray = [NSMutableArray arrayWithContentsOfFile:path];
     
     self.tableView.backgroundColor = [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1.0];
-    self.tableView.tableFooterView = self.logoutView;
+//    self.tableView.tableFooterView = self.footerView;
+    self.tableView.tableFooterView = [[UIView alloc] init];
     self.tableView.sectionHeaderHeight = 40.0;
     self.tableView.rowHeight = 50.0;
     
@@ -128,21 +116,21 @@
     return _accountButton;
 }
 
-- (UIView *)logoutView
+- (UIView *)footerView
 {
-    if (_logoutView == nil) {
-        _logoutView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 70)];
-        _logoutView.backgroundColor = [UIColor clearColor];
+    if (_footerView == nil) {
+        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 70)];
+        _footerView.backgroundColor = [UIColor clearColor];
         
-        UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 15, KLEFTVIEWWIDTH - 30, 35)];
-        logoutButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
-        [logoutButton setTitle:@"退出当前账户" forState:UIControlStateNormal];
-        [logoutButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
-        [logoutButton addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
-        [_logoutView addSubview:logoutButton];
+        UIButton *fButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 15, KLEFTVIEWWIDTH - 30, 35)];
+        fButton.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
+        [fButton setTitle:@"退出登录" forState:UIControlStateNormal];
+        [fButton setBackgroundImage:[[UIImage imageNamed:@"button_bg_red"] stretchableImageWithLeftCapWidth:10 topCapHeight:15] forState:UIControlStateNormal];
+        [fButton addTarget:self action:@selector(logoutAction) forControlEvents:UIControlEventTouchUpInside];
+        [_footerView addSubview:fButton];
     }
     
-    return _logoutView;
+    return _footerView;
 }
 
 - (UINavigationController *)reposityNavTabController
@@ -252,7 +240,7 @@
 {
     // Return the number of sections.
 //    return [self.dataArray count];
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -271,8 +259,11 @@
             return @"关注";
             break;
         case 2:
-            return @"动态";
+            return @"附属功能";
             break;
+//        case 3:
+//            return @"动态";
+//            break;
             
         default:
             return @"";
@@ -366,23 +357,19 @@
             case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEING:
                 self.deckController.centerController = self.followingNavController;
                 break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_XDS:
+            {
                 
+            }
+                break;
+            case KPLIST_VALUE_CONTROLLERSELECTOR_EMAIL:
+            {
+                
+            }
+                break;
             default:
                 break;
         }
-        
-//        if (_menuItem == nil) {
-//            UIButton *menuButton = [[UIButton alloc]initWithFrame:CGRectMake(15.0, 20.0+(44.0-30.0)/2, 30.0, 30.0)];
-//            [menuButton setBackgroundImage:[UIImage imageNamed:@"side_menu"]tr8 forState:UIControlStateNormal];
-//            [menuButton addTarget:self action:@selector(openSideAction) forControlEvents:UIControlEventTouchUpInside];
-//            _menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-//        }
-//        
-//        id controller = self.deckController.centerController;
-//        if ([controller isKindOfClass:[UINavigationController class]]) {
-//            UINavigationController *navController = (UINavigationController *)controller;
-//            [[[navController.viewControllers objectAtIndex:0] navigationItem] setLeftBarButtonItem:_menuItem];
-//        }
     }
 
     [self.deckController closeLeftViewAnimated:YES];
@@ -397,7 +384,7 @@
     UIBarButtonItem *cancleItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:cardController action:@selector(dismissButtonTapped:)];
     
     [[[XDViewManager defaultManager] appRootNavController] presentViewController:cardNavigation animated:YES completion:^{
-        [cardController.navigationItem setLeftBarButtonItem:cancleItem];
+        [cardController.navigationItem setRightBarButtonItem:cancleItem];
     }];
 }
 
@@ -424,6 +411,11 @@
 }
 
 #pragma mark - private
+
+- (void)tableViewDidTriggerHeaderRefresh
+{
+    [self fetchUserInfo];
+}
 
 - (void)fetchUserInfo
 {

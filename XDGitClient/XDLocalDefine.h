@@ -36,6 +36,11 @@ typedef enum{
     XDPullRequestStateClosed,
 }XDPullRequestState;
 
+typedef enum{
+    XDSourceTypeFile,
+    XDSourceTypeDir,
+}XDSourceType;
+
 //block
 #pragma mark - block
 typedef void (^XDGitEngineSuccessBlock)(id object);
@@ -89,6 +94,8 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KPLIST_VALUE_CONTROLLERSELECTOR_GIT         111
 #define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOWER    112
 #define KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEING   113
+#define KPLIST_VALUE_CONTROLLERSELECTOR_XDS         114
+#define KPLIST_VALUE_CONTROLLERSELECTOR_EMAIL       115
 
 //repo
 #define KPLIST_VALUE_CONTROLLERSELECTOR_ACCOUNT     120
@@ -114,6 +121,7 @@ typedef void (^XDGitEngineFailureBlock)(NSError *error);
 #define KMODEL_CREATE @"created_at"
 #define KMODEL_UPDATE @"updated_at"
 #define KMODEL_SIZE @"size"
+#define KMODEL_SHA @"sha"
 
 
 //Pull Request

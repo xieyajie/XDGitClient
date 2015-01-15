@@ -9,7 +9,7 @@
 #import "XDPageViewViewController.h"
 
 @class XDGitDeckViewController;
-@interface XDGitSideViewController : XDPageViewViewController
+@interface XDGitSideViewController : XDTableViewController
 
 @property (strong, nonatomic) XDGitDeckViewController *deckController;
 

@@ -16,8 +16,6 @@
 {
     NSString *_userName;
     XDRepositoryStyle _style;
-    
-    UIBarButtonItem *_editItem;
 }
 
 @end
@@ -40,11 +38,6 @@
     if (self) {
         _style = style;
         _userName = userName;
-        
-        if (_userName == nil && _userName.length == 0) {
-            _editItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editAction)];
-            _rightItems = [NSMutableArray arrayWithObjects:_editItem, nil];
-        }
     }
     
     return self;
@@ -133,14 +126,6 @@
     }];
     
     [self showLoadingViewWithRequestOperation:operation];
-}
-
-#pragma mark - action
-
-- (void)editAction
-{
-    self.tableView.editing = !self.tableView.editing;
-    _editItem.title = self.tableView.editing ? @"完成" : @"编辑";
 }
 
 @end

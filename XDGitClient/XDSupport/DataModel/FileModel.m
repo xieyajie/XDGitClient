@@ -10,33 +10,29 @@
 
 @implementation FileModel
 
-@synthesize fId = _fId;
-@synthesize fileName = _fileName;
-@synthesize sizeDes = _sizeDes;
-@synthesize language = _language;
-@synthesize typeDes = _typeDes;
-
-@synthesize rawUrl = _rawUrl;
+@synthesize content = _content;
+@synthesize downloadPath = _downloadPath;
+@synthesize gitPath = _gitPath;
+@synthesize htmlPath = _htmlPath;
+@synthesize name = _name;
+@synthesize path = _path;
+@synthesize sha = _sha;
+@synthesize size = _size;
+@synthesize encoding = _encoding;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [super init];
     if (self) {
-//        self.fId = [dictionary objectForKey:KMODEL_ID];
-//        self.name = [dictionary objectForKey:KREPO_NAME];
-//        self.fullName = [dictionary objectForKey:KREPO_FULLNAME];
-//        self.description = [dictionary objectForKey:KREPO_DESC];
-//        self.createDateDes = [dictionary objectForKey:KREPO_CREATE];
-//        self.updateDateDes = [dictionary objectForKey:KREPO_UPDATE];
-//        self.sizeDes = [dictionary objectForKey:KREPO_SIZE];
-//        self.language = [dictionary objectForKey:KREPO_LANGUAGE];
-//        self.cloneUrl = [dictionary objectForKey:KREPO_CLONEURL];
-//        self.svnUrl = [dictionary objectForKey:KREPO_SVNURL];
-//        self.gitUrl = [dictionary objectForKey:KREPO_GITURL];
-//        self.forksCountDes = [dictionary objectForKey:KREPO_FORKSCOUNT];
-//        self.issuesCountDeS = [dictionary objectForKey:KREPO_OPENISSUESCOUNT];
-//        self.watchersCountDes = [dictionary objectForKey:KREPO_WATCHERSCOUNT];
-//        self.starsCountDes = [dictionary objectForKey:KREPO_STARSCOUNT];
+        self.content = [dictionary objectForKey:KREPO_FILE_CONTENT];
+        self.downloadPath = [dictionary objectForKey:KREPO_FILE_DOWNLOADPATH];
+        self.gitPath = [dictionary objectForKey:KREPO_FILE_GIT];
+        self.htmlPath = [dictionary objectForKey:KREPO_FILE_BROWSERPATH];
+        self.name = [dictionary objectForKey:KREPO_FILE_NAME];
+        self.path = [dictionary objectForKey:KREPO_FILE_PATH];
+        self.sha = [dictionary objectForKey:KMODEL_SHA];
+        self.size = [[dictionary objectForKey:KMODEL_SIZE] longLongValue];
+        self.encoding = [dictionary objectForKey:KREPO_FILE_ENCODING];
     }
     
     return self;
