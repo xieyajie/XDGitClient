@@ -648,7 +648,7 @@ static XDGithubEngine *engineInstance = nil;
 
 #pragma mark - 通用
 
-- (AFHTTPRequestOperation *)requestWithPath:(NSString *)path mothod:(XDRequestMothod)mothod headers:(NSDictionary *)headers parameters:(NSDictionary *)parameters success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+- (AFHTTPRequestOperation *)requestWithPath:(NSString *)path mothod:(XDRequestMothod)mothod success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
     if ([path length] == 0) {
         return nil;
@@ -662,6 +662,30 @@ static XDGithubEngine *engineInstance = nil;
             failureBlock(error);
         }];
     }
+    
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)getWithPath:(NSString *)path page:(int)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
+{
+    if ([path length] == 0) {
+        return nil;
+    }
+    
+    NSString *fullPath = nil;
+    NSString *lastPath = [path lastPathComponent];
+    if ([lastPath rangeOfString:@"?"].location == NSNotFound) {
+        fullPath = [NSString stringWithFormat:@"%@?page=%d&per_page=%d", path, page, KPERPAGENUMBER];
+    }
+    else{
+        fullPath = [NSString stringWithFormat:@"%@&page=%d&per_page=%d", path, page, KPERPAGENUMBER];
+    }
+
+    AFHTTPRequestOperation *operation = [self _requestWithPath:fullPath page:page parameters:nil success:^(id object, BOOL haveNextPage) {
+        successBlock(object, haveNextPage);
+    } failure:^(NSError *error) {
+        failureBlock(error);
+    }];
     
     return operation;
 }

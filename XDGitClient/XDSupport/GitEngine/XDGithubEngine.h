@@ -100,6 +100,8 @@ typedef enum{
 
 #pragma mark - 通用
 
-- (AFHTTPRequestOperation *)requestWithPath:(NSString *)path mothod:(XDRequestMothod)mothod headers:(NSDictionary *)headers parameters:(NSDictionary *)parameters success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+- (AFHTTPRequestOperation *)requestWithPath:(NSString *)path mothod:(XDRequestMothod)mothod success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
+
+- (AFHTTPRequestOperation *)getWithPath:(NSString *)path page:(int)page success:(XDGitEnginePageSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock;
 
 @end
