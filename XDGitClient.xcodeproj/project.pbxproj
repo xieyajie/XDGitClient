@@ -82,6 +82,7 @@
 		3AEDEA5818AE21B10093946D /* XDGitSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5718AE21B10093946D /* XDGitSideViewController.m */; };
 		3AEDEA5B18AE221D0093946D /* XDGitDeckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */; };
 		3AEDEA5E18AE22570093946D /* XDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AEDEA5D18AE22570093946D /* XDRootViewController.m */; };
+		3C0F0B221A7280BD00FC6300 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C0F0B211A7280BD00FC6300 /* Images-2.xcassets */; };
 		3C1F777D1A677CA600C24D5E /* XDSourceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F777B1A677CA600C24D5E /* XDSourceViewController.m */; };
 		3C1F77841A67AB4C00C24D5E /* XDFileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F77831A67AB4C00C24D5E /* XDFileListViewController.m */; };
 		3C1F77871A67B14200C24D5E /* RepoSourceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1F77861A67B14200C24D5E /* RepoSourceModel.m */; };
@@ -293,6 +294,7 @@
 		3AEDEA5A18AE221D0093946D /* XDGitDeckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGitDeckViewController.m; sourceTree = "<group>"; };
 		3AEDEA5C18AE22570093946D /* XDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDRootViewController.h; sourceTree = "<group>"; };
 		3AEDEA5D18AE22570093946D /* XDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDRootViewController.m; sourceTree = "<group>"; };
+		3C0F0B211A7280BD00FC6300 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-2.xcassets"; sourceTree = "<group>"; };
 		3C1F777A1A677CA600C24D5E /* XDSourceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDSourceViewController.h; sourceTree = "<group>"; };
 		3C1F777B1A677CA600C24D5E /* XDSourceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDSourceViewController.m; sourceTree = "<group>"; };
 		3C1F77821A67AB4C00C24D5E /* XDFileListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDFileListViewController.h; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				3AEDE99018ADFF1A0093946D /* XDSupport */,
 				3AEDE98018ADFD370093946D /* Class */,
 				3AEDE95E18ADF5A90093946D /* Images.xcassets */,
+				3C0F0B211A7280BD00FC6300 /* Images-2.xcassets */,
 				3AEDE95318ADF5A90093946D /* Supporting Files */,
 			);
 			path = XDGitClient;
@@ -1085,6 +1088,7 @@
 				3A47A50818B462FE001C76C0 /* rectangle_checked@2x.png in Resources */,
 				3A47A51718B462FE001C76C0 /* side_own@2x.png in Resources */,
 				3A47A51018B462FE001C76C0 /* navi_bg_i7@2x.png in Resources */,
+				3C0F0B221A7280BD00FC6300 /* Images-2.xcassets in Resources */,
 				3A3279D918B704B90031A0A7 /* star@2x.png in Resources */,
 				3A47A50718B462FE001C76C0 /* rectangle_checked.png in Resources */,
 				3A47A51518B462FE001C76C0 /* side_menu@2x.png in Resources */,
