@@ -218,6 +218,7 @@
 {
     if (_followerNavController == nil) {
         XDFollowerViewController *followerController = [[XDFollowerViewController alloc] initWithUserName:nil];
+        followerController.title = @"关注我的人";
         _followerNavController = [[UINavigationController alloc] initWithRootViewController:followerController];
     }
     
@@ -228,6 +229,7 @@
 {
     if (_followingNavController == nil) {
         XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:nil];
+        followingController.title = @"我关注的人";
         _followingNavController = [[UINavigationController alloc] initWithRootViewController:followingController];
     }
     

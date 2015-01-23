@@ -31,7 +31,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.title = @"关注我的人";
 }
 
 - (void)didReceiveMemoryWarning

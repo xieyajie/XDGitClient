@@ -292,6 +292,7 @@
             followerController.title = [dic objectForKey:KPLIST_KEYTITLE];
             [self.navigationController pushViewController:followerController animated:YES];
         }
+            break;
         case KPLIST_VALUE_CONTROLLERSELECTOR_FOLLOEING:
         {
             XDFollowingViewController *followingController = [[XDFollowingViewController alloc] initWithUserName:userName];
