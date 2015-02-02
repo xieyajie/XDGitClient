@@ -11,7 +11,7 @@
 #import "XDConfigManager.h"
 
 #define KCLIENTID @"dd15c5320bd70c217be5"
-#define KCLIENTSECRET @"2428107df510240815de4cba7795e779894889d5"
+#define KCLIENTSECRET @"0fcf625e6d11d5c9122b21fc0a9a6146f2f1de91"
 static NSString * const kAccessTokenRegexPattern = @"access_token=([^&]+)";
 
 static XDGithubEngine *engineInstance = nil;
@@ -186,18 +186,6 @@ static XDGithubEngine *engineInstance = nil;
 
 - (NSURLSessionDataTask *)fetchTokenWithUsername:(NSString *)username password:(NSString *)password code:(NSString *)code success:(XDGitEngineSuccessBlock)successBlock failure:(XDGitEngineFailureBlock)failureBlock
 {
-//    NSString *path = @"https://github.com/login/oauth/access_token";
-//    NSDictionary *parameters = @{@"client_id":KCLIENTID, @"client_secret":KCLIENTSECRET, @"code":code};
-//
-//    _operationManager.responseSerializer = [AFJSONResponseSerializer serializer];
-//    _operationManager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    AFHTTPRequestOperation *operation = [_operationManager POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        NSString *token = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-//        successBlock(token);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        failureBlock(error);
-//    }];
-    
     NSString *requestString = [NSString stringWithFormat:@"https://github.com/login/oauth/access_token?client_id=%@&client_secret=%@&code=%@", KCLIENTID, KCLIENTSECRET, code];
     NSURLSessionConfiguration *sessionConficuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConficuration];

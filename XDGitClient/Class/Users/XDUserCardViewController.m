@@ -223,6 +223,7 @@
         cell.textLabel.textColor = [UIColor grayColor];
         cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.2f alpha:1.0];
         cell.detailTextLabel.font = [UIFont systemFontOfSize:15.0];
+        cell.detailTextLabel.numberOfLines = 0;
     }
     
     NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -240,8 +241,7 @@
         SEL selectorMethod = NSSelectorFromString(selectorStr);
         if (selectorStr && selectorStr.length && selectorMethod) {
             NSString *resultStr = [self.userModel performSelector:selectorMethod withObject:nil];
-            if(resultStr && resultStr.length > 0)
-            {
+            if(resultStr && resultStr.length > 0){
                 cell.detailTextLabel.text = resultStr;
             }
         }
@@ -263,6 +263,24 @@
     }
     
     return 40.0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *dic = [[self.plistSourceArray objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    NSString *selectorStr = [dic objectForKey:KPLIST_KEYMODELSELECTOR];
+    if([selectorStr isEqualToString:@"webUrl"]){
+        CGFloat height = 50;
+        if([self.userModel.webUrl length] > 0){
+            CGSize textMinSize = {220, 50};
+            CGRect bound = [self.userModel.webUrl boundingRectWithSize:textMinSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil];
+            height = (int)bound.size.height > 30 ? (int)bound.size.height + 20 : 50;
+        }
+        
+        return height;
+   }
+    
+    return 50.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

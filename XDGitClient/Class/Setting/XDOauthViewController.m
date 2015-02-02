@@ -32,10 +32,9 @@
         _isLoadFinish = NO;
         
         _webView = [[UIWebView alloc] init];
-        _webView.backgroundColor = [UIColor whiteColor];
+        _webView.backgroundColor = [UIColor redColor];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _webView.delegate = self;
-        [self.view addSubview:_webView];
         
         NSString *path = [[XDGithubEngine shareEngine] requestPathForOauth];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
@@ -50,6 +49,7 @@
     // Do any additional setup after loading the view.
     
     _webView.frame = CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height);
+    [self.view addSubview:_webView];
     
     _backButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 5, 40, 40)];
     [_backButton setTitle:@"返回" forState:UIControlStateNormal];
