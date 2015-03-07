@@ -25,8 +25,8 @@
     if (self) {
         self.gId = [dictionary safeStringForKey:KMODEL_ID];
         self.describe = [dictionary safeStringForKey:KGIT_DESC];
-        self.createDateDes = [dictionary safeStringForKey:KMODEL_CREATE];
-        self.updateDateDes = [dictionary safeStringForKey:KMODEL_UPDATE];
+        self.createDateDes = [[dictionary safeStringForKey:KMODEL_CREATE] dateDes];
+        self.updateDateDes = [[dictionary safeStringForKey:KMODEL_UPDATE] dateDes];
         self.htmlUrl = [dictionary safeStringForKey:KGIT_HTMLURL];
         self.forksUrl = [dictionary safeStringForKey:KGIT_FORKURL];
         self.commentCountDes = [dictionary safeStringForKey:KGIT_COMMENTCOUNT];

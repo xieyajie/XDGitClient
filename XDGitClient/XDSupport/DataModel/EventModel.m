@@ -31,7 +31,7 @@
     self = [super init];
     if (self) {
         self.eId = [dictionary objectForKey:KMODEL_ID];
-        self.createdDateDes = [dictionary objectForKey:KMODEL_CREATE];
+        self.createdDateDes = [[dictionary objectForKey:KMODEL_CREATE] dateDes];
         self.typeDes = [dictionary objectForKey:KMODEL_TYPE];
         self.isPublic = [[dictionary objectForKey:KEVENT_PUBLICSTATE] boolValue];
         

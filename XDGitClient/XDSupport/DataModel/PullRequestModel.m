@@ -24,8 +24,8 @@
         self.prId = [dictionary safeStringForKey:KMODEL_ID];
         self.title = [dictionary safeStringForKey:KPULLREQUEST_TITLE];
         self.content = [dictionary safeStringForKey:KPULLREQUEST_CONTENT];
-        self.createdDateDes = [dictionary objectForKey:KMODEL_CREATE];
-        self.updatedDateDes = [dictionary objectForKey:KMODEL_UPDATE];
+        self.createdDateDes = [[dictionary objectForKey:KMODEL_CREATE] dateDes];
+        self.updatedDateDes = [[dictionary objectForKey:KMODEL_UPDATE] dateDes];
         self.owner = [[UserModel alloc] initWithDictionary:[dictionary objectForKey:KPULLREQUEST_OWNER]];
     }
     

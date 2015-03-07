@@ -10,32 +10,29 @@
 
 @implementation NSString (Category)
 
-- (NSDate *)dateFromGithubDateString {
-	
-	NSDateFormatter *df = [[NSDateFormatter alloc] init];
-	NSString *dateString = self;
-    
-    if (![[self substringWithRange:NSMakeRange([self length] - 1, 1)] isEqualToString:@"Z"])
-    {
-        NSMutableString *newDate = [self mutableCopy];
-        [newDate deleteCharactersInRange:NSMakeRange(19, 1)];
-        [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
-        dateString = newDate;
-    }
-    else
-    {
-        [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-    }
-    
-    return [df dateFromString:dateString];
-}
-
-
-- (NSString *)encodedString
-{
-    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, (CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8);
-    
-}
+//- (NSDate *)dateFromGithubDateString
+//{
+//    //设置源日期时区
+//    NSTimeZone* sourceTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];//或GMT
+//    //设置转换后的目标日期时区
+//    NSTimeZone* destinationTimeZone = [NSTimeZone localTimeZone];
+//    //得到源日期与世界标准时间的偏移量
+//    NSInteger sourceGMTOffset = [sourceTimeZone secondsFromGMTForDate:];
+//    //目标日期与本地时区的偏移量
+//    NSInteger destinationGMTOffset = [destinationTimeZone secondsFromGMTForDate:];
+//    //得到时间偏移量的差值
+//    NSTimeInterval interval = destinationGMTOffset - sourceGMTOffset;
+//    //转为现在时间
+//    NSDate* destinationDateNow = [[[NSDate alloc] initWithTimeInterval:interval sinceDate:anyDate] autorelease];
+//    return destinationDateNow;
+//}
+//
+//
+//- (NSString *)encodedString
+//{
+//    return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, (CFStringRef)@";/?:@&=$+{}<>,", kCFStringEncodingUTF8);
+//    
+//}
 
 - (NSString *)fileSizeDescription
 {
@@ -78,10 +75,18 @@
 
 - (NSString *)dateDes
 {
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //输入格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    NSTimeZone *localTimeZone = [NSTimeZone localTimeZone];
+    [dateFormatter setTimeZone:localTimeZone];
     
-    return [df stringFromDate:[self dateFromGithubDateString]];
+    NSDate *dateFormatted = [dateFormatter dateFromString:self];
+    //输出格式
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateString = [dateFormatter stringFromDate:dateFormatted];
+
+    return dateString;
 }
 
 @end

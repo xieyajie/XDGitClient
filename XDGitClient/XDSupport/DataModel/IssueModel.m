@@ -33,9 +33,9 @@
     self = [super init];
     if (self) {
         self.iId = [dictionary objectForKey:KMODEL_ID];
-        self.closedDateDes = [dictionary objectForKey:KMODEL_CREATE];
-        self.createDateDes = [dictionary objectForKey:KMODEL_CREATE];
-        self.updateDateDes = [dictionary objectForKey:KMODEL_CREATE];
+        self.closedDateDes = [[dictionary objectForKey:KMODEL_CREATE] dateDes];
+        self.createDateDes = [[dictionary objectForKey:KMODEL_CREATE] dateDes];
+        self.updateDateDes = [[dictionary objectForKey:KMODEL_CREATE] dateDes];
         self.stateDes = [dictionary objectForKey:KISSUE_STATE];
         self.title = [dictionary objectForKey:KISSUE_TITLE];
         self.content = [dictionary objectForKey:KISSUE_CONTENT];
