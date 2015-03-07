@@ -8,6 +8,7 @@
 
 #import "XDGitSideViewController.h"
 
+#import <MessageUI/MFMailComposeViewController.h>
 #import "XDGitDeckViewController.h"
 #import "XDTabBarController.h"
 #import "XDRepositoryViewController.h"
@@ -23,7 +24,7 @@
 
 #import "XDConfigManager.h"
 
-@interface XDGitSideViewController ()
+@interface XDGitSideViewController ()<MFMailComposeViewControllerDelegate>
 {
     UIImageView *_headerImageView;
     UILabel *_nameLabel;
@@ -360,13 +361,14 @@
                 self.deckController.centerController = self.followingNavController;
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_XDS:
-            {
-                
-            }
                 break;
             case KPLIST_VALUE_CONTROLLERSELECTOR_EMAIL:
             {
-                
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                [mailController setSubject:@"My Subject"];
+                [mailController setMessageBody:@"Hello there." isHTML:NO];
+                [self presentViewController:mailController animated:YES completion:nil];
             }
                 break;
             default:
@@ -375,6 +377,18 @@
     }
 
     [self.deckController closeLeftViewAnimated:YES];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error;
+{
+    if (result == MFMailComposeResultSent) {
+        NSLog(@"It's away!");
+        [controller dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - action

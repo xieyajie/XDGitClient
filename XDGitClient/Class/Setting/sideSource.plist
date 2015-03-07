@@ -37,7 +37,7 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>XDStudio发展史</string>
+			<string>XDStudio发展档</string>
 			<key>controller_selector</key>
 			<integer>114</integer>
 		</dict>
