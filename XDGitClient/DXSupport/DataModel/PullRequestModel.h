@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
-@interface PullRequestModel : XDBaseModel
+@interface PullRequestModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *prId;              //ID
 @property (strong, nonatomic) NSString *title;           //标题

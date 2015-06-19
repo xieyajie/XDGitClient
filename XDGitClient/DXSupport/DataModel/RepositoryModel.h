@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KREPO_NAME @"name"
 #define KREPO_FULLNAME @"full_name"
@@ -22,7 +22,7 @@
 #define KREPO_PRIVATESTATE @"private"
 #define KREPO_FORKSTATE @"fork"
 
-@interface RepositoryModel : XDBaseModel
+@interface RepositoryModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *rId;             //ID
 @property (strong, nonatomic) NSString *name;           //项目名称

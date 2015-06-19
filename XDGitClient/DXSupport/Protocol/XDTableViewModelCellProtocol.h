@@ -8,14 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "XDModelProtocol.h"
+#import "DXModelProtocol.h"
 
 @protocol XDTableViewModelCellProtocol <NSObject>
 
 //@property (strong, nonatomic) id<XDModelProtocol> model;
 
 @optional
-+ (CGFloat)heightWithModel:(id<XDModelProtocol>)model;
-+ (CGFloat)heightWithModel:(id<XDModelProtocol>)model accessoryType:(UITableViewCellAccessoryType)accessoryType;
++ (CGFloat)heightWithModel:(id<DXModelProtocol>)model;
++ (CGFloat)heightWithModel:(id<DXModelProtocol>)model accessoryType:(UITableViewCellAccessoryType)accessoryType;
 
 @end

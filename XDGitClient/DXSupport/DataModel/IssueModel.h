@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #import "LabelModel.h"
 
@@ -19,7 +19,7 @@
 #define KISSUE_COMMENTCOUNT @"comments"
 #define KISSUE_CLOSED @"closed_at"
 
-@interface IssueModel : XDBaseModel
+@interface IssueModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *iId;
 @property (strong, nonatomic) NSString *stateDes;

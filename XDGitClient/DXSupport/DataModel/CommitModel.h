@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KCOMMIT_AUTHOR @"author"
 #define KCOMMIT_AUTHOR_NAME @"name"
@@ -14,7 +14,7 @@
 #define KCOMMIT_DISTINCT @"distinct"
 #define KCOMMIT_MESSAGE @"message"
 
-@interface CommitModel : XDBaseModel
+@interface CommitModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *authorEmail;
 @property (strong, nonatomic) NSString *authorName;

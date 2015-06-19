@@ -1,14 +1,14 @@
 //
-//  XDModelProtocol.h
-//  XDGitClient
+//  DXModelProtocol.h
+//  DXStudio
 //
 //  Created by xieyajie on 14-2-20.
-//  Copyright (c) 2014年 XDIOS. All rights reserved.
+//  Copyright (c) 2014年 DXStudio. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@protocol XDModelProtocol <NSObject>
+@protocol DXModelProtocol <NSObject>
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 

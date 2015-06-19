@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KUSER_COMPANY @"company"
 #define KUSER_EMAIL @"email"
@@ -15,7 +15,7 @@
 #define KUSER_FOLLOWER @"followers"
 #define KUSER_FOLLOWING @"following"
 
-@interface UserModel : XDBaseModel
+@interface UserModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *uId;      //ID
 @property (strong, nonatomic) NSString *userName;    //用户名称

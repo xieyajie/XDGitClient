@@ -112,7 +112,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setModel:(id<XDModelProtocol>)model
+- (void)setModel:(id<DXModelProtocol>)model
 {
     _model = model;
     _nameLabel.text = _model.name;

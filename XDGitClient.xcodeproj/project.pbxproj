@@ -97,7 +97,7 @@
 		EBE9FF3B1B3442E3002170EE /* RepositoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE801B3442E3002170EE /* RepositoryModel.m */; };
 		EBE9FF3C1B3442E3002170EE /* RepoSourceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE821B3442E3002170EE /* RepoSourceModel.m */; };
 		EBE9FF3D1B3442E3002170EE /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE841B3442E3002170EE /* UserModel.m */; };
-		EBE9FF3E1B3442E3002170EE /* XDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE861B3442E3002170EE /* XDBaseModel.m */; };
+		EBE9FF3E1B3442E3002170EE /* DXBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE861B3442E3002170EE /* DXBaseModel.m */; };
 		EBE9FF3F1B3442E3002170EE /* DXGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE891B3442E3002170EE /* DXGithubEngine.m */; };
 		EBE9FF411B3442E3002170EE /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE8F1B3442E3002170EE /* XDConfigManager.m */; };
 		EBE9FF431B3442E3002170EE /* XDViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE9FE931B3442E3002170EE /* XDViewManager.m */; };
@@ -311,15 +311,15 @@
 		EBE9FE821B3442E3002170EE /* RepoSourceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepoSourceModel.m; sourceTree = "<group>"; };
 		EBE9FE831B3442E3002170EE /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		EBE9FE841B3442E3002170EE /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		EBE9FE851B3442E3002170EE /* XDBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDBaseModel.h; sourceTree = "<group>"; };
-		EBE9FE861B3442E3002170EE /* XDBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDBaseModel.m; sourceTree = "<group>"; };
+		EBE9FE851B3442E3002170EE /* DXBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXBaseModel.h; sourceTree = "<group>"; };
+		EBE9FE861B3442E3002170EE /* DXBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXBaseModel.m; sourceTree = "<group>"; };
 		EBE9FE881B3442E3002170EE /* DXGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXGithubEngine.h; sourceTree = "<group>"; };
 		EBE9FE891B3442E3002170EE /* DXGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXGithubEngine.m; sourceTree = "<group>"; };
 		EBE9FE8E1B3442E3002170EE /* XDConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDConfigManager.h; sourceTree = "<group>"; };
 		EBE9FE8F1B3442E3002170EE /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		EBE9FE921B3442E3002170EE /* XDViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDViewManager.h; sourceTree = "<group>"; };
 		EBE9FE931B3442E3002170EE /* XDViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDViewManager.m; sourceTree = "<group>"; };
-		EBE9FE951B3442E3002170EE /* XDModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDModelProtocol.h; sourceTree = "<group>"; };
+		EBE9FE951B3442E3002170EE /* DXModelProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXModelProtocol.h; sourceTree = "<group>"; };
 		EBE9FE961B3442E3002170EE /* XDTableViewModelCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewModelCellProtocol.h; sourceTree = "<group>"; };
 		EBE9FE991B3442E3002170EE /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		EBE9FE9A1B3442E3002170EE /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -778,8 +778,8 @@
 				EBE9FE821B3442E3002170EE /* RepoSourceModel.m */,
 				EBE9FE831B3442E3002170EE /* UserModel.h */,
 				EBE9FE841B3442E3002170EE /* UserModel.m */,
-				EBE9FE851B3442E3002170EE /* XDBaseModel.h */,
-				EBE9FE861B3442E3002170EE /* XDBaseModel.m */,
+				EBE9FE851B3442E3002170EE /* DXBaseModel.h */,
+				EBE9FE861B3442E3002170EE /* DXBaseModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -807,7 +807,7 @@
 		EBE9FE941B3442E3002170EE /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				EBE9FE951B3442E3002170EE /* XDModelProtocol.h */,
+				EBE9FE951B3442E3002170EE /* DXModelProtocol.h */,
 				EBE9FE961B3442E3002170EE /* XDTableViewModelCellProtocol.h */,
 			);
 			path = Protocol;
@@ -1130,7 +1130,7 @@
 				3C1F777D1A677CA600C24D5E /* XDSourceViewController.m in Sources */,
 				EBE9FF3C1B3442E3002170EE /* RepoSourceModel.m in Sources */,
 				EBE9FF261B3442E3002170EE /* DXTabBarItem.m in Sources */,
-				EBE9FF3E1B3442E3002170EE /* XDBaseModel.m in Sources */,
+				EBE9FF3E1B3442E3002170EE /* DXBaseModel.m in Sources */,
 				EBE9FF331B3442E3002170EE /* CommitModel.m in Sources */,
 				EBE9FF301B3442E3002170EE /* NSString+Category.m in Sources */,
 				EBE9FF481B3442E3002170EE /* AFSecurityPolicy.m in Sources */,

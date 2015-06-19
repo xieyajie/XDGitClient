@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #import "UserModel.h"
 #import "CommitModel.h"
@@ -26,7 +26,7 @@
 #define KEVENT_PAYLOAD_BEFORE @"before"
 #define KEVENT_PAYLOAD_RER @"ref"
 
-@interface EventModel : XDBaseModel
+@interface EventModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *eId;
 @property (strong, nonatomic) NSString *createdDateDes;

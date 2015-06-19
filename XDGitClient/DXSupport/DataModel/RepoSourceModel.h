@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
-@interface RepoSourceModel : XDBaseModel
+@interface RepoSourceModel : DXBaseModel
 
 @property (nonatomic, strong) NSString *downloadPath;
 @property (nonatomic, strong) NSString *gitPath;

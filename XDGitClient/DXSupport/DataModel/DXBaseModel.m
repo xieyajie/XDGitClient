@@ -1,14 +1,14 @@
 //
-//  XDBaseModel.m
-//  XDGitClient
+//  DXBaseModel.m
+//  DXStudio
 //
 //  Created by xieyajie on 14-2-20.
-//  Copyright (c) 2014年 XDIOS. All rights reserved.
+//  Copyright (c) 2014年 DXStudio. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
-@implementation XDBaseModel
+@implementation DXBaseModel
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {

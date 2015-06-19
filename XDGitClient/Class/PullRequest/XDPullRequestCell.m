@@ -85,7 +85,7 @@
     oY += 20;
 }
 
-- (void)setModel:(id<XDModelProtocol>)model
+- (void)setModel:(id<DXModelProtocol>)model
 {
     _model = model;
     _titleLabel.text = _model.title;

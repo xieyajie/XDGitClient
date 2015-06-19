@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KGIT_DESC @"description"
 #define KGIT_HTMLURL @"html_url"
@@ -14,7 +14,7 @@
 #define KGIT_COMMENTCOUNT @"comments"
 #define KGIT_PUBLICSTATE @"public"
 
-@interface GitModel : XDBaseModel
+@interface GitModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *gId;             //ID
 @property (strong, nonatomic) NSString *describe;    //描述

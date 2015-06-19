@@ -6,11 +6,11 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KORG_GRAVATARID @"gravatar_id"
 
-@interface OrganizationModel : XDBaseModel
+@interface OrganizationModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *oId;
 @property (strong, nonatomic) NSString *name;

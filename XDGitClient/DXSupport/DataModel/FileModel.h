@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KREPO_FILE_CONTENT @"content"
 #define KREPO_FILE_DOWNLOADPATH @"download_url"
@@ -16,7 +16,7 @@
 #define KREPO_FILE_NAME @"name"
 #define KREPO_FILE_PATH @"path"
 
-@interface FileModel : XDBaseModel
+@interface FileModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *content;
 @property (strong, nonatomic) NSString *downloadPath;

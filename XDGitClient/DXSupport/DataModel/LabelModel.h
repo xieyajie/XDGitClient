@@ -6,12 +6,12 @@
 //  Copyright (c) 2015年 XDIOS. All rights reserved.
 //
 
-#import "XDBaseModel.h"
+#import "DXBaseModel.h"
 
 #define KLABEL_NAME @"name"
 #define KLABEL_COLOR @"color"
 
-@interface LabelModel : XDBaseModel
+@interface LabelModel : DXBaseModel
 
 @property (strong, nonatomic) NSString *url;
 @property (strong, nonatomic) NSString *name;
