@@ -15,7 +15,7 @@
     UIView *_slideBg;
 }
 
-@property (nonatomic, assign) int currentSelectedIndex;
+@property (nonatomic, assign) NSInteger currentSelectedIndex;
 @property (nonatomic, assign, readonly) BOOL tabBarHidden;;
 @property (nonatomic, strong)  NSArray *viewControllers;
 @property (nonatomic, strong)  UIViewController *activityController;

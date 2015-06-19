@@ -52,7 +52,7 @@
 		3AA4F03C18B5DBC500E8E1BA /* XDRepositoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F03B18B5DBC500E8E1BA /* XDRepositoryCell.m */; };
 		3AA4F04218B5DCB900E8E1BA /* XDBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA4F04118B5DCB900E8E1BA /* XDBaseModel.m */; };
 		3AA8010318B2F62B00F8450B /* XDTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010218B2F62B00F8450B /* XDTableViewCell.m */; };
-		3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010F18B323CE00F8450B /* XDGithubEngine.m */; };
+		3AA8011018B323CE00F8450B /* DXGithubEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8010F18B323CE00F8450B /* DXGithubEngine.m */; };
 		3AA8012018B3460200F8450B /* NSData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8011D18B3460200F8450B /* NSData+Category.m */; };
 		3AA8012118B3460200F8450B /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8011F18B3460200F8450B /* NSString+Category.m */; };
 		3AA8012518B3532D00F8450B /* XDRepositoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA8012418B3532D00F8450B /* XDRepositoryViewController.m */; };
@@ -122,7 +122,6 @@
 		3C3529451A4199F700D88E09 /* XDFollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3529431A4199F700D88E09 /* XDFollowingViewController.m */; };
 		3C5072451A428C5400566CDA /* XDConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50723E1A428C5400566CDA /* XDConfigManager.m */; };
 		3C5072481A428C5400566CDA /* XDViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5072441A428C5400566CDA /* XDViewManager.m */; };
-		3C50724B1A428CCD00566CDA /* XDHelperManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C50724A1A428CCD00566CDA /* XDHelperManager.m */; };
 		3CA4F00D18B25298006C28BF /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4F00C18B25298006C28BF /* UserModel.m */; };
 		3CDB06281A67C5EF004FB764 /* XDFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CDB06271A67C5EF004FB764 /* XDFileViewController.m */; };
 		3CE0FAD01A66527100BC0A68 /* XDWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE0FACF1A66527100BC0A68 /* XDWebViewController.m */; };
@@ -235,9 +234,8 @@
 		3AA4F04518B5DD2F00E8E1BA /* XDTableViewModelCellProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewModelCellProtocol.h; sourceTree = "<group>"; };
 		3AA8010118B2F62B00F8450B /* XDTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDTableViewCell.h; sourceTree = "<group>"; };
 		3AA8010218B2F62B00F8450B /* XDTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDTableViewCell.m; sourceTree = "<group>"; };
-		3AA8010E18B323CE00F8450B /* XDGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGithubEngine.h; sourceTree = "<group>"; };
-		3AA8010F18B323CE00F8450B /* XDGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDGithubEngine.m; sourceTree = "<group>"; };
-		3AA8011418B32A9F00F8450B /* XDGitEngineRequestTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDGitEngineRequestTypes.h; sourceTree = "<group>"; };
+		3AA8010E18B323CE00F8450B /* DXGithubEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXGithubEngine.h; sourceTree = "<group>"; };
+		3AA8010F18B323CE00F8450B /* DXGithubEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXGithubEngine.m; sourceTree = "<group>"; };
 		3AA8011C18B3460200F8450B /* NSData+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Category.h"; sourceTree = "<group>"; };
 		3AA8011D18B3460200F8450B /* NSData+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Category.m"; sourceTree = "<group>"; };
 		3AA8011E18B3460200F8450B /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
@@ -371,8 +369,6 @@
 		3C50723E1A428C5400566CDA /* XDConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDConfigManager.m; sourceTree = "<group>"; };
 		3C5072431A428C5400566CDA /* XDViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDViewManager.h; sourceTree = "<group>"; };
 		3C5072441A428C5400566CDA /* XDViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDViewManager.m; sourceTree = "<group>"; };
-		3C5072491A428CCD00566CDA /* XDHelperManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDHelperManager.h; sourceTree = "<group>"; };
-		3C50724A1A428CCD00566CDA /* XDHelperManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDHelperManager.m; sourceTree = "<group>"; };
 		3CA4F00818B24D8C006C28BF /* XDLocalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDLocalDefine.h; sourceTree = "<group>"; };
 		3CA4F00B18B25298006C28BF /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
 		3CA4F00C18B25298006C28BF /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
@@ -559,9 +555,8 @@
 		3AA8010C18B3228000F8450B /* GitEngine */ = {
 			isa = PBXGroup;
 			children = (
-				3AA8011418B32A9F00F8450B /* XDGitEngineRequestTypes.h */,
-				3AA8010E18B323CE00F8450B /* XDGithubEngine.h */,
-				3AA8010F18B323CE00F8450B /* XDGithubEngine.m */,
+				3AA8010E18B323CE00F8450B /* DXGithubEngine.h */,
+				3AA8010F18B323CE00F8450B /* DXGithubEngine.m */,
 			);
 			path = GitEngine;
 			sourceTree = "<group>";
@@ -881,8 +876,6 @@
 				3C50723E1A428C5400566CDA /* XDConfigManager.m */,
 				3C5072431A428C5400566CDA /* XDViewManager.h */,
 				3C5072441A428C5400566CDA /* XDViewManager.m */,
-				3C5072491A428CCD00566CDA /* XDHelperManager.h */,
-				3C50724A1A428CCD00566CDA /* XDHelperManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -986,7 +979,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = XD;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = XDIOS;
 				TargetAttributes = {
 					3AEDE94818ADF5A90093946D = {
@@ -1155,7 +1148,6 @@
 				3C2D35C41A3A88D7000E0FFB /* UIWebView+AFNetworking.m in Sources */,
 				3C2B73941A52E51200DCA00F /* XDOauthViewController.m in Sources */,
 				3C3401D31A44318700DC5632 /* OrganizationModel.m in Sources */,
-				3C50724B1A428CCD00566CDA /* XDHelperManager.m in Sources */,
 				3C5072481A428C5400566CDA /* XDViewManager.m in Sources */,
 				3AEDE95918ADF5A90093946D /* main.m in Sources */,
 				3C2D35B51A3A88D7000E0FFB /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1168,7 +1160,7 @@
 				3A3279F618B758510031A0A7 /* XDWatchersViewController.m in Sources */,
 				3AA4F03918B5D36000E8E1BA /* FileModel.m in Sources */,
 				3C3529441A4199F700D88E09 /* XDFollowerViewController.m in Sources */,
-				3AA8011018B323CE00F8450B /* XDGithubEngine.m in Sources */,
+				3AA8011018B323CE00F8450B /* DXGithubEngine.m in Sources */,
 				3C2D35BD1A3A88D7000E0FFB /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3A3279F318B7513A0031A0A7 /* XDForkersViewController.m in Sources */,
 				3C2D35B91A3A88D7000E0FFB /* AFURLConnectionOperation.m in Sources */,
@@ -1222,7 +1214,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1261,7 +1252,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1307,7 +1297,7 @@
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6cab64ab-ddab-4047-a08c-ff259fed8566";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1318,7 +1308,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XDGitClient/XDGitClient-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1329,7 +1319,7 @@
 				INFOPLIST_FILE = "XDGitClient/XDGitClient-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6cab64ab-ddab-4047-a08c-ff259fed8566";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1338,7 +1328,6 @@
 		3AEDE97918ADF5A90093946D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XDGitClient.app/XDGitClient";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -1361,7 +1350,6 @@
 		3AEDE97A18ADF5A90093946D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/XDGitClient.app/XDGitClient";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

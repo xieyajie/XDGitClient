@@ -41,14 +41,14 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     if (_fullName == nil || _fullName.length == 0) {
         return;
     }
     
     __block __weak XDWatchersViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] watchersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] watchersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
         if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

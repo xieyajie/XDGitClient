@@ -41,14 +41,14 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     if (_fullName == nil || _fullName.length == 0) {
         return;
     }
     
     __block __weak XDStargazersViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] stargazersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] stargazersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
         if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

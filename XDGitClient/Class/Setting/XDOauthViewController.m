@@ -8,7 +8,7 @@
 
 #import "XDOauthViewController.h"
 
-#import "XDGithubEngine.h"
+#import "DXGithubEngine.h"
 #import "XDConfigManager.h"
 
 @interface XDOauthViewController ()<UIWebViewDelegate>
@@ -36,7 +36,7 @@
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _webView.delegate = self;
         
-        NSString *path = [[XDGithubEngine shareEngine] requestPathForOauth];
+        NSString *path = [[DXGithubEngine shareEngine] requestPathForOauth];
         NSURLRequest *request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
         [_webView loadRequest:request];
     }
@@ -115,7 +115,7 @@
     [self showLoadingViewWithTitle:@"获取token..."];
     
     __weak __typeof(self) weakSelf = self;
-    [[XDGithubEngine shareEngine] fetchTokenWithUsername:nil password:nil code:code success:^(id object) {
+    [[DXGithubEngine shareEngine] fetchTokenWithUsername:nil password:nil code:code success:^(id object) {
         [weakSelf hideLoadingView];
         if (object) {
             [[XDConfigManager defaultManager] setLoginToken:object];

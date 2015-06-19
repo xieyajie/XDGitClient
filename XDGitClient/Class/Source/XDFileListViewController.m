@@ -107,7 +107,7 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     __block __weak XDFileListViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] sourceForRepository:_repoFullName filePath:_filePath success:^(id object) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] sourceForRepository:_repoFullName filePath:_filePath success:^(id object) {
         [weakSelf.dataArray removeAllObjects];
         if ([object count] > 0) {
             for (NSDictionary *dic in object) {

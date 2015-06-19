@@ -92,7 +92,7 @@
 {
     __block __weak XDIssuesViewController *weakSelf = self;
     
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] issueEventsWithSuccess:^(id object) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] issueEventsWithSuccess:^(id object) {
         [weakSelf.dataArray removeAllObjects];
         if (object) {
             for (NSDictionary *dic in object) {

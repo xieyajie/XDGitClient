@@ -83,10 +83,10 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDPullRequestsViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] pullRequestsForRepository:_repoFullName state:_state page:page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] pullRequestsForRepository:_repoFullName state:_state page:page success:^(id object, BOOL haveNextPage) {
         if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

@@ -343,7 +343,7 @@
     __block __weak XDUserCardViewController *weakSelf = self;
     AFHTTPRequestOperation *operation = nil;
     if (_isOwn) {
-        operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
+        operation = [[DXGithubEngine shareEngine] userWithSuccess:^(id object) {
             weakSelf.userModel = [[UserModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];
@@ -352,7 +352,7 @@
         }];
     }
     else{
-        operation = [[XDGithubEngine shareEngine] user:_userModel.userName success:^(id object) {
+        operation = [[DXGithubEngine shareEngine] user:_userModel.userName success:^(id object) {
             weakSelf.userModel = [[UserModel alloc] initWithDictionary:object];
             
             [weakSelf tableViewDidFinishHeaderRefresh];

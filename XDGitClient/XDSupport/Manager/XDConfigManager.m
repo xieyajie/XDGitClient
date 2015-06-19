@@ -55,7 +55,7 @@ static XDConfigManager *defaultManagerInstance = nil;
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:_configFilePath];
     _appConfig = [[AppConfigModel alloc] initWithDictionary:dic];
     _loginToken = _appConfig.loginToken;
-    [[XDGithubEngine shareEngine] setToken:_loginToken];
+    [[DXGithubEngine shareEngine] setToken:_loginToken];
 }
 
 #pragma mark - setter

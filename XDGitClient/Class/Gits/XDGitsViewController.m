@@ -87,10 +87,10 @@
 
 #pragma mark - date
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDGitsViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] gistsForUser:_userName style:_style page:self.page success:^(id object, BOOL haveNextPage) {
         
         if (isHeaderRefresh)
         {

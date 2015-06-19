@@ -78,7 +78,7 @@
 {
     if (_model) {
         __weak typeof(self) weakSelf = self;
-        AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] requestWithPath:_model.contentsPath mothod:XDRequestMothodGet success:^(id object) {
+        AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] requestWithPath:_model.contentsPath mothod:DXRequestMothodGet success:^(id object) {
             if ([object count] > 0) {
                 _fileModel = [[FileModel alloc] initWithDictionary:object];
                 

@@ -71,12 +71,12 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDNewsViewController *weakSelf = self;
     
     NSString *account = [XDConfigManager defaultManager].loginUser.userName;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] eventsForUsername:account page:page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] eventsForUsername:account page:page success:^(id object, BOOL haveNextPage) {
         if (isHeaderRefresh) {
             [weakSelf.dataArray removeAllObjects];
         }

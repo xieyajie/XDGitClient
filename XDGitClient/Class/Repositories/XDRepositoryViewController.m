@@ -93,10 +93,10 @@
 
 #pragma mark - date
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     __block __weak XDRepositoryViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] repositoriesWithUser:_userName style:_style includeWatched:NO page:self.page success:^(id object, BOOL haveNextPage) {
         
         if (isHeaderRefresh)
         {

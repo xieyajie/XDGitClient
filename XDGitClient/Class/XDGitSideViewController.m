@@ -437,7 +437,7 @@
 - (void)fetchUserInfo
 {
     __block __weak XDGitSideViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] userWithSuccess:^(id object) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] userWithSuccess:^(id object) {
         UserModel *account = [[UserModel alloc] initWithDictionary:object];
         _configManager.loginUser = account;
         [weakSelf.accountButton setImageFromURL:[NSURL URLWithString:account.avatarUrl] placeholderImage:[UIImage imageNamed:@"userHeaderDefault_30"] forState:UIControlStateNormal adjustToSize:CGSizeMake(30, 30)];

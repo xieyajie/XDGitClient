@@ -10,9 +10,9 @@
 
 @interface XDPageViewViewController : XDTableViewController
 
-@property (nonatomic) NSInteger page;//起始页为1
+@property (nonatomic) int page;//起始页为1
 @property (nonatomic) BOOL haveNextPage;
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh;
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh;
 
 @end

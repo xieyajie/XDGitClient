@@ -232,7 +232,7 @@
 - (void)tableViewDidTriggerHeaderRefresh
 {
     __block __weak XDRepoCardViewController *weakSelf = self;
-    AFHTTPRequestOperation *operation = [[XDGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object) {
+    AFHTTPRequestOperation *operation = [[DXGithubEngine shareEngine] repository:self.repoModel.fullName success:^(id object) {
         if([object count] > 0)
         {
             

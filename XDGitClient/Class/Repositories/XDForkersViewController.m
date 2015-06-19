@@ -43,7 +43,7 @@
 
 #pragma mark - data
 
-- (void)fetchDataAtPage:(NSInteger)page isHeaderRefresh:(BOOL)isHeaderRefresh
+- (void)fetchDataAtPage:(int)page isHeaderRefresh:(BOOL)isHeaderRefresh
 {
     if (_fullName == nil || _fullName.length == 0) {
         return;
@@ -53,7 +53,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         AFHTTPRequestOperation *operation = nil;
         
-        operation = [[XDGithubEngine shareEngine] forkersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
+        operation = [[DXGithubEngine shareEngine] forkersForRepository:_fullName page:page success:^(id object, BOOL haveNextPage) {
             if (isHeaderRefresh) {
                 [weakSelf.dataArray removeAllObjects];
             }

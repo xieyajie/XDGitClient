@@ -142,7 +142,7 @@
 - (void)configurationTabbarItems
 {
     //创建按钮
-    int viewCount = self.viewControllers.count > 5 ? 5 : self.viewControllers.count;
+    NSInteger viewCount = self.viewControllers.count > 5 ? 5 : self.viewControllers.count;
     self.itemButtons = [NSMutableArray arrayWithCapacity:viewCount];
     CGFloat width = 320.0 / viewCount;
     CGFloat height = KTabBarHeight;
