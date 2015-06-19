@@ -64,7 +64,7 @@
 
 - (void)browserAction
 {
-    XDWebViewController *webController = [[XDWebViewController alloc] initWithUrlPath:_fileModel.htmlPath];
+    DXWebViewController *webController = [[DXWebViewController alloc] initWithUrlPath:_fileModel.htmlPath];
     webController.title = _model.name;
     UIBarButtonItem *closeItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭" style:UIBarButtonItemStylePlain target:webController action:@selector(closeWithDismiss)];
     [webController.navigationItem setRightBarButtonItem:closeItem];

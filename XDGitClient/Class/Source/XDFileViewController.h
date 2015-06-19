@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 XDIOS. All rights reserved.
 //
 
-#import "XDWebViewController.h"
+#import "DXWebViewController.h"
 
 @class RepoSourceModel;
-@interface XDFileViewController : XDWebViewController
+@interface XDFileViewController : DXWebViewController
 
 - (instancetype)initWithSourceModel:(RepoSourceModel *)model;
 

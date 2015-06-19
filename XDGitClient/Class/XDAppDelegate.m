@@ -8,7 +8,7 @@
 
 #import "XDAppDelegate.h"
 
-#import "XDViewController.h"
+#import "DXViewController.h"
 #import "XDLoginViewController.h"
 #import "XDRootViewController.h"
 

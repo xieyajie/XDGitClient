@@ -10,7 +10,7 @@
 
 #import <MessageUI/MFMailComposeViewController.h>
 #import "XDGitDeckViewController.h"
-#import "XDTabBarController.h"
+#import "DXTabBarController.h"
 #import "XDRepositoryViewController.h"
 #import "XDGitsViewController.h"
 #import "XDNewsViewController.h"
@@ -152,7 +152,7 @@
             [controllers addObject:projectsController];
         }
         
-        XDTabBarController *reposityTabController = [[XDTabBarController alloc] init];
+        DXTabBarController *reposityTabController = [[DXTabBarController alloc] init];
         [reposityTabController setViewControllers:controllers];
         _reposityNavTabController = [[UINavigationController alloc] initWithRootViewController:reposityTabController];
     }
@@ -177,7 +177,7 @@
             [controllers addObject:projectsController];
         }
         
-        XDTabBarController *gitsTabController = [[XDTabBarController alloc] init];
+        DXTabBarController *gitsTabController = [[DXTabBarController alloc] init];
         [gitsTabController setViewControllers:controllers];
         _gitsNavTabController = [[UINavigationController alloc] initWithRootViewController:gitsTabController];
     }

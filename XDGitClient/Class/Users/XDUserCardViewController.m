@@ -9,7 +9,7 @@
 #import "XDUserCardViewController.h"
 
 #import "XDTableViewCell.h"
-#import "XDTabBarController.h"
+#import "DXTabBarController.h"
 #import "XDRepositoryViewController.h"
 #import "XDGitsViewController.h"
 #import "XDFollowerViewController.h"
@@ -33,7 +33,7 @@
 
 @property (strong, nonatomic) UIBarButtonItem *acttentionItem;;
 @property (strong, nonatomic) UIImageView *headerImageView;
-@property (strong, nonatomic) XDTabBarController *reposityController;
+@property (strong, nonatomic) DXTabBarController *reposityController;
 @property (strong, nonatomic) XDGitsViewController *gitsController;
 
 @end
@@ -146,7 +146,7 @@
     return _plistSourceArray;
 }
 
-- (XDTabBarController *)reposityController
+- (DXTabBarController *)reposityController
 {
     if (_reposityController == nil) {
         NSArray *titleArray = @[@"Ta全部的", @"Ta自己的", @"Ta参与的", @"Ta关注的"];
@@ -164,7 +164,7 @@
             [controllers addObject:controller];
         }
         
-        _reposityController = [[XDTabBarController alloc] init];
+        _reposityController = [[DXTabBarController alloc] init];
         [_reposityController setViewControllers:controllers];
     }
     

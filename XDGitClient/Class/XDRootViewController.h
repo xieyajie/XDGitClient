@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 XDIOS. All rights reserved.
 //
 
-#import "XDViewController.h"
+#import "DXViewController.h"
 
-@interface XDRootViewController : XDViewController
+@interface XDRootViewController : DXViewController
 
 @end
