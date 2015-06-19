@@ -22,6 +22,8 @@
         _nameLabel = [[UILabel alloc] init];
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.font = [UIFont systemFontOfSize:18.0];
+        _nameLabel.textColor = [UIColor blackColor];
+        _nameLabel.highlightedTextColor = [UIColor colorWithRed:61 / 255.0 green:158 / 255.0 blue:221 / 255.0 alpha:1.0];
         [self.contentView addSubview:_nameLabel];
         
         _desLabel = [[UILabel alloc] init];
@@ -29,6 +31,7 @@
         _desLabel.numberOfLines = 0;
         _desLabel.font = [UIFont systemFontOfSize:14.0];
         _desLabel.textColor = [UIColor colorWithWhite:0.3 alpha:1.0];
+//        _desLabel.highlightedTextColor = [UIColor colorWithRed:70 / 255.0 green:175 / 255.0 blue:226 / 255.0 alpha:1.0];
         [self.contentView addSubview:_desLabel];
         
         _updateLabel = [[UILabel alloc] init];

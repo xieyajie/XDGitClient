@@ -32,7 +32,7 @@
         _isLoadFinish = NO;
         
         _webView = [[UIWebView alloc] init];
-        _webView.backgroundColor = [UIColor redColor];
+        _webView.backgroundColor = [UIColor whiteColor];
         _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         _webView.delegate = self;
         
@@ -77,7 +77,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *path = [request.URL absoluteString];
-    NSRange range = [path rangeOfString:@"http://www.easemob.com/"];
+    NSRange range = [path rangeOfString:@"http://54.186.87.109"];
     if (range.location != NSNotFound) {
         range = [path rangeOfString:@"code="];
         if (range.location != NSNotFound) {

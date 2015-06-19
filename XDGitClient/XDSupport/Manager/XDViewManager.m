@@ -47,12 +47,9 @@ static XDViewManager *defaultManagerInstance = nil;
     {
         //导航栏
         NSString *nameSuffix = (version >= 7.0) ? @"_i7" : @"";
-        NSString *imageName = [NSString stringWithFormat:@"navi_bg_prompt%@", nameSuffix];
-        UIImage *tempImage = [[UIImage imageNamed:imageName] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
-        [[UINavigationBar appearance] setBackgroundImage:tempImage forBarMetrics:UIBarMetricsDefaultPrompt];
         
-        imageName = [NSString stringWithFormat:@"navi_bg%@", nameSuffix];
-        tempImage = [[UIImage imageNamed:imageName] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
+        NSString *imageName = [NSString stringWithFormat:@"navi_bg%@", nameSuffix];
+        UIImage *tempImage = [[UIImage imageNamed:imageName] stretchableImageWithLeftCapWidth:5 topCapHeight:5];
         [[UINavigationBar appearance] setBackgroundImage:tempImage forBarMetrics:UIBarMetricsDefault];
         
         NSMutableDictionary *attributesDictionary = [NSMutableDictionary dictionary];

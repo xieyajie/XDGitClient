@@ -387,8 +387,9 @@
 {
     if (result == MFMailComposeResultSent) {
         NSLog(@"It's away!");
-        [controller dismissViewControllerAnimated:YES completion:nil];
     }
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - action

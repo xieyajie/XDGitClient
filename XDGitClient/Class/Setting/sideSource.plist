@@ -37,13 +37,13 @@
 	<array>
 		<dict>
 			<key>title</key>
-			<string>XDStudio发展档</string>
+			<string>DXStudio官网</string>
 			<key>controller_selector</key>
 			<integer>114</integer>
 		</dict>
 		<dict>
 			<key>title</key>
-			<string>联系XDStudio</string>
+			<string>联系DXStudio</string>
 			<key>controller_selector</key>
 			<integer>115</integer>
 		</dict>

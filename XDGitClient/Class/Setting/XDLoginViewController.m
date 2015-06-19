@@ -60,7 +60,7 @@
     _copyrightLabel.font = [UIFont systemFontOfSize:13];
     _copyrightLabel.textAlignment = NSTextAlignmentCenter;
     _copyrightLabel.textColor = [UIColor grayColor];
-    _copyrightLabel.text = @"XDStudio工作室出品，欢迎使用";
+    _copyrightLabel.text = @"DXStudio工作室出品，欢迎使用";
     [self.view addSubview:_copyrightLabel];
 }
 
